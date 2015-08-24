@@ -1,0 +1,16 @@
+{
+    "reset": {
+        "title": "Reset Password",
+        "form": {
+            "button": "Reset Password",
+            "email": "E-mail Address",
+            "email.placeholder": "E-mail Address",
+            "confirmemail": "Confirm E-mail Address",
+            "confirmemail.placeholder": "Confirm E-mail Address"
+        },
+        "messages": {
+            "error":  "<strong>An error has occurred!</strong> The password could not be changed.",
+            "success": "<strong>Password changed!</strong>"
+        }
+    }
+}
