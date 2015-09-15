@@ -9,11 +9,6 @@
  */
 angular.module('fastrankApp')
   .controller('DomainsCtrl', function ($scope, domain, domainStrength, majTF, $q, $timeout) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
   $scope.domainStrength = { min: 0, max: 10000, ceil: 10000, floor: 0, step: 100 };
   $scope.majTF = { min: 0, max: 100, ceil: 100, floor: 0, step: 10 };
   $scope.otherSliders = { min: 0, max: 100, ceil: 100, floor: 0, step: 10 };
@@ -25,7 +20,7 @@ angular.module('fastrankApp')
   };
 
   $scope.checkAll = function() {
-    if(typeof $scope.selectedAll === "undefined") {
+    if(typeof $scope.selectedAll === 'undefined') {
       $scope.selectedAll = true;
     }
     angular.forEach($scope.otherDomains, function (item) {
