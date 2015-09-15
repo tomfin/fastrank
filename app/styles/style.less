@@ -17,7 +17,7 @@ Tags: blog, bootstrap, business, corporate, creative, landing-page, modern, mult
 @import "mixins.less";
 @import "utilities.less";
 
-@import "./font-awesome.min.css";
+@import url('font-awesome.min.css');
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700);
 @import url(http://fonts.googleapis.com/css?family=Exo+2:400italic,200,300,400,600,700);
 
@@ -3220,7 +3220,7 @@ legend,
 	font-family: @font-family-alt;
 	line-height: @line-height-base;
 	color: @input-color;
-	background-color: @input-bg;
+	//background-color: @input-bg;
 	border: 1px solid @input-border;
 	border-radius: @input-border-radius;
 	.box-shadow(none);
@@ -3830,39 +3830,6 @@ input[type="number"] {
 	}
 }
 
-/* 15.9. Password Strength  */
-// ---------------------------
-ul {
-	&#strength {
-	    display:inline;
-	    list-style:none;
-	    margin:0;
-	    margin-left:15px;
-	    padding:0;
-	    vertical-align:2px;	
-	}
-}
-
-.point {
-	&:last {
-		margin:0 !important;
-	}
-	    background:#DDD;
-	    border-radius:2px;
-	    display:inline-block;
-	    height:5px;
-	    margin-right:1px;
-	    width:20px;
-	    margin:0;
-	    padding:0;
-}
-li {
-	&.point {
-		&:before {
-			content: '';
-		}
-	}
-}
 
 
 /*
