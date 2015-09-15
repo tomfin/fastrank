@@ -32,6 +32,7 @@
   
   <link rel="stylesheet" href="styles/style.css" />
   <link rel="stylesheet" href="styles/custom.css" />
+  <link rel="stylesheet" href="scripts/vendor/rzslider/rzslider.min.css" />
   <!-- endbuild -->
 </head>
 <body ng-app="fastrankApp">
@@ -1921,30 +1922,31 @@
   <!-- bower:js -->
   <script src="bower_components/jquery/dist/jquery.js"></script>
   <script src="bower_components/angular/angular.js"></script>
-  <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
   <script src="bower_components/angular-animate/angular-animate.js"></script>
+  <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+  <script src="bower_components/angular-cache-buster/angular-cache-buster.js"></script>
   <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+  <script src="bower_components/angular-dynamic-locale/src/tmhDynamicLocale.js"></script>
+  <script src="bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
   <script src="bower_components/angular-resource/angular-resource.js"></script>
   <script src="bower_components/angular-route/angular-route.js"></script>
   <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
   <script src="bower_components/angular-touch/angular-touch.js"></script>
-  <script src="bower_components/jquery-migrate/jquery-migrate.js"></script>
-  <script src="bower_components/jquery.easing/js/jquery.easing.js"></script>
-  <script src="bower_components/magnific-popup/dist/jquery.magnific-popup.js"></script>
-  <script src="bower_components/jquery.parallax/jquery.parallax.js"></script>
-  <script src="bower_components/jquery.scrollTo/jquery.scrollTo.js"></script>
-  <script src="bower_components/jquery.localScroll/jquery.localScroll.js"></script>
-  <script src="bower_components/wow/dist/wow.js"></script>
-  <script src="bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
-  <script src="bower_components/angular-dynamic-locale/src/tmhDynamicLocale.js"></script>
   <script src="bower_components/angular-translate/angular-translate.js"></script>
   <script src="bower_components/angular-translate-loader-partial/angular-translate-loader-partial.js"></script>
   <script src="bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie.js"></script>
-  <script src="bower_components/angular-cache-buster/angular-cache-buster.js"></script>
-  <script src="bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js"></script>
   <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+  <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+  <script src="bower_components/jquery-migrate/jquery-migrate.js"></script>
+  <script src="bower_components/jquery.easing/js/jquery.easing.js"></script>
+  <script src="bower_components/jquery.scrollTo/jquery.scrollTo.js"></script>
+  <script src="bower_components/jquery.localScroll/jquery.localScroll.js"></script>
+  <script src="bower_components/jquery.parallax/jquery.parallax.js"></script>
+  <script src="bower_components/magnific-popup/dist/jquery.magnific-popup.js"></script>
+  <script src="bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js"></script>
   <script src="bower_components/sockjs-client/dist/sockjs.js"></script>
   <script src="bower_components/stomp-websocket/lib/stomp.min.js"></script>
+  <script src="bower_components/wow/dist/wow.js"></script>
   <!-- endbower -->
   <!-- endbuild -->
 
@@ -1976,6 +1978,7 @@
 
 
   <!-- build:js({.tmp,app}) scripts/scripts.js -->
+  <script src="scripts/vendor/rzslider/rzslider.min.js"></script>
   <script src="scripts/vendor/bootstrap/bootstrap-scripts.js"></script>
   <script src="scripts/vendor/bootstrap/fhmm.js"></script>
   <script src="scripts/vendor/owl-carousel/owl.carousel.min.js"></script>
@@ -2003,6 +2006,7 @@
   <script src="scripts/routes/password.js"></script>
   <script src="scripts/routes/activate.js"></script>
   <script src="scripts/routes/reset.js"></script>
+  <script src="scripts/routes/domains.js"></script>
   <script src="scripts/services/password.directive.js"></script>
   <script src="scripts/services/auth/auth.service.js"></script>
   <script src="scripts/services/auth/authority.directive.js"></script>

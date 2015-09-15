@@ -1,1 +1,65 @@
 /* Add your CSS here */
+.domain-page .panel {
+  background-color: #f1f2f4;
+}
+.domain-page .panel-heading h4 a {
+  background: #ff9009; 
+  padding: 5px 27px;
+}
+.domain-page .panel-primary > .panel-heading h2,
+.domain-page .panel-heading h4 a {
+  background: #836aa0;
+  text-align: center;
+  color: white;
+  font-size: larger;
+  padding: 5px 27px;
+  font-size: 22px;
+}
+.domain-page .panel-title a {
+  border-bottom: none;
+}
+.domain-page .panel-collapse {
+  background: whitesmoke;
+}
+.domain-page .panel-title .accordion-toggle {
+  font-size: 22px;
+}
+.domain-page .btn-primary:hover, 
+.domain-page .btn-primary:focus,
+.domain-page .btn-primary.focus, 
+.domain-page .btn-primary:active, 
+.domain-page .btn-primary.active, 
+.domain-page .open > .dropdown-toggle.btn-primary,
+.domain-page .btn-primary{
+  background: none repeat scroll 0 0 #836aa0;
+}
+.domain-page .noUi-connect,
+.domain-page .noUi-handle {
+  background: #836aa0;
+}
+.domain-page .domainStr .noUi-target,
+.domain-page .majTF .noUi-target {
+  margin-bottom: 0px;
+}
+.domain-page .panel-primary, 
+.domain-page .panel-primary > .panel-heading {
+  border: 1px solid #d2d2dd;
+}
+.domain-page .noUi-handle:after {
+  background: #FFF; 
+}
+.domain-page .panel-body a {
+  color: #836AA0;
+  border-bottom: none;
+}
+.domain-page .panel-body a:hover {
+  cursor: pointer
+}
+.domain-page .basic-search.keyword .input-group {
+  width: 90%;
+  float: left;
+}
+.domain-page .btnInvisible {
+  border: none;
+  background: none;
+}

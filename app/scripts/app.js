@@ -20,7 +20,9 @@ angular
     'tmh.dynamicLocale',
     'pascalprecht.translate', 
     'ngCacheBuster', 
-    'infinite-scroll'
+    'infinite-scroll',
+    'ui.bootstrap',
+    'rzModule'
   ])
   .run(function ($rootScope, $location, $window, $http, $state, $translate, Auth, Principal, Language, ENV, VERSION) {
       $rootScope.ENV = ENV;
