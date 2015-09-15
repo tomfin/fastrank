@@ -1,6 +1,6 @@
 {
-    "settings": {
-        "title": "User settings for [<b>{{username}}</b>]",
+    "domains": {
+        "title": "Domains",
         "form": {
             "firstname": "First Name",
             "firstname.placeholder": "Your first name",
@@ -28,4 +28,4 @@
             }
         }
     }
-}
+} 

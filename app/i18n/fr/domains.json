@@ -1,8 +1,8 @@
 {
-    "settings": {
-        "title": "Profil de l'utilisateur [{{username}}]",
+    "domains": {
+        "title": "Domains",
         "form": {
-            "firstname": "Prénom",
+            "firstname": "domaine",
             "firstname.placeholder": "Votre prénom",
             "lastname": "Nom",
             "lastname.placeholder": "Votre nom",
