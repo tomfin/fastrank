@@ -8,7 +8,7 @@
  * Controller of the fastrankApp
  */
 angular.module('fastrankApp')
-  .controller('MainCtrl', function ($scope, $location, $cookieStore, $rootScope, $window, $state, Auth, Principal) {
+  .controller('MainCtrl', function ($scope, $location, $cookieStore, $rootScope, $window, $state, Auth, Principal, RegisterInterest, ContactUs) {
 
 	$scope.currentPage = $window.location;
 	
@@ -52,6 +52,30 @@ angular.module('fastrankApp')
         $scope.account = null;
         $scope.isAuthenticated = Principal.isAuthenticated;
 	    $state.go('home');
+	};
+	
+	$scope.registerInterest = function(interestEmail) {
+		console.log('D> interestEmail: ', interestEmail);
+
+		RegisterInterest.register(interestEmail).$promise.then(function (responseEmail) {
+			console.log('D> interest made with email:', interestEmail, responseEmail);
+            $scope.registerInterestError = null;
+            $scope.registerInterestSuccess = true;
+        }, function (err) {
+			console.log('D> interest failed with email:', interestEmail, err);
+            $scope.registerInterestSuccess = null;
+            $scope.registerInterestError = true;
+        });
+	};
+
+	$scope.contactUs = function(contactUsForm) {
+		ContactUs.contact(contactUsForm).$promise.then(function () {
+            $scope.contactUsError = null;
+            $scope.contactUsSuccess = true;
+        }).catch(function () {
+            $scope.contactUsSuccess = null;
+            $scope.contactUsError = true;
+        });
 	};
 
   });

@@ -189,12 +189,13 @@
 				</div>
 	
 				<div class="row">
-					<form action="php/contact-form.php" id="contact-form" class="contact-form" novalidate="novalidate">
+					<form id="contact-form" class="contact-form" novalidate="novalidate">
 		
-						<div class="alert alert-success hidden" id="contact-alert-success">
+						Checkit: <pre>{{registerInterestSuccess}}</pre>
+						<div ng-show="registerInterestSuccess" class="alert alert-success" id="contact-alert-success">
 							<strong>Success!</strong> Your email address has been received.
 						</div>
-						<div class="alert alert-danger hidden" id="contact-alert-error">
+						<div ng-show="registerInterestError" class="alert alert-danger" id="contact-alert-error">
 							<strong>Error!</strong> Something went wrong sending your email.
 						</div>
 		
@@ -204,13 +205,13 @@
 								<div class="form-group">
 									<div class="input-group">
 										<div class="input-group-addon"><i class="fa fa-envelope"></i></div>
-										<input type="email" value="" data-msg-required="Please enter your email address." data-msg-email="Please enter a valid email address." class="form-control" name="email" id="email" placeholder="Email Address">
+										<input type="email" ng-model="interestEmail" value="" data-msg-required="Please enter your email address." data-msg-email="Please enter a valid email address." class="form-control" name="email" id="email" placeholder="Email Address">
 									</div>
 								</div>
 								<!-- Field: Email / End -->
 							</div>
 							<div class="col-md-4">
-									<button class="btn btn-primary btn-has-icon btn-block" data-loading-text="Loading...">
+									<button class="btn btn-primary btn-has-icon btn-block" ng-click="registerInterest(interestEmail)" data-loading-text="Loading...">
 										<i class="fa fa-envelope"></i> 
 										Register Your Interest
 									</button>
@@ -235,12 +236,12 @@
 				</div>
 				
 				<!-- Contact Form -->
-				<form action="php/contact-form.php" id="contact-form" class="contact-form" novalidate="novalidate">
+				<form id="contact-form" class="contact-form" novalidate="novalidate">
 	
-					<div class="alert alert-success hidden" id="contact-alert-success">
-						<strong>Success!</strong> Thank you for your message. Reply will be in a while!
+					<div ng-show="contactUsSuccess" class="alert alert-success" id="contact-alert-success">
+						<strong>Success!</strong> Thank you for your message. We'll aim to get back to you within 24 business hours.
 					</div>
-					<div class="alert alert-danger hidden" id="contact-alert-error">
+					<div ng-show="contactUsError" class="alert alert-danger" id="contact-alert-error">
 						<strong>Error!</strong> Something went wrong sending your message.
 					</div>
 	
@@ -250,7 +251,7 @@
 							<div class="form-group">
 								<div class="input-group">
 									<div class="input-group-addon"><i class="fa fa-user"></i></div>
-									<input type="text" value="" data-msg-required="Please enter your name." class="form-control" name="name" id="name" placeholder="Your Name">
+									<input type="text" value="" ng-model="contactUsForm.name" data-msg-required="Please enter your name." class="form-control" name="name" id="name" placeholder="Your Name">
 								</div>
 							</div>
 							<!-- Field: Name / End -->
@@ -260,7 +261,7 @@
 							<div class="form-group">
 								<div class="input-group">
 									<div class="input-group-addon"><i class="fa fa-envelope"></i></div>
-									<input type="email" value="" data-msg-required="Please enter your email address." data-msg-email="Please enter a valid email address." class="form-control" name="email" id="email" placeholder="Email Address">
+									<input type="email" value="" ng-model="contactUsForm.email" data-msg-required="Please enter your email address." data-msg-email="Please enter a valid email address." class="form-control" name="email" id="email" placeholder="Email Address">
 								</div>
 							</div>
 							<!-- Field: Email / End -->
@@ -270,7 +271,7 @@
 							<div class="form-group">
 								<div class="input-group">
 									<div class="input-group-addon"><i class="fa fa-desktop"></i></div>
-									<input type="url" class="form-control" name="url" id="url" placeholder="Your Web Site">
+									<input type="url" ng-model="contactUsForm.website" class="form-control" name="url" id="url" placeholder="Your Web Site">
 								</div>
 							</div>
 							<!-- Field: Site / End -->
@@ -282,14 +283,14 @@
 							<div class="form-group">
 								<div class="input-group">
 									<div class="input-group-addon"><i class="fa fa-pencil"></i></div>
-									<textarea data-msg-required="Please enter your message." rows="8" class="form-control" name="message" id="message" placeholder="Your Message"></textarea>
+									<textarea data-msg-required="Please enter your message." ng-model="contactUsForm.message" rows="8" class="form-control" name="message" id="message" placeholder="Your Message"></textarea>
 								</div>
 							</div>
 							<!-- Field: Textarea / End -->
 						</div>
 						<div class="col-md-4">
 	
-							<button class="btn btn-primary btn-has-icon btn-block" data-loading-text="Loading...">
+							<button class="btn btn-primary btn-has-icon btn-block" ng-click="contactUs(contactUsForm)" data-loading-text="Loading...">
 								<i class="fa fa-envelope"></i> 
 								Send Message
 							</button>
@@ -470,7 +471,6 @@
   <script src="scripts/routes/password.js"></script>
   <script src="scripts/routes/activate.js"></script>
   <script src="scripts/routes/reset.js"></script>
-  <script src="scripts/routes/domains.js"></script>
   <script src="scripts/services/password.directive.js"></script>
   <script src="scripts/services/auth/auth.service.js"></script>
   <script src="scripts/services/auth/authority.directive.js"></script>
@@ -479,6 +479,7 @@
   <script src="scripts/services/auth/services/account.service.js"></script>
   <script src="scripts/services/auth/services/activate.service.js"></script>
   <script src="scripts/services/auth/services/domain.services.js"></script>
+  <script src="scripts/services/auth/services/contact.service.js"></script>
   <script src="scripts/services/auth/services/password.service.js"></script>
   <script src="scripts/services/auth/services/register.service.js"></script>
   <script src="scripts/services/auth/services/reset.service.js"></script>
