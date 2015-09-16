@@ -7,5 +7,6 @@ angular.module('fastrankApp')
 .constant('VERSION', '0.0.1-SNAPSHOT')
 
 .constant('ENDPOINT', 'http://localhost:9191/')
+//.constant('ENDPOINT', 'http://ns3006822.ip-151-80-36.eu:8080/')
 
 ;
