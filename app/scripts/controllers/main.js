@@ -55,14 +55,11 @@ angular.module('fastrankApp')
 	};
 	
 	$scope.registerInterest = function(interestEmail) {
-		console.log('D> interestEmail: ', interestEmail);
 
-		RegisterInterest.register(interestEmail).$promise.then(function (responseEmail) {
-			console.log('D> interest made with email:', interestEmail, responseEmail);
+		RegisterInterest.register(interestEmail).$promise.then(function () {
             $scope.registerInterestError = null;
             $scope.registerInterestSuccess = true;
-        }, function (err) {
-			console.log('D> interest failed with email:', interestEmail, err);
+        }, function () {
             $scope.registerInterestSuccess = null;
             $scope.registerInterestError = true;
         });
