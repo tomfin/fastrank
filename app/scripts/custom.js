@@ -544,13 +544,13 @@
         loop:false,
         margin:10,
         nav:false,
-        dots:true,
+        dots:false,
         responsive:{
           0:{
               items:1
           },
           768:{
-              items:2
+              items:1
           },
           992:{
               items:1
