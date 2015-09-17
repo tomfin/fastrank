@@ -308,7 +308,7 @@
 							<div class="form-group">
 								<div class="input-group">
 									<div class="input-group-addon"><i class="fa fa-desktop"></i></div>
-									<input type="url" ng-model="contactUsForm.website" class="form-control" name="url" id="url" placeholder="Your Web Site">
+									<input type="text" ng-model="contactUsForm.website" class="form-control" name="website" id="website" placeholder="Your Web Site">
 								</div>
 							</div>
 							<!-- Field: Site / End -->
@@ -394,12 +394,16 @@
   <!-- Back to Top -->
   <div id="back-top">
     <div class="link-holder scroll-local">
-      <a href="#top" class="top-link"><i class="fa fa-chevron-up"></i></a>
+      <a href="#top" class="contacts-link" 
+      	data-toggle="tooltip" data-placement="left" title="Back to Top">
+      	<i class="fa fa-chevron-up"></i>
+      </a>
     </div>
     <div class="link-holder scroll-local">
       <a href="#section-contact" class="contacts-link"
         data-toggle="tooltip" data-placement="left" title="Contact Us"><i
-        class="fa fa-envelope"></i></a>
+        class="fa fa-envelope"></i>
+      </a>
     </div>
   </div>
   <!-- Back to Top / End -->
