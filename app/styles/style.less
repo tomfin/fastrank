@@ -912,8 +912,8 @@ p {
 .title-with-icon {
 	position: relative;
 	min-height: 70px;
-	padding-right: 70px;
-	background: url(../images/icon-title-rocket.png) 100% 0 no-repeat;
+//	padding-right: 70px;
+//	background: url(../images/icon-title-rocket.png) 100% 0 no-repeat;
 	margin-top: -7px;
 	margin-bottom: 42px;
 
@@ -9530,6 +9530,15 @@ img.mfp-img {
 				display: none !important;
 			}
 		}
+
+		&.top-link + .tooltip {
+			margin: 0 0 0 -30px;
+
+			@media (max-width:@screen-xs-max) {
+				display: none !important;
+			}
+		}
+
 	}
 }
 

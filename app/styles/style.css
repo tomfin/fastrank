@@ -732,7 +732,7 @@ h6 {
   line-height: 1.2;
   font-family: 'Exo 2', sans-serif;
   font-weight: 600;
-  color: #746981;
+  color: #1a7ab0;
 }
 h1 {
   margin-bottom: .5em;
@@ -798,8 +798,6 @@ p {
 .title-with-icon {
   position: relative;
   min-height: 70px;
-  padding-right: 70px;
-  background: url(../images/icon-title-rocket.png) 100% 0 no-repeat;
   margin-top: -7px;
   margin-bottom: 42px;
 }
@@ -817,11 +815,11 @@ p {
   right: 0;
   height: 1px;
   overflow: hidden;
-  background-image: -webkit-linear-gradient(left, rgba(116, 105, 129, 0.1) 0%, #746981 100%);
-  background-image: -o-linear-gradient(left, rgba(116, 105, 129, 0.1) 0%, #746981 100%);
-  background-image: linear-gradient(to right, rgba(116, 105, 129, 0.1) 0%, #746981 100%);
+  background-image: -webkit-linear-gradient(left, rgba(26, 122, 176, 0.1) 0%, #1a7ab0 100%);
+  background-image: -o-linear-gradient(left, rgba(26, 122, 176, 0.1) 0%, #1a7ab0 100%);
+  background-image: linear-gradient(to right, rgba(26, 122, 176, 0.1) 0%, #1a7ab0 100%);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#1a746981', endColorstr='#ff746981', GradientType=1);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#1a1a7ab0', endColorstr='#ff1a7ab0', GradientType=1);
 }
 .hgroup {
   margin-bottom: 40px;
@@ -1179,7 +1177,7 @@ th {
   font-size: 18px;
   font-family: 'Exo 2', sans-serif;
   text-transform: uppercase;
-  color: #746981;
+  color: #1a7ab0;
 }
 .table {
   margin-bottom: 24px;
@@ -1194,7 +1192,7 @@ th {
   line-height: 1.6;
   border-top: 1px solid #d2d2dd;
   font-size: 18px;
-  color: #746981;
+  color: #1a7ab0;
   font-family: 'Exo 2', sans-serif;
   font-weight: 400;
 }
@@ -2066,7 +2064,7 @@ fieldset[disabled] .btn-link:focus {
   }
 }
 .breadcrumb > li {
-  color: #746981;
+  color: #1a7ab0;
   font-weight: 600;
 }
 .breadcrumb > li + li:before {
@@ -2082,13 +2080,13 @@ fieldset[disabled] .btn-link:focus {
   -moz-osx-font-smoothing: grayscale;
 }
 .breadcrumb > li > a {
-  color: #746981;
+  color: #1a7ab0;
 }
 .breadcrumb > li > a:hover {
   color: #45c3ab;
 }
 .breadcrumb > .active {
-  color: rgba(105, 129, 129, 0.4);
+  color: rgba(122, 176, 176, 0.4);
 }
 /*
 // 8. Panels
@@ -2192,7 +2190,7 @@ fieldset[disabled] .btn-link:focus {
   border-color: #d2d2dd;
 }
 .panel-default > .panel-heading {
-  color: #746981;
+  color: #1a7ab0;
   background-color: #f1f2f4;
   border-color: #d2d2dd;
 }
@@ -2201,7 +2199,7 @@ fieldset[disabled] .btn-link:focus {
 }
 .panel-default > .panel-heading .badge {
   color: #f1f2f4;
-  background-color: #746981;
+  background-color: #1a7ab0;
 }
 .panel-default > .panel-footer + .panel-collapse > .panel-body {
   border-bottom-color: #d2d2dd;
@@ -3085,7 +3083,7 @@ legend,
   margin-bottom: 28.8px;
   padding-bottom: 19.2px;
   font-size: 24px;
-  color: #746981;
+  color: #1a7ab0;
   border-bottom: 1px solid #d9d9d9;
   font-family: 'Exo 2', sans-serif;
   font-weight: 600;
@@ -5010,7 +5008,7 @@ input[type="number"] {
 .widget_recent_comments > ul > li > a,
 .widget_recent_entries > ul > li > a,
 .widget_categories > ul > li > a {
-  color: #746981;
+  color: #1a7ab0;
 }
 .widget_archive > ul > li > a:hover,
 .widget_nav_menu > ul > li > a:hover,
@@ -5095,7 +5093,7 @@ input[type="number"] {
 .widget_recent_comments > ul ul.children li a,
 .widget_recent_entries > ul ul.children li a,
 .widget_categories > ul ul.children li a {
-  color: #746981;
+  color: #1a7ab0;
 }
 .widget_archive > ul ul.children li a:hover,
 .widget_nav_menu > ul ul.children li a:hover,
@@ -6732,7 +6730,7 @@ img.mfp-img {
 }
 @media (min-width: 992px) {
   .fhmm .dropdown-menu > li > a {
-    color: #746981 !important;
+    color: #1a7ab0 !important;
     font-size: 18px;
     font-family: 'Exo 2', sans-serif;
     font-weight: 600;
@@ -6912,7 +6910,7 @@ img.mfp-img {
     font-size: 18px;
     padding: 14px 24px;
     margin: 0;
-    color: #746981;
+    color: #1a7ab0;
     font-weight: 600;
     font-family: 'Exo 2', sans-serif;
   }
@@ -6968,7 +6966,7 @@ img.mfp-img {
     margin: 0 -15px;
     border-bottom: 2px solid #1a7ab0;
     padding-top: 10px;
-    color: #746981;
+    color: #1a7ab0;
   }
 }
 @media (max-width: 991px) {
@@ -8750,6 +8748,14 @@ img.mfp-img {
 }
 @media (max-width: 767px) {
   #back-top a.contacts-link + .tooltip {
+    display: none !important;
+  }
+}
+#back-top a.top-link + .tooltip {
+  margin: 0 0 0 -30px;
+}
+@media (max-width: 767px) {
+  #back-top a.top-link + .tooltip {
     display: none !important;
   }
 }
