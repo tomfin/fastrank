@@ -1,14 +1,11 @@
 /* Add your CSS here */
-.domain-page .panel {
-  background-color: #f1f2f4;
-}
 .domain-page .panel-heading h4 a {
   background: #ff9009; 
   padding: 5px 27px;
 }
 .domain-page .panel-primary > .panel-heading h2,
 .domain-page .panel-heading h4 a {
-  background: #836aa0;
+  background: #1a4b69;
   text-align: center;
   color: white;
   font-size: larger;
@@ -31,25 +28,18 @@
 .domain-page .btn-primary.active, 
 .domain-page .open > .dropdown-toggle.btn-primary,
 .domain-page .btn-primary{
-  background: none repeat scroll 0 0 #836aa0;
+  background: none repeat scroll 0 0 #1a4b69;
 }
-.domain-page .noUi-connect,
-.domain-page .noUi-handle {
-  background: #836aa0;
+.domain-page rzslider span.rz-pointer {
+  background: #1a7ab0;
 }
-.domain-page .domainStr .noUi-target,
-.domain-page .majTF .noUi-target {
-  margin-bottom: 0px;
+
+.domain-page rzslider span.rz-bar.rz-selection {
+  background: #746981;
 }
-.domain-page .panel-primary, 
-.domain-page .panel-primary > .panel-heading {
-  border: 1px solid #d2d2dd;
-}
-.domain-page .noUi-handle:after {
-  background: #FFF; 
-}
+
 .domain-page .panel-body a {
-  color: #836AA0;
+  color: #1a7ab0;
   border-bottom: none;
 }
 .domain-page .panel-body a:hover {
@@ -63,3 +53,13 @@
   border: none;
   background: none;
 }
+.domain-page .glyphicon-question-sign {
+  font-size: 1.5em;
+}
+.domain-page .form-control.checkbox {
+  height: 20px;
+}
+.domain-page .panel-primary, .domain-page .panel {
+  border-color: #1a4b69;
+}
+ 

@@ -2,14 +2,12 @@
   <!-- Page Section -->
   <section class="page-section">
     <div class="container-fluid">
-
       <div class="content">
         <div class="row">
           <div class="panel panel-primary">
             <div class="panel-heading">
               <h2 class="panel-title text-center">Basic search</h2>
             </div>
-
             <div class="panel-body">
               <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 text-center domainStr">
                 <span>Domain Strength: Weak - Max</span>
@@ -20,7 +18,7 @@
                       rz-slider-ceil="domainStrength.ceil"
                       rz-slider-model="domainStrength.min"
                       rz-slider-high="domainStrength.max"
-                      rz-slider-step="{{ domainStrength.step }}"
+                      rz-slider-step="{{ domainStrength.step}}"
                       rz-slider-tpl-url="rzSliderTpl.html"
                       rz-slider-hide-limit-labels="true"
                       rz-slider-on-end="updateDomainStrengthSlider(domainStrength.min, domainStrength.max)">
@@ -34,21 +32,19 @@
                   <div class="col-lg-12">({{ domainStrength.count | number }}) </div>
                 </div>
               </div>
-
               <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12 text-center">
                 <div><h3>and/or</h3></div>
               </div>
-              
               <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 text-center basic-search keyword">
-                  <div class="form-group">
-                    <div class="input-group">
-                      <div class="input-group-addon"><i class="fa fa-desktop"></i></div>
-                      <input type="text" ng-model="keywords" value="" data-msg-required="Please enter your name." class="form-control" name="name" id="name" placeholder="Topic Keyword Here">
-                    </div>
-                    <button class="btnInvisible" popover="This is the tooltip" popover-trigger="focus" aria-hidden="true">
-                      <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
-                    </button>
+                <div class="form-group">
+                  <div class="input-group">
+                    <div class="input-group-addon"><i class="fa fa-desktop"></i></div>
+                    <input type="text" ng-model="keywords" value="" data-msg-required="Please enter your name." class="form-control" name="name" id="name" placeholder="Topic Keyword Here">
                   </div>
+                  <button class="btnInvisible" popover="This is the tooltip" popover-trigger="focus" aria-hidden="true">
+                    <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+                  </button>
+                </div>
               </div>
               <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 text-center">
                 <div class="col-lg-6">
@@ -57,416 +53,175 @@
                   </button>
                 </div>
                 <div class="col-lg-6"> 
-                <button class="btn btn-primary btn-has-icon btn-block" data-loading-text="Loading..." ng-click="save()">
+                  <button class="btn btn-primary btn-has-icon btn-block" data-loading-text="Loading..." ng-click="save()">
                     <i class="fa fa-save"></i>Save search
-                </button></div>
+                  </button></div>
               </div>
             </div>
           </div>
         </div>
-            
+        
         <div class="row">
-        <accordion>
-          <accordion-group is-open="pstatus.open">
-            <accordion-heading>
-              Advance Search<i class="pull-right glyphicon" ng-class="{'glyphicon glyphicon-minus-sign': pstatus.open, 'glyphicon glyphicon-plus-sign': !pstatus.open}"></i>
-            </accordion-heading>
-            <div class="row">
-              <div class="panel panel-primary">
-                <div class="panel-body"> 
-                  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                    <h4 class="text-center">Majestic SEO</h4>
-                    Search for powerful expired domains using Majestic data.
-                    <div class="row">
-                      <div class="col-lg-12">
-                        <span>Domain Extensions</span>
-                        <span>Select:
-                          <a ng-click="selectAllNone(true)">All</a> | <a ng-click="selectAllNone(false)">None</a>
-                        </span>
+          <accordion>
+            <accordion-group is-open="pstatus.open">
+              <accordion-heading>
+                Advance Search<i class="pull-right glyphicon" ng-class="{'glyphicon glyphicon-minus-sign': pstatus.open, 'glyphicon glyphicon-plus-sign': !pstatus.open}"></i>
+              </accordion-heading>
+              <div class="row"> 
+                <div class="panel panel-primary">
+                  <div class="panel-body"> 
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                      <h4 class="text-center">Majestic SEO</h4>
+                      Search for powerful expired domains using Majestic data.
+                      <div class="row">
+                        <div class="col-lg-12">
+                          <span>Domain Extensions</span>
+                          <span>Select:
+                            <a ng-click="selectAllNone(true)">All</a> | <a ng-click="selectAllNone(false)">None</a>
+                          </span>
+                        </div>
+                        <div class="col-lg-12 col-md-12">
+                          <div class="form-group col-lg-6 col-md-6">
+                            <div class="col-lg-3 col-md-3">
+                              <input type="checkbox" class="form-control checkbox" ng-model="com.selected" />
+                            </div>
+                            <div class="col-lg-9 col-md-9">
+                              <span>{{ com.tld | uppercase }} ({{ com.count | number }})</span>
+                            </div>
+                          </div>
+                          <div class="form-group col-lg-6 col-md-6">
+                            <div class="col-lg-3 col-md-3">
+                              <input type="checkbox" class="form-control checkbox" ng-model="otherDomains.selected" ng-click="selectAllNone(otherDomains.selected, 'other')" />
+                            </div>
+                            <div class="col-lg-9 col-md-9">
+                              <span>{{ allOthers.tld | uppercase }} ({{ allOthers.count | number }})</span>
+                            </div>
+                          </div>
+                        </div>
                       </div>
-                      <div class="col-lg-12">
-                        <input type="checkbox" ng-model="selectedCom" value="com" />{{ com.tld | uppercase }} ({{ com.count | number }})
-                        <input type="checkbox" ng-model="selectedAll" ng-click="checkAll()" />{{ allOthers.tld | uppercase }} ({{ allOthers.count | number }})
+                      <div class="row">
+                        <div class="col-lg-12 col-md-12">
+                          <accordion>
+                            <accordion-group is-open="status.open">
+                              <accordion-heading>
+                                Other Domain Extensions! <i class="pull-right glyphicon" ng-class="{'glyphicon glyphicon-minus-sign': status.open, 'glyphicon glyphicon-plus-sign': !status.open}"></i>
+                              </accordion-heading>
+                              <div ng-repeat="domain in otherDomains">
+                                <div class="form-group">
+                                  <div class="col-lg-1 col-md-1">
+                                    <input type="checkbox" class="form-control checkbox" ng-model="domain.selected" />
+                                  </div>
+                                  <div class="col-lg-11 col-md-11">
+                                    <span>{{ domain.tld | uppercase}} ({{ domain.count| number}})</span>
+                                  </div>
+                                </div>                                
+                              </div>
+                            </accordion-group>
+                          </accordion>
+                        </div>
                       </div>
-                    </div>
-                    
-                    <div class="row">
-                    <div class="col-lg-12">
-                      <accordion>
-                        <accordion-group is-open="status.open">
-                          <accordion-heading>
-                            Other Domain Extensions! <i class="pull-right glyphicon" ng-class="{'glyphicon glyphicon-minus-sign': status.open, 'glyphicon glyphicon-plus-sign': !status.open}"></i>
-                          </accordion-heading>
-                          <div ng-repeat="domain in otherDomains">
-                            <input type="checkbox" ng-model="domain.Selected" value="{{ domain.tld }}" />{{ domain.tld | uppercase}} ({{ domain.count| number}})
-                          </div>
-                        </accordion-group>
-                      </accordion>
-                    </div>
-                    </div>
-
-                    <div class="col-lg-5 col-lg-offset-4 majTF">
-                      Maj. Dom TF: 0 - 100 | ?
-                    <rzslider
-                      rz-slider-floor="majTF.floor"
-                      rz-slider-ceil="majTF.ceil"
-                      rz-slider-model="majTF.min"
-                      rz-slider-high="majTF.max"
-                      rz-slider-step="{{ majTF.step }}"
-                      rz-slider-tpl-url="rzSliderTpl.html"
-                      rz-slider-hide-limit-labels="true"
-                      rz-slider-on-end="updatemajTFSlider(majTF.min, majTF.max)">
-                    </rzslider>
-                      Domains: {{ majTF.count }}
-                    </div>
-                    
-                    <div class="row">
-                    <div class="col-lg-12">
-                      <accordion>
-                        <accordion-group is-open="status.open">
-                          <accordion-heading>
-                            Other Majestic Metics <i class="pull-right glyphicon" ng-class="{'glyphicon glyphicon-minus-sign': status.open, 'glyphicon glyphicon-plus-sign': !status.open}"></i>
-                          </accordion-heading>
-                          <div class="col-lg-5 col-lg-offset-4 text-center">
-                              Maj. Dom CF:0 - 100 | ?
-                             <rzslider
-                              rz-slider-floor="otherSliders.floor"
-                              rz-slider-ceil="otherSliders.ceil"
-                              rz-slider-model="otherSliders.min"
-                              rz-slider-high="otherSliders.max"
-                              rz-slider-step="{{ otherSliders.step }}"
-                              rz-slider-tpl-url="rzSliderTpl.html"
-                              rz-slider-hide-limit-labels="true">
-                            </rzslider>
-                          </div>
-                          <div class="col-lg-5 col-lg-offset-4 text-center">
-                            Maj. RefDomians: 0 - MAx | ?
-                            <rzslider
-                              rz-slider-floor="otherSliders.floor"
-                              rz-slider-ceil="otherSliders.ceil"
-                              rz-slider-model="otherSliders.min"
-                              rz-slider-high="otherSliders.max"
-                              rz-slider-step="{{ otherSliders.step }}"
-                              rz-slider-tpl-url="rzSliderTpl.html"
-                              rz-slider-hide-limit-labels="true">
-                            </rzslider>
-                          </div>
-                          <div class="col-lg-5 col-lg-offset-4 text-center">
-                            Maj. ExtBackLinks  1 - MAx | ?
-                            <rzslider
-                              rz-slider-floor="otherSliders.floor"
-                              rz-slider-ceil="otherSliders.ceil"
-                              rz-slider-model="otherSliders.min"
-                              rz-slider-high="otherSliders.max"
-                              rz-slider-step="{{ otherSliders.step }}"
-                              rz-slider-tpl-url="rzSliderTpl.html"
-                              rz-slider-hide-limit-labels="true">
-                            </rzslider>
-                          </div>
-                          <div class="col-lg-5 col-lg-offset-4 text-center">
-                            Maj. Ref. ReflPs: 0 - Max | ?
-                            <rzslider
-                              rz-slider-floor="otherSliders.floor"
-                              rz-slider-ceil="otherSliders.ceil"
-                              rz-slider-model="otherSliders.min"
-                              rz-slider-high="otherSliders.max"
-                              rz-slider-step="{{ otherSliders.step }}"
-                              rz-slider-tpl-url="rzSliderTpl.html"
-                              rz-slider-hide-limit-labels="true">
-                            </rzslider>
-                          </div>
-                          <div class="col-lg-5 col-lg-offset-4 text-center">
-                            Maj. OutLinksExternal: 1 - Max | ?
-                            <rzslider
-                              rz-slider-floor="otherSliders.floor"
-                              rz-slider-ceil="otherSliders.ceil"
-                              rz-slider-model="otherSliders.min"
-                              rz-slider-high="otherSliders.max"
-                              rz-slider-step="{{ otherSliders.step }}"
-                              rz-slider-tpl-url="rzSliderTpl.html"
-                              rz-slider-hide-limit-labels="true">
-                            </rzslider>
-                          </div>
-                          <div class="col-lg-5 col-lg-offset-4 text-center">
-                            Maj. OutLinksInternal: 1 - Max | ?
-                            <rzslider
-                              rz-slider-floor="otherSliders.floor"
-                              rz-slider-ceil="otherSliders.ceil"
-                              rz-slider-model="otherSliders.min"
-                              rz-slider-high="otherSliders.max"
-                              rz-slider-step="{{ otherSliders.step }}"
-                              rz-slider-tpl-url="rzSliderTpl.html"
-                              rz-slider-hide-limit-labels="true">
-                            </rzslider>
-                          </div>
-                          <div class="col-lg-5 col-lg-offset-4 text-center">
-                            Maj. OutDomiansExternal: 1 - Max | ?
-                            <rzslider
-                              rz-slider-floor="otherSliders.floor"
-                              rz-slider-ceil="otherSliders.ceil"
-                              rz-slider-model="otherSliders.min"
-                              rz-slider-high="otherSliders.max"
-                              rz-slider-step="{{ otherSliders.step }}"
-                              rz-slider-tpl-url="rzSliderTpl.html"
-                              rz-slider-hide-limit-labels="true">
-                            </rzslider>
-                          </div>
-                          <div class="col-lg-5 col-lg-offset-4 text-center">
-                            Maj. IndexedURLs: 1 - Max | ?
-                            <rzslider
-                              rz-slider-floor="otherSliders.floor"
-                              rz-slider-ceil="otherSliders.ceil"
-                              rz-slider-model="otherSliders.min"
-                              rz-slider-high="otherSliders.max"
-                              rz-slider-step="{{ otherSliders.step }}"
-                              rz-slider-tpl-url="rzSliderTpl.html"
-                              rz-slider-hide-limit-labels="true">
-                            </rzslider>
-                          </div>
-                          <div class="col-lg-5 col-lg-offset-4 text-center">
-                            Maj. RedDomainsEDU: 1 - Max | ?
-                            <rzslider
-                              rz-slider-floor="otherSliders.floor"
-                              rz-slider-ceil="otherSliders.ceil"
-                              rz-slider-model="otherSliders.min"
-                              rz-slider-high="otherSliders.max"
-                              rz-slider-step="{{ otherSliders.step }}"
-                              rz-slider-tpl-url="rzSliderTpl.html"
-                              rz-slider-hide-limit-labels="true">
-                            </rzslider>
-                          </div>
-                          <div class="col-lg-5 col-lg-offset-4 text-center">
-                            Maj. EXTBackLinksEDU: 1 - Max | ?
-                            <rzslider
-                              rz-slider-floor="otherSliders.floor"
-                              rz-slider-ceil="otherSliders.ceil"
-                              rz-slider-model="otherSliders.min"
-                              rz-slider-high="otherSliders.max"
-                              rz-slider-step="{{ otherSliders.step }}"
-                              rz-slider-tpl-url="rzSliderTpl.html"
-                              rz-slider-hide-limit-labels="true">
-                            </rzslider>
-                          </div>
-                          <div class="col-lg-5 col-lg-offset-4 text-center">
-                            Maj. REFDomainsGOV: 1 - Max | ?
-                            <rzslider
-                              rz-slider-floor="otherSliders.floor"
-                              rz-slider-ceil="otherSliders.ceil"
-                              rz-slider-model="otherSliders.min"
-                              rz-slider-high="otherSliders.max"
-                              rz-slider-step="{{ otherSliders.step }}"
-                              rz-slider-tpl-url="rzSliderTpl.html"
-                              rz-slider-hide-limit-labels="true">
-                            </rzslider>
-                          </div>
-                          <div class="col-lg-5 col-lg-offset-4 text-center">
-                            Maj. ExtBackLinksGOV: 1 - Max | ? **************
-                            <rzslider
-                              rz-slider-floor="otherSliders.floor"
-                              rz-slider-ceil="otherSliders.ceil"
-                              rz-slider-model="otherSliders.min"
-                              rz-slider-high="otherSliders.max"
-                              rz-slider-step="{{ otherSliders.step }}"
-                              rz-slider-tpl-url="rzSliderTpl.html"
-                              rz-slider-hide-limit-labels="true">
-                            </rzslider>
-                          </div>
-                          <div class="col-lg-5 col-lg-offset-4 text-center">
-                            Maj. Dom TF: 0 - 100 | ?
-                            <rzslider
-                              rz-slider-floor="otherSliders.floor"
-                              rz-slider-ceil="otherSliders.ceil"
-                              rz-slider-model="otherSliders.min"
-                              rz-slider-high="otherSliders.max"
-                              rz-slider-step="{{ otherSliders.step }}"
-                              rz-slider-tpl-url="rzSliderTpl.html"
-                              rz-slider-hide-limit-labels="true">
-                            </rzslider>
-                          </div>
-                          <div class="col-lg-5 col-lg-offset-4 text-center">
-                            Maj. Dom TF: 0 - 100 | ?
-                            <rzslider
-                              rz-slider-floor="otherSliders.floor"
-                              rz-slider-ceil="otherSliders.ceil"
-                              rz-slider-model="otherSliders.min"
-                              rz-slider-high="otherSliders.max"
-                              rz-slider-step="{{ otherSliders.step }}"
-                              rz-slider-tpl-url="rzSliderTpl.html"
-                              rz-slider-hide-limit-labels="true">
-                            </rzslider>
-                          </div>
-                          <div class="col-lg-5 col-lg-offset-4 text-center">
-                            Maj. Dom TF: 0 - 100 | ?
-                            <rzslider
-                              rz-slider-floor="otherSliders.floor"
-                              rz-slider-ceil="otherSliders.ceil"
-                              rz-slider-model="otherSliders.min"
-                              rz-slider-high="otherSliders.max"
-                              rz-slider-step="{{ otherSliders.step }}"
-                              rz-slider-tpl-url="rzSliderTpl.html"
-                              rz-slider-hide-limit-labels="true">
-                            </rzslider>
-                          </div>
-                        </accordion-group>
-                      </accordion>
-                    </div>
-                    </div>
-                    
-                    <div class="row">
-                    <div class="col-lg-12">
-                      <accordion>
-                        <accordion-group is-open="status.open">
-                          <accordion-heading>
-                            Majestic Topical Trust Flow <i class="pull-right glyphicon" ng-class="{'glyphicon glyphicon-minus-sign': status.open, 'glyphicon glyphicon-plus-sign': !status.open}"></i>
-                          </accordion-heading>
-                          <div class="col-lg-12">
-                            <div class="row">
-                              <h4>Or use Majestic Topical Trust Flow</h4>
-                              Use Majestic Topical TrustFlow categorisation to find relevant sites
-                              Categorise your URL - uClassify 
-                            </div>
-                            <div class="row">
-                              <div class="form-group col-lg-11">
-                                <div class="input-group">
-                                  <div class="input-group-addon"><i class="fa fa-desktop"></i></div>
-                                  <input type="text" value="" data-msg-required="Please enter your name." class="form-control" name="name" id="name" placeholder="URL here">
-                                </div>
-                              </div>
-                              <div class="col-lg-1">
-                                <button class="btnInvisible" popover="This is the tooltip" popover-trigger="focus" aria-hidden="true">
-                                  <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
-                                </button>
-                              </div>
-                            </div>
-                            <div class="row">Or pick your Majestic Topcial TrustFlow category here
-                              <button class="btnInvisible" popover="This is the tooltip" popover-trigger="focus" aria-hidden="true">
-                                <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
-                              </button>
-                            </div>
-                            <div class="row text-center">How relevant should the results be? More relevance gives fewer results
-                              <p>Relevance: Least -Most
-                                <button class="btnInvisible" popover="This is the tooltip" popover-trigger="focus" aria-hidden="true">
-                                  <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
-                                </button>
-                              </p>
-                              <div class="col-lg-5 col-lg-offset-4 text-center">
+                      <div class="col-lg-5 col-lg-offset-4 majTF">
+                        Maj. Dom TF: 0 - 100 | ?
+                        <rzslider
+                          rz-slider-floor="majTF.floor"
+                          rz-slider-ceil="majTF.ceil"
+                          rz-slider-model="majTF.min"
+                          rz-slider-high="majTF.max"
+                          rz-slider-step="{{ majTF.step}}"
+                          rz-slider-tpl-url="rzSliderTpl.html"
+                          rz-slider-hide-limit-labels="true"
+                          rz-slider-on-end="updatemajTFSlider(majTF.min, majTF.max)">
+                        </rzslider>
+                        Domains: {{ majTF.count}}
+                      </div>
+                      <div class="row">
+                        <div class="col-lg-12">
+                          <accordion>
+                            <accordion-group is-open="status.open">
+                              <accordion-heading>
+                                Other Majestic Metics <i class="pull-right glyphicon" ng-class="{'glyphicon glyphicon-minus-sign': status.open, 'glyphicon glyphicon-plus-sign': !status.open}"></i>
+                              </accordion-heading>
+                              <div class="col-lg-5 col-lg-offset-4 text-center" ng-repeat="slider in otherSliders">
+                                {{ slider.title}}
                                 <rzslider
-                                  rz-slider-floor="otherSliders.floor"
-                                  rz-slider-ceil="otherSliders.ceil"
-                                  rz-slider-model="otherSliders.min"
-                                  rz-slider-high="otherSliders.max"
-                                  rz-slider-step="{{ otherSliders.step }}"
+                                  rz-slider-floor="slider.floor"
+                                  rz-slider-ceil="slider.ceil"
+                                  rz-slider-model="slider.min"
+                                  rz-slider-high="slider.max"
+                                  rz-slider-step="{{ slider.step}}"
                                   rz-slider-tpl-url="rzSliderTpl.html"
                                   rz-slider-hide-limit-labels="true">
-                              </rzslider>
+                                </rzslider>
                               </div>
-                            </div>
-                          </div>
-                        </accordion-group>
-                      </accordion>
-                    </div>
-                    </div>
-
-                  </div>
-
-                  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                    <h4 class="text-center">Find Relevant Domains</h4>
-                    <div>
-                      <p>Search for relevant expired domains using an example URL, pasted content or categories
-                      <button class="btnInvisible" popover="This is the tooltip" popover-trigger="focus" aria-hidden="true">
-                        <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
-                      </button>
-                      </p>
-                      <p>Use Alchemy categorisation to find relevant sites
-                        <button class="btnInvisible" popover="This is the tooltip" popover-trigger="focus" aria-hidden="true">
-                          <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
-                        </button>  
-                      </p>
-                      <p>Enter one or more of the following:</p>
-                    </div>
-
-                    <div class="row">
-                      <div class="col-lg-12 center-block">
-                        <span>Categorise your URL - Alchemy
-                          <button class="btnInvisible" popover="This is the tooltip" popover-trigger="focus" aria-hidden="true">
-                            <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
-                          </button>
-                        </span>
-                        <div class="form-group">
-                          <div class="input-group">
-                            <div class="input-group-addon"><i class="fa fa-desktop"></i></div>
-                            <input type="text" value="" data-msg-required="Please enter your name." class="form-control" name="name" id="name" placeholder="URL here">
-                          </div>
+                            </accordion-group>
+                          </accordion>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-lg-12">
+                          <accordion>
+                            <accordion-group is-open="status.open">
+                              <accordion-heading>
+                                Majestic Topical Trust Flow <i class="pull-right glyphicon" ng-class="{'glyphicon glyphicon-minus-sign': status.open, 'glyphicon glyphicon-plus-sign': !status.open}"></i>
+                              </accordion-heading>
+                              <div class="col-lg-12">
+                                <div class="row">
+                                  <h4>Or use Majestic Topical Trust Flow</h4>
+                                  Use Majestic Topical TrustFlow categorisation to find relevant sites
+                                  Categorise your URL - uClassify 
+                                </div>
+                                <div class="row">
+                                  <div class="form-group col-lg-11">
+                                    <div class="input-group">
+                                      <div class="input-group-addon"><i class="fa fa-desktop"></i></div>
+                                      <input type="text" value="" data-msg-required="Please enter your name." class="form-control" name="name" id="name" placeholder="URL here">
+                                    </div>
+                                  </div>
+                                  <div class="col-lg-1">
+                                    <button class="btnInvisible" popover="This is the tooltip" popover-trigger="focus" aria-hidden="true">
+                                      <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+                                    </button>
+                                  </div>
+                                </div>
+                                <div class="row">Or pick your Majestic Topcial TrustFlow category here
+                                  <button class="btnInvisible" popover="This is the tooltip" popover-trigger="focus" aria-hidden="true">
+                                    <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+                                  </button>
+                                </div>
+                              </div>
+                            </accordion-group>
+                          </accordion>
                         </div>
                       </div>
                     </div>
-
-                    <div class="row">
-                      <div class="col-lg-12 center-block">
-                        <span>Or paste your text below Alchemy
-                          <button class="btnInvisible" popover="This is the tooltip" popover-trigger="focus" aria-hidden="true">
-                            <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                      <div class="col-lg-12">
+                        <div class="col-md-4">
+                          <button class="btn btn-primary btn-has-icon btn-block" data-loading-text="Loading...">
+                            <i class="fa fa-search"></i> 
+                            Search
                           </button>
-                        </span>
-                        <div class="form-group">
-                          <div class="input-group">
-                            <div class="input-group-addon"><i class="fa fa-pencil"></i></div>
-                            <textarea placeholder="Or paste your content here" data-msg-required="Please enter your message." rows="8" class="form-control" name="message" id="message" placeholder="Your Message"></textarea>
-                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <button class="btn btn-primary btn-has-icon btn-block" data-loading-text="Loading...">
+                            <i class="fa fa-save"></i> 
+                            Save Search
+                          </button>
+                        </div>
+                        <div class="col-md-4">
+                          <button class="btn btn-primary btn-has-icon btn-block" data-loading-text="Loading...">
+                            <i class="fa fa-refresh"></i> 
+                            Reset Search
+                          </button>
                         </div>
                       </div>
                     </div>
-
-                    <div class="row">
-                      <div class="col-lg-12 text-center">
-                        How relevant should the results be? More relevance gives fewer results
-                      </div>
-                      <div class="col-lg-5 col-lg-offset-4 text-center">
-                        Relevance: Least -Most 
-                        <rzslider
-                          rz-slider-floor="otherSliders.floor"
-                          rz-slider-ceil="otherSliders.ceil"
-                          rz-slider-model="otherSliders.min"
-                          rz-slider-high="otherSliders.max"
-                          rz-slider-step="{{ otherSliders.step }}"
-                          rz-slider-tpl-url="rzSliderTpl.html"
-                          rz-slider-hide-limit-labels="true">
-                        </rzslider>
-                      </div>
-                    </div>
                   </div>
-
-                  <div class="col-lg-12">
-                    <div class="col-lg-12">
-                      <div class="col-lg-7">
-                        <button class="btn btn-primary btn-has-icon btn-block" data-loading-text="Loading...">
-                          <i class="fa fa-search"></i> 
-                          Search
-                        </button>
-                      </div>
-                      <div class="col-lg-2">
-                        <button class="btn btn-primary btn-has-icon btn-block" data-loading-text="Loading...">
-                          <i class="fa fa-save"></i> 
-                          Save Search
-                        </button>
-                      </div>
-
-                      <div class="col-lg-2 col-lg-offset-1">
-                        <button class="btn btn-primary btn-has-icon btn-block" data-loading-text="Loading...">
-                          <i class="fa fa-refresh"></i> 
-                          Reset Search
-                        </button>
-                      </div>
-
-                    </div>
-                  </div>
-
                 </div>
               </div>
-            </div>
-          </accordion-group>
-        </accordion>
-          </div>
+            </accordion-group>
+          </accordion>
+        </div>
       </div>
     </div>
   </section>

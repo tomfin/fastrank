@@ -11,7 +11,13 @@ angular.module('fastrankApp')
   .controller('DomainsCtrl', function ($scope, domain, domainStrength, majTF, $q, $timeout) {
   $scope.domainStrength = { min: 0, max: 10000, ceil: 10000, floor: 0, step: 100 };
   $scope.majTF = { min: 0, max: 100, ceil: 100, floor: 0, step: 10 };
-  $scope.otherSliders = { min: 0, max: 100, ceil: 100, floor: 0, step: 10 };
+  $scope.otherSliders = {
+    majDOMCF: { title: 'Maj. Dom CF:0 - 100 | ?', min: 0, max: 100, ceil: 100, floor: 0, step: 10 },
+    majRefDomians: { title: 'Maj. RefDomians: 0 - MAx | ?', min: 0, max: 100, ceil: 100, floor: 0, step: 10 },
+    majRefIPs: { title: 'Maj. RefIPs: 0 - MAx | ?', min: 0, max: 100, ceil: 100, floor: 0, step: 10 },
+    majRefDomainsEDU: { title: 'Maj. RefDomainsEDU: 1 - Max | ?', min: 0, max: 100, ceil: 100, floor: 0, step: 10 },
+    majRefDomainGOV: { title: 'Maj. RefDomainGOV: 1 - Max | ?', min: 0, max: 100, ceil: 100, floor: 0, step: 10 }
+  };
 
   $scope.initDomain = function() {
     $scope.updateDomainStrengthSlider($scope.majTF.min, $scope.majTF.max);
@@ -19,22 +25,14 @@ angular.module('fastrankApp')
     getDomains();
   };
 
-  $scope.checkAll = function() {
-    if(typeof $scope.selectedAll === 'undefined') {
-      $scope.selectedAll = true;
+  $scope.selectAllNone = function(status, other) {
+    angular.forEach($scope.otherDomains, function (obj) {
+        obj.selected = status;
+    }); 
+    if(angular.isUndefined(other)) {
+      $scope.com.selected = status;
+      $scope.otherDomains.selected = status;
     }
-    angular.forEach($scope.otherDomains, function (item) {
-      item.Selected = $scope.selectedAll;
-    });
-    $scope.selectedAll = !$scope.selectedAll;
-  };
-
-  $scope.selectAllNone = function(status) {
-    $scope.selectedCom = status;
-    $scope.selectedAll = status;
-    angular.forEach($scope.otherDomains, function (item) {
-      item.Selected = status;
-    });
   };
 
   $scope.updateDomainStrengthSlider = function(min, max) {
@@ -103,26 +101,8 @@ angular.module('fastrankApp')
   var reCalSlider = function() {
     $scope.$broadcast('reCalcViewDimensions');
   };
-  $timeout(reCalSlider, 2);
-})
-.factory('domain', function($http) {
-  var data = {};
-  data.fetchDomains = function() {
-    return $http.get('http://ns3006822.ip-151-80-36.eu:8080/rest-api/domains/tlds');
-  };
-  return data;
-})
-.factory('domainStrength', function($http) {
-  var data = {};
-  data.get = function(min, max) {
-    return $http.get('http://ns3006822.ip-151-80-36.eu:8080/rest-api/domains/strength?from=' + min + '&to=' + max);
-  };
-  return data;
-})
-.factory('majTF', function($http) {
-  var data = {};
-  data.get = function(min, max) {
-    return $http.get('http://ns3006822.ip-151-80-36.eu:8080/rest-api/domains/trustflow?from=' + min + '&to=' + max);
-  };
-  return data;
+  $timeout(reCalSlider, 1);
 });
+  
+
+
