@@ -119,6 +119,20 @@
 				                        </p>
 				                    </div>
 				                </div>
+                
+				                <div class="form-group">
+				                	<label translate="global.form.bonusCode">Do you have a bonus code?</label>
+				                	<input type="text" class="form-control" name="bonusCode" placeholder="{{'global.form.bonusCode.placeholder' | translate}}"
+				                		ng-model="bonusCode" ng-minlength=5 ng-maxlength=15>
+				                        <p class="help-block"
+				                               ng-show="form.bonusCode.$error.minlength" translate="global.messages.validate.bonusCode.minlength">
+				                            Your bonus code must be at least 5 characters
+				                        </p>
+				                        <p class="help-block"
+				                               ng-show="form.bonusCode.$error.maxlength" translate="global.messages.validate.bonusCode.maxlength">
+				                            Your bonus code cannot be longer than 15 characters
+				                        </p>
+				                </div>
 
 								<div class="form-group">
 									<div class="gap-20 visible-xs visible-sm"></div>

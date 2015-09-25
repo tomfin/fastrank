@@ -39,7 +39,9 @@
             "confirmpassword": "New password confirmation",
             "confirmpassword.placeholder": "Confirm the new password",
             "email": "E-mail",
-            "email.placeholder": "Your e-mail"
+            "email.placeholder": "Your e-mail",
+            "bonusCode": "Do you have a bonus code?",
+            "bonusCode.placeholder": "Enter your bonus code"
         },
         "messages": {
             "info": {
