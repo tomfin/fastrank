@@ -63,3 +63,37 @@
   border-color: #1a4b69;
 }
  
+
+/* start Password strength bar style */
+ul#strength {
+    display:inline;
+    list-style:none;
+	list-style-type: none;
+    margin: 0;
+    margin-left:15px;
+    padding: 0 !important;
+    vertical-align:2px;
+}
+ul#strengthBar {
+	padding-top: 0;
+	padding-bottom: 0;
+	margin: 0;
+}
+
+.point:last {
+    margin:0 !important;
+}
+.point {
+    background:#DDD;
+    border-radius:2px;
+    display:inline-block;
+    height:5px;
+    padding: 0;
+    margin-right:1px;
+    width:20px;
+}
+.point::before {
+	display: none;
+}
+/* end Password strength bar style */
+ 
