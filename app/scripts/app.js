@@ -189,16 +189,24 @@ angular
         };
     };
 })
-  .config(function ($httpProvider, requestNotificationProvider) {
-    $httpProvider.defaults.transformRequest.push(function (data) {
-        requestNotificationProvider.fireRequestStarted(data);
-        return data;
-    });
-
-    $httpProvider.defaults.transformResponse.push(function (data) {
-        requestNotificationProvider.fireRequestEnded(data);
-        return data;
-    });
+.config(function ($httpProvider, requestNotificationProvider) {
+    $httpProvider.interceptors.push(function ($q) {
+        return {
+            request: function (config) {
+                requestNotificationProvider.fireRequestStarted();
+                return config;
+            },
+            response: function (response) {
+                requestNotificationProvider.fireRequestEnded();
+                return response;
+            },
+            
+            responseError: function (rejection) {
+	            requestNotificationProvider.fireRequestEnded();
+	            return $q.reject(rejection);
+	        }
+	    };
+	});
 })
 .directive('loadingWidget', function (requestNotification) {
     return {
@@ -220,4 +228,5 @@ angular
         }
     };
 });
+
   
