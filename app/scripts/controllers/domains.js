@@ -9,7 +9,7 @@
  */
 angular.module('fastrankApp')
   .controller('DomainsCtrl', function ($scope, domain, domainStrength, majTF, $q, $timeout) {
-  $scope.domainStrength = { min: 0, max: 10000, ceil: 10000, floor: 0, step: 100 };
+  $scope.domainStrength = { min: 0, max: 100, ceil: 100, floor: 0, step: 1 };
   $scope.majTF = { min: 0, max: 100, ceil: 100, floor: 0, step: 10 };
   $scope.otherSliders = {
     majDOMCF: { title: 'Maj. Dom CF:0 - 100 | ?', min: 0, max: 100, ceil: 100, floor: 0, step: 10 },

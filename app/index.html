@@ -90,8 +90,8 @@
                 </button>
                 <!-- Logo -->
                 <div class="logo">
-                  <a href="/"><img src="images/logo.png"
-                    alt="Rocket"></a>
+                  <a ui-sref="home"><img src="images/logo.png"
+                    alt="FastRank"></a>
                 </div>
                 <!-- Logo / End -->
               </div>
@@ -419,11 +419,15 @@
       	<i class="fa fa-chevron-up"></i>
       </a>
     </div>
-    <div class="link-holder scroll-local">
-      <a href="#section-contact" class="contacts-link"
-        data-toggle="tooltip" data-placement="left" title="Contact Us"><i
-        class="fa fa-envelope"></i>
-      </a>
+    <div ng-show="isHome()" class="link-holder scroll-local">
+	    <a ng-show="isHome()" href="#section-contact" class="contacts-link"
+	        data-toggle="tooltip" data-placement="left" title="Contact Us"><i
+	        class="fa fa-envelope"></i>
+	    </a>
+	    <a ng-show="!isHome()" ng-click="linkTo('/#section-contact')" class="contacts-link"
+	        data-toggle="tooltip" data-placement="left" title="Contact Us"><i
+	        class="fa fa-envelope"></i>
+	    </a>
     </div>
   </div>
   <!-- Back to Top / End -->

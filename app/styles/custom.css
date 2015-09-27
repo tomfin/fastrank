@@ -48,6 +48,7 @@
 .domain-page .basic-search.keyword .input-group {
   width: 90%;
   float: left;
+  position: relative;
 }
 .domain-page .btnInvisible {
   border: none;
@@ -99,4 +100,36 @@ ul#strengthBar {
 
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important;
+}
+
+.vertical-align {
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.row-height {
+  display: table;
+  table-layout: fixed;
+  height: 100%;
+  width: 100%;
+}
+.col-height {
+  display: table-cell;
+  float: none;
+  height: 100%;
+}
+.col-top {
+  vertical-align: top;
+}
+.col-middle {
+  vertical-align: middle;
+}
+.col-bottom {
+  vertical-align: bottom;
+}
+.tooltip-top {
+  position: absolute;
+  top: 50%;
+  left: 87%;
+  transform: translateY(-50%);
 }
