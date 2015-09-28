@@ -8,8 +8,8 @@
  * Controller of the fastrankApp
  */
 angular.module('fastrankApp')
-  .controller('DomainsCtrl', function ($scope, domain, domainStrength, majTF, $q, $timeout) {
-  $scope.domainStrength = { min: 0, max: 100, ceil: 100, floor: 0, step: 1 };
+  .controller('DomainsCtrl', function ($scope, domain, domainStrength, majTF,simpleSearch, $q, $timeout, $log) {
+  $scope.domainStrength = { min: 0, max: 10000, ceil: 10000, floor: 0, step: 100 };
   $scope.majTF = { min: 0, max: 100, ceil: 100, floor: 0, step: 10 };
   $scope.otherSliders = {
     majDOMCF: { title: 'Maj. Dom CF:0 - 100 | ?', min: 0, max: 100, ceil: 100, floor: 0, step: 10 },
@@ -18,6 +18,7 @@ angular.module('fastrankApp')
     majRefDomainsEDU: { title: 'Maj. RefDomainsEDU: 1 - Max | ?', min: 0, max: 100, ceil: 100, floor: 0, step: 10 },
     majRefDomainGOV: { title: 'Maj. RefDomainGOV: 1 - Max | ?', min: 0, max: 100, ceil: 100, floor: 0, step: 10 }
   };
+  $scope.keywords = '';
 
   $scope.initDomain = function() {
     $scope.updateDomainStrengthSlider($scope.majTF.min, $scope.majTF.max);
@@ -41,7 +42,7 @@ angular.module('fastrankApp')
     .success(function (res) {
       domainStrengthDefer.resolve(res);  
     }).error(function () {
-      console.log('Error fetching domain strength');
+      $log.error('Error fetching domain strength');
     });
     domainStrengthDefer.promise.then(function (res) {
       $scope.domainStrength.count = res;
@@ -54,7 +55,7 @@ angular.module('fastrankApp')
     .success(function (res) {
       majTFDefer.resolve(res);  
     }).error(function () {
-      console.log('Error fetching majTF');
+      $log.error('Error fetching majTF');
     });
     majTFDefer.promise.then(function (res) {
       $scope.majTF.count = res;
@@ -67,7 +68,7 @@ angular.module('fastrankApp')
     .success(function (res) {
       domainDefer.resolve(res);  
     }).error(function () {
-      console.log('Error fetching domains');
+      $log.error('Error fetching domains');
     });
     domainDefer.promise.then(function (res) {
       $scope.allDomains = res;
@@ -91,7 +92,16 @@ angular.module('fastrankApp')
   };  
 
   $scope.find = function() {
-
+    var simpleSearchDefer = $q.defer();
+    simpleSearch.search($scope.domainStrength.min, $scope.domainStrength.max, $scope.keywords, 'text')
+    .success(function (res) {
+      simpleSearchDefer.resolve(res);  
+    }).error(function () {
+      $log.error('Error while searching');
+    });
+    simpleSearchDefer.promise.then(function (res) {
+      console.log(res);
+    });
   };
 
   $scope.save = function() {
