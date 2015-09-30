@@ -8,15 +8,15 @@
  * Controller of the fastrankApp
  */
 angular.module('fastrankApp')
-  .controller('DomainsCtrl', function ($scope, domain, domainStrength, majTF,simpleSearch, $q, $timeout, $log) {
-  $scope.domainStrength = { min: 0, max: 10000, ceil: 10000, floor: 0, step: 100 };
-  $scope.majTF = { min: 0, max: 100, ceil: 100, floor: 0, step: 10 };
+  .controller('DomainsCtrl', function ($scope, domain, domainStrength, majTF, simpleSearch, $q, $timeout) {
+  $scope.domainStrength = { min: 0, max: 100, ceil: 100, floor: 0, step: 1 };
+  $scope.majTF = { min: 0, max: 100, ceil: 100, floor: 0, step: 1 };
   $scope.otherSliders = {
-    majDOMCF: { title: 'Maj. Dom CF:0 - 100 | ?', min: 0, max: 100, ceil: 100, floor: 0, step: 10 },
-    majRefDomians: { title: 'Maj. RefDomians: 0 - MAx | ?', min: 0, max: 100, ceil: 100, floor: 0, step: 10 },
-    majRefIPs: { title: 'Maj. RefIPs: 0 - MAx | ?', min: 0, max: 100, ceil: 100, floor: 0, step: 10 },
-    majRefDomainsEDU: { title: 'Maj. RefDomainsEDU: 1 - Max | ?', min: 0, max: 100, ceil: 100, floor: 0, step: 10 },
-    majRefDomainGOV: { title: 'Maj. RefDomainGOV: 1 - Max | ?', min: 0, max: 100, ceil: 100, floor: 0, step: 10 }
+    majDOMCF: { title: 'Maj. Dom CF:0 - 100', min: 0, max: 100, ceil: 100, floor: 0, step: 1 },
+    majRefDomians: { title: 'Maj. RefDomains: 0 - Max', min: 0, max: 100, ceil: 100, floor: 0, step: 1 },
+    majRefIPs: { title: 'Maj. RefIPs: 0 - Max', min: 0, max: 100, ceil: 100, floor: 0, step: 1 },
+    majRefDomainsEDU: { title: 'Maj. RefDomainsEDU: 0 - Max', min: 0, max: 100, ceil: 100, floor: 0, step: 1 },
+    majRefDomainGOV: { title: 'Maj. RefDomainGOV: 0 - Max', min: 0, max: 100, ceil: 100, floor: 0, step: 1 }
   };
   $scope.keywords = '';
 
@@ -26,6 +26,20 @@ angular.module('fastrankApp')
     getDomains();
   };
 
+  $scope.refreshSlider = function () {
+  };
+  
+  $scope.acc = {};
+  $scope.acc.advancedOpen = false;
+  $scope.acc.otherMetricsOpen = false;
+  
+  $scope.$watch('acc', function() {
+	 console.log('D> acc changed: ', $scope.acc); 
+     $timeout(function () {
+         $scope.$broadcast('rzSliderForceRender');
+     });
+  }, true);
+  
   $scope.selectAllNone = function(status, other) {
     angular.forEach($scope.otherDomains, function (obj) {
         obj.selected = status;
@@ -42,7 +56,7 @@ angular.module('fastrankApp')
     .success(function (res) {
       domainStrengthDefer.resolve(res);  
     }).error(function () {
-      $log.error('Error fetching domain strength');
+      console.log('Error fetching domain strength');
     });
     domainStrengthDefer.promise.then(function (res) {
       $scope.domainStrength.count = res;
@@ -55,7 +69,7 @@ angular.module('fastrankApp')
     .success(function (res) {
       majTFDefer.resolve(res);  
     }).error(function () {
-      $log.error('Error fetching majTF');
+      console.log('Error fetching majTF');
     });
     majTFDefer.promise.then(function (res) {
       $scope.majTF.count = res;
@@ -68,7 +82,7 @@ angular.module('fastrankApp')
     .success(function (res) {
       domainDefer.resolve(res);  
     }).error(function () {
-      $log.error('Error fetching domains');
+      console.log('Error fetching domains');
     });
     domainDefer.promise.then(function (res) {
       $scope.allDomains = res;
@@ -97,7 +111,7 @@ angular.module('fastrankApp')
     .success(function (res) {
       simpleSearchDefer.resolve(res);  
     }).error(function () {
-      $log.error('Error while searching');
+      console.log('Error while searching');
     });
     simpleSearchDefer.promise.then(function (res) {
       console.log(res);
@@ -108,10 +122,6 @@ angular.module('fastrankApp')
 
   };
   
-  var reCalSlider = function() {
-    $scope.$broadcast('reCalcViewDimensions');
-  };
-  $timeout(reCalSlider, 1);
 });
   
 
