@@ -52,12 +52,12 @@
   <link rel="stylesheet" href="styles/universal-custom/rs-universal.css">
   <link rel="stylesheet" href="rs-plugin/css/settings.css" media="screen">
   
-  <link rel="stylesheet" href="styles/style.css" />
   <link rel="stylesheet" href="styles/custom.css" />
+  <link rel="stylesheet" href="styles/style.css" />
   <link rel="stylesheet" href="scripts/vendor/rzslider/rzslider.min.css" />
   <!-- endbuild -->
 </head>
-<body ng-app="fastrankApp">
+<body ng-app="fastrankApp" ng-cloak>
 
   <!-- Page Loader -->
   <div class="page-loader">
@@ -71,13 +71,18 @@
   <div class="page-wrapper" ng-controller="MainCtrl">
     <div class="top-wrapper top-wrapper__bg1" id="top">
 
+	<!-- Preloader -->
+	<div class="page-loader loading-widget">
+		<div class="loader">Loading...</div>
+	</div>
+
       <!-- Header -->
-      <header class="header header__fixed">
+      <header class="header header__fixed" ng-cloak>
         <div class="header-main">
           <div class="container">
 
             <!-- Navigation -->
-            <nav class="navbar navbar-default fhmm" role="navigation">
+            <nav class="navbar navbar-default fhmm" role="navigation" ng-cloak>
 
               <div class="navbar-header">
                 <button type="button" class="navbar-toggle">
@@ -85,18 +90,33 @@
                 </button>
                 <!-- Logo -->
                 <div class="logo">
-                  <a href="/"><img src="images/logo.png"
-                    alt="Rocket"></a>
+                  <a ui-sref="home"><img src="images/logo.png"
+                    alt="FastRank"></a>
                 </div>
                 <!-- Logo / End -->
               </div>
               <!-- end navbar-header -->
 
-              <div id="main-nav" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav scroll-local">
-                  <li><a href="#section-about">About Us</a></li>
-                  <li><a href="#section-cta">Register Your Interest</a></li>
-                  <li><a href="#section-contact">Contact Us</a></li>
+				<div id="main-nav" class="navbar-collapse collapse" ng-cloak>
+					<ul class="nav navbar-nav scroll-local">
+					<li ng-show="isHome()"><a href="#section-about" ng-cloak>About Us</a></li>
+					<li ng-show="!isHome()"><a href="" ng-click="linkTo('/#section-about')" ng-cloak>About Us</a></li>
+					<li ng-show="isHome()"><a href="#section-cta" ng-cloak>Register Your Interest</a></li>
+					<li ng-show="!isHome()"><a href="" ng-click="linkTo('/#section-cta')" ng-cloak>Register Your Interest</a></li>
+					<li ng-show="isHome()"><a href="#section-contact" ng-cloak>Contact Us</a></li>
+					<li ng-show="!isHome()"><a href="" ng-click="linkTo('/#section-contact')" ng-cloak>Contact Us</a></li>
+					<li ng-show="isAuthenticated()"><a ui-sref="domains">Search for Domains</a></li>
+					<li ng-show="isAuthenticated()" class="dropdown">
+						<a href="#" data-toggle="dropdown" class="dropdown-toggle dropdown-toggle__caret-holder">My Account</a>
+						<a class="dropdown-toggle dropdown-toggle__caret"><b class="caret"></b></a>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="">My Details</a></li>
+							<li><a href="">My Domains</a></li>
+							<li><a href="">My Transactions</a></li>
+						</ul><!-- end drop down menu -->
+					</li>
+	                <li ng-show="!isAuthenticated()"><a ui-sref="login">Login/Register</a></li>
+	                <li ng-show="isAuthenticated()"><a ng-click="logout()">Logout</a></li>
                 </ul>
                 <!-- end nav navbar-nav -->
               </div>
@@ -400,10 +420,14 @@
       </a>
     </div>
     <div class="link-holder scroll-local">
-      <a href="#section-contact" class="contacts-link"
-        data-toggle="tooltip" data-placement="left" title="Contact Us"><i
-        class="fa fa-envelope"></i>
-      </a>
+	    <a ng-show="isHome()" href="#section-contact" class="contacts-link"
+	        data-toggle="tooltip" data-placement="left" title="Contact Us"><i
+	        class="fa fa-envelope"></i>
+	    </a>
+	    <a ng-show="!isHome()" ng-click="linkTo('/#section-contact')" class="contacts-link"
+	        data-toggle="tooltip" data-placement="left" title="Contact Us"><i
+	        class="fa fa-envelope"></i>
+	    </a>
     </div>
   </div>
   <!-- Back to Top / End -->
@@ -478,7 +502,6 @@
   <script src="scripts/controllers/password.js"></script>
   <script src="scripts/controllers/activate.js"></script>
   <script src="scripts/controllers/reset.js"></script>
-  <script src="scripts/controllers/account.js"></script>
   <script src="scripts/routes/main.js"></script>
   <script src="scripts/routes/domains.js"></script>
   <script src="scripts/routes/login.js"></script>
@@ -486,7 +509,6 @@
   <script src="scripts/routes/password.js"></script>
   <script src="scripts/routes/activate.js"></script>
   <script src="scripts/routes/reset.js"></script>
-  <script src="scripts/routes/account.js"></script>
   <script src="scripts/services/password.directive.js"></script>
   <script src="scripts/services/auth/auth.service.js"></script>
   <script src="scripts/services/auth/authority.directive.js"></script>
