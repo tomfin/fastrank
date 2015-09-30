@@ -15,11 +15,11 @@ angular.module('fastrankApp')
   $scope.doNotMatch = null;
   $scope.noCurrentPsw = null;
   
-  $scope.account_update = function () {   
+  $scope.accountUpdate = function () {   
     //$log.info($scope.account);
   };
   
-  $scope.change_password = function() {
+  $scope.changePassword = function() {
     if(angular.isDefined($scope.account.newPassword) && angular.isDefined($scope.account.confirmPassword)) {
       if($scope.account.newPassword === $scope.account.confirmPassword) {
         $scope.doNotMatch = null;
@@ -32,15 +32,14 @@ angular.module('fastrankApp')
         $scope.noCurrentPsw = null;
         $scope.doNotMatch = 'ERROR';
       }
-    } else if (angular.isDefined($scope.account.newPassword) && !angular.isDefined($scope.account.confirmPassword)
-           || !angular.isDefined($scope.account.newPassword) && angular.isDefined($scope.account.confirmPassword)) {
+    } else if (angular.isDefined($scope.account.newPassword) && !angular.isDefined($scope.account.confirmPassword) || !angular.isDefined($scope.account.newPassword) && angular.isDefined($scope.account.confirmPassword)) {
       $scope.noCurrentPsw = null;
       $scope.doNotMatch = 'ERROR';
     } else {
       $scope.noCurrentPsw = null;
       $scope.doNotMatch = null;
     }
-  }
+  };
   
 }]);
   
