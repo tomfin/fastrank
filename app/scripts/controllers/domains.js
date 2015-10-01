@@ -34,7 +34,6 @@ angular.module('fastrankApp')
   $scope.acc.otherMetricsOpen = false;
   
   $scope.$watch('acc', function() {
-	 $log.info('D> acc changed: ', $scope.acc); 
      $timeout(function () {
          $scope.$broadcast('rzSliderForceRender');
      });
