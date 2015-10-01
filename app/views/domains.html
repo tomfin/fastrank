@@ -83,9 +83,11 @@
                   <div class="panel-body"> 
                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                       <h4 class="text-center">Majestic SEO</h4>
-                      Search for powerful expired domains using Majestic data.
+                      <p class="text-center">
+                      	Search for powerful expired domains using Majestic data.
+                      </p>
                       <div class="row">
-                        <div class="col-lg-12">
+                        <div class="col-lg-12 text-center">
                           <span>Domain Extensions</span>
                           <span>Select:
                             <a ng-click="selectAllNone(true)">All</a> | <a ng-click="selectAllNone(false)">None</a>
@@ -94,18 +96,18 @@
                         <div class="col-lg-12 col-md-12">
                           <div class="form-group col-lg-6 col-md-6">
                             <div class="col-lg-3 col-md-3">
-                              <input type="checkbox" class="form-control checkbox" ng-model="com.selected" />
+                              <input type="checkbox" id="comOnly" class="form-control checkbox" ng-model="com.selected" />
                             </div>
                             <div class="col-lg-9 col-md-9">
-                              <span>{{ com.tld | uppercase }} ({{ com.count | number }})</span>
+                              <label for="comOnly">{{ com.tld | uppercase }} ({{ com.count | number }})</label>
                             </div>
                           </div>
                           <div class="form-group col-lg-6 col-md-6">
                             <div class="col-lg-3 col-md-3">
-                              <input type="checkbox" class="form-control checkbox" ng-model="otherDomains.selected" ng-click="selectAllNone(otherDomains.selected, 'other')" />
+                              <input type="checkbox" id="allOthers" class="form-control checkbox" ng-model="otherDomains.selected" ng-click="selectAllNone(otherDomains.selected, 'other')" />
                             </div>
                             <div class="col-lg-9 col-md-9">
-                              <span>{{ allOthers.tld | uppercase }} ({{ allOthers.count | number }})</span>
+                              <label for="allOthers">{{ allOthers.tld | uppercase }} ({{ allOthers.count | number }})</label>
                             </div>
                           </div>
                         </div>
@@ -119,11 +121,11 @@
                               </accordion-heading>
                               <div ng-repeat="domain in otherDomains">
                                 <div class="form-group">
-                                  <div class="col-lg-1 col-md-1">
-                                    <input type="checkbox" class="form-control checkbox" ng-model="domain.selected" />
+                                  <div class="col-sm-1">
+                                    <input type="checkbox" id="{{domain.tld}}" class="form-control checkbox" ng-model="domain.selected" />
                                   </div>
-                                  <div class="col-lg-11 col-md-11">
-                                    <span>{{ domain.tld | uppercase}} ({{ domain.count| number}})</span>
+                                  <div class="col-sm-11">
+                                    <label for="{{domain.tld}}">{{ domain.tld | uppercase}} ({{ domain.count| number}})</label>
                                   </div>
                                 </div>                                
                               </div>
@@ -131,7 +133,7 @@
                           </accordion>
                         </div>
                       </div>
-                      <div class="col-lg-5 col-lg-offset-4 majTF">
+                      <div class="col-lg-8 col-lg-offset-2 majTF text-center">
                         Maj. Dom TF: 0 - 100 | ?
                         <rzslider
                           rz-slider-floor="majTF.floor"
@@ -152,7 +154,7 @@
                               <accordion-heading>
                                 Other Majestic Metics <i class="pull-right glyphicon" ng-class="{'glyphicon glyphicon-minus-sign': acc.otherMetricsOpen, 'glyphicon glyphicon-plus-sign': !acc.otherMetricsOpen}"></i>
                               </accordion-heading>
-                              <div class="col-lg-5 col-lg-offset-4 text-center" ng-repeat="slider in otherSliders">
+                              <div class="col-lg-8 col-lg-offset-2 text-center" ng-repeat="slider in otherSliders">
                                 {{slider.title}}
                                 <rzslider
                                   rz-slider-floor="slider.floor"
