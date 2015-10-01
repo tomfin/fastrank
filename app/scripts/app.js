@@ -82,11 +82,10 @@ angular
           }
       };
   })
-  
   .config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider, $translateProvider, tmhDynamicLocaleProvider, httpRequestInterceptorCacheBusterProvider) {
 
       //Cache everything except rest api requests
-      httpRequestInterceptorCacheBusterProvider.setMatchlist([/.*api.*/, /.*protected.*/], true);
+      httpRequestInterceptorCacheBusterProvider.setMatchlist([/.*api.*/, /.*rest-api.*/, /.*protected.*/], true);
 
       $urlRouterProvider.otherwise('/');
 
@@ -153,6 +152,7 @@ angular
         requestCounter.increment();
         //run each subscribed listener
         angular.forEach(onRequestStartedListeners, function (listener) {
+        	console.log('D> start listener: ', listener);
             // call the listener with request argument
             listener(request);
         });
@@ -193,7 +193,9 @@ angular
     $httpProvider.interceptors.push(function ($q) {
         return {
             request: function (config) {
-                requestNotificationProvider.fireRequestStarted();
+            	if (config.url.indexOf('rest-api/domains/strength') < 0 && config.url.indexOf('rest-api/domains/trustflow') < 0) {
+            		requestNotificationProvider.fireRequestStarted();
+            	}
                 return config;
             },
             response: function (response) {
