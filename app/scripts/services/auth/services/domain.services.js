@@ -9,28 +9,28 @@ angular.module('fastrankApp')
     }
   });
 })
-.factory('domain', function($http, ENDPOINT) {
+.factory('Domain', function($http, ENDPOINT) {
   var data = {};
   data.fetchDomains = function() {
     return $http({ url: ENDPOINT+ 'rest-api/domains/tlds', method:"GET" });
   };
   return data;
 })
-.factory('domainStrength', function($http, ENDPOINT) {
+.factory('DomainStrength', function($http, ENDPOINT) {
   var data = {};
   data.get = function(min, max) {
     return $http({ url: ENDPOINT+ 'rest-api/domains/strength', method:"GET", params:{ from:min, to:max } });
   };
   return data;
 })
-.factory('majTF', function($http, ENDPOINT) {
+.factory('MajTF', function($http, ENDPOINT) {
   var data = {};
   data.get = function(min, max) {
     return $http({ url: ENDPOINT + 'rest-api/domains/trustflow', method:'GET', params: { from:min, to:max } });
   };
   return data;
 })
-.factory('simpleSearch', function($http, ENDPOINT) {
+.factory('SimpleSearch', function($http, ENDPOINT) {
   var data = {};
   data.search = function(min, max, item, type) {
     return $http({ url: ENDPOINT+ 'rest-api/domains/search', method:"GET", params:{ min:min, max:max, item:item, type:type } });

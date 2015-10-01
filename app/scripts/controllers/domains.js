@@ -8,7 +8,7 @@
  * Controller of the fastrankApp
  */
 angular.module('fastrankApp')
-  .controller('DomainsCtrl', ['$scope', 'domain', 'domainStrength', 'majTF', 'simpleSearch', '$q', '$timeout', '$log', function ($scope, domain, domainStrength, majTF, simpleSearch, $q, $timeout, $log) {
+  .controller('DomainsCtrl', ['$scope', 'Domain', 'DomainStrength', 'MajTF', 'SimpleSearch', '$q', '$timeout', '$log', function ($scope, Domain, DomainStrength, MajTF, SimpleSearch, $q, $timeout, $log) {
   $scope.domainStrength = { min: 0, max: 100, ceil: 100, floor: 0, step: 1 };
   $scope.majTF = { min: 0, max: 100, ceil: 100, floor: 0, step: 1 };
   $scope.otherSliders = {
@@ -52,7 +52,7 @@ angular.module('fastrankApp')
 
   $scope.updateDomainStrengthSlider = function(min, max) {
     var domainStrengthDefer = $q.defer();
-    domainStrength.get(min, max)
+    DomainStrength.get(min, max)
     .success(function (res) {
       domainStrengthDefer.resolve(res);  
     }).error(function () {
@@ -65,7 +65,7 @@ angular.module('fastrankApp')
 
   $scope.updatemajTFSlider = function(min, max) {  
     var majTFDefer = $q.defer();
-    majTF.get(min, max)
+    MajTF.get(min, max)
     .success(function (res) {
       majTFDefer.resolve(res);  
     }).error(function () {
@@ -78,7 +78,7 @@ angular.module('fastrankApp')
 
   var getDomains = function() {  
     var domainDefer = $q.defer();
-    domain.fetchDomains()
+    Domain.fetchDomains()
     .success(function (res) {
       domainDefer.resolve(res);  
     }).error(function () {
@@ -107,7 +107,7 @@ angular.module('fastrankApp')
 
   $scope.find = function() {
     var simpleSearchDefer = $q.defer();
-    simpleSearch.search($scope.domainStrength.min, $scope.domainStrength.max, $scope.keywords, 'text')
+    SimpleSearch.search($scope.domainStrength.min, $scope.domainStrength.max, $scope.keywords, 'text')
     .success(function (res) {
       simpleSearchDefer.resolve(res);  
     }).error(function () {
