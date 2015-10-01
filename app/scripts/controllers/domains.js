@@ -8,7 +8,7 @@
  * Controller of the fastrankApp
  */
 angular.module('fastrankApp')
-  .controller('DomainsCtrl', function ($scope, domain, domainStrength, majTF, simpleSearch, $q, $timeout) {
+  .controller('DomainsCtrl', ['$scope', 'domain', 'domainStrength', 'majTF', 'simpleSearch', '$q', '$timeout', '$log', function ($scope, domain, domainStrength, majTF, simpleSearch, $q, $timeout, $log) {
   $scope.domainStrength = { min: 0, max: 100, ceil: 100, floor: 0, step: 1 };
   $scope.majTF = { min: 0, max: 100, ceil: 100, floor: 0, step: 1 };
   $scope.otherSliders = {
@@ -34,7 +34,7 @@ angular.module('fastrankApp')
   $scope.acc.otherMetricsOpen = false;
   
   $scope.$watch('acc', function() {
-	 console.log('D> acc changed: ', $scope.acc); 
+	 $log.info('D> acc changed: ', $scope.acc); 
      $timeout(function () {
          $scope.$broadcast('rzSliderForceRender');
      });
@@ -56,7 +56,7 @@ angular.module('fastrankApp')
     .success(function (res) {
       domainStrengthDefer.resolve(res);  
     }).error(function () {
-      console.log('Error fetching domain strength');
+      $log.error('Error fetching domain strength');
     });
     domainStrengthDefer.promise.then(function (res) {
       $scope.domainStrength.count = res;
@@ -69,7 +69,7 @@ angular.module('fastrankApp')
     .success(function (res) {
       majTFDefer.resolve(res);  
     }).error(function () {
-      console.log('Error fetching majTF');
+      $log.info('Error fetching majTF');
     });
     majTFDefer.promise.then(function (res) {
       $scope.majTF.count = res;
@@ -82,7 +82,7 @@ angular.module('fastrankApp')
     .success(function (res) {
       domainDefer.resolve(res);  
     }).error(function () {
-      console.log('Error fetching domains');
+      $log.error('Error fetching domains');
     });
     domainDefer.promise.then(function (res) {
       $scope.allDomains = res;
@@ -111,10 +111,10 @@ angular.module('fastrankApp')
     .success(function (res) {
       simpleSearchDefer.resolve(res);  
     }).error(function () {
-      console.log('Error while searching');
+      $log.error('Error while searching');
     });
     simpleSearchDefer.promise.then(function (res) {
-      console.log(res);
+      $log.info(res);
     });
   };
 
@@ -122,7 +122,7 @@ angular.module('fastrankApp')
 
   };
   
-});
+}]);
   
 
 
