@@ -11,7 +11,7 @@
 
       <fieldset>
         <legend>Change account info</legend>
-        <form ng-show="!success" name="form" role="form" novalidate ng-submit="account_update()" show-validation>
+        <form ng-show="!success" name="form" role="form" novalidate ng-submit="accountUpdate()" show-validation>
           <div class="row">
             <div class="col-md-6 col-md-offset-3">
               <div class="form-group">
@@ -70,7 +70,7 @@
         <div class="alert alert-danger" ng-show="doNotMatch">
           The new password and its confirmation do not match!
         </div>
-        <form ng-show="!success" name="form" role="form" novalidate ng-submit="change_password()" show-validation>
+        <form ng-show="!success" name="form" role="form" novalidate ng-submit="changePassword()" show-validation>
           <div class="row">
             <div class="col-md-6 col-md-offset-3">
               <div class="form-group">

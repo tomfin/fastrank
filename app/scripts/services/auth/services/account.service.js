@@ -10,6 +10,16 @@ angular.module('fastrankApp')
                         return response;
                     }
                 }
+            },
+            'update': 
+            {
+              method: 'POST', params: {}, isArray: false,
+                interceptor: {
+                    response: function(response) {
+                        // expose response
+                        return response;
+                    }
+                }
             }
         });
     });
