@@ -152,7 +152,6 @@ angular
         requestCounter.increment();
         //run each subscribed listener
         angular.forEach(onRequestStartedListeners, function (listener) {
-        	console.log('D> start listener: ', listener);
             // call the listener with request argument
             listener(request);
         });
