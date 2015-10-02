@@ -10,9 +10,9 @@
 angular.module('fastrankApp')
 .controller('AccountCtrl', [ '$scope', '$log', 'Account', function ($scope, $log, Account) {  
   $scope.accountUpdate = function () {   
-    var $updatedAccount = {};
+    var updatedAccount = {};
     $updatedAccount.fullName = $scope.account.fullName;
-    Account.update($updatedAccount);
+    Account.update(updatedAccount);
   };
   
   $scope.changePassword = function() {
@@ -21,9 +21,10 @@ angular.module('fastrankApp')
         $scope.doNotMatch = null;
         if(angular.isDefined($scope.account.currentPassword)) {
           $scope.noCurrentPsw = null;
-          var $updatedAccount = {};
-          $updatedAccount.newPassword = $scope.account.newPassword;
-          Account.update($updatedAccount);
+          var updatedAccount = {};
+          updatedAccount.currentPassword = $scope.account.currentPassword;
+          updatedAccount.newPassword = $scope.account.newPassword;
+          Account.update(updatedAccount);
         } else {
           $scope.noCurrentPsw = 'ERROR';
         }
@@ -39,5 +40,4 @@ angular.module('fastrankApp')
       $scope.doNotMatch = null;
     }
   };
-  
 }]);
