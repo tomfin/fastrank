@@ -11,7 +11,7 @@ angular.module('fastrankApp')
 .controller('AccountCtrl', [ '$scope', '$log', 'Account', function ($scope, $log, Account) {  
   $scope.accountUpdate = function () {   
     var updatedAccount = {};
-    $updatedAccount.fullName = $scope.account.fullName;
+    updatedAccount.fullName = $scope.account.fullName;
     Account.update(updatedAccount);
   };
   
