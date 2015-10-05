@@ -177,31 +177,20 @@
                               <accordion-heading>
                                 Majestic Topical Trust Flow <i class="pull-right glyphicon" ng-class="{'glyphicon glyphicon-minus-sign': status.open, 'glyphicon glyphicon-plus-sign': !status.open}"></i>
                               </accordion-heading>
-                              <div class="col-lg-12">
-                                <div class="row">
-                                  <h4>Or use Majestic Topical Trust Flow</h4>
-                                  Use Majestic Topical TrustFlow categorisation to find relevant sites
-                                  Categorise your URL - uClassify 
-                                </div>
-                                <div class="row">
-                                  <div class="form-group col-lg-11">
-                                    <div class="input-group">
-                                      <div class="input-group-addon"><i class="fa fa-desktop"></i></div>
-                                      <input type="text" value="" data-msg-required="Please enter your name." class="form-control" name="name" id="name" placeholder="URL here">
-                                    </div>
-                                  </div>
-                                  <div class="col-lg-1">
-                                    <button class="btnInvisible" popover="This is the tooltip" popover-trigger="focus" aria-hidden="true">
-                                      <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
-                                    </button>
-                                  </div>
-                                </div>
-                                <div class="row">Or pick your Majestic Topcial TrustFlow category here
-                                  <button class="btnInvisible" popover="This is the tooltip" popover-trigger="focus" aria-hidden="true">
-                                    <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
-                                  </button>
-                                </div>
-                              </div>
+                                  <p>Use Majestic Topical TrustFlow categorisation to find relevant sites. Select a category and sub-category below.</p>
+									<select class="form-control selectpicker" ng-change="categoryChange()" name="majesticSelect1" id="majesticSelect1" ng-model="categories.majesticCategoryIdx" data-style="btn-default">
+										<option value="">----Please select a category----</option>
+										<option ng-repeat="category in majesticCategories" value="{{$index}}">{{category.category}}</option>
+									</select>
+									<select class="form-control selectpicker" ng-change="subcategoryChange()" ng-show="categories.majesticCategory != null" name="majesticSelect2" id="majesticSelect2" ng-model="categories.majesticSubcategoryIdx" data-style="btn-default">
+										<option value="">----Please select a sub-category----</option>
+										<option ng-repeat="subcategory in categories.majesticCategory.subcategories" value="{{$index}}">{{subcategory.category}}</option>
+									</select>
+									<select class="form-control selectpicker" ng-change="subsubcategoryChange()" ng-show="categories.majesticSubcategory != null && categories.majesticSubcategory.lastCategory == false" name="majesticSelect3" id="majesticSelect3" ng-model="categories.majesticSubsubcategoryIdx" data-style="btn-default">
+										<option value="">----Please select a further sub-category----</option>
+										<option ng-repeat="subcategory in categories.majesticSubcategory.subcategories" value="{{$index}}">{{subcategory.category}}</option>
+									</select>
+                              
                             </accordion-group>
                           </accordion>
                         </div>

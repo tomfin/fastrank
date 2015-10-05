@@ -8,7 +8,7 @@
  * Controller of the fastrankApp
  */
 angular.module('fastrankApp')
-  .controller('DomainsCtrl', ['$scope', 'Domain', 'DomainStrength', 'MajTF', 'SimpleSearch', '$q', '$timeout', '$log', function ($scope, Domain, DomainStrength, MajTF, SimpleSearch, $q, $timeout, $log) {
+  .controller('DomainsCtrl', ['$scope', 'Domain', 'DomainStrength', 'MajTF', 'SimpleSearch', 'MajesticCategories', '$q', '$timeout', '$log', function ($scope, Domain, DomainStrength, MajTF, SimpleSearch, MajesticCategories, $q, $timeout, $log) {
   $scope.domainStrength = { min: 0, max: 100, ceil: 100, floor: 0, step: 1 };
   $scope.majTF = { min: 0, max: 100, ceil: 100, floor: 0, step: 1 };
   $scope.otherSliders = {
@@ -19,13 +19,40 @@ angular.module('fastrankApp')
     majRefDomainGOV: { title: 'Maj. RefDomainGOV: 0 - Max', min: 0, max: 100, ceil: 100, floor: 0, step: 1 }
   };
   $scope.keywords = '';
+  $scope.categories = {};
+  $scope.categories.majesticCategoryIdx = null;
+  $scope.categories.majesticSubcategoryIdx = null;
+  $scope.categories.majesticSubsubcategoryIdx = null;
+  $scope.categories.majesticCategory = null;
+  $scope.categories.majesticSubcategory = null;
+  $scope.categories.majesticSubsubcategory = null;
 
   $scope.initDomain = function() {
     $scope.updateDomainStrengthSlider($scope.majTF.min, $scope.majTF.max);
     $scope.updatemajTFSlider($scope.majTF.min, $scope.majTF.max);
     getDomains();
+    MajesticCategories.categories()
+    .$promise.then(function(categories) {
+    	$scope.majesticCategories = categories;
+    });
   };
 
+  $scope.categoryChange = function () {
+	  $scope.categories.majesticCategory = $scope.majesticCategories[$scope.categories.majesticCategoryIdx];
+	  $scope.categories.majesticSubcategoryIdx = null;
+	  $scope.categories.majesticSubcategory = null;
+  };
+  
+  $scope.subcategoryChange = function () {
+	  $scope.categories.majesticSubcategory = $scope.categories.majesticCategory.subcategories[$scope.categories.majesticSubcategoryIdx];
+	  $scope.categories.majesticSubsubcategoryIdx = null;
+	  $scope.categories.majesticSubsubcategory = null;
+  };
+  
+  $scope.subsubcategoryChange = function () {
+	  $scope.categories.majesticSubsubcategory = $scope.categories.majesticSubcategory.subcategories[$scope.categories.majesticSubsubcategoryIdx];
+  };
+  
   $scope.refreshSlider = function () {
   };
   

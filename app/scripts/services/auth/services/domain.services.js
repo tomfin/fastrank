@@ -36,4 +36,12 @@ angular.module('fastrankApp')
     return $http({ url: ENDPOINT+ 'rest-api/domains/search', method:"GET", params:{ min:min, max:max, item:item, type:type } });
   };
   return data;
+})
+.factory('MajesticCategories', function($resource, ENDPOINT) {
+	return $resource(ENDPOINT + 'rest-api/domains/majesticcategories', {}, {
+		'categories': {
+			method: 'GET',
+			isArray: true
+		}
+	})
 });
