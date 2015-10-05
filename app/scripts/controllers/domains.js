@@ -8,15 +8,15 @@
  * Controller of the fastrankApp
  */
 angular.module('fastrankApp')
-  .controller('DomainsCtrl', ['$scope', 'Domain', 'DomainStrength', 'MajTF', 'SimpleSearch', 'MajesticCategories', '$q', '$timeout', '$log', function ($scope, Domain, DomainStrength, MajTF, SimpleSearch, MajesticCategories, $q, $timeout, $log) {
+  .controller('DomainsCtrl', ['$scope', 'Domain', 'DomainStrength', 'MajTF', 'SimpleSearch', 'AdvancedSearch', 'MajesticCategories', '$q', '$timeout', '$log', function ($scope, Domain, DomainStrength, MajTF, SimpleSearch, AdvancedSearch, MajesticCategories, $q, $timeout, $log) {
   $scope.domainStrength = { min: 0, max: 100, ceil: 100, floor: 0, step: 1 };
   $scope.majTF = { min: 0, max: 100, ceil: 100, floor: 0, step: 1 };
   $scope.otherSliders = {
     majDOMCF: { title: 'Maj. Dom CF:0 - 100', min: 0, max: 100, ceil: 100, floor: 0, step: 1 },
-    majRefDomians: { title: 'Maj. RefDomains: 0 - Max', min: 0, max: 100, ceil: 100, floor: 0, step: 1 },
+    majRefDomains: { title: 'Maj. RefDomains: 0 - Max', min: 0, max: 100, ceil: 100, floor: 0, step: 1 },
     majRefIPs: { title: 'Maj. RefIPs: 0 - Max', min: 0, max: 100, ceil: 100, floor: 0, step: 1 },
     majRefDomainsEDU: { title: 'Maj. RefDomainsEDU: 0 - Max', min: 0, max: 100, ceil: 100, floor: 0, step: 1 },
-    majRefDomainGOV: { title: 'Maj. RefDomainGOV: 0 - Max', min: 0, max: 100, ceil: 100, floor: 0, step: 1 }
+    majRefDomainsGOV: { title: 'Maj. RefDomainsGOV: 0 - Max', min: 0, max: 100, ceil: 100, floor: 0, step: 1 }
   };
   $scope.keywords = '';
   $scope.categories = {};
@@ -143,11 +143,80 @@ angular.module('fastrankApp')
       $log.info(res);
     });
   };
+  
+  $scope.advancedFind = function () {
+	  var advancedSubmit = {};
+	  
+	  // Domain extensions
+	  advancedSubmit.comDomains = $scope.com.selected;
+	  advancedSubmit.otherDomains = $scope.otherDomains.selected;
 
-  $scope.save = function() {
+	  // Majestic topics
+	  advancedSubmit.majesticCategory = $scope.categories.majesticCategory.category;
+	  advancedSubmit.majesticSubcategory = $scope.categories.majesticSubcategory.category;
+	  advancedSubmit.majesticSubsubcategory = $scope.categories.majesticSubsubcategory.category;
+
+	  // Majestic metrics
+	  // TF
+	  advancedSubmit.majTFMin = $scope.majTF.min;
+	  advancedSubmit.majTFMax = $scope.majTF.max;
+	  // CF
+	  advancedSubmit.majDOMCFMin = $scope.otherSliders.majDOMCF.min;
+	  advancedSubmit.majDOMCFMax = $scope.otherSliders.majDOMCF.max;
+	  // RefDomains
+	  advancedSubmit.majRefDomainsMin = $scope.otherSliders.majRefDomains.min;
+	  advancedSubmit.majRefDomainsMax = $scope.otherSliders.majRefDomains.max;
+	  // RefIPs
+	  advancedSubmit.majRefIPsMin = $scope.otherSliders.majRefIPs.min;
+	  advancedSubmit.majRefIPsMax = $scope.otherSliders.majRefIPs.max;
+	  // Ref EDU
+	  advancedSubmit.majRefDomainsEDUMin = $scope.otherSliders.majRefDomainsEDU.min;
+	  advancedSubmit.majRefDomainsEDUMax = $scope.otherSliders.majRefDomainsEDU.max;
+	  // Ref GOV
+	  advancedSubmit.majRefDomainsGOVMin = $scope.otherSliders.majRefDomainsGOV.min;
+	  advancedSubmit.majRefDomainsGOVMax = $scope.otherSliders.majRefDomainsGOV.max;
+	  
+	  console.log('D> Advanced criteria: ', advancedSubmit);
+
+	  var advancedSearchDefer = $q.defer();
+	  AdvancedSearch.search(advancedSubmit)
+	    .success(function (res) {
+	    	advancedSearchDefer.resolve(res);  
+	    }).error(function () {
+	    $log.error('Error while advacned searching');
+	  });
+	  advancedSearchDefer.promise.then(function (res) {
+	    $log.info(res);
+	  });
 
   };
   
+  $scope.advancedReset = function () {
+	  $scope.com.selected = null;
+	  $scope.otherDomains.selected = null;
+ 	  angular.forEach($scope.otherDomains, function (obj) {
+	    obj.selected = false;
+	  }); 
+
+	  $scope.categories.majesticCategory = null;
+	  $scope.categories.majesticCategoryIdx = null;
+	  $scope.categories.majesticSubcategory = null;
+	  $scope.categories.majesticSubsubcategory = null;
+
+	  $scope.majTF.min = 0;
+	  $scope.majTF.max = 100;
+	  $scope.otherSliders.majDOMCF.min = 0;
+	  $scope.otherSliders.majDOMCF.max = 100;
+	  $scope.otherSliders.majRefDomains.min = 0;
+	  $scope.otherSliders.majRefDomains.max = 100;
+	  $scope.otherSliders.majRefIPs.min = 0;
+	  $scope.otherSliders.majRefIPs.max = 100;
+	  $scope.otherSliders.majRefDomainsEDU.min = 0;
+	  $scope.otherSliders.majRefDomainsEDU.max = 100;
+	  $scope.otherSliders.majRefDomainsGOV.min = 0;
+	  $scope.otherSliders.majRefDomainsGOV.max = 100;
+  };
+
 }]);
   
 

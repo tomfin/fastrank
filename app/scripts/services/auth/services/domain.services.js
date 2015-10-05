@@ -33,9 +33,16 @@ angular.module('fastrankApp')
 .factory('SimpleSearch', function($http, ENDPOINT) {
   var data = {};
   data.search = function(min, max, item, type) {
-    return $http({ url: ENDPOINT+ 'rest-api/domains/search', method:"GET", params:{ min:min, max:max, item:item, type:type } });
+    return $http({ url: ENDPOINT+ 'rest-api/domains/search', method:'GET', params:{ min:min, max:max, item:item, type:type } });
   };
   return data;
+})
+.factory('AdvancedSearch', function($http, ENDPOINT) {
+	var data = {};
+	data.search = function(advancedFind) {
+		return $http({url: ENDPOINT + 'rest-api/domains/advancedsearch', method:'GET', params: {advancedFind:advancedFind} });
+	};
+	return data;
 })
 .factory('MajesticCategories', function($resource, ENDPOINT) {
 	return $resource(ENDPOINT + 'rest-api/domains/majesticcategories', {}, {
