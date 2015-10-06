@@ -8,13 +8,13 @@
  * Controller of the fastrankApp
  */
 angular.module('fastrankApp')
-.controller('AccountCtrl', [ '$scope', '$log', 'Account', '$q', function ($scope, $log, Account, $q) { 
+.controller('AccountCtrl', [ '$scope', '$log', 'Account', '$q', function ($scope, Account) { 
   $scope.accountUpdate = function () {
     $scope.profleUpdateMsg = null;
     var updatedAccount = {};
     updatedAccount.fullName = $scope.account.fullName;
     Account.update(updatedAccount).$promise
-    .then(function (res) {
+    .then(function () {
       $scope.profleUpdateMsg = 'Profile is successfully updated.';
     })
     .catch(function () {
@@ -33,7 +33,7 @@ angular.module('fastrankApp')
           updatedAccount.currentPassword = $scope.account.currentPassword;
           updatedAccount.newPassword = $scope.account.newPassword;
           Account.update(updatedAccount).$promise
-          .then(function (res) {
+          .then(function () {
             $scope.pswUpdateMsg = 'Password is changed successfully.';
           })
           .catch(function () {
