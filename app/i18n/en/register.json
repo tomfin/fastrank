@@ -11,6 +11,12 @@
                     "minlength": "Your name is required to be at least 1 character",
                     "maxlength": "Your name cannot be longer than 80 characters",
                     "pattern": "Your name can only contain letters and hyphens"
+                },
+                "fullName": {
+                  "required": "Your full name is required.",
+                  "minlength": "Your name is required to be at least 2 character",
+                  "maxlength": "Your name cannot be longer than 80 characters",
+                  "pattern": "Your name can only contain letters and hyphens"
                 }
             },
             "success": "<strong>Registration saved!</strong> Please check your email for confirmation.",
