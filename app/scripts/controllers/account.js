@@ -8,14 +8,24 @@
  * Controller of the fastrankApp
  */
 angular.module('fastrankApp')
-.controller('AccountCtrl', [ '$scope', '$log', 'Account', function ($scope, $log, Account) {  
-  $scope.accountUpdate = function () {   
+.controller('AccountCtrl', [ '$scope', '$log', 'Account', '$q', function ($scope, $log, Account, $q) { 
+  $scope.accountUpdate = function () {
+    $scope.profleUpdateMsg = null;
     var updatedAccount = {};
     updatedAccount.fullName = $scope.account.fullName;
-    Account.update(updatedAccount);
+    Account.update(updatedAccount).$promise
+    .then(function (res) {
+      $scope.profleUpdateMsg = 'Profile is successfully updated.';
+      $log.info('Profile is successfully updated.');
+    })
+    .catch(function () {
+      $scope.profleUpdateMsg = 'Error updating profile.';
+      $log.error('Error updating profile');
+    });
   };
   
   $scope.changePassword = function() {
+    $scope.pswUpdateMsg = null;
     if(angular.isDefined($scope.account.newPassword) && angular.isDefined($scope.account.confirmPassword)) {
       if($scope.account.newPassword === $scope.account.confirmPassword) {
         $scope.doNotMatch = null;
@@ -24,7 +34,15 @@ angular.module('fastrankApp')
           var updatedAccount = {};
           updatedAccount.currentPassword = $scope.account.currentPassword;
           updatedAccount.newPassword = $scope.account.newPassword;
-          Account.update(updatedAccount);
+          Account.update(updatedAccount).$promise
+          .then(function (res) {
+            $scope.pswUpdateMsg = 'Password is changed successfully.';
+            $log.info('Password is changed successfully.');
+          })
+          .catch(function () {
+            $scope.pswUpdateMsg = 'Error updating password.';
+            $log.error('Error updating password.');
+          });
         } else {
           $scope.noCurrentPsw = 'ERROR';
         }

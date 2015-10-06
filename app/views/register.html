@@ -60,7 +60,7 @@
 				                <div class="form-group">
 				                    <label translate="global.form.username">Full Name</label>
 				                    <input type="text" class="form-control" name="fullName" placeholder="{{'global.form.username.placeholder' | translate}}"
-				                           ng-model="registerAccount.fullName" ng-minlength=1 ng-maxlength=80 ng-pattern="/^[a-zA-Z\- ]*$/" required>
+				                           ng-model="registerAccount.fullName" ng-minlength=2 ng-maxlength=80 ng-pattern="/^[a-zA-Z\- ]*$/" required>
 				                    <div ng-show="form.fullName.$dirty && form.fullName.$invalid">
 				                        <p class="help-block"
 				                               ng-show="form.fullName.$error.required" translate="register.messages.validate.fullName.required">
@@ -68,7 +68,7 @@
 				                        </p>
 				                        <p class="help-block"
 				                               ng-show="form.fullName.$error.minlength" translate="register.messages.validate.fullName.minlength">
-				                            Your name is required to be at least 1 character
+				                            Your name is required to be at least 2 characters
 				                        </p>
 				                        <p class="help-block"
 				                               ng-show="form.fullName.$error.maxlength" translate="register.messages.validate.fullName.maxlength">
