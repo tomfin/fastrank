@@ -16,11 +16,9 @@ angular.module('fastrankApp')
     Account.update(updatedAccount).$promise
     .then(function (res) {
       $scope.profleUpdateMsg = 'Profile is successfully updated.';
-      $log.info('Profile is successfully updated.');
     })
     .catch(function () {
       $scope.profleUpdateMsg = 'Error updating profile.';
-      $log.error('Error updating profile');
     });
   };
   
@@ -37,11 +35,9 @@ angular.module('fastrankApp')
           Account.update(updatedAccount).$promise
           .then(function (res) {
             $scope.pswUpdateMsg = 'Password is changed successfully.';
-            $log.info('Password is changed successfully.');
           })
           .catch(function () {
-            $scope.pswUpdateMsg = 'Error updating password.';
-            $log.error('Error updating password.');
+            $scope.pswUpdateMsg = 'Error updating password. Please ensure that your current password is correct.';
           });
         } else {
           $scope.noCurrentPsw = 'ERROR';
