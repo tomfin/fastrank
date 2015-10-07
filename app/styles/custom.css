@@ -133,3 +133,7 @@ ul#strengthBar {
   left: 87%;
   transform: translateY(-50%);
 }
+li a[ng-click], li a[ui-sref] {
+	cursor: pointer;
+	cursor: hand;
+}
