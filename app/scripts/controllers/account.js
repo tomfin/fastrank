@@ -9,6 +9,8 @@
  */
 angular.module('fastrankApp')
 .controller('AccountCtrl', [ '$scope', '$rootScope', '$log', 'Account', 'Auth', function ($scope, $rootScope, $log, Account, Auth) {  
+  $scope.updateAccount = {};
+  $scope.updateAccount.email = $rootScope.account.email;
   $scope.accountUpdate = function () {
     $scope.profleUpdateMsg = null;
     var updatedAccount = {};
