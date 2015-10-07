@@ -105,7 +105,7 @@
 					<li ng-show="!isHome()"><a href="" ng-click="linkTo('/#section-cta')" ng-cloak>Register Your Interest</a></li>
 					<li ng-show="isHome()"><a href="#section-contact" ng-cloak>Contact Us</a></li>
 					<li ng-show="!isHome()"><a href="" ng-click="linkTo('/#section-contact')" ng-cloak>Contact Us</a></li>
-					<li ng-show="isAuthenticated()"><a ui-sref="domains">Search for Domains</a></li>
+					<li ng-show="isAuthenticated()"><a ui-sref="search">Search for Domains</a></li>
 					<li ng-show="isAuthenticated()" class="dropdown">
 						<a href="#" data-toggle="dropdown" class="dropdown-toggle dropdown-toggle__caret-holder">My Account</a>
 						<a class="dropdown-toggle dropdown-toggle__caret"><b class="caret"></b></a>
@@ -497,14 +497,14 @@
   <script src="scripts/controllers/about.js"></script>
   <script src="scripts/controllers/login.js"></script>
   <script src="scripts/controllers/register.js"></script>
-  <script src="scripts/controllers/domains.js"></script>
+  <script src="scripts/controllers/search.js"></script>
   <script src="scripts/controllers/faq.js"></script>
   <script src="scripts/controllers/password.js"></script>
   <script src="scripts/controllers/activate.js"></script>
   <script src="scripts/controllers/reset.js"></script>
   <script src="scripts/controllers/account.js"></script>
   <script src="scripts/routes/main.js"></script>
-  <script src="scripts/routes/domains.js"></script>
+  <script src="scripts/routes/search.js"></script>
   <script src="scripts/routes/login.js"></script>
   <script src="scripts/routes/register.js"></script>
   <script src="scripts/routes/password.js"></script>
@@ -518,7 +518,7 @@
   <script src="scripts/services/auth/provider/auth.xauth.service.js"></script>
   <script src="scripts/services/auth/services/account.service.js"></script>
   <script src="scripts/services/auth/services/activate.service.js"></script>
-  <script src="scripts/services/auth/services/domain.services.js"></script>
+  <script src="scripts/services/auth/services/search.services.js"></script>
   <script src="scripts/services/auth/services/contact.service.js"></script>
   <script src="scripts/services/auth/services/password.service.js"></script>
   <script src="scripts/services/auth/services/register.service.js"></script>

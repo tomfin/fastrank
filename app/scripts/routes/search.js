@@ -3,22 +3,22 @@
 angular.module('fastrankApp')
     .config(function ($stateProvider) {
         $stateProvider
-            .state('domains', {
+            .state('search', {
                 parent: 'site',
-                url: '/domains',
+                url: '/search',
                 data: {
                     roles: [], 
-                    pageTitle: 'domains.title'
+                    pageTitle: 'search.title'
                 },
                 views: {
                     'content@': {
-                        templateUrl: 'views/domains.html',
-                        controller: 'DomainsCtrl'
+                        templateUrl: 'views/search.html',
+                        controller: 'SearchCtrl'
                     }
                 },
                 resolve: {
                     translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                        $translatePartialLoader.addPart('domains');
+                        $translatePartialLoader.addPart('search');
                         return $translate.refresh();
                     }]
                 }
