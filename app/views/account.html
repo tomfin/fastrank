@@ -82,12 +82,12 @@
             <div class="col-md-6 col-md-offset-3">
               <div class="form-group">
                 <label>Current password</label>
-                <input type="password" class="form-control" name="currentPassword" placeholder="Current password" ng-model="account.currentPassword" required>
+                <input type="password" class="form-control" name="currentPassword" placeholder="Current password" ng-model="updateAccount.currentPassword" required>
               </div>
 
               <div class="form-group">
                 <label>New password</label>
-                <input type="password" class="form-control" name="password" placeholder="New password" ng-model="account.newPassword" ng-minlength=5 ng-maxlength=50 required>
+                <input type="password" class="form-control" name="password" placeholder="New password" ng-model="updateAccount.newPassword" ng-minlength=5 ng-maxlength=50 required>
                 <div ng-show="pswform.password.$dirty && pswform.password.$invalid">
                   <p class="help-block" ng-show="pswform.password.$error.required">
                     Your password is required.
@@ -104,7 +104,7 @@
 
               <div class="form-group">
                 <label>New password confirmation</label>
-                <input type="password" class="form-control" name="confirmPassword" placeholder="Confirm new password" ng-model="account.confirmPassword" ng-minlength=5 ng-maxlength=50 required>
+                <input type="password" class="form-control" name="confirmPassword" placeholder="Confirm new password" ng-model="updateAccount.confirmPassword" ng-minlength=5 ng-maxlength=50 required>
                 <div ng-show="pswform.confirmPassword.$dirty && pswform.confirmPassword.$invalid">
                   <p class="help-block" ng-show="pswform.confirmPassword.$error.required">
                     Your password is required.
