@@ -22,6 +22,7 @@ angular.module('fastrankApp')
 	
     Principal.identity().then(function(account) {
         $scope.account = account;
+        $rootScope.account = account;
         $scope.isAuthenticated = Principal.isAuthenticated;
     });
 
