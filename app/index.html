@@ -111,8 +111,8 @@
 						<a class="dropdown-toggle dropdown-toggle__caret"><b class="caret"></b></a>
 						<ul class="dropdown-menu" role="menu">
 							<li><a ui-sref="account">My Details</a></li>
-							<li><a href="">My Domains</a></li>
-							<li><a href="">My Transactions</a></li>
+							<li><a ui-sref="domains">My Domains</a></li>
+							<li><a ui-sref="transactions">My Transactions</a></li>
 						</ul><!-- end drop down menu -->
 					</li>
 	                <li ng-show="!isAuthenticated()"><a ui-sref="login">Login/Register</a></li>
@@ -498,6 +498,8 @@
   <script src="scripts/controllers/login.js"></script>
   <script src="scripts/controllers/register.js"></script>
   <script src="scripts/controllers/search.js"></script>
+  <script src="scripts/controllers/domains.js"></script>
+  <script src="scripts/controllers/transactions.js"></script>
   <script src="scripts/controllers/faq.js"></script>
   <script src="scripts/controllers/password.js"></script>
   <script src="scripts/controllers/activate.js"></script>
@@ -505,6 +507,8 @@
   <script src="scripts/controllers/account.js"></script>
   <script src="scripts/routes/main.js"></script>
   <script src="scripts/routes/search.js"></script>
+  <script src="scripts/routes/domains.js"></script>
+  <script src="scripts/routes/transactions.js"></script>
   <script src="scripts/routes/login.js"></script>
   <script src="scripts/routes/register.js"></script>
   <script src="scripts/routes/password.js"></script>
