@@ -1,0 +1,49 @@
+<script async src="https://checkout.stripe.com/checkout.js"></script>
+
+<div class="content-wrapper domain-page">
+  <!-- Page Section -->
+  <section class="page-section">
+    <div class="container-fluid">
+    
+		<div class="section-title-wrapper">
+			<div class="section-title-inner">
+				<h1 class="section-title section-title__lg">Purchase Credits</h1>
+			</div>
+		</div>
+    
+		<div class="table-responsive">
+			<table class="table table-bordered table-striped">
+				<thead>
+					<tr>
+						<th>Level</th>
+						<th>Price</th>
+						<th>Credits</th>
+						<th>Buy</th>
+						<th>Addons</th>
+					</tr>
+				</thead>
+				<pre>{{prices}}</pre>
+				<tbody>
+					<tr ng-repeat="price in prices">
+						<td><strong>{{price.level}}</strong></td>
+						<td>${{price.price}}</td>
+						<td>{{price.credits}}</td>
+						<td>Get {{price.level}}</td>
+						<td>
+						<table>
+						<tr ng-repeat="addon in price.addons">
+							<td>{{addon.addonLevel}}</td>
+							<td>${{addon.price}}</td>
+							<td>C{{addon.credits}}</td>
+						</tr>
+						</table>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+    	
+    </div>
+  </section>
+  <!-- Page Section / End -->
+</div>
