@@ -51,6 +51,7 @@ angular.module('fastrankApp')
 	$scope.logout = function () {
 	    Auth.logout();
         $scope.account = null;
+        $rootScope.account = null;
         $scope.isAuthenticated = Principal.isAuthenticated;
 	    $state.go('home');
 	};
