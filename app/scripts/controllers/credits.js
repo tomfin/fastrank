@@ -10,7 +10,6 @@ angular.module('fastrankApp')
 
 	  $scope.prices = [];
 	  Prices.get().$promise.then(function(priceList) {
-		  console.log('D> priceList: ', priceList);
 		  $scope.prices = priceList;
 	  });
 	  
@@ -21,8 +20,6 @@ angular.module('fastrankApp')
 	  };
 	  
 	  $scope.purchase = function(levelToBuy) {
-		console.log('D> user login: ', $rootScope.account.login);
-		
 		var handler = StripeCheckout.configure({ // jshint ignore:line
 			key: STRIPE_KEY, // jshint ignore:line
 			image: 'images/fastrank_avatar_square.jpg',
@@ -63,9 +60,6 @@ angular.module('fastrankApp')
 	  };
 	  
 	  $scope.purchaseAddon = function(levelToBuy) {
-			console.log('D> user login: ', $rootScope.account.login);
-			console.log('D> Addon toBuy: ', levelToBuy);
-			
 			var handler = StripeCheckout.configure({ // jshint ignore:line
 				key: STRIPE_KEY, // jshint ignore:line
 				image: 'images/fastrank_avatar_square.jpg',
