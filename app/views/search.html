@@ -65,6 +65,7 @@
 			                  </button>
 			                </div>
 			                 -->
+                                         <span ng-if="searchMsg">{{ searchMsg }}</span>
             		</div>
               		</div>
               	</div>
@@ -122,10 +123,10 @@
                               <div ng-repeat="domain in otherDomains">
                                 <div class="form-group">
                                   <div class="col-sm-1">
-                                    <input type="checkbox" id="{{domain.tld}}" class="form-control checkbox" ng-model="domain.selected" />
+                                    <input type="checkbox" id="{{ domain.tld }}" class="form-control checkbox" ng-model="domain.selected" />
                                   </div>
                                   <div class="col-sm-11">
-                                    <label for="{{domain.tld}}">{{ domain.tld | uppercase}} ({{ domain.count| number}})</label>
+                                    <label for="{{ domain.tld }}">{{ domain.tld | uppercase }} ({{ domain.count | number }})</label>
                                   </div>
                                 </div>                                
                               </div>

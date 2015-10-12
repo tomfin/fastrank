@@ -1,0 +1,85 @@
+<div class="content-wrapper domain-page" ng-init="initDomain()">
+  <!-- Page Section -->
+  <section class="page-section">
+    <div class="container-fluid">
+      <div class="section-title-wrapper">
+        <div class="section-title-inner">
+          <h1 class="section-title section-title__lg">Domain search result</h1>
+        </div>
+      </div>
+      <div class="content">
+        <div class="row">
+          <div class="table-responsive">          
+            <table class="table">
+                <tr>
+                  <th><input type="checkbox" ng-model="selectedAll" ng-click="checkAll()" /></th>
+                  <th></th>
+                  <th></th>
+                  <th>Was</th>
+                  <th>$USD</th>
+                  <th>You Save</th>
+                  <th>Agg Link TF</th>
+                  <th>FR Trust</th>
+                  <th>Dom Rel</th>
+                  <th>Dom TF</th>
+                  <th></th>
+                  <th></th>
+                </tr>
+                <tr ng-repeat-start="rec in result">
+                  <td><input type="checkbox" ng-model="rec.selected" /></td>
+                  <td><a>Add</a></td>
+                  <td><a>Fast Buy</a></td>
+                  <td>{{ rec.basePrice }}</td>
+                  <td>{{ rec.actualPrice }}</td>
+                  <td>{{ rec.discount }}</td>
+                  <td>{{ rec.aggLinkTF }}</td>
+                  <td>{{ rec.frTrust }}</td>
+                  <td>{{ rec.domRel }}</td>
+                  <td>{{ rec.domTF }}</td>
+                  <td><a ng-click="more_info()">More</a></td>
+                  <td><a>All</a></td>
+                </tr>
+                <tr ng-repeat-end ng-show="toggle">
+                  <td colspan="12" ng-show="toggle">
+                    <table style="width: 100%">
+                      <tr>
+                        <td>Domain Registration <input type="checkbox" /></td>
+                        <td>Quote of site build <input type="checkbox" /></td>
+                        <td><a>Add to watch list</a></td>
+                      </tr>
+                      <tr>
+                        <td>DTF: {{ rec.domTF }} </td>
+                        <td>1<sup>1st</sup> Crawl {{ rec.firstCrawlDate }} </td>
+                        <td>Found: {{ rec.firstCrawlDate }} </td>
+                      </tr>
+                      <tr>
+                        <td>Maj. Agg TF: {{ rec.aggLinkTF }}</td>
+                        <td>Spam: {{ rec.spammedDomain }}</td>
+                        <td>Main maj. topic: {{ rec.majMainTopic }}</td>
+                      </tr>
+                      <tr>
+                        <td>TF/CF: {{ rec.tfcfRatio }}</td>
+                        <td>Last check: {{ rec.lastChecked }}</td>
+                        <td>Main Alchemy Taxonomy: {{ rec.alchMainTaxonomy }}</td>
+                      </tr>
+                      <tr>
+                        <td>Ref Dom: {{ rec.refDom }}</td>
+                        <td>Link Rel: {{ rec.linkRel }}</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>EDU/Gov: {{ rec.edugovCount }}</td>
+                        <td>TlD: {{ rec.tld }}</td>
+                        <td></td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Page Section / End -->
+</div>

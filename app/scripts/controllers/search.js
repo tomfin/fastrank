@@ -8,7 +8,7 @@
  * Controller of the fastrankApp
  */
 angular.module('fastrankApp')
-  .controller('SearchCtrl', ['$scope', 'Domain', 'DomainStrength', 'MajTF', 'SimpleSearch', 'AdvancedSearch', 'MajesticCategories', '$q', '$timeout', '$log', function ($scope, Domain, DomainStrength, MajTF, SimpleSearch, AdvancedSearch, MajesticCategories, $q, $timeout, $log) {
+  .controller('SearchCtrl', ['$scope', 'Domain', 'DomainStrength', 'MajTF', 'SimpleSearch', 'AdvancedSearch', 'MajesticCategories', '$q', '$timeout', '$log', '$state', function ($scope, Domain, DomainStrength, MajTF, SimpleSearch, AdvancedSearch, MajesticCategories, $q, $timeout, $log, $state) {
   $scope.domainStrength = { min: 0, max: 100, ceil: 100, floor: 0, step: 1 };
   $scope.majTF = { min: 0, max: 100, ceil: 100, floor: 0, step: 1 };
   $scope.otherSliders = {
@@ -26,6 +26,7 @@ angular.module('fastrankApp')
   $scope.categories.majesticCategory = null;
   $scope.categories.majesticSubcategory = null;
   $scope.categories.majesticSubsubcategory = null;
+  $scope.searchMsg = '';
 
   $scope.initDomain = function() {
     $scope.updateDomainStrengthSlider($scope.majTF.min, $scope.majTF.max);
@@ -136,11 +137,20 @@ angular.module('fastrankApp')
     SimpleSearch.search($scope.domainStrength.min, $scope.domainStrength.max, $scope.keywords, 'text')
     .success(function (res) {
       simpleSearchDefer.resolve(res);  
-    }).error(function () {
-      $log.error('Error while searching');
+    }).error(function (res) {
+      if(res === null) {
+        $scope.searchMsg = 'Error while searching';
+        $log.error('Error while searching');
+      } else if(angular.isDefined(res.status) && res.status === 404) {
+        $scope.searchMsg = 'Sorry, no result found in selected criteria.';
+        $log.error('Sorry, no result found in selected criteria');
+      } else {
+        $scope.searchMsg = 'Error while searching';
+      }
     });
     simpleSearchDefer.promise.then(function (res) {
-      $log.info(res);
+      //$log.info(res);
+      $state.go("search-result", { result: res });
     });
   };
   
