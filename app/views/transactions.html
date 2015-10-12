@@ -8,6 +8,27 @@
 				<h1 class="section-title section-title__lg">Transactions Made</h1>
 			</div>
 		</div>
+		
+					<div class="table-responsive">
+						<table class="table table-bordered table-striped">
+							<thead>
+								<tr>
+									<th>Transaction Id</th>
+									<th>Amount (USD)</th>
+									<th>Credits Granted</th>
+									<th>Date</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="transaction in transactions">
+									<td class="col-md-3">{{transaction.transactionId}}</td>
+									<td class="col-md-3">${{transaction.amount}}</td>
+									<td class="col-md-3">{{transaction.credits}}</td>
+									<td class="col-md-3">{{transaction.date}}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
     </div>
   </section>
   <!-- Page Section / End -->

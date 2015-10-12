@@ -23,3 +23,13 @@ angular.module('fastrankApp')
             }
         });
     });
+
+angular.module('fastrankApp')
+.factory('Transaction', function Transaction($resource, ENDPOINT) {
+	return $resource(ENDPOINT + 'rest-api/domains/transactions', {}, {
+		'get': {
+			method: 'GET',
+			isArray: true
+		}
+	})
+});

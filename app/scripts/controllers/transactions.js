@@ -8,9 +8,14 @@
  * Controller of the fastrankApp
  */
 angular.module('fastrankApp')
-  .controller('TransactionsCtrl', ['$scope', function ($scope) {
+  .controller('TransactionsCtrl', ['$scope', 'Transaction', function ($scope, Transaction) {
 
-	  $scope.blah = '';
+	  $scope.transactions = [];
+	  Transaction.get().$promise.then(function(transactionList) {
+		  console.log('D> transactionList: ', transactionList);
+		  $scope.transactions = transactionList;
+	  });
+
 }]);
   
 
