@@ -12,6 +12,7 @@ angular.module('fastrankApp')
   $scope.updateAccount = {};
   $scope.updateAccount.email = $rootScope.account.login;
   $scope.updateAccount.fullName = $rootScope.account.fullName;
+  $scope.updateAccount.credits = $rootScope.account.credits;
   $scope.accountUpdate = function () {
     $scope.profleUpdateMsg = null;
     var updatedAccount = {};

@@ -10,6 +10,17 @@
       </div>
 
       <fieldset>
+        <legend>Credits</legend>
+        
+          <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+				<p>You currently have <strong>{{updateAccount.credits}}</strong> credits available to use.</p>
+				<p>Need more credits? <a ui-sref="credits">Top-up your credits</a> at any time.</p>
+            </div>
+          </div>
+      </fieldset>
+      
+      <fieldset>
         <legend>Change account info</legend>
           <div class="alert alert-danger" ng-show="profleUpdateMsg">
           {{ profleUpdateMsg }}
