@@ -42,6 +42,7 @@ angular.module('fastrankApp')
 				$scope.card.used = token.used;
 				$scope.card.type = token.type;
 				$scope.card.amount = (levelToBuy.price * 100),
+				$scope.card.credits = levelToBuy.credits,
 				$scope.card.description = levelToBuy.level + ' level top-up'; // jshint ignore:line
 				PaymentFactory.newCard($scope.card).$promise.then(function() {
 					$scope.paymentError = null;
@@ -84,6 +85,7 @@ angular.module('fastrankApp')
 					$scope.card.used = token.used;
 					$scope.card.type = token.type;
 					$scope.card.amount = (levelToBuy.price * 100),
+					$scope.card.credits = levelToBuy.credits,
 					$scope.card.description = levelToBuy.parentTierLevelName + 'Addon level ' + levelToBuy.addonLevel + ' top-up'; // jshint ignore:line
 					PaymentFactory.newCard($scope.card).$promise.then(function() {
 						$scope.paymentError = null;
