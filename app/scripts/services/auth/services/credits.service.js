@@ -20,3 +20,13 @@ angular.module('fastrankApp')
     });
 });
 
+angular.module('fastrankApp')
+.factory('PaymentFactory', function($resource, ENDPOINT) {
+    return $resource(ENDPOINT + 'rest-api/payment/stripe/single', {},
+        {
+            'newCard': {
+                method: 'POST'
+            }
+        });
+});
+

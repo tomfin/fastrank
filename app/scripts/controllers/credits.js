@@ -3,12 +3,10 @@
 /**
  * @ngdoc function
  * @name fastrankApp.controller:CreditsCtrl
- * @description
- * # CreditsCtrl
- * Controller of the fastrankApp
+ * @description # CreditsCtrl Controller of the fastrankApp
  */
 angular.module('fastrankApp')
-  .controller('CreditsCtrl', ['$scope', 'STRIPE_KEY', 'Prices', 'Addons', function ($scope, STRIPE_KEY, Prices, Addons) {
+  .controller('CreditsCtrl', ['$scope', '$rootScope', 'STRIPE_KEY', 'Prices', 'Addons', 'PaymentFactory', function ($scope, $rootScope, STRIPE_KEY, Prices, Addons, PaymentFactory) {
 
 	  $scope.prices = [];
 	  Prices.get().$promise.then(function(priceList) {
@@ -22,42 +20,87 @@ angular.module('fastrankApp')
 		  });
 	  };
 	  
-	$scope.purchase = function() {
+	  $scope.purchase = function(levelToBuy) {
+		console.log('D> user login: ', $rootScope.account.login);
+		
 		var handler = StripeCheckout.configure({ // jshint ignore:line
 			key: STRIPE_KEY, // jshint ignore:line
-			image: 'images/qlkto_avatar_square.jpg',
+			image: 'images/fastrank_avatar_square.jpg',
 			name: 'Fastrank Ltd',
-			description: $scope.submit.tier.name + ' Subscription',
-			amount: ($scope.submit.tier.price * 100),
+			description: levelToBuy.level + ' level top-up',
+			amount: (levelToBuy.price * 100),
 			currency: 'USD',
 			panelLabel: 'Top-up',
-			email: $scope.submit.user.username,
+			email: $scope.account.login,
 			allowRememberMe: 'false',
 			token: function(token) {
 				$scope.card = {};
-				$scope.card.tierId = $scope.submit.tier.id;
-				$scope.card.tokenId = token.id;
+				$scope.card.levelId = levelToBuy.level;
+				$scope.card.token = token.id;
 				$scope.card.createdDate = token.created;
 				$scope.card.livemode = token.livemode;
 				$scope.card.used = token.used;
 				$scope.card.type = token.type;
-//				PaymentFactory.newCard($scope.card).$promise.then(function() {
-//					SharedMessages.setMessage('Congratulations! You\'re now subscribed to the ' + $scope.submit.tier.name + ' plan.');
-//					$location.path('/plans');
-//				}, function() {
-//					$scope.error = 'Something unexpected happened here. Please try again, but if you keep seeing this then let us know!';
-//				});
+				$scope.card.amount = (levelToBuy.price * 100),
+				$scope.card.description = levelToBuy.level + ' level top-up'; // jshint ignore:line
+				PaymentFactory.newCard($scope.card).$promise.then(function() {
+					$scope.paymentError = null;
+					$scope.paymentSuccess = levelToBuy.credits;
+				}, function() {
+					$scope.paymentError = 'ERROR';
+					$scope.paymentSuccess = null;
+				});
 			}
 		});
-
+		
 		// Open Checkout with further options
 		handler.open({
-			name: $scope.submit.tier.name + ' Subscription',
-			description: '$' + $scope.submit.tier.price + '.00',
-			amount: ($scope.submit.tier.price * 100)
+			name: levelToBuy.level + ' level top-up',
+			description: '$' + levelToBuy.price,
+			amount: (levelToBuy.price * 100)
 		});
-	};
+	  };
+	  
+	  $scope.purchaseAddon = function(levelToBuy) {
+			console.log('D> user login: ', $rootScope.account.login);
+			console.log('D> Addon toBuy: ', levelToBuy);
+			
+			var handler = StripeCheckout.configure({ // jshint ignore:line
+				key: STRIPE_KEY, // jshint ignore:line
+				image: 'images/fastrank_avatar_square.jpg',
+				name: 'Fastrank Ltd',
+				description: levelToBuy.parentTierLevelName + ' Addon level ' + levelToBuy.addonLevel + ' top-up',
+				amount: (levelToBuy.price * 100),
+				currency: 'USD',
+				panelLabel: 'Top-up Addon',
+				email: $scope.account.login,
+				allowRememberMe: 'false',
+				token: function(token) {
+					$scope.card = {};
+					$scope.card.levelId = levelToBuy.level;
+					$scope.card.token = token.id;
+					$scope.card.createdDate = token.created;
+					$scope.card.livemode = token.livemode;
+					$scope.card.used = token.used;
+					$scope.card.type = token.type;
+					$scope.card.amount = (levelToBuy.price * 100),
+					$scope.card.description = levelToBuy.parentTierLevelName + 'Addon level ' + levelToBuy.addonLevel + ' top-up'; // jshint ignore:line
+					PaymentFactory.newCard($scope.card).$promise.then(function() {
+						$scope.paymentError = null;
+						$scope.paymentSuccess = levelToBuy.credits;
+					}, function() {
+						$scope.paymentError = 'ERROR';
+						$scope.paymentSuccess = null;
+					});
+				}
+			});
+			
+			// Open Checkout with further options
+			handler.open({
+				name: levelToBuy.parentTierLevelName + 'Addon level ' + levelToBuy.addonLevel + ' top-up',
+				description: '$' + levelToBuy.price,
+				amount: (levelToBuy.price * 100)
+			});
+	  };
 }]);
-  
-
 
