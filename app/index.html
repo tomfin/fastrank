@@ -105,7 +105,8 @@
 					<li ng-show="!isHome()"><a href="" ng-click="linkTo('/#section-cta')" ng-cloak>Register Your Interest</a></li>
 					<li ng-show="isHome()"><a href="#section-contact" ng-cloak>Contact Us</a></li>
 					<li ng-show="!isHome()"><a href="" ng-click="linkTo('/#section-contact')" ng-cloak>Contact Us</a></li>
-					<li ng-show="isAuthenticated()"><a ui-sref="search">Search for Domains</a></li>
+					<li ng-show="isAuthenticated()"><a ui-sref="search">Domain Search</a></li>
+					<li ng-show="isAuthenticated()"><a ui-sref="credits">Buy Credits</a></li>
 					<li ng-show="isAuthenticated()" class="dropdown">
 						<a href="#" data-toggle="dropdown" class="dropdown-toggle dropdown-toggle__caret-holder">My Account</a>
 						<a class="dropdown-toggle dropdown-toggle__caret"><b class="caret"></b></a>
@@ -500,6 +501,7 @@
   <script src="scripts/controllers/search.js"></script>
   <script src="scripts/controllers/domains.js"></script>
   <script src="scripts/controllers/transactions.js"></script>
+  <script src="scripts/controllers/credits.js"></script>
   <script src="scripts/controllers/faq.js"></script>
   <script src="scripts/controllers/password.js"></script>
   <script src="scripts/controllers/activate.js"></script>
@@ -510,6 +512,7 @@
   <script src="scripts/routes/search.js"></script>
   <script src="scripts/routes/domains.js"></script>
   <script src="scripts/routes/transactions.js"></script>
+  <script src="scripts/routes/credits.js"></script>
   <script src="scripts/routes/login.js"></script>
   <script src="scripts/routes/register.js"></script>
   <script src="scripts/routes/password.js"></script>
@@ -529,6 +532,7 @@
   <script src="scripts/services/auth/services/password.service.js"></script>
   <script src="scripts/services/auth/services/register.service.js"></script>
   <script src="scripts/services/auth/services/reset.service.js"></script>
+  <script src="scripts/services/auth/services/credits.service.js"></script>
   <script src="scripts/services/user/user.service.js"></script>
   <script src="scripts/services/tracker/tracker.service.js"></script>
   <script src="scripts/services/util/base64.service.js"></script>

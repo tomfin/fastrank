@@ -1,0 +1,53 @@
+<script async src="https://checkout.stripe.com/checkout.js"></script>
+
+<div class="content-wrapper domain-page">
+  <!-- Page Section -->
+  <section class="page-section">
+    <div class="container-fluid">
+    
+		<div class="section-title-wrapper">
+			<div class="section-title-inner">
+				<h1 class="section-title section-title__lg">Purchase Credits</h1>
+			</div>
+		</div>
+    
+		<div ng-if="paymentError" class="alert alert-danger alert-dismissible fade in text-uppercase">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true"><i class="fa fa-times"></i></span></button>
+			<strong>Error!</strong> Unfortunately something went wrong with your transaction. Please try again later or contact us.
+		</div>
+		<div ng-if="paymentSuccess" class="alert alert-success alert-dismissible fade in text-uppercase">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true"><i class="fa fa-times"></i></span></button>
+			<strong>Success!</strong> You have now added {{paymentSuccess}} credits to your account. 
+		</div>
+
+		<div class="table-responsive">
+			<table class="table table-bordered table-striped prices-table" ng-class="{'selected':$index == selectedRow}">
+				<thead>
+					<tr>
+						<th>Level</th>
+						<th>Price</th>
+						<th>Credits</th>
+						<th>Top-up</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat-start="price in prices" ng-class="{'selected':$index == selectedRow}">
+						<td ng-click="price.expanded = !price.expanded" class="col-md-3"><strong>{{price.level}}</strong></td>
+						<td ng-click="price.expanded = !price.expanded" class="col-md-3">${{price.price}}</td>
+						<td ng-click="price.expanded = !price.expanded" class="col-md-3">{{price.credits}}</td>
+						<td class="col-md-3"><a href="" ng-click="purchase(price)">Get {{price.level}}</a></td>
+					</tr>
+					<tr class="animate-repeat" ng-if="price.expanded" ng-repeat="addon in price.addons" ng-repeat-end="">
+						<td ng-click="price.expanded = false" class="col-md-3"><em>{{price.level}} Addon {{addon.addonLevel}}</em></td>
+						<td ng-click="price.expanded = false" class="col-md-3">${{addon.price}}</td>
+						<td ng-click="price.expanded = false" class="col-md-3">{{addon.credits}}</td>
+						<td class="col-md-3"><a href="" ng-click="purchaseAddon(addon)">Get {{price.level}} Addon {{addon.addonLevel}}</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		
+    </div>
+  </section>
+  <!-- Page Section / End -->
+</div>
