@@ -150,7 +150,7 @@ angular.module('fastrankApp')
     });
     simpleSearchDefer.promise.then(function (res) {
       //$log.info(res);
-      $state.go("search-result", { result: res });
+      $state.go('search-result', { result: res });
     });
   };
   
