@@ -27,20 +27,23 @@
 						<th>Level</th>
 						<th>Price</th>
 						<th>Credits</th>
+						<th>Credits per $</th>
 						<th>Top-up</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr ng-repeat-start="price in prices" ng-class="{'selected':$index == selectedRow}">
-						<td ng-click="price.expanded = !price.expanded" class="col-md-3"><strong>{{price.level}}</strong></td>
-						<td ng-click="price.expanded = !price.expanded" class="col-md-3">${{price.price}}</td>
-						<td ng-click="price.expanded = !price.expanded" class="col-md-3">{{price.credits}}</td>
+						<td ng-click="price.expanded = !price.expanded" class="col-md-2"><strong>{{price.level}}</strong></td>
+						<td ng-click="price.expanded = !price.expanded" class="col-md-2">${{price.price}}</td>
+						<td ng-click="price.expanded = !price.expanded" class="col-md-2">{{price.credits}}</td>
+						<td ng-click="price.expanded = !price.expanded" class="col-md-2">{{price.credits / price.price | number:2}}</td>
 						<td class="col-md-3"><a href="" ng-click="purchase(price)">Get {{price.level}}</a></td>
 					</tr>
 					<tr class="animate-repeat" ng-if="price.expanded" ng-repeat="addon in price.addons" ng-repeat-end="">
-						<td ng-click="price.expanded = false" class="col-md-3"><em>{{price.level}} Addon {{addon.addonLevel}}</em></td>
-						<td ng-click="price.expanded = false" class="col-md-3">${{addon.price}}</td>
-						<td ng-click="price.expanded = false" class="col-md-3">{{addon.credits}}</td>
+						<td ng-click="price.expanded = false" class="col-md-2"><em>{{price.level}} Addon {{addon.addonLevel}}</em></td>
+						<td ng-click="price.expanded = false" class="col-md-2">${{addon.price}}</td>
+						<td ng-click="price.expanded = false" class="col-md-2">{{addon.credits}}</td>
+						<td ng-click="price.expanded = false" class="col-md-2">{{addon.credits / addon.price | number:2}}</td>
 						<td class="col-md-3"><a href="" ng-click="purchaseAddon(addon)">Get {{price.level}} Addon {{addon.addonLevel}}</a></td>
 					</tr>
 				</tbody>
