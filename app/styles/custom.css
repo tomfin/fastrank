@@ -133,7 +133,7 @@ ul#strengthBar {
   left: 87%;
   transform: translateY(-50%);
 }
-li a[ng-click], li a[ui-sref] {
+li a[ng-click], li a[ui-sref], td a[ng-click], td a[ui-sref] {
 	cursor: pointer;
 	cursor: hand;
 }
@@ -203,4 +203,14 @@ transition: 300ms linear all;
 .selected-remove.selected-remove-active {
     background-color:#707070;
     font-size:1em;
+}
+.more-info .more-info-td {
+  padding: 0 !important;
+}
+.toggle {
+  padding: 23px;
+  background: #DDD;
+}
+.toggle td {
+  background: #DDD;
 }
