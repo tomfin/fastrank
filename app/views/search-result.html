@@ -18,9 +18,9 @@
                   <th>Was</th>
                   <th>$USD</th>
                   <th>You Save</th>
+                  <th>Credits</th>
                   <th>Agg Link TF</th>
                   <th>FR Trust</th>
-                  <th>Dom Rel</th>
                   <th>Dom TF</th>
                   <th></th>
                   <th></th>
@@ -29,12 +29,12 @@
                   <td><input type="checkbox" ng-model="rec.selected" /></td>
                   <td><a>Add</a></td>
                   <td><a>Fast Buy</a></td>
-                  <td>{{ rec.basePrice }}</td>
-                  <td>{{ rec.actualPrice }}</td>
-                  <td>{{ rec.discount }}</td>
+                  <td><del>${{ rec.basePrice }}</del></td>
+                  <td><span class="actualPrice">${{ rec.actualPrice }}</span></td>
+                  <td>${{ rec.discount }}</td>
+                  <td>{{ rec.credits }}</td>
                   <td>{{ rec.aggLinkTF }}</td>
                   <td>{{ rec.frTrust }}</td>
-                  <td>{{ rec.domRel }}</td>
                   <td>{{ rec.domTF }}</td>
                   <td><a class="more-link">More</a></td>
                   <td><a>All</a></td>
@@ -44,34 +44,34 @@
                     <div class="toggle" style="display: none">
                       <table width="100%">
                       <tr>
-                        <td>Domain Registration <input type="checkbox" /></td>
-                        <td>Quote of site build <input type="checkbox" /></td>
-                        <td><a>Add to watch list</a></td>
+                        <td class="col-md-2">DTF: {{ rec.domTF }} </td>
+                        <td class="col-md-3">1<sup>1st</sup> Crawl {{ rec.firstCrawlDate }} </td>
+                        <td class="col-md-5">Found: {{ rec.found }} </td>
+                        <td class="col-md-2">Domain Registration <input type="checkbox" /></td>
                       </tr>
                       <tr>
-                        <td>DTF: {{ rec.domTF }} </td>
-                        <td>1<sup>1st</sup> Crawl {{ rec.firstCrawlDate }} </td>
-                        <td>Found: {{ rec.firstCrawlDate }} </td>
+                        <td class="col-md-2">Maj. Agg TF: {{ rec.aggLinkTF }}</td>
+                        <td class="col-md-3">Spam: {{ rec.spammedDomain }}</td>
+                        <td class="col-md-5">Main maj. topic: {{ rec.majMainTopic }}</td>
+                        <td class="col-md-2">Quote of site build <input type="checkbox" /></td>
                       </tr>
                       <tr>
-                        <td>Maj. Agg TF: {{ rec.aggLinkTF }}</td>
-                        <td>Spam: {{ rec.spammedDomain }}</td>
-                        <td>Main maj. topic: {{ rec.majMainTopic }}</td>
+                        <td class="col-md-2">TF/CF: {{ rec.tfcfRatio }}</td>
+                        <td class="col-md-3">Last check: {{ rec.lastChecked }}</td>
+                        <td class="col-md-5">Main Alchemy Taxonomy: {{ rec.alchMainTaxonomy }}</td>
+                        <td class="col-md-2"></td>
                       </tr>
                       <tr>
-                        <td>TF/CF: {{ rec.tfcfRatio }}</td>
-                        <td>Last check: {{ rec.lastChecked }}</td>
-                        <td>Main Alchemy Taxonomy: {{ rec.alchMainTaxonomy }}</td>
+                        <td class="col-md-2">Ref Dom: {{ rec.refDom }}</td>
+                        <td class="col-md-3">Link Rel: {{ rec.linkRel }}</td>
+                        <td class="col-md-5"></td>
+                        <td class="col-md-2"></td>
                       </tr>
                       <tr>
-                        <td>Ref Dom: {{ rec.refDom }}</td>
-                        <td>Link Rel: {{ rec.linkRel }}</td>
-                        <td></td>
-                      </tr>
-                      <tr>
-                        <td>EDU/Gov: {{ rec.edugovCount }}</td>
-                        <td>TlD: {{ rec.tld }}</td>
-                        <td></td>
+                        <td class="col-md-2">EDU/Gov: {{ rec.edugovCount }}</td>
+                        <td class="col-md-3">TlD: {{ rec.tld }}</td>
+                        <td class="col-md-5"></td>
+                        <td class="col-md-2"></td>
                       </tr>
                     </table>
                     </div>

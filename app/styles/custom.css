@@ -133,7 +133,7 @@ ul#strengthBar {
   left: 87%;
   transform: translateY(-50%);
 }
-li a[ng-click], li a[ui-sref], td a[ng-click], td a[ui-sref] {
+li a[ng-click], li a[ui-sref], td a[ng-click], td a[ui-sref], td a.more-link {
 	cursor: pointer;
 	cursor: hand;
 }
@@ -213,4 +213,8 @@ transition: 300ms linear all;
 }
 .toggle td {
   background: #DDD;
+}
+
+.actualPrice {
+	color: red;
 }
