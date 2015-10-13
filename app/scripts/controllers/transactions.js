@@ -12,7 +12,6 @@ angular.module('fastrankApp')
 
 	  $scope.transactions = [];
 	  Transaction.get().$promise.then(function(transactionList) {
-		  console.log('D> transactionList: ', transactionList);
 		  $scope.transactions = transactionList;
 	  });
 
