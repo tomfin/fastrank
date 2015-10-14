@@ -8,7 +8,7 @@
  * Controller of the fastrankApp
  */
 angular.module('fastrankApp')
-  .controller('searchResultCtrl', ['$scope', '$log', '$stateParams', function ($scope, $log, $stateParams) {
+  .controller('searchResultCtrl', ['$scope', '$log', '$stateParams', 'FastBuy', function ($scope, $log, $stateParams, FastBuy) {
     //$log.info($stateParams.result);
     $scope.result = $stateParams.result;
     $scope.parantCheck = '';
@@ -21,14 +21,28 @@ angular.module('fastrankApp')
     $scope.moreInfo = function() {
       $scope.toggle = !$scope.toggle;
     };
+    
+    $scope.fastBuy = function(result, index) {
+    	var obj = {};
+    	obj.id = result.id;
+    	obj.credits = result.credits;
+    	FastBuy.buy(obj).$promise.then(function() {
+    		$scope.fastBuySuccess = 'SUCCESS';
+    		$scope.fastBuyError = null;
+    		$scope.result.splice(index, 1);
+    	}, function() {
+    		$scope.fastBuySuccess = null;
+    		$scope.fastBuyError = 'ERROR';
+    	});
+    };
 }])
 .directive('frCollapse', [ function() {
   return {
     restrict: 'A',
     link: function(scope, element) {
-        var p = jQuery(element.prev('.domain-row').find('.more-link'));
-        p.click(function($event) {
-          jQuery(element).find('.toggle').slideToggle("slow");
+        var p = jQuery(element.prev('.domain-row').find('.more-link')); //jshint ignore:line
+        p.click(function() {
+          jQuery(element).find('.toggle').slideToggle('slow'); //jshint ignore:line
         });
       }
     };

@@ -9,6 +9,65 @@
 			</div>
 		</div>
     
+		<div class="table-responsive">          
+			<table class="table">
+				<tr>
+					<th>Domain</th>
+					<th>Purchased</th>
+					<th>Credits</th>
+					<th>Agg Link TF</th>
+					<th>FR Trust</th>
+					<th>Dom TF</th>
+					<th></th>
+					<th></th>
+				</tr>
+				<tr ng-repeat-start="rec in domains" class="domain-row">
+					<td>{{ rec.rootURL }}</td>
+					<td>{{ rec.purchaseDate }}</td>
+					<td>{{ rec.credits }}</td>
+					<td>{{ rec.aggLinkTF }}</td>
+					<td>{{ rec.frTrust }}</td>
+					<td>{{ rec.domTF }}</td>
+					<td ng-show="!rec.expanded" ng-click="rec.expanded = !rec.expanded" class="more-link"><a>More</a></td>
+					<td ng-show="rec.expanded" ng-click="rec.expanded = !rec.expanded" class="more-link"><a>Less</a></td>
+					<td><a>All</a></td>
+				</tr>
+				<tr ng-repeat-end fr-collapse class="more-info">
+					<td colspan="12" class="more-info-td">
+						<div class="toggle" style="display: none">
+							<table width="100%">
+								<tr>
+									<td class="col-md-2">DTF: {{ rec.domTF }} </td>
+									<td class="col-md-3">1<sup>1st</sup> Crawl {{ rec.firstCrawlDate }} </td>
+									<td class="col-md-5">Found: {{ rec.found }} </td>
+								</tr>
+								<tr>
+									<td class="col-md-2">Maj. Agg TF: {{ rec.aggLinkTF }}</td>
+									<td class="col-md-3">Spam: {{ rec.spammedDomain }}</td>
+									<td class="col-md-5">Main maj. topic: {{ rec.majMainTopic }}</td>
+								</tr>
+								<tr>
+									<td class="col-md-2">TF/CF: {{ rec.tfcfRatio }}</td>
+									<td class="col-md-3">Last check: {{ rec.lastChecked }}</td>
+									<td class="col-md-5">Main Alchemy Taxonomy: {{ rec.alchMainTaxonomy }}</td>
+								</tr>
+								<tr>
+									<td class="col-md-2">Ref Dom: {{ rec.refDom }}</td>
+									<td class="col-md-3">Link Rel: {{ rec.linkRel }}</td>
+									<td class="col-md-5"></td>
+								</tr>
+								<tr>
+									<td class="col-md-2">EDU/Gov: {{ rec.edugovCount }}</td>
+									<td class="col-md-3">TlD: {{ rec.tld }}</td>
+									<td class="col-md-5"></td>
+								</tr>
+							</table>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</div>    
+    
     </div>
   </section>
   <!-- Page Section / End -->

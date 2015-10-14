@@ -8,9 +8,13 @@
  * Controller of the fastrankApp
  */
 angular.module('fastrankApp')
-  .controller('DomainsCtrl', ['$scope', function ($scope) {
+  .controller('DomainsCtrl', ['$scope', 'Domains', function ($scope, Domains) {
 
-	  $scope.blah = '';
+	  $scope.domains = [];
+	  Domains.get().$promise.then(function(domainList) {
+		  $scope.domains = domainList;
+	  });
+
 }]);
   
 

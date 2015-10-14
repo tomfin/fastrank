@@ -7,8 +7,18 @@
           <h1 class="section-title section-title__lg">Domain search result</h1>
         </div>
       </div>
-      <div class="content">
-        <div class="row">
+		<div class="content">
+       		<div class="row">
+        
+    	   		<div ng-if="fastBuyError" class="alert alert-danger alert-dismissible fade in text-uppercase">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true"><i class="fa fa-times"></i></span></button>
+					<strong>Error!</strong> Unfortunately something went wrong with your FastBuy. Please try again later or contact us.
+				</div>
+				<div ng-if="fastBuySuccess" class="alert alert-success alert-dismissible fade in text-uppercase">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true"><i class="fa fa-times"></i></span></button>
+					<strong>Congratulations!</strong> You have successfully purchased the details for a new domain. Check out <a href="" ui-sref="domains">your domains</a> to view the specifics. 
+				</div>
+		       
           <div class="table-responsive">          
             <table class="table">
                 <tr>
@@ -28,7 +38,7 @@
                 <tr ng-repeat-start="rec in result" class="domain-row">
                   <td><input type="checkbox" ng-model="rec.selected" /></td>
                   <td><a>Add</a></td>
-                  <td><a>Fast Buy</a></td>
+                  <td><a ng-click="fastBuy(rec, $index)">Fast Buy</a></td>
                   <td><del>${{ rec.basePrice }}</del></td>
                   <td><span class="actualPrice">${{ rec.actualPrice }}</span></td>
                   <td>${{ rec.discount }}</td>
