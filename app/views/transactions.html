@@ -14,6 +14,7 @@
 							<thead>
 								<tr>
 									<th>Transaction Id</th>
+									<th>Provider</th>
 									<th>Amount (USD)</th>
 									<th>Credits Granted</th>
 									<th>Date</th>
@@ -22,8 +23,9 @@
 							<tbody>
 								<tr ng-repeat="transaction in transactions">
 									<td class="col-md-3">{{transaction.transactionId}}</td>
-									<td class="col-md-3">${{transaction.amount}}</td>
-									<td class="col-md-3">{{transaction.credits}}</td>
+									<td class="col-md-2">{{transaction.provider}}</td>
+									<td class="col-md-2">${{transaction.amount}}</td>
+									<td class="col-md-2">{{transaction.credits}}</td>
 									<td class="col-md-3">{{transaction.date}}</td>
 								</tr>
 							</tbody>
