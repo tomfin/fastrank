@@ -22,7 +22,8 @@ angular
     'ngCacheBuster', 
     'infinite-scroll',
     'ui.bootstrap',
-    'rzModule'
+    'rzModule',
+    'braintree-angular'
   ])
   .run(function ($rootScope, $location, $window, $http, $state, $translate, Auth, Principal, Language, ENV, VERSION) {
       $rootScope.ENV = ENV;

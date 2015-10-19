@@ -6,7 +6,7 @@
  * @description # CreditsCtrl Controller of the fastrankApp
  */
 angular.module('fastrankApp')
-  .controller('CreditsCtrl', ['$scope', '$rootScope', 'STRIPE_KEY', 'Prices', 'Addons', 'PaymentFactory', function ($scope, $rootScope, STRIPE_KEY, Prices, Addons, PaymentFactory) {
+  .controller('CreditsCtrl', ['$scope', '$rootScope', 'STRIPE_KEY', 'Prices', 'Addons', 'PaymentFactory', 'PaypalFactory', 'PaypalToken', function ($scope, $rootScope, STRIPE_KEY, Prices, Addons, PaymentFactory, PaypalFactory, PaypalToken) {
 
 	  $scope.prices = [];
 	  Prices.get().$promise.then(function(priceList) {
@@ -18,6 +18,10 @@ angular.module('fastrankApp')
 			  $scope.addons = response;
 		  });
 	  };
+	  
+	  PaypalToken.get().then(function(response) {
+		  $scope.token = response;
+	  });
 	  
 	  $scope.purchase = function(levelToBuy) {
 		var handler = StripeCheckout.configure({ // jshint ignore:line
@@ -98,5 +102,36 @@ angular.module('fastrankApp')
 				amount: (levelToBuy.price * 100)
 			});
 	  };
+	  
+	  $scope.paypal = function(levelToBuy) {
+		  
+		  console.log('D> Token: ', $scope.token);
+		  
+		  braintree.setup($scope.token.data, 'paypal', { //jshint ignore:line
+		    container: 'paypal-container',
+		    singleUse: true,
+		    amount: levelToBuy.price,
+		    description: 'Tom test',
+		    currency: 'USD',
+		    locale: 'en_us',
+		    enableShippingAddress: 'false',
+		    onPaymentMethodReceived: function (obj) {
+		      console.log('D> Call server here with nonce: ', obj.nonce);
+		      var payForm = {};
+		      payForm.nonce = obj.nonce;
+		      payForm.amount = levelToBuy.price;
+		      payForm.description = 'Tom test';
+		      payForm.credits = levelToBuy.credits;
+		      PaypalFactory.pay(payForm).$promise.then(function() {
+					$scope.paymentError = null;
+					$scope.paymentSuccess = levelToBuy.credits;
+		      }, function() {
+					$scope.paymentError = 'ERROR';
+					$scope.paymentSuccess = null;
+		      });
+		    }
+		  });
+	  };
+	  
 }]);
 

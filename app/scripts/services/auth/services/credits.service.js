@@ -30,3 +30,21 @@ angular.module('fastrankApp')
         });
 });
 
+angular.module('fastrankApp')
+.factory('PaypalToken', function($resource, $http, ENDPOINT) {
+    return {
+        get: function(credentials) {
+        	return $http.get(ENDPOINT + 'rest-api/payment/token');
+        }
+    }
+});
+
+angular.module('fastrankApp')
+.factory('PaypalFactory', function($resource, ENDPOINT) {
+    return $resource(ENDPOINT + 'rest-api/payment/paypal/single', {},
+        {
+            'pay': {
+                method: 'POST'
+            }
+        });
+});

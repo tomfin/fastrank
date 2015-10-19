@@ -1,5 +1,7 @@
 <script async src="https://checkout.stripe.com/checkout.js"></script>
 
+
+
 <div class="content-wrapper domain-page">
   <!-- Page Section -->
   <section class="page-section">
@@ -29,6 +31,7 @@
 						<th>Credits</th>
 						<th>Credits per $</th>
 						<th>Top-up</th>
+						<th>PayPal</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -37,7 +40,12 @@
 						<td ng-click="price.expanded = !price.expanded" class="col-md-2">${{price.price}}</td>
 						<td ng-click="price.expanded = !price.expanded" class="col-md-2">{{price.credits}}</td>
 						<td ng-click="price.expanded = !price.expanded" class="col-md-2">{{price.credits / price.price | number:2}}</td>
-						<td class="col-md-3"><a href="" ng-click="purchase(price)">Get {{price.level}}</a></td>
+						<td class="col-md-2"><a href="" ng-click="purchase(price)">Get {{price.level}}</a></td>
+						<td class="col-md-2">
+							<div id="paypal-container">
+								<a href="" ng-click="paypal(price)">Get {{price.level}}</a>
+							</div>
+						</td>
 					</tr>
 					<tr class="animate-repeat" ng-if="price.expanded" ng-repeat="addon in price.addons" ng-repeat-end="">
 						<td ng-click="price.expanded = false" class="col-md-2"><em>{{price.level}} Addon {{addon.addonLevel}}</em></td>
@@ -54,3 +62,4 @@
   </section>
   <!-- Page Section / End -->
 </div>
+<script src="https://js.braintreegateway.com/v2/braintree.js"></script>
