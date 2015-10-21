@@ -8,8 +8,9 @@
  * Controller of the fastrankApp
  */
 angular.module('fastrankApp')
-  .controller('searchResultCtrl', ['$scope', '$log', '$stateParams', 'FastBuy', function ($scope, $log, $stateParams, FastBuy) {
-    //$log.info($stateParams.result);
+  .controller('searchResultCtrl', ['$scope', '$log', '$stateParams', 'FastBuy', 'Summary', 'Links', function ($scope, $log, $stateParams, FastBuy, Summary, Links) {
+    $scope.summery = "";
+    $scope.links = "";
     $scope.result = $stateParams.result;
     $scope.parantCheck = '';
     $scope.checkAll = function () {
@@ -34,6 +35,24 @@ angular.module('fastrankApp')
     		$scope.fastBuySuccess = null;
     		$scope.fastBuyError = 'ERROR';
     	});
+    };
+    $scope.detailInfo = function(id) {
+        var domain = {};
+        domain.id = id;
+        Summary.get(domain).$promise.then(function(summery) {
+            $scope.summery = summery;
+            $log.info($scope.summery);
+        }).catch(function(err) {
+            $log.info(err);
+        });
+        Links.get(domain).$promise.then(function(links) {
+            $scope.links = links;
+            $log.info($scope.links);
+        }).catch(function(err) {
+            $log.info(err);
+        });
+
+        $("html, body").delay(1000).animate({scrollTop: $('.detail-info').offset().top-65 }, 2000);
     };
 }])
 .directive('frCollapse', [ function() {
