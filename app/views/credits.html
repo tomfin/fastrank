@@ -1,6 +1,10 @@
+<!-- Preloader -->
+<div class="page-loader loading-widget">
+	<div class="loader">Loading...</div>
+</div>
+
 <script async src="https://checkout.stripe.com/checkout.js"></script>
-
-
+<script async src="https://js.braintreegateway.com/v2/braintree.js"></script>
 
 <div class="content-wrapper domain-page">
   <!-- Page Section -->
@@ -42,8 +46,8 @@
 						<td ng-click="price.expanded = !price.expanded" class="col-md-2">{{price.credits / price.price | number:2}}</td>
 						<td class="col-md-2"><a href="" ng-click="purchase(price)">Get {{price.level}}</a></td>
 						<td class="col-md-2">
-							<div id="paypal-container">
-								<a href="" ng-click="paypal(price)">Get {{price.level}}</a>
+							<div id="paypal-container-{{price.tierLevel}}">
+								<a href="" ng-click="launchPaypal(price)" lightbox="paypalForm">Get {{price.level}}</a>
 							</div>
 						</td>
 					</tr>
@@ -62,4 +66,27 @@
   </section>
   <!-- Page Section / End -->
 </div>
-<script src="https://js.braintreegateway.com/v2/braintree.js"></script>
+
+<div id="paypalForm" class="popup white-popup-block mfp-hide">
+	<form>
+		<div id="paypal-container-{{selectedLevel.tierLevel}}" class="center-block">
+		</div>
+	</form>
+
+    <div>
+        <a href="" auto-close class="btn btn-block btn-d btn-round close-verify">Close</a>
+    </div>
+</div>
+
+<script>
+	$('.close-verify').click(function(e){
+		e.preventDefault();
+    	$.magnificPopup.close();
+	});
+   
+	function hideConfirm(e) { 
+		e.preventDefault();
+    	$.magnificPopup.close();
+  	}
+</script>
+

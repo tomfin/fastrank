@@ -6,7 +6,7 @@
  * @description # CreditsCtrl Controller of the fastrankApp
  */
 angular.module('fastrankApp')
-  .controller('CreditsCtrl', ['$scope', '$rootScope', 'STRIPE_KEY', 'Prices', 'Addons', 'PaymentFactory', 'PaypalFactory', 'PaypalToken', function ($scope, $rootScope, STRIPE_KEY, Prices, Addons, PaymentFactory, PaypalFactory, PaypalToken) {
+  .controller('CreditsCtrl', ['$scope', '$rootScope', '$q', 'STRIPE_KEY', 'Prices', 'Addons', 'PaymentFactory', 'PaypalFactory', 'PaypalToken', function ($scope, $rootScope, $q, STRIPE_KEY, Prices, Addons, PaymentFactory, PaypalFactory, PaypalToken) {
 
 	  $scope.prices = [];
 	  Prices.get().$promise.then(function(priceList) {
@@ -106,32 +106,105 @@ angular.module('fastrankApp')
 	  $scope.paypal = function(levelToBuy) {
 		  
 		  console.log('D> Token: ', $scope.token);
+		  console.log('D> levelToBuy: ', levelToBuy);
+		  console.log('D> inital ppIntegration: ', $scope.ppIntegration);
+		  if ($scope.ppIntegration != null) { //jshint ignore:line
+			  $scope.ppIntegration.teardown(function () {
+				  console.log('D> Braintree teardown called');
+			  });
+		  }
 		  
-		  braintree.setup($scope.token.data, 'paypal', { //jshint ignore:line
-		    container: 'paypal-container',
-		    singleUse: true,
-		    amount: levelToBuy.price,
-		    description: 'Tom test',
-		    currency: 'USD',
-		    locale: 'en_us',
-		    enableShippingAddress: 'false',
-		    onPaymentMethodReceived: function (obj) {
-		      console.log('D> Call server here with nonce: ', obj.nonce);
-		      var payForm = {};
-		      payForm.nonce = obj.nonce;
-		      payForm.amount = levelToBuy.price;
-		      payForm.description = 'Tom test';
-		      payForm.credits = levelToBuy.credits;
-		      PaypalFactory.pay(payForm).$promise.then(function() {
-					$scope.paymentError = null;
-					$scope.paymentSuccess = levelToBuy.credits;
-		      }, function() {
-					$scope.paymentError = 'ERROR';
-					$scope.paymentSuccess = null;
-		      });
-		    }
+		  $scope.ppIntegration = null;
+		  
+		  function asyncGreet() {
+			  var deferred = $q.defer();
+
+//			  setTimeout(function() {
+				 
+			    braintree.setup($scope.token.data, 'paypal', { //jshint ignore:line
+			    	onReady: function(integration) {
+			    		$scope.ppIntegration = integration;
+			    	},
+			    	container: 'paypal-container-' + levelToBuy.tierLevel,
+		    		singleUse: true,
+		    		amount: levelToBuy.price,
+		    		description: 'Tom test',
+		    		currency: 'USD',
+		    		locale: 'en_us',
+		    		enableShippingAddress: 'false',
+		    		onCancelled: function (obj) {
+		    			console.log('D> Tx cancelled: ', obj);
+		    		},
+			    	onPaymentMethodReceived: function (obj) {
+			    		console.log('D> Call server here with nonce: ', obj.nonce);
+			    		var payForm = {};
+			    		payForm.nonce = obj.nonce;
+			    		payForm.amount = levelToBuy.price;
+			    		payForm.description = 'Tom test';
+			    		payForm.credits = levelToBuy.credits;
+			    		PaypalFactory.pay(payForm).$promise.then(function(data) {
+			    			console.log('D> Success payment: ', data);
+			    			$scope.paymentError = null;
+			    			$scope.paymentSuccess = levelToBuy.credits;
+			    	    	$scope.$broadcast('paymentcomplete');
+			    	    	$scope.ppIntegration = null;
+	    	    		}, function(data) {
+			    			console.log('D> Failure payment: ', data);
+			    			$scope.paymentError = 'ERROR';
+			    			$scope.paymentSuccess = null;
+			    	    	$scope.$broadcast('paymentcomplete');
+			    		});
+			    	}
+			    });
+//			  }, 0);
+
+			  return deferred.promise;
+		  }
+		  
+		  var promise = asyncGreet();
+		  promise.then(function() {
+			  console.log('Success');
+			  $scope.ppIntegration.teardown();
+		  }, function(reason) {
+			  console.log('Failed: ', reason);
+			  $scope.ppIntegration.teardown();
 		  });
 	  };
 	  
+	  $scope.launchPaypal = function(levelToBuy) {
+		  $scope.selectedLevel = levelToBuy;
+		  $scope.paypal(levelToBuy);
+	  };
 }]);
 
+angular.module('fastrankApp')
+.directive('lightbox', function () {
+ 
+	return {
+		restrict: 'A',
+		link: function (scope, element, attrs) {
+		
+			element.magnificPopup({
+				items: {
+					src: '#' + attrs.lightbox,
+					type: 'inline',
+					preloader: false,
+					modal: true
+				}
+			});
+		}
+	};
+});
+
+angular.module('fastrankApp')
+.directive('autoClose', ['$timeout', function ($timeout) {
+    return {
+        link: function ($scope, element) {
+            $scope.$on('paymentcomplete', function () {
+                $timeout(function () { // You might need this timeout to be sure its run after DOM render.
+                	element.trigger('click');
+                }, 0, false);
+            });
+        }
+    };
+}]);
