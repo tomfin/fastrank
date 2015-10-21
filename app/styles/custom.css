@@ -230,3 +230,50 @@ transition: 300ms linear all;
     width: 50%;
     padding: 10px;
 }
+/* Popup overlay styles */
+.popup1 {
+  display: none;
+  position: fixed;
+  padding: 10px;
+  width: 280px;
+  left: 50%;
+  margin-left: -150px;
+  height: 180px;
+  top: 50%;
+  margin-top: -100px;
+  background: #FFF;
+  z-index: 20;
+}
+
+#paypalForm1:after {
+  position: fixed;
+  content: "";
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: -2;
+}
+
+#paypalForm1:before {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: #FFF;
+  z-index: -1;
+}
+.mfp-hide {
+	display:none!important
+}
+.white-popup-block {
+	background:#FFF;
+	padding:20px 30px;
+	text-align:left;
+	max-width:650px;
+	margin:40px auto;
+	position:relative
+}
