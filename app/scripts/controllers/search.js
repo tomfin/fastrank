@@ -149,23 +149,29 @@ angular.module('fastrankApp')
       }
     });
     simpleSearchDefer.promise.then(function (res) {
-      //$log.info(res);
-      $state.go('search-result', { result: res });
+      $state.go('search-result', { result: res }, {inherit: true} );
     });
   };
   
   $scope.advancedFind = function () {
 	  var advancedSubmit = {};
-	  
+          
 	  // Domain extensions
 	  advancedSubmit.comDomains = $scope.com.selected;
 	  advancedSubmit.otherDomains = $scope.otherDomains.selected;
 
 	  // Majestic topics
-	  advancedSubmit.majesticCategory = $scope.categories.majesticCategory.category;
-	  advancedSubmit.majesticSubcategory = $scope.categories.majesticSubcategory.category;
-	  advancedSubmit.majesticSubsubcategory = $scope.categories.majesticSubsubcategory.category;
 
+            if(angular.isDefined($scope.majesticCategories[$scope.categories.majesticCategoryIdx])) {
+                advancedSubmit.majesticCategory = $scope.majesticCategories[$scope.categories.majesticCategoryIdx].category;
+                if(angular.isDefined(advancedSubmit.majesticCategory) && angular.isDefined($scope.majesticCategories[$scope.categories.majesticCategoryIdx].subcategories[$scope.categories.majesticSubcategoryIdx])) {
+                    advancedSubmit.majesticSubcategory = $scope.majesticCategories[$scope.categories.majesticCategoryIdx].subcategories[$scope.categories.majesticSubcategoryIdx].category;
+                    if(angular.isDefined(advancedSubmit.majesticSubcategory) && angular.isDefined($scope.majesticCategories[$scope.categories.majesticCategoryIdx].subcategories[$scope.categories.majesticSubcategoryIdx].subcategories[$scope.categories.majesticSubsubcategoryIdx])) {
+                        advancedSubmit.majesticSubsubcategory = $scope.majesticCategories[$scope.categories.majesticCategoryIdx].subcategories[$scope.categories.majesticSubcategoryIdx].subcategories[$scope.categories.majesticSubsubcategoryIdx].category;
+                    }
+                }
+            }
+         
 	  // Majestic metrics
 	  // TF
 	  advancedSubmit.majTFMin = $scope.majTF.min;
@@ -196,6 +202,7 @@ angular.module('fastrankApp')
 	    $log.error('Error while advacned searching');
 	  });
 	  advancedSearchDefer.promise.then(function (res) {
+              $state.go('search-result', { result: res });
 	    $log.info(res);
 	  });
 
