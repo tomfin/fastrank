@@ -36,11 +36,17 @@
                             <tr ng-repeat-start="rec in result" class="domain-row">
                                 <td><input type="checkbox" ng-model="rec.selected" /></td>
                                 <td><a>Add</a></td>
-                                <td><a ng-click="fastBuy(rec, $index)">Fast Buy</a></td>
-                                <td><del>${{ rec.basePrice}}</del></td>
-                                <td><span class="actualPrice">${{ rec.actualPrice}}</span></td>
-                                <td>${{ rec.discount }}</td>
-                                <td>{{ rec.credits }}</td>
+                                <td><a ng-if="rec.credits > 0" ng-click="fastBuy(rec, $index)">Fast Buy</a></td>
+                                <td ng-if="rec.credits > 0"><del>${{ rec.basePrice}}</del></td>
+                                <td ng-if="rec.credits > 0"><span class="actualPrice">${{ rec.actualPrice}}</span></td>
+                                <td ng-if="rec.credits > 0">${{ rec.discount }}</td>
+                                <td ng-if="rec.credits > 0">{{ rec.credits }}</td>
+
+                                <td ng-if="rec.credits == 0"><del>$--.--</del></td>
+                                <td ng-if="rec.credits == 0"><span class="actualPrice">$--.--</span></td>
+                                <td ng-if="rec.credits == 0">$--.--</td>
+                                <td ng-if="rec.credits == 0">--</td>
+
                                 <td>{{ rec.aggLinkTF }}</td>
                                 <td>{{ rec.frTrust }}</td>
                                 <td>{{ rec.domTF }}</td>
@@ -80,7 +86,7 @@
                                                 <td class="col-md-2"><strong>EDU/Gov:</strong> {{ rec.edugovCount}}</td>
                                                 <td class="col-md-3"><strong>TlD:</strong> {{ rec.tld}}</td>
                                                 <td class="col-md-5">{{ rec.alchMainTaxonomy}}</td>
-                                                <td class="col-md-2"><a ng-click="fastBuy(rec, $index)">Fast Buy</a></td>
+                                                <td class="col-md-2"><a ng-if="rec.credits > 0" ng-click="fastBuy(rec, $index)">Fast Buy</a></td>
                                             </tr>
                                         </table>
                                     </div>
