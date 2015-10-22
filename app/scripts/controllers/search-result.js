@@ -9,8 +9,8 @@
  */
 angular.module('fastrankApp')
   .controller('searchResultCtrl', ['$scope', '$log', '$stateParams', 'FastBuy', 'Summary', 'Links', function ($scope, $log, $stateParams, FastBuy, Summary, Links) {
-    $scope.summery = "";
-    $scope.links = "";
+    $scope.summery = '';
+    $scope.links = '';
     $scope.result = $stateParams.result;
     $scope.parantCheck = '';
     $scope.checkAll = function () {
@@ -52,7 +52,7 @@ angular.module('fastrankApp')
             $log.info(err);
         });
 
-        $("html, body").delay(1000).animate({scrollTop: $('.detail-info').offset().top-65 }, 2000);
+        jQuery('html, body').delay(1000).animate({scrollTop: jQuery('.detail-info').offset().top-65 }, 2000); //jshint ignore:line
     };
 }])
 .directive('frCollapse', [ function() {
