@@ -23,17 +23,17 @@
                                 <th><input type="checkbox" ng-model="selectedAll" ng-click="checkAll()" /></th>
                                 <th></th>
                                 <th></th>
-                                <th>Was</th>
-                                <th>$USD</th>
-                                <th>You Save</th>
-                                <th>Credits</th>
-                                <th>Agg Link TF</th>
-                                <th>FR Trust</th>
-                                <th>Dom TF</th>
+                                <th ng-click="changeSorting('basePrice')">Was</th>
+                                <th ng-click="changeSorting('actualPrice')">$USD</th>
+                                <th ng-click="changeSorting('discount')">You Save</th>
+                                <th ng-click="changeSorting('credits')">Credits</th>
+                                <th ng-click="changeSorting('aggLinkTF')">Agg Link TF</th>
+                                <th ng-click="changeSorting('frTrust')">FR Trust</th>
+                                <th ng-click="changeSorting('domTF')">Dom TF</th>
                                 <th></th>
                                 <th></th>
                             </tr>
-                            <tr ng-repeat-start="rec in result" class="domain-row">
+                            <tr ng-repeat-start="rec in result|orderBy:sort.column:sort.descending" class="domain-row">
                                 <td><input type="checkbox" ng-model="rec.selected" /></td>
                                 <td><a>Add</a></td>
                                 <td><a ng-if="rec.credits > 0" ng-click="fastBuy(rec, $index)">Fast Buy</a></td>
@@ -96,11 +96,11 @@
                     </div>
                 </div>
                 <section class="detail-info">
-                <div class="row" ng-if="summery && links">
-                    <accordion class="summery-accordian" id="summery-accordian">
+                <div class="row" ng-if="summary && links">
+                    <accordion class="summary-accordian" id="summary-accordian">
                         <accordion-group is-open="true">
                             <accordion-heading>
-                                Summery<i class="pull-right glyphicon" ng-class="{'glyphicon glyphicon-minus-sign': status.open, 'glyphicon glyphicon-plus-sign': !status.open}"></i>
+                                summary<i class="pull-right glyphicon" ng-class="{'glyphicon glyphicon-minus-sign': status.open, 'glyphicon glyphicon-plus-sign': !status.open}"></i>
                             </accordion-heading>
                             <div>
                                 <div class="table-responsive">          
@@ -113,16 +113,16 @@
                                             <th>Link Relevance to Domain</th>
                                         </tr>
                                         <tr>
-                                            <td>Pwr: {{ summery.power }}</td>
-                                            <td>TF: {{ summery.trustFlow }}</td>
-                                            <td>TF Sum: {{ summery.tfSum }}</td>
+                                            <td>Pwr: {{ summary.power }}</td>
+                                            <td>TF: {{ summary.trustFlow }}</td>
+                                            <td>TF Sum: {{ summary.tfSum }}</td>
                                             <td>Alchemy: {{  }}</td>
                                             <td>Majestic: {{  }}</td>
                                         </tr>
                                         <tr>
-                                            <td>D-Rel: {{ summery.dRel }}</td>
-                                            <td>CF: {{ summery.citationFlow }}</td>
-                                            <td>CF-Sum: {{ summery.tfSum }}</td>
+                                            <td>D-Rel: {{ summary.dRel }}</td>
+                                            <td>CF: {{ summary.citationFlow }}</td>
+                                            <td>CF-Sum: {{ summary.tfSum }}</td>
                                             <td></td>
                                             <td></td>
                                         </tr>
@@ -138,27 +138,27 @@
                                                 </tr>
                                                 <tr>
                                                     <td>Trust Flow</td>
-                                                    <td>{{ summery.trustFlow }}</td>
+                                                    <td>{{ summary.trustFlow }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Citation Flow</td>
-                                                    <td>{{ summery.citationFlow }}</td>
+                                                    <td>{{ summary.citationFlow }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>External Backlinks</td>
-                                                    <td>{{ summery.externalBacklinks }}</td>
+                                                    <td>{{ summary.externalBacklinks }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Referring Domains</td>
-                                                    <td>{{ summery.referringDomains }}</td>
+                                                    <td>{{ summary.referringDomains }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Referring IP's</td>
-                                                    <td>{{ summery.referringIPs }}</td>
+                                                    <td>{{ summary.referringIPs }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Referring Subnets</td>
-                                                    <td>{{ summery.referringSubnets }}</td>
+                                                    <td>{{ summary.referringSubnets }}</td>
                                                 </tr>
                                             </table>
                                         </div>
@@ -170,7 +170,7 @@
                                                 <tr>
                                                     <th colspan="2">Alchemy Home Page Keywords</th>
                                                 </tr>
-                                                <tr ng-repeat="x in summery.alchemyKeywords|limitTo:3">
+                                                <tr ng-repeat="x in summary.alchemyKeywords|limitTo:3">
                                                     <td>{{ x.key }}</td>
                                                     <td>{{ x.value }}</td>
                                                 </tr>
@@ -181,7 +181,7 @@
                                                 <tr>
                                                     <th colspan="2">Alchemy Archived Home Page Topic</th>
                                                 </tr>
-                                                <tr ng-repeat="x in summery.alchemyTaxonomies|limitTo:3">
+                                                <tr ng-repeat="x in summary.alchemyTaxonomies|limitTo:3">
                                                     <td>{{ x.key }}</td>
                                                     <td>{{ x.value }}</td>
                                                 </tr>
@@ -192,7 +192,7 @@
                                                 <tr>
                                                     <th colspan="2">Majestic Domain Topical Trustflow</th>
                                                 </tr>
-                                                <tr ng-repeat="x in summery.majesticTopics|limitTo:3">
+                                                <tr ng-repeat="x in summary.majesticTopics|limitTo:3">
                                                     <td>{{ x.key }}</td>
                                                     <td>{{ x.value }}</td>
                                                 </tr>
@@ -218,7 +218,7 @@
                                                 <tr>
                                                     <th colspan="2">Alchemy Archived Home Page Keywords</th>
                                                 </tr>
-                                                <tr ng-repeat="x in summery.alchemyKeywords">
+                                                <tr ng-repeat="x in summary.alchemyKeywords">
                                                     <td>{{ x.key }}</td>
                                                     <td>{{ x.value }}</td>
                                                 </tr>
@@ -231,7 +231,7 @@
                                                 <tr>
                                                     <th colspan="2">Alchemy Archived Home Page Topic</th>
                                                 </tr>
-                                                <tr ng-repeat="x in summery.alchemyTaxonomies">
+                                                <tr ng-repeat="x in summary.alchemyTaxonomies">
                                                     <td>{{ x.key }}</td>
                                                     <td>{{ x.value }}</td>
                                                 </tr>
@@ -244,7 +244,7 @@
                                                 <tr>
                                                     <th colspan="2">Majestic Domain Topical Trustflow</th>
                                                 </tr>
-                                                <tr ng-repeat="x in summery.majesticTopics">
+                                                <tr ng-repeat="x in summary.majesticTopics">
                                                     <td>{{ x.key }}</td>
                                                     <td>{{ x.value }}</td>
                                                 </tr>

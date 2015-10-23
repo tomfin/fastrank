@@ -94,7 +94,7 @@ angular.module('fastrankApp')
                     }
                 }
 
-                $scope.summery = '';
+                $scope.summary = '';
                 $scope.links = '';
                 $scope.result = $stateParams.result;
                 $scope.parantCheck = '';
@@ -124,9 +124,9 @@ angular.module('fastrankApp')
                 $scope.detailInfo = function (id) {
                     var domain = {};
                     domain.id = id;
-                    Summary.get(domain).$promise.then(function (summery) {
-                        $scope.summery = summery;
-                        $log.info($scope.summery);
+                    Summary.get(domain).$promise.then(function (summary) {
+                        $scope.summary = summary;
+                        $log.info($scope.summary);
                     }).catch(function (err) {
                         $log.info(err);
                     });
@@ -138,6 +138,22 @@ angular.module('fastrankApp')
                     });
 
                     jQuery('html, body').delay(1000).animate({scrollTop: jQuery('.detail-info').offset().top - 65}, 2000); //jshint ignore:line
+                };
+                $scope.sort = {
+                    column: '',
+                    descending: false
+                };
+                $scope.changeSorting = function (column) {
+
+                    var sort = $scope.sort;
+
+                    if (sort.column == column) {
+                        console.log(sort);
+                        sort.descending = !sort.descending;
+                    } else {
+                        sort.column = column;
+                        sort.descending = false;
+                    }
                 };
             }])
         .directive('frCollapse', [function () {

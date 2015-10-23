@@ -218,13 +218,13 @@ transition: 300ms linear all;
 .actualPrice {
 	color: red;
 }
-.summery-accordian .left,
+.summary-accordian .left,
 .topic-accordian .left {
     float: left;
     width: 50%;
     padding: 10px;
 }
-.summery-accordian .right,
+.summary-accordian .right,
 .topic-accordian .right {
     float: right;
     width: 50%;
