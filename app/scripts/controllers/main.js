@@ -8,7 +8,7 @@
  * Controller of the fastrankApp
  */
 angular.module('fastrankApp')
-  .controller('MainCtrl', function ($scope, $location, $cookieStore, $rootScope, $window, $state, Auth, Principal, RegisterInterest, ContactUs) {
+  .controller('MainCtrl', function ($scope, $location, $cookieStore, $cookies, $rootScope, $window, $state, Auth, Principal, RegisterInterest, ContactUs) {
 
 	$scope.currentPage = $window.location;
 	
@@ -24,6 +24,8 @@ angular.module('fastrankApp')
         $scope.account = account;
         $rootScope.account = account;
         $scope.isAuthenticated = Principal.isAuthenticated;
+        var cartDomains = [];
+        $cookies.putObject('cartDomains', cartDomains);
     });
 
 	$scope.linkTo = function(id) {
@@ -47,6 +49,21 @@ angular.module('fastrankApp')
 		$scope.$parent.main.currentuser = newValue;
 		$scope.main.currentuser = newValue;
 	});
+	
+    $scope.$watch(function() { return $cookies.cartDomains; }, function() {
+        console.log('Cookie string: ', $cookies.cartDomains);
+        $scope.cartDomains = {};
+        $scope.cartDomains.size = 0;
+		var creditsTotal = 0;
+		if ($cookies.cartDomains != null) { //jshint ignore:line
+			for(var i = $cookies.cartDomains.length - 1; i >= 0; i--) {
+				creditsTotal += $cookies.cartDomains[i].credits;
+			}
+			$scope.cartDomains.size = $cookies.cartDomains.length;
+		}
+        $scope.cartDomains.total = creditsTotal;
+        $scope.cartDomains.domains = $cookies.cartDomains;
+    });
 
 	$scope.logout = function () {
 	    Auth.logout();
@@ -54,6 +71,11 @@ angular.module('fastrankApp')
         $rootScope.account = null;
         $scope.isAuthenticated = Principal.isAuthenticated;
 	    $state.go('home');
+	};
+	
+	$scope.closeCart = function() {
+          var element = angular.element('.shopping-cart');
+          element.removeClass('open');
 	};
 	
 	$scope.registerInterest = function(interestEmail) {

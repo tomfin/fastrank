@@ -90,26 +90,66 @@
 
 				<div id="main-nav" class="navbar-collapse collapse" ng-cloak>
 					<ul class="nav navbar-nav scroll-local">
-					<li ng-show="isHome()"><a href="#section-about" ng-cloak>About Us</a></li>
-					<li ng-show="!isHome()"><a href="" ng-click="linkTo('/#section-about')" ng-cloak>About Us</a></li>
-					<li ng-show="isHome()"><a href="#section-cta" ng-cloak>Register Your Interest</a></li>
-					<li ng-show="!isHome()"><a href="" ng-click="linkTo('/#section-cta')" ng-cloak>Register Your Interest</a></li>
-					<li ng-show="isHome()"><a href="#section-contact" ng-cloak>Contact Us</a></li>
-					<li ng-show="!isHome()"><a href="" ng-click="linkTo('/#section-contact')" ng-cloak>Contact Us</a></li>
-					<li ng-show="isAuthenticated()"><a ui-sref="search">Domain Search</a></li>
-					<li ng-show="isAuthenticated()"><a ui-sref="credits">Buy Credits</a></li>
-					<li ng-show="isAuthenticated()" class="dropdown">
-						<a href="#" data-toggle="dropdown" class="dropdown-toggle dropdown-toggle__caret-holder">My Account</a>
-						<a class="dropdown-toggle dropdown-toggle__caret"><b class="caret"></b></a>
-						<ul class="dropdown-menu" role="menu">
-							<li><a ui-sref="account">My Details</a></li>
-							<li><a ui-sref="domains">My Domains</a></li>
-							<li><a ui-sref="transactions">My Transactions</a></li>
-						</ul><!-- end drop down menu -->
-					</li>
-	                <li ng-show="!isAuthenticated()"><a ui-sref="login">Login/Register</a></li>
-	                <li ng-show="isAuthenticated()"><a ng-click="logout()">Logout</a></li>
-                </ul>
+						<li ng-show="isHome()"><a href="#section-about" ng-cloak>About Us</a></li>
+						<li ng-show="!isHome()"><a href="" ng-click="linkTo('/#section-about')" ng-cloak>About Us</a></li>
+						<li ng-show="isHome() && !isAuthenticated()"><a href="#section-cta" ng-cloak>Register Your Interest</a></li>
+						<li ng-show="!isHome() && !isAuthenticated()"><a href="" ng-click="linkTo('/#section-cta')" ng-cloak>Register Your Interest</a></li>
+						<li ng-show="isHome()"><a href="#section-contact" ng-cloak>Contact Us</a></li>
+						<li ng-show="!isHome()"><a href="" ng-click="linkTo('/#section-contact')" ng-cloak>Contact Us</a></li>
+						<li ng-show="isAuthenticated()"><a ui-sref="search">Domain Search</a></li>
+						<li ng-show="isAuthenticated()"><a ui-sref="credits">Buy Credits</a></li>
+						<li ng-show="isAuthenticated()" class="dropdown">
+							<a href="#" data-toggle="dropdown" class="dropdown-toggle dropdown-toggle__caret-holder">My Account</a>
+							<a class="dropdown-toggle dropdown-toggle__caret"><b class="caret"></b></a>
+							<ul class="dropdown-menu" role="menu">
+								<li><a ui-sref="account">My Details</a></li>
+								<li><a ui-sref="domains">My Domains</a></li>
+								<li><a ui-sref="transactions">My Transactions</a></li>
+				                <li><a ng-click="logout()">Logout</a></li>
+							</ul><!-- end drop down menu -->
+						</li>
+						<li ng-show="isAuthenticated()" class="item-has-cart dropdown dropdown-right fhmm-fw">
+							<div class="shopping-cart open">
+
+								<span class="cart-total">{{cartDomains.total}} Credits</span>
+								<a href="#" data-toggle="dropdown" class="cart-icon dropdown-toggle dropdown-toggle__caret-holder"><i class="fa fa-shopping-cart"></i></a>
+								<span class="cart-number">{{cartDomains.size}}</span>
+
+								<ul class="dropdown-menu half half-right">
+									<li class="fhmm-content withoutdesc">
+										<!-- Shopping Cart -->
+										<table class="table">
+											<tbody>
+												<tr ng-if="!cartDomains.domains">
+													<td>
+														<h5>Shopping cart empty.</h5>
+														<span class="product-desc-alt"> <a ui-sref="search">Search for some domains.</a></span>
+													</td>
+												</tr>
+												<tr ng-repeat="domain in cartDomains.domains">
+													<td>
+														<h5 class="product-name"><span class="product-count"></span>FastRank score [{{domain.frTrust}}] | Majestic TrustFlow [{{domain.domTF}}]</h5>
+													</td>
+													<td class="product-price">{{domain.credits}}</td>
+												</tr>
+												<tr>
+													<td class="product-checkout">
+														<button type="submit" class="btn btn-primary btn-has-icon btn-confirm"><i class="fa fa-shopping-cart"></i> Checkout</button>
+													</td>
+													<td class="product-close">
+														<a href="" ng-click="closeCart()" class="btn btn-default btn-single-icon btn-cancel"><i class="fa fa-times"></i></a>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+										<!-- Shopping Cart / End -->
+									</li><!-- end grid demo -->
+								</ul><!-- end drop down menu -->
+
+							</div>
+						</li>
+		                <li ng-show="!isAuthenticated()"><a ui-sref="login">Login/Register</a></li>
+              		</ul>
                 <!-- end nav navbar-nav -->
               </div>
               <!-- end #main-nav -->

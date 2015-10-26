@@ -20,8 +20,7 @@
                     <div class="table-responsive">          
                         <table class="table">
                             <tr>
-                                <th><input type="checkbox" ng-model="selectedAll" ng-click="checkAll()" /></th>
-                                <th></th>
+                                <th ng-show="isAuthenticated()"><input id="addAllToCart" type="checkbox" ng-model="selectedAll" ng-click="checkAll()" /><label for="addAllToCart">Add to Cart</label></th>
                                 <th></th>
                                 <th ng-click="changeSorting('basePrice')">Was</th>
                                 <th ng-click="changeSorting('actualPrice')">$USD</th>
@@ -34,8 +33,7 @@
                                 <th></th>
                             </tr>
                             <tr ng-repeat-start="rec in result|orderBy:sort.column:sort.descending" class="domain-row">
-                                <td><input type="checkbox" ng-model="rec.selected" /></td>
-                                <td><a>Add</a></td>
+                                <td ng-if="isAuthenticated()"><input id="addToCart{{$index}}" type="checkbox" ng-change="addToCart(rec)" ng-model="rec.selected" /><label for="addToCart{{$index}}">Add to Cart</label></td>
                                 <td><a ng-if="rec.credits > 0" ng-click="fastBuy(rec, $index)">Fast Buy</a></td>
                                 <td ng-if="rec.credits > 0"><del>${{ rec.basePrice}}</del></td>
                                 <td ng-if="rec.credits > 0"><span class="actualPrice">${{ rec.actualPrice}}</span></td>
@@ -100,7 +98,7 @@
                     <accordion class="summary-accordian" id="summary-accordian">
                         <accordion-group is-open="true">
                             <accordion-heading>
-                                summary<i class="pull-right glyphicon" ng-class="{'glyphicon glyphicon-minus-sign': status.open, 'glyphicon glyphicon-plus-sign': !status.open}"></i>
+                                Summary<i class="pull-right glyphicon" ng-class="{'glyphicon glyphicon-minus-sign': status.open, 'glyphicon glyphicon-plus-sign': !status.open}"></i>
                             </accordion-heading>
                             <div>
                                 <div class="table-responsive">          
@@ -206,7 +204,7 @@
                     <accordion class="topic-accordian">
                         <accordion-group is-open="status.open">
                             <accordion-heading>
-                                Topic details<i class="pull-right glyphicon" ng-class="{'glyphicon glyphicon-minus-sign': status.open, 'glyphicon glyphicon-plus-sign': !status.open}"></i>
+                                Topic Detail<i class="pull-right glyphicon" ng-class="{'glyphicon glyphicon-minus-sign': status.open, 'glyphicon glyphicon-plus-sign': !status.open}"></i>
                             </accordion-heading>
                             <div>
                                 <p>Domain Relevance to You</p>

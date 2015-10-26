@@ -8,12 +8,12 @@
  * Controller of the fastrankApp
  */
 angular.module('fastrankApp')
-        .controller('searchResultCtrl', ['$scope', '$log', '$stateParams', 'FastBuy', 'Summary', 'Links', 'SimpleSearch', 'AdvancedSearch', '$q', '$state', function ($scope, $log, $stateParams, FastBuy, Summary, Links, SimpleSearch, AdvancedSearch, $q, $state) {
+        .controller('searchResultCtrl', ['$scope', '$log', '$stateParams', '$cookies', 'FastBuy', 'Summary', 'Links', 'SimpleSearch', 'AdvancedSearch', '$q', '$state', function ($scope, $log, $stateParams, $cookies, FastBuy, Summary, Links, SimpleSearch, AdvancedSearch, $q, $state) {
 
                 if (!$stateParams.result) {
                     if (angular.isDefined($stateParams.min) && angular.isDefined($stateParams.max) && angular.isDefined($stateParams.type)) {
                         var simpleSubmit = {};
-						simpleSubmit.item = "";
+						simpleSubmit.item = '';
 						if(angular.isDefined($stateParams.item)) {
 							simpleSubmit.item = $stateParams.item;
 						}
@@ -104,6 +104,7 @@ angular.module('fastrankApp')
                 $scope.checkAll = function () {
                     angular.forEach($scope.result, function (obj) {
                         obj.selected = $scope.selectedAll;
+                        $scope.addToCart(obj);
                     });
                 };
                 $scope.toggle = false;
@@ -124,6 +125,7 @@ angular.module('fastrankApp')
                         $scope.fastBuyError = 'ERROR';
                     });
                 };
+                
                 $scope.detailInfo = function (id) {
                     var domain = {};
                     domain.id = id;
@@ -142,21 +144,45 @@ angular.module('fastrankApp')
 
                     jQuery('html, body').delay(1000).animate({scrollTop: jQuery('.detail-info').offset().top - 65}, 2000); //jshint ignore:line
                 };
+                
                 $scope.sort = {
                     column: '',
                     descending: false
                 };
+                
                 $scope.changeSorting = function (column) {
 
                     var sort = $scope.sort;
 
-                    if (sort.column == column) {
+                    if (sort.column === column) {
                         console.log(sort);
                         sort.descending = !sort.descending;
                     } else {
                         sort.column = column;
                         sort.descending = false;
                     }
+                };
+                
+                $scope.addToCart = function (domain) {
+                	var cartDomains = $cookies.getObject('cartDomains');
+                	if (domain.selected === true) {
+                		var selectedItem = {};
+                		selectedItem.id = domain.id;
+                		selectedItem.credits = domain.credits;
+                		selectedItem.frTrust = domain.frTrust;
+                		selectedItem.domTF = domain.domTF;
+                		cartDomains.push(selectedItem);
+                		$cookies.putObject('cartDomains', cartDomains);
+                		$cookies.cartDomains = cartDomains;
+                	} else if (domain.selected === false) {
+                		for(var i = cartDomains.length - 1; i >= 0; i--) {
+                		    if(cartDomains[i].id === domain.id) {
+                		       cartDomains.splice(i, 1);
+                		    }
+                		}
+                		$cookies.putObject('cartDomains', cartDomains);
+                		$cookies.cartDomains = cartDomains;
+                	}
                 };
             }])
         .directive('frCollapse', [function () {
