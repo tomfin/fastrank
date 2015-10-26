@@ -109,7 +109,7 @@
 							</ul><!-- end drop down menu -->
 						</li>
 						<li ng-show="isAuthenticated()" class="item-has-cart dropdown dropdown-right fhmm-fw">
-							<div class="shopping-cart open">
+							<div class="shopping-cart">
 
 								<span class="cart-total">{{cartDomains.total}} Credits</span>
 								<a href="#" data-toggle="dropdown" class="cart-icon dropdown-toggle dropdown-toggle__caret-holder"><i class="fa fa-shopping-cart"></i></a>
@@ -120,13 +120,13 @@
 										<!-- Shopping Cart -->
 										<table class="table">
 											<tbody>
-												<tr ng-if="!cartDomains.domains">
+												<tr ng-if="!cartDomains">
 													<td>
 														<h5>Shopping cart empty.</h5>
 														<span class="product-desc-alt"> <a ui-sref="search">Search for some domains.</a></span>
 													</td>
 												</tr>
-												<tr ng-repeat="domain in cartDomains.domains">
+												<tr ng-repeat="domain in cartDomains">
 													<td>
 														<h5 class="product-name"><span class="product-count"></span>FastRank score [{{domain.frTrust}}] | Majestic TrustFlow [{{domain.domTF}}]</h5>
 													</td>
@@ -134,7 +134,7 @@
 												</tr>
 												<tr>
 													<td class="product-checkout">
-														<button type="submit" class="btn btn-primary btn-has-icon btn-confirm"><i class="fa fa-shopping-cart"></i> Checkout</button>
+														<a ng-disable="!cartDomains" ui-sref="checkout" ng-click="closeCart()" class="btn btn-primary btn-has-icon btn-confirm"><i class="fa fa-shopping-cart"></i> Checkout</a>
 													</td>
 													<td class="product-close">
 														<a href="" ng-click="closeCart()" class="btn btn-default btn-single-icon btn-cancel"><i class="fa fa-times"></i></a>
@@ -533,6 +533,7 @@
   <script src="scripts/controllers/domains.js"></script>
   <script src="scripts/controllers/transactions.js"></script>
   <script src="scripts/controllers/credits.js"></script>
+  <script src="scripts/controllers/checkout.js"></script>
   <script src="scripts/controllers/faq.js"></script>
   <script src="scripts/controllers/password.js"></script>
   <script src="scripts/controllers/activate.js"></script>
@@ -544,6 +545,7 @@
   <script src="scripts/routes/domains.js"></script>
   <script src="scripts/routes/transactions.js"></script>
   <script src="scripts/routes/credits.js"></script>
+  <script src="scripts/routes/checkout.js"></script>
   <script src="scripts/routes/login.js"></script>
   <script src="scripts/routes/register.js"></script>
   <script src="scripts/routes/password.js"></script>

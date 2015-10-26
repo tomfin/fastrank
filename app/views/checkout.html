@@ -1,0 +1,62 @@
+<div class="content-wrapper domain-page" ng-init="initDomain()">
+  <!-- Page Section -->
+  <section class="page-section">
+    <div class="container-fluid">
+    
+		<div class="section-title-wrapper">
+			<div class="section-title-inner">
+				<h1 class="section-title section-title__lg">Domain Checkout</h1>
+			</div>
+		</div>
+		
+    
+		<div class="table-responsive">
+			<div class="row">
+				<div class="col-md-8"></div>   
+				<div class="col-md-4">
+					<a href="" ng-click="checkout()" class="btn btn-primary btn-block btn-has-icon"><i class="fa fa-shopping-cart"></i>Buy Domains</a>
+				</div>
+			</div>       
+			<table class="table">
+				<tr>
+					<th></th>
+					<th>FR Trust</th>
+					<th>Dom TF</th>
+					<th>More Info</th>
+					<th>Credits</th>
+				</tr>
+				<tr ng-if="!cartDomains">
+					<td>
+						<h5>Shopping cart empty.</h5>
+						<span class="product-desc-alt"> <a ui-sref="search">Search for some domains.</a></span>
+					</td>
+				</tr>
+				<tr ng-if="cartDomains" ng-repeat="domain in cartDomains" class="domain-row">
+					<td ng-click="removeDomain($index)" class="more-link"><a>Remove</a></td>
+					<td>{{domain.frTrust}}</td>
+					<td>{{domain.domTF}}</td>
+					<td ng-click="" class="more-link"><a>More</a></td>
+					<td>{{domain.credits}}</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>Sub-total: </td>
+					<td>{{cartDomains.total}}</td>
+				</tr>
+			</table>
+			
+			<div class="row">
+				<div class="col-md-8"></div>   
+				<div class="col-md-4">
+					<a href="" ng-click="checkout()" class="btn btn-primary btn-block btn-has-icon"><i class="fa fa-shopping-cart"></i>Buy Domains</a>
+				</div>
+			</div>       
+			
+		</div>    
+    
+    </div>
+  </section>
+  <!-- Page Section / End -->
+</div>

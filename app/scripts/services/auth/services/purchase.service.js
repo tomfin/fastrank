@@ -10,6 +10,15 @@ angular.module('fastrankApp')
 });
 
 angular.module('fastrankApp')
+.factory('CheckoutBuy', function Account($resource, ENDPOINT) {
+    return $resource(ENDPOINT + 'rest-api/payment/checkout', {}, {
+        'buy': { 
+        	method: 'POST'
+        }
+    });
+});
+
+angular.module('fastrankApp')
 .factory('Transaction', function Transaction($resource, ENDPOINT) {
 	return $resource(ENDPOINT + 'rest-api/domains/transactions', {}, {
 		'get': {

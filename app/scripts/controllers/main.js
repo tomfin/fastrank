@@ -24,8 +24,6 @@ angular.module('fastrankApp')
         $scope.account = account;
         $rootScope.account = account;
         $scope.isAuthenticated = Principal.isAuthenticated;
-        var cartDomains = [];
-        $cookies.putObject('cartDomains', cartDomains);
     });
 
 	$scope.linkTo = function(id) {
@@ -51,18 +49,18 @@ angular.module('fastrankApp')
 	});
 	
     $scope.$watch(function() { return $cookies.cartDomains; }, function() {
-        console.log('Cookie string: ', $cookies.cartDomains);
-        $scope.cartDomains = {};
+        $scope.cartDomains = $cookies.getObject('cartDomains');
+        console.log('D> Main cartDomains: ', $scope.cartDomains);
         $scope.cartDomains.size = 0;
 		var creditsTotal = 0;
-		if ($cookies.cartDomains != null) { //jshint ignore:line
-			for(var i = $cookies.cartDomains.length - 1; i >= 0; i--) {
-				creditsTotal += $cookies.cartDomains[i].credits;
+		if ($scope.cartDomains != null) { //jshint ignore:line
+			for(var i = $scope.cartDomains.length - 1; i >= 0; i--) {
+				creditsTotal += $scope.cartDomains[i].credits;
 			}
-			$scope.cartDomains.size = $cookies.cartDomains.length;
+			$scope.cartDomains.size = $scope.cartDomains.length;
 		}
         $scope.cartDomains.total = creditsTotal;
-        $scope.cartDomains.domains = $cookies.cartDomains;
+//        $scope.cartDomains.domains = $scope.cartDomains;
     });
 
 	$scope.logout = function () {

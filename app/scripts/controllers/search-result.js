@@ -99,7 +99,21 @@ angular.module('fastrankApp')
 
                 $scope.summary = '';
                 $scope.links = '';
-                $scope.result = $stateParams.result;
+        		$scope.cartDomains = $cookies.getObject('cartDomains');
+                $scope.resultInit = function () {
+                	$scope.result = $stateParams.result;
+                	console.log('D> result: ', $scope.result);
+                    angular.forEach($scope.result, function (obj) {
+                    	for (var i = 0; i < $scope.cartDomains.length; i++) {
+                    		if (obj.id === $scope.cartDomains[i].id) {
+                    			obj.selected = true;
+                    			console.log('D> selecting true for id: ', obj.id);
+                    		}
+                    	}
+                    });
+                };
+                $scope.resultInit();
+                
                 $scope.parantCheck = '';
                 $scope.checkAll = function () {
                     angular.forEach($scope.result, function (obj) {
