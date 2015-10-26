@@ -11,9 +11,12 @@ angular.module('fastrankApp')
         .controller('searchResultCtrl', ['$scope', '$log', '$stateParams', 'FastBuy', 'Summary', 'Links', 'SimpleSearch', 'AdvancedSearch', '$q', '$state', function ($scope, $log, $stateParams, FastBuy, Summary, Links, SimpleSearch, AdvancedSearch, $q, $state) {
 
                 if (!$stateParams.result) {
-                    if (angular.isDefined($stateParams.item) && angular.isDefined($stateParams.min) && angular.isDefined($stateParams.max) && angular.isDefined($stateParams.type)) {
+                    if (angular.isDefined($stateParams.min) && angular.isDefined($stateParams.max) && angular.isDefined($stateParams.type)) {
                         var simpleSubmit = {};
-                        simpleSubmit.item = $stateParams.item;
+						simpleSubmit.item = "";
+						if(angular.isDefined($stateParams.item)) {
+							simpleSubmit.item = $stateParams.item;
+						}
                         simpleSubmit.max = $stateParams.max;
                         simpleSubmit.min = $stateParams.min;
                         simpleSubmit.type = $stateParams.type;
