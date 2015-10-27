@@ -27,6 +27,7 @@ angular.module('fastrankApp')
                 $scope.categories.majesticSubcategory = null;
                 $scope.categories.majesticSubsubcategory = null;
                 $scope.searchMsg = '';
+				$scope.advanceSearchMsg = '';
 
                 $scope.initDomain = function () {
                     $scope.updateDomainStrengthSlider($scope.majTF.min, $scope.majTF.max);
@@ -155,7 +156,7 @@ angular.module('fastrankApp')
                         }
                     });
                     simpleSearchDefer.promise.then(function (res) {
-                        //console.log(res);
+                        console.log(res);
                         simpleSubmit.result = res;
                         $state.go('search-result', simpleSubmit);
                     });
@@ -199,13 +200,21 @@ angular.module('fastrankApp')
                     // Ref GOV
                     advancedSubmit.majRefDomainsGOVMin = $scope.otherSliders.majRefDomainsGOV.min;
                     advancedSubmit.majRefDomainsGOVMax = $scope.otherSliders.majRefDomainsGOV.max;
-
+					
                     var advancedSearchDefer = $q.defer();
                     AdvancedSearch.search(advancedSubmit)
                             .success(function (res) {
                                 advancedSearchDefer.resolve(res);
-                            }).error(function () {
-                        $log.error('Error while advacned searching');
+                            }).error(function (res) {
+						if (res === null) {
+							$scope.advanceSearchMsg = 'Error while searching';
+                            $log.error('Error while searching');
+                        } else if (angular.isDefined(res.status) && res.status === 404) {
+                            $scope.advanceSearchMsg = 'Sorry, no result found in selected criteria.';
+                            $log.error('Sorry, no result found in selected criteria');
+                        } else {
+                            $scope.advanceSearchMsg = 'Error while searching';
+                        }
                     });
                     advancedSearchDefer.promise.then(function (res) {
                         advancedSubmit.result = res;

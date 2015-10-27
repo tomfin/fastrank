@@ -9,7 +9,7 @@
  */
 angular.module('fastrankApp')
         .controller('searchResultCtrl', ['$scope', '$log', '$stateParams', '$cookies', 'FastBuy', 'Summary', 'Links', 'SimpleSearch', 'AdvancedSearch', '$q', '$state', function ($scope, $log, $stateParams, $cookies, FastBuy, Summary, Links, SimpleSearch, AdvancedSearch, $q, $state) {
-
+				$scope.searchMsg = '';
                 if (!$stateParams.result) {
                     if (angular.isDefined($stateParams.min) && angular.isDefined($stateParams.max) && angular.isDefined($stateParams.type)) {
                         var simpleSubmit = {};
@@ -87,8 +87,16 @@ angular.module('fastrankApp')
                         AdvancedSearch.search(advancedSubmit)
                                 .success(function (res) {
                                     advancedSearchDefer.resolve(res);
-                                }).error(function () {
-                            $log.error('Error while advacned searching');
+                                }).error(function (res) {
+							if (res === null) {
+								$scope.searchMsg = 'Error while searching';
+								$log.error('Error while searching');
+							} else if (angular.isDefined(res.status) && res.status === 404) {
+								$scope.searchMsg = 'Sorry, no result found in selected criteria.';
+								$log.error('Sorry, no result found in selected criteria');
+							} else {
+								$scope.searchMsg = 'Error while searching';
+							}
                         });
                         advancedSearchDefer.promise.then(function (res) {
                             advancedSubmit.result = res;

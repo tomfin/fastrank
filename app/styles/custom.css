@@ -204,7 +204,7 @@ transition: 300ms linear all;
     background-color:#707070;
     font-size:1em;
 }
-.more-info .more-info-td {
+.more-info-td {
   padding: 0 !important;
 }
 .toggle {
@@ -276,4 +276,13 @@ transition: 300ms linear all;
 	max-width:650px;
 	margin:40px auto;
 	position:relative
+}
+.toggle.credit-detail td {
+	padding: 23px;
+}
+.toggle.credit-detail {
+	padding: 0;
+}
+.expandCredit {
+    border-style: solid !important; 
 }

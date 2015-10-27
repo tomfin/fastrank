@@ -208,3 +208,16 @@ angular.module('fastrankApp')
         }
     };
 }]);
+
+angular.module('fastrankApp')
+.directive('frCollapse', [function () {
+	return {
+		restrict: 'A',
+		link: function (scope, element) {
+			var p = jQuery(element.prev().find('td.expandCredit')); //jshint ignore:line
+			p.click(function () {
+				jQuery(element).find('.toggle').slideToggle('slow'); //jshint ignore:line
+			});
+		}
+	};
+}]);
