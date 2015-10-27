@@ -20,11 +20,21 @@ angular.module('fastrankApp')
     $scope.cartDomains.total = creditsTotal;
 
   	$scope.checkout = function() {
-  		CheckoutBuy.buy($scope.cartDomains).$promise.then(function () {
+  		
+  		var domains = [];
+
+        angular.forEach($scope.cartDomains, function (result) {
+        	var obj = {};
+        	obj.id = result.id;
+        	obj.credits = result.credits;
+        	domains.push(obj);
+        });
+  		
+  		CheckoutBuy.buy(domains).$promise.then(function () {
   			$scope.checkoutBuySuccess = 'SUCCESS';
   			$scope.checkoutBuyError = null;
-  			$cookies.putObject('cartDomains', null);
-  			$cookies.cartDomains = null;
+  			$cookies.putObject('cartDomains', []);
+  			$cookies.cartDomains = [];
   		}, function () {
   			$scope.checkoutBuySuccess = null;
   			$scope.checkoutBuyError = 'ERROR';

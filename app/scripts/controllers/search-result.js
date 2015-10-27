@@ -102,15 +102,16 @@ angular.module('fastrankApp')
         		$scope.cartDomains = $cookies.getObject('cartDomains');
                 $scope.resultInit = function () {
                 	$scope.result = $stateParams.result;
-                	console.log('D> result: ', $scope.result);
-                    angular.forEach($scope.result, function (obj) {
-                    	for (var i = 0; i < $scope.cartDomains.length; i++) {
-                    		if (obj.id === $scope.cartDomains[i].id) {
-                    			obj.selected = true;
-                    			console.log('D> selecting true for id: ', obj.id);
-                    		}
-                    	}
-                    });
+                	if ($scope.cartDomains != null) { //jshint ignore:line
+                		angular.forEach($scope.result, function (obj) {
+                			for (var i = 0; i < $scope.cartDomains.length; i++) {
+                				if (obj.id === $scope.cartDomains[i].id) {
+                					obj.selected = true;
+                					console.log('D> selecting true for id: ', obj.id);
+                				}
+                			}
+                		});
+                	}
                 };
                 $scope.resultInit();
                 
@@ -179,6 +180,9 @@ angular.module('fastrankApp')
                 
                 $scope.addToCart = function (domain) {
                 	var cartDomains = $cookies.getObject('cartDomains');
+                	if (cartDomains == null) { //jshint ignore:line
+                		cartDomains = [];
+                	}
                 	if (domain.selected === true) {
                 		var selectedItem = {};
                 		selectedItem.id = domain.id;
