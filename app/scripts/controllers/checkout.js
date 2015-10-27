@@ -16,8 +16,8 @@ angular.module('fastrankApp')
 			creditsTotal += $scope.cartDomains[i].credits;
 		}
 		$scope.cartDomains.size = $scope.cartDomains.length;
+		$scope.cartDomains.total = creditsTotal;
 	}
-    $scope.cartDomains.total = creditsTotal;
 
   	$scope.checkout = function() {
   		

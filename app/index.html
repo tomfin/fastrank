@@ -120,7 +120,7 @@
 										<!-- Shopping Cart -->
 										<table class="table">
 											<tbody>
-												<tr ng-if="!cartDomains">
+												<tr ng-if="cartDomains.length == 0">
 													<td>
 														<h5>Shopping cart empty.</h5>
 														<span class="product-desc-alt"> <a ui-sref="search">Search for some domains.</a></span>
@@ -134,7 +134,7 @@
 												</tr>
 												<tr>
 													<td class="product-checkout">
-														<a ng-disable="!cartDomains" ui-sref="checkout" ng-click="closeCart()" class="btn btn-primary btn-has-icon btn-confirm"><i class="fa fa-shopping-cart"></i> Checkout</a>
+														<a ng-disabled="cartDomains.length == 0" ui-sref="checkout" ng-click="closeCart()" class="btn btn-primary btn-has-icon btn-confirm"><i class="fa fa-shopping-cart"></i> Checkout</a>
 													</td>
 													<td class="product-close">
 														<a href="" ng-click="closeCart()" class="btn btn-default btn-single-icon btn-cancel"><i class="fa fa-times"></i></a>

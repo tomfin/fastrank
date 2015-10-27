@@ -50,7 +50,6 @@ angular.module('fastrankApp')
 	
     $scope.$watch(function() { return $cookies.cartDomains; }, function() {
         $scope.cartDomains = $cookies.getObject('cartDomains');
-        console.log('D> Main cartDomains: ', $scope.cartDomains);
 		var creditsTotal = 0;
 		if ($scope.cartDomains != null) { //jshint ignore:line
 			for(var i = $scope.cartDomains.length - 1; i >= 0; i--) {
@@ -61,7 +60,7 @@ angular.module('fastrankApp')
 			$scope.cartDomains = [];
 			$scope.cartDomains.size = 0;
 		}
-        $scope.cartDomains.total = creditsTotal;
+		$scope.cartDomains.total = creditsTotal;
 //        $scope.cartDomains.domains = $scope.cartDomains;
     });
 
