@@ -195,7 +195,7 @@ angular.module('fastrankApp')
                 		var selectedItem = {};
                 		selectedItem.id = domain.id;
                 		selectedItem.credits = domain.credits;
-                		selectedItem.frTrust = domain.frTrust;
+                		selectedItem.domRel = domain.domRel;
                 		selectedItem.domTF = domain.domTF;
                 		cartDomains.push(selectedItem);
                 		$cookies.putObject('cartDomains', cartDomains);
