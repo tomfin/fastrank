@@ -23,6 +23,7 @@
                             <tr>
                                 <th ng-show="isAuthenticated()"><input id="addAllToCart" type="checkbox" ng-model="selectedAll" ng-click="checkAll()" /><label for="addAllToCart">Add to Cart</label></th>
                                 <th></th>
+                                <th>Domain</th>
                                 <th ng-click="changeSorting('actualPrice')">Price (USD)</th>
                                 <th ng-click="changeSorting('credits')">Credits</th>
                                 <th ng-click="changeSorting('domTF')">Dom TF</th>
@@ -34,6 +35,7 @@
                             <tr ng-repeat-start="rec in result|orderBy:sort.column:sort.descending" class="domain-row">
                                 <td ng-if="isAuthenticated()"><input id="addToCart{{$index}}" type="checkbox" ng-change="addToCart(rec)" ng-model="rec.selected" /><label for="addToCart{{$index}}">Add to Cart</label></td>
                                 <td><a ng-if="rec.credits > 0" ng-click="fastBuy(rec, $index)">Fast Buy</a></td>
+                                <td>{{ rec.rootURL }}</td>
                                 <td ng-if="rec.credits > 0 && rec.basePrice > rec.actualPrice"><span class="actualPrice">${{ rec.actualPrice | number:2 }}</span> <del>${{ rec.basePrice | number:2 }}</del></td>
                                 <td ng-if="rec.credits > 0 && rec.basePrice <= rec.actualPrice"><span class="actualPrice">${{ rec.actualPrice | number:2 }}</span></td>
                                 <td ng-if="rec.credits > 0">{{ rec.credits }}</td>
@@ -54,32 +56,26 @@
                                             <tr>
                                                 <td class="col-md-2"><strong>Domain TF:</strong> {{ rec.domTF}} </td>
                                                 <td class="col-md-3"><strong>1<sup>1st</sup> Crawled:</strong> {{ rec.firstCrawlDate}} </td>
-                                                <td class="col-md-5"><strong>Found:</strong> {{ rec.found}} </td>
-                                                <td class="col-md-2"><input id="buildQuote" type="checkbox" /><label for="buildQuote">Site build?</label></td>
+                                                <td class="col-md-3"><strong>Found:</strong> {{ rec.found}} </td>
+                                                <td class="col-md-4 cell-right"><input id="buildQuote" type="checkbox" /><label for="buildQuote">Site build?</label></td>
                                             </tr>
                                             <tr>
                                                 <td class="col-md-2"><strong>Maj. Agg TF:</strong> {{ rec.aggLinkTF}}</td>
                                                 <td class="col-md-3"><strong>Spam Found?</strong> {{ rec.spammedDomain}}</td>
-                                                <td class="col-md-5"><strong>Main Majestic topic:</strong> </td>
-                                                <td class="col-md-2"></td>
+                                                <td class="col-md-3"><strong>Main Majestic topic:</strong> </td>
+                                                <td class="col-md-4">{{ rec.majMainTopic}}</td>
                                             </tr>
                                             <tr>
                                                 <td class="col-md-2"><strong>TF/CF:</strong> {{ rec.tfcfRatio}}</td>
                                                 <td class="col-md-3"><strong>Last checked:</strong> {{ rec.lastChecked}}</td>
-                                                <td class="col-md-5">{{ rec.majMainTopic}}</td>
-                                                <td class="col-md-2"></td>
+                                                <td class="col-md-3"><strong>Main Alchemy Taxonomy:</strong></td>
+                                                <td class="col-md-4">{{ rec.alchMainTaxonomy}}</td>
                                             </tr>
                                             <tr>
                                                 <td class="col-md-2"><strong>Ref Dom:</strong> {{ rec.refDom}}</td>
-                                                <td class="col-md-3"><strong>Link Rel:</strong> {{ rec.linkRel}}</td>
-                                                <td class="col-md-5"><strong>Main Alchemy Taxonomy:</strong> </td>
-                                                <td class="col-md-2"></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="col-md-2"><strong>EDU/Gov:</strong> {{ rec.edugovCount}}</td>
-                                                <td class="col-md-3"><strong>TlD:</strong> {{ rec.tld}}</td>
-                                                <td class="col-md-5">{{ rec.alchMainTaxonomy}}</td>
-                                                <td class="col-md-2"><a ng-if="rec.credits > 0" ng-click="fastBuy(rec, $index)">Fast Buy</a></td>
+                                                <td class="col-md-3"><strong>EDU/Gov:</strong> {{ rec.edugovCount}}</td>
+                                                <td class="col-md-3"></td>
+                                                <td class="col-md-4 cell-right"><a ng-if="rec.credits > 0" ng-click="fastBuy(rec, $index)">Fast Buy</a></td>
                                             </tr>
                                         </table>
                                     </div>

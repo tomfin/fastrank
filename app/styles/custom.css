@@ -290,3 +290,6 @@ transition: 300ms linear all;
 /*    background-color: #1a7ab0 !important;*/
     background-color: #45c3ab !important;
 }
+.cell-right { 
+	text-align: right; 
+}
