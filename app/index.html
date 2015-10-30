@@ -40,6 +40,7 @@
   <!-- bower:css -->
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
   <link rel="stylesheet" href="bower_components/magnific-popup/dist/magnific-popup.css" />
+  <link rel="stylesheet" href="bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css" />
   <!-- endbower -->
   <!-- endbuild -->
   <!-- build:css(.tmp) styles/main.css -->
@@ -114,9 +115,9 @@
 								<span class="cart-total">{{cartDomains.total}} Credits</span>
 								<a href="#" data-toggle="dropdown" class="cart-icon dropdown-toggle dropdown-toggle__caret-holder"><i class="fa fa-shopping-cart"></i></a>
 								<span class="cart-number">{{cartDomains.size}}</span>
-
+<!--                                                                <div class="scrollMe">-->
 								<ul class="dropdown-menu half half-right">
-									<li class="fhmm-content withoutdesc">
+									<li class="fhmm-content withoutdesc" ng-scrollbars ng-scrollbars-config="config">
 										<!-- Shopping Cart -->
 										<table class="table">
 											<tbody>
@@ -132,6 +133,15 @@
 													</td>
 													<td class="product-price">{{domain.credits}}</td>
 												</tr>
+											</tbody>
+										</table>
+										<!-- Shopping Cart / End -->
+									</li><!-- end grid demo -->
+                                                                        
+                                                                        <li class="fhmm-content withoutdesc">
+										<!-- Shopping Cart -->
+										<table class="table">
+											<tbody>
 												<tr>
 													<td class="product-checkout">
 														<a ng-disabled="cartDomains.length == 0" ui-sref="checkout" ng-click="closeCart()" class="btn btn-primary btn-has-icon btn-confirm"><i class="fa fa-shopping-cart"></i> Checkout</a>
@@ -144,7 +154,9 @@
 										</table>
 										<!-- Shopping Cart / End -->
 									</li><!-- end grid demo -->
+                                                                        
 								</ul><!-- end drop down menu -->
+<!--                                                                </div>-->
 
 							</div>
 						</li>
@@ -508,6 +520,9 @@
   <script src="bower_components/sockjs-client/dist/sockjs.js"></script>
   <script src="bower_components/stomp-websocket/lib/stomp.min.js"></script>
   <script src="bower_components/wow/dist/wow.js"></script>
+  <script src="bower_components/jquery-mousewheel/jquery.mousewheel.js"></script>
+  <script src="bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.js"></script>
+  <script src="bower_components/ng-scrollbars/dist/scrollbars.min.js"></script>
   <!-- endbower -->
   <!-- endbuild -->
 
@@ -540,6 +555,7 @@
   <script src="scripts/controllers/reset.js"></script>
   <script src="scripts/controllers/account.js"></script>
   <script src="scripts/controllers/search-result.js"></script>
+  <script src="scripts/controllers/cart-domain.js"></script>
   <script src="scripts/routes/main.js"></script>
   <script src="scripts/routes/search.js"></script>
   <script src="scripts/routes/domains.js"></script>
@@ -553,6 +569,7 @@
   <script src="scripts/routes/reset.js"></script>
   <script src="scripts/routes/account.js"></script>
   <script src="scripts/routes/search-result.js"></script>
+  <script src="scripts/routes/cart-domain.js"></script>
   <script src="scripts/services/password.directive.js"></script>
   <script src="scripts/services/auth/auth.service.js"></script>
   <script src="scripts/services/auth/authority.directive.js"></script>
@@ -575,6 +592,7 @@
   <script src="scripts/services/language/language.controller.js"></script>
   <script src="scripts/services/language/language.service.js"></script>
   <script src="scripts/services/auth/services/result.service.js"></script>
+  <script src="scripts/services/auth/services/cart-domain.service.js"></script>
   <script src="scripts/custom.js"></script>
   <script src="rs-plugin/js/jquery.themepunch.tools.min.js"></script>
   <script src="rs-plugin/js/jquery.themepunch.revolution.min.js"></script>

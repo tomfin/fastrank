@@ -286,3 +286,7 @@ transition: 300ms linear all;
 .expandCredit {
     border-style: solid !important; 
 }
+.mCSB_dragger_bar {
+/*    background-color: #1a7ab0 !important;*/
+    background-color: #45c3ab !important;
+}

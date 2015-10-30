@@ -46,4 +46,10 @@ angular.module('fastrankApp')
   		$cookies.putObject('cartDomains', $scope.cartDomains);
   		$cookies.cartDomains = $scope.cartDomains;
   	};
+        
+     
 }]);
+
+
+   
+

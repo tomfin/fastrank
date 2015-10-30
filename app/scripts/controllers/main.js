@@ -97,5 +97,18 @@ angular.module('fastrankApp')
             $scope.contactUsError = true;
         });
 	};
-
+        $scope.config = {
+            autoHideScrollbar: false,
+            theme: 'rounded-dots-dark',
+            advanced: {
+            updateOnContentResize: true
+            },
+            axis: 'yx', // enable 2 axis scrollbars by default,
+            setHeight: 200,
+            scrollInertia: 400,
+            scrollButtons: {
+                scrollAmount: 'auto', // scroll amount when button pressed
+                enable: true // enable scrolling buttons by default
+            }
+        };
   });
