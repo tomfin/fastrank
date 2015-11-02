@@ -126,7 +126,7 @@ angular.module('fastrankApp')
                 $scope.parantCheck = '';
                 $scope.checkAll = function (status) {
                     angular.forEach($scope.result, function (obj) {
-                        obj.selected = status;
+                        obj.selected = $scope.selectedAll;
                         $scope.addToCart(obj);
                     });
                 };
