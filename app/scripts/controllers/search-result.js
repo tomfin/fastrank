@@ -115,7 +115,6 @@ angular.module('fastrankApp')
                 			for (var i = 0; i < $scope.cartDomains.length; i++) {
                 				if (obj.id === $scope.cartDomains[i].id) {
                 					obj.selected = true;
-                					console.log('D> selecting true for id: ', obj.id);
                 				}
                 			}
                 		});
@@ -154,15 +153,13 @@ angular.module('fastrankApp')
                     domain.id = id;
                     Summary.get(domain).$promise.then(function (summary) {
                         $scope.summary = summary;
-                        $log.info($scope.summary);
                     }).catch(function (err) {
-                        $log.info(err);
+                        $log.error(err);
                     });
                     Links.get(domain).$promise.then(function (links) {
                         $scope.links = links;
-                        $log.info($scope.links);
                     }).catch(function (err) {
-                        $log.info(err);
+                        $log.error(err);
                     });
 
                     jQuery('html, body').delay(1000).animate({scrollTop: jQuery('.detail-info').offset().top - 65}, 2000); //jshint ignore:line
@@ -178,7 +175,6 @@ angular.module('fastrankApp')
                     var sort = $scope.sort;
 
                     if (sort.column === column) {
-                        console.log(sort);
                         sort.descending = !sort.descending;
                     } else {
                         sort.column = column;
@@ -195,8 +191,6 @@ angular.module('fastrankApp')
                 		var selectedItem = {};
                 		selectedItem.id = domain.id;
                 		selectedItem.credits = domain.credits;
-                		selectedItem.domRel = domain.domRel;
-                		selectedItem.domTF = domain.domTF;
                 		cartDomains.push(selectedItem);
                 		$cookies.putObject('cartDomains', cartDomains);
                 		$cookies.cartDomains = cartDomains;
