@@ -21,7 +21,7 @@
                     <div class="table-responsive">          
                         <table class="table">
                             <tr>
-                                <th ng-show="isAuthenticated()"><input id="addAllToCart" type="checkbox" ng-model="selectedAll" ng-click="checkAll()" /><label for="addAllToCart">Add to Cart</label></th>
+                                <th ng-show="isAuthenticated()"><input id="addAllToCart" type="checkbox" ng-model="selectedAll" ng-click="checkAll(selectedAll)" /><label for="addAllToCart">Add to Cart</label></th>
                                 <th></th>
                                 <th>Domain</th>
                                 <th ng-click="changeSorting('actualPrice')">Price (USD)</th>
