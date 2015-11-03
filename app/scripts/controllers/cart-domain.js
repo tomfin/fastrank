@@ -46,7 +46,7 @@ angular.module('fastrankApp')
                     jQuery('html, body').animate({scrollTop: jQuery('.detail-info').offset().top - 65}, 2000); //jshint ignore:line
                 };
                 
-                if(angular.isDefined(summeryDomain)) {
+                if(angular.isDefined(summeryDomain) && summeryDomain !== '') {
                     $scope.detailInfo(summeryDomain);
                 }
             
