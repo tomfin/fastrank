@@ -197,10 +197,9 @@ angular.module('fastrankApp')
                     advancedSubmit.majRefDomainsGOVMin = $scope.otherSliders.majRefDomainsGOV.min;
                     advancedSubmit.majRefDomainsGOVMax = $scope.otherSliders.majRefDomainsGOV.max;
                     
-                    var selectedOtherDomains = [];
                     advancedSubmit.selectedTLDs = [];
                     
-                    angular.forEach($scope.otherDomains, function(value, key) {
+                    angular.forEach($scope.otherDomains, function(value) {
                         if(angular.isDefined(value.selected)) {
                             this.push(value.tld);
                         }
