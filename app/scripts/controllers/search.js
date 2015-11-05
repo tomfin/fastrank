@@ -165,10 +165,6 @@ angular.module('fastrankApp')
                 $scope.advancedFind = function () {
                     var advancedSubmit = {};
 
-                    // Domain extensions
-                    advancedSubmit.comDomains = $scope.com.selected;
-                    advancedSubmit.otherDomains = $scope.otherDomains.selected;
-
                     // Majestic topics
 
                     if (angular.isDefined($scope.majesticCategories[$scope.categories.majesticCategoryIdx])) {
@@ -200,7 +196,20 @@ angular.module('fastrankApp')
                     // Ref GOV
                     advancedSubmit.majRefDomainsGOVMin = $scope.otherSliders.majRefDomainsGOV.min;
                     advancedSubmit.majRefDomainsGOVMax = $scope.otherSliders.majRefDomainsGOV.max;
-					
+                    
+                    var selectedOtherDomains = [];
+                    advancedSubmit.selectedTLDs = [];
+                    
+                    angular.forEach($scope.otherDomains, function(value, key) {
+                        if(angular.isDefined(value.selected)) {
+                            this.push(value.tld);
+                        }
+                    }, advancedSubmit.selectedTLDs);
+			
+                    if(angular.isDefined($scope.com.selected)) {
+                        advancedSubmit.selectedTLDs.push('com');
+                    }    
+                        
                     var advancedSearchDefer = $q.defer();
                     AdvancedSearch.search(advancedSubmit)
                             .success(function (res) {
