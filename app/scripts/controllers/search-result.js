@@ -171,23 +171,6 @@ angular.module('fastrankApp')
                     jQuery('html, body').delay(1000).animate({scrollTop: jQuery('.detail-info').offset().top - 65}, 2000); //jshint ignore:line
                 };
 
-                $scope.sort = {
-                    column: '',
-                    descending: false
-                };
-
-                $scope.changeSorting = function (column) {
-
-                    var sort = $scope.sort;
-
-                    if (sort.column === column) {
-                        sort.descending = !sort.descending;
-                    } else {
-                        sort.column = column;
-                        sort.descending = false;
-                    }
-                };
-
                 $scope.addToCart = function (domain) {
                     var cartDomains = $cookies.getObject('cartDomains');
                     if (cartDomains == null) { //jshint ignore:line
