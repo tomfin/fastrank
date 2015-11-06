@@ -9,14 +9,15 @@
  */
 angular.module('fastrankApp')
         .controller('searchResultCtrl', ['$scope', '$log', '$stateParams', '$cookies', 'FastBuy', 'Summary', 'Links', 'SimpleSearch', 'AdvancedSearch', '$q', '$state', function ($scope, $log, $stateParams, $cookies, FastBuy, Summary, Links, SimpleSearch, AdvancedSearch, $q, $state) {
-				$scope.searchMsg = '';
+                $scope.searchMsg = '';
+
                 if (!$stateParams.result) {
                     if (angular.isDefined($stateParams.min) && angular.isDefined($stateParams.max) && angular.isDefined($stateParams.type)) {
                         var simpleSubmit = {};
-						simpleSubmit.item = '';
-						if(angular.isDefined($stateParams.item)) {
-							simpleSubmit.item = $stateParams.item;
-						}
+                        simpleSubmit.item = '';
+                        if (angular.isDefined($stateParams.item)) {
+                            simpleSubmit.item = $stateParams.item;
+                        }
                         simpleSubmit.max = $stateParams.max;
                         simpleSubmit.min = $stateParams.min;
                         simpleSubmit.type = $stateParams.type;
@@ -49,12 +50,6 @@ angular.module('fastrankApp')
 
                         var advancedSubmit = {};
 
-                        if (angular.isDefined($stateParams.comDomains)) {
-                            advancedSubmit.comDomains = $stateParams.comDomains;
-                        }
-                        if (angular.isDefined($stateParams.otherDomains)) {
-                            advancedSubmit.otherDomains = $stateParams.otherDomains;
-                        }
                         if (angular.isDefined($stateParams.majesticCategory)) {
                             advancedSubmit.majesticCategory = $stateParams.majesticCategory;
                         }
@@ -83,20 +78,31 @@ angular.module('fastrankApp')
                         advancedSubmit.majRefDomainsGOVMin = $stateParams.majRefDomainsGOVMin;
                         advancedSubmit.majRefDomainsGOVMax = $stateParams.majRefDomainsGOVMax;
 
+                        advancedSubmit.selectedTLDs = [];
+                        if (angular.isDefined($stateParams.selectedTLDs)) {
+                            if (angular.isArray($stateParams.selectedTLDs)) {
+                                angular.forEach($stateParams.selectedTLDs, function(value) {
+                                    this.push(value.replace(/dot/gi, '%2E'));
+                                }, advancedSubmit.selectedTLDs);
+                            } else {
+                                advancedSubmit.selectedTLDs.push($stateParams.selectedTLDs.replace(/dot/gi, '%2E'));
+                            }
+                        }
+
                         var advancedSearchDefer = $q.defer();
                         AdvancedSearch.search(advancedSubmit)
                                 .success(function (res) {
                                     advancedSearchDefer.resolve(res);
                                 }).error(function (res) {
-							if (res === null) {
-								$scope.searchMsg = 'Error while searching';
-								$log.error('Error while searching');
-							} else if (angular.isDefined(res.status) && res.status === 404) {
-								$scope.searchMsg = 'Sorry, no result found in selected criteria.';
-								$log.error('Sorry, no result found in selected criteria');
-							} else {
-								$scope.searchMsg = 'Error while searching';
-							}
+                            if (res === null) {
+                                $scope.searchMsg = 'Error while searching';
+                                $log.error('Error while searching');
+                            } else if (angular.isDefined(res.status) && res.status === 404) {
+                                $scope.searchMsg = 'Sorry, no result found in selected criteria.';
+                                $log.error('Sorry, no result found in selected criteria');
+                            } else {
+                                $scope.searchMsg = 'Error while searching';
+                            }
                         });
                         advancedSearchDefer.promise.then(function (res) {
                             advancedSubmit.result = res;
@@ -107,21 +113,21 @@ angular.module('fastrankApp')
 
                 $scope.summary = '';
                 $scope.links = '';
-        		$scope.cartDomains = $cookies.getObject('cartDomains');
+                $scope.cartDomains = $cookies.getObject('cartDomains');
                 $scope.resultInit = function () {
-                	$scope.result = $stateParams.result;
-                	if ($scope.cartDomains != null) { //jshint ignore:line
-                		angular.forEach($scope.result, function (obj) {
-                			for (var i = 0; i < $scope.cartDomains.length; i++) {
-                				if (obj.id === $scope.cartDomains[i].id) {
-                					obj.selected = true;
-                				}
-                			}
-                		});
-                	}
+                    $scope.result = $stateParams.result;
+                    if ($scope.cartDomains != null) { //jshint ignore:line
+                        angular.forEach($scope.result, function (obj) {
+                            for (var i = 0; i < $scope.cartDomains.length; i++) {
+                                if (obj.id === $scope.cartDomains[i].id) {
+                                    obj.selected = true;
+                                }
+                            }
+                        });
+                    }
                 };
                 $scope.resultInit();
-                
+
                 $scope.parantCheck = '';
                 $scope.checkAll = function (status) {
                     angular.forEach($scope.result, function (obj) {
@@ -147,7 +153,7 @@ angular.module('fastrankApp')
                         $scope.fastBuyError = 'ERROR';
                     });
                 };
-                
+
                 $scope.detailInfo = function (id) {
                     var domain = {};
                     domain.id = id;
@@ -164,12 +170,12 @@ angular.module('fastrankApp')
 
                     jQuery('html, body').delay(1000).animate({scrollTop: jQuery('.detail-info').offset().top - 65}, 2000); //jshint ignore:line
                 };
-                
+
                 $scope.sort = {
                     column: '',
                     descending: false
                 };
-                
+
                 $scope.changeSorting = function (column) {
 
                     var sort = $scope.sort;
@@ -181,28 +187,28 @@ angular.module('fastrankApp')
                         sort.descending = false;
                     }
                 };
-                
+
                 $scope.addToCart = function (domain) {
-                	var cartDomains = $cookies.getObject('cartDomains');
-                	if (cartDomains == null) { //jshint ignore:line
-                		cartDomains = [];
-                	}
-                	if (domain.selected === true) {
-                		var selectedItem = {};
-                		selectedItem.id = domain.id;
-                		selectedItem.credits = domain.credits;
-                		cartDomains.push(selectedItem);
-                		$cookies.putObject('cartDomains', cartDomains);
-                		$cookies.cartDomains = cartDomains;
-                	} else if (domain.selected === false) {
-                		for(var i = cartDomains.length - 1; i >= 0; i--) {
-                		    if(cartDomains[i].id === domain.id) {
-                		       cartDomains.splice(i, 1);
-                		    }
-                		}
-                		$cookies.putObject('cartDomains', cartDomains);
-                		$cookies.cartDomains = cartDomains;
-                	}
+                    var cartDomains = $cookies.getObject('cartDomains');
+                    if (cartDomains == null) { //jshint ignore:line
+                        cartDomains = [];
+                    }
+                    if (domain.selected === true) {
+                        var selectedItem = {};
+                        selectedItem.id = domain.id;
+                        selectedItem.credits = domain.credits;
+                        cartDomains.push(selectedItem);
+                        $cookies.putObject('cartDomains', cartDomains);
+                        $cookies.cartDomains = cartDomains;
+                    } else if (domain.selected === false) {
+                        for (var i = cartDomains.length - 1; i >= 0; i--) {
+                            if (cartDomains[i].id === domain.id) {
+                                cartDomains.splice(i, 1);
+                            }
+                        }
+                        $cookies.putObject('cartDomains', cartDomains);
+                        $cookies.cartDomains = cartDomains;
+                    }
                 };
             }])
         .directive('frCollapse', [function () {

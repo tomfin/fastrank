@@ -156,7 +156,6 @@ angular.module('fastrankApp')
                         }
                     });
                     simpleSearchDefer.promise.then(function (res) {
-                        console.log(res);
                         simpleSubmit.result = res;
                         $state.go('search-result', simpleSubmit);
                     });
@@ -201,14 +200,14 @@ angular.module('fastrankApp')
                     
                     angular.forEach($scope.otherDomains, function(value) {
                         if(angular.isDefined(value.selected)) {
-                            this.push(value.tld);
+                            this.push(value.tld.replace(/\./gi, '%2E'));
                         }
                     }, advancedSubmit.selectedTLDs);
 			
                     if(angular.isDefined($scope.com.selected)) {
                         advancedSubmit.selectedTLDs.push('com');
                     }    
-                        
+                                          
                     var advancedSearchDefer = $q.defer();
                     AdvancedSearch.search(advancedSubmit)
                             .success(function (res) {
