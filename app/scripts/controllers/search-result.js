@@ -186,6 +186,7 @@ angular.module('fastrankApp')
 
                 var cart = [];
                 $scope.addToCart = function (domain, selectAll) {
+                	console.log('D> Adding domain: ', domain);
                     if (domain.selected === true || selectAll === true) { // To add into cart
                         if (selectAll === true) {
                             angular.forEach(domain, function (obj) { // if all domains are checked

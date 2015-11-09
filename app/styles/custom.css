@@ -293,3 +293,55 @@ transition: 300ms linear all;
 .cell-right { 
 	text-align: right; 
 }
+
+input[id^=addToCart] {
+	opacity: 0;
+   /*display: none; */
+}
+
+/*
+.cartSelected {
+    width: 46px;
+    height: 46px;
+    background: url(/images/remove-from-cart.png);
+}
+
+.cartUnselected {
+    width: 46px;
+    height: 46px;
+    background: url(/images/add-to-cart.png);
+}
+
+*/
+
+input[id^=addToCart] + label::before {
+	content: ' ';
+	position: absolute;
+	left: 50px;
+	width: 51px;
+	height: 51px;
+	display: block;
+	background: url('/images/add-to-cart.png') no-repeat center center;
+}
+
+input[id^=addToCart] + label::after {
+	content: ' ';
+	position: relative;
+	left: 13px;
+	width: 51px;
+	height: 51px;
+	display: block;
+	z-index: 1;
+	background: url('/images/remove-from-cart.png') no-repeat center center;
+	opacity: 0;
+}
+
+input[id^=addToCart]:checked + label::after {
+  opacity: 1;
+}
+
+.cartUnselected {
+}
+
+.cartSelected {
+}
