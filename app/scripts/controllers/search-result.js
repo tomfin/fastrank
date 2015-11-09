@@ -110,6 +110,8 @@ angular.module('fastrankApp')
                             $state.go('search-result', advancedSubmit);
                         });
                     }
+                } else {
+                	$scope.result = $stateParams.result;
                 }
 
                 $scope.summary = '';
@@ -133,10 +135,11 @@ angular.module('fastrankApp')
                             });
                         }
                     }).catch(function (err) {
+                    	console.log('D> GetCart err: ', err);
                         $log.info(err);
                     });
                 };
-                $scope.resultInit();
+//                $scope.resultInit();
 
                 $scope.parantCheck = '';
                 $scope.checkAll = function (status) {
