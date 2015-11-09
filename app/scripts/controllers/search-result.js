@@ -116,26 +116,25 @@ angular.module('fastrankApp')
                 $scope.links = '';
                 $scope.cartDomains = '';
 
-                /* To get domains which are already added into the cart */
-                GetCart.get().$promise.then(function (res) {
-                    $scope.cartDomains = res;
-                    $log.info('Domains into cart:');
-                    $log.info(res);
-                }).catch(function (err) {
-                    $log.info(err);
-                });  
                 $scope.resultInit = function () {
-                    $scope.result = $stateParams.result;
-                    if ($scope.cartDomains != null) { //jshint ignore:line
-                        angular.forEach($scope.result, function (obj) {
-                            for (var i = 0; i < $scope.cartDomains.length; i++) {
-                                if (obj.id === $scope.cartDomains[i].publicId) {
-                                    $log.info('yyyyy');
-                                    obj.selected = true;
+                    /* To get domains which are already added into the cart */
+                    GetCart.get().$promise.then(function (res) {
+                        $scope.cartDomains = res;
+                        $log.info('Domains into cart:');
+                        $log.info(res);
+                        $scope.result = $stateParams.result;
+                        if ($scope.cartDomains != null) { //jshint ignore:line   
+                            angular.forEach($scope.result, function (obj) {
+                                for (var i = 0; i < $scope.cartDomains.length; i++) {
+                                    if (obj.id === $scope.cartDomains[i].publicId) {
+                                        obj.selected = true;
+                                    }
                                 }
-                            }
-                        });
-                    }
+                            });
+                        }
+                    }).catch(function (err) {
+                        $log.info(err);
+                    });
                 };
                 $scope.resultInit();
 
@@ -180,8 +179,8 @@ angular.module('fastrankApp')
                     });
 
                     jQuery('html, body').delay(1000).animate({scrollTop: jQuery('.detail-info').offset().top - 65}, 2000); //jshint ignore:line
-                };          
-                
+                };
+
                 var cart = [];
                 $scope.addToCart = function (domain, selectAll) {
                     if (domain.selected === true || selectAll === true) { // To add into cart
@@ -202,7 +201,7 @@ angular.module('fastrankApp')
                             cartObj.credits = domain.credits;
                             cart.push(cartObj);
                         }
-                        
+
                         AddToCart.add(cart).$promise.then(function (res) {
                             $log.info(res);
                         }).catch(function (err) {
@@ -227,26 +226,26 @@ angular.module('fastrankApp')
                      }
                      }*/
 
-                /*var cartDomains = $cookies.getObject('cartDomains');
-                 if (cartDomains == null) { //jshint ignore:line
-                 cartDomains = [];
-                 }
-                 if (domain.selected === true) {
-                 var selectedItem = {};
-                 selectedItem.id = domain.id;
-                 selectedItem.credits = domain.credits;
-                 cartDomains.push(selectedItem);
-                 $cookies.putObject('cartDomains', cartDomains);
-                 $cookies.cartDomains = cartDomains;
-                 } else if (domain.selected === false) {
-                 for (var i = cartDomains.length - 1; i >= 0; i--) {
-                 if (cartDomains[i].id === domain.id) {
-                 cartDomains.splice(i, 1);
-                 }
-                 }
-                 $cookies.putObject('cartDomains', cartDomains);
-                 $cookies.cartDomains = cartDomains;
-                 }*/
+                    /*var cartDomains = $cookies.getObject('cartDomains');
+                     if (cartDomains == null) { //jshint ignore:line
+                     cartDomains = [];
+                     }
+                     if (domain.selected === true) {
+                     var selectedItem = {};
+                     selectedItem.id = domain.id;
+                     selectedItem.credits = domain.credits;
+                     cartDomains.push(selectedItem);
+                     $cookies.putObject('cartDomains', cartDomains);
+                     $cookies.cartDomains = cartDomains;
+                     } else if (domain.selected === false) {
+                     for (var i = cartDomains.length - 1; i >= 0; i--) {
+                     if (cartDomains[i].id === domain.id) {
+                     cartDomains.splice(i, 1);
+                     }
+                     }
+                     $cookies.putObject('cartDomains', cartDomains);
+                     $cookies.cartDomains = cartDomains;
+                     }*/
                 };
             }])
         .directive('frCollapse', [function () {
