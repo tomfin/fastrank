@@ -8,8 +8,15 @@
  * Controller of the fastrankApp
  */
 angular.module('fastrankApp')
-.controller('AccountCtrl', [ '$scope', '$rootScope', '$log', 'Account', 'Auth', function ($scope, $rootScope, $log, Account, Auth) {  
+.controller('AccountCtrl', [ '$scope', '$rootScope', '$log', 'Account', 'Auth', 'Principal', function ($scope, $rootScope, $log, Account, Auth, Principal) {  
   $scope.updateAccount = {};
+  if ($rootScope.account == null) { //jshint ignore:line
+	  console.log('W> Null rootScope account - re-fetching.');
+		Principal.identity().then(function(account) {
+		    $rootScope.account = account;
+		    $scope.isAuthenticated = Principal.isAuthenticated;
+		});
+  }
   $scope.updateAccount.email = $rootScope.account.login;
   $scope.updateAccount.fullName = $rootScope.account.fullName;
   $scope.updateAccount.credits = $rootScope.account.credits;
