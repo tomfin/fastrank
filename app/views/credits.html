@@ -4,7 +4,6 @@
 </div>
 
 <script async src="https://checkout.stripe.com/checkout.js"></script>
-<script async src="https://js.braintreegateway.com/v2/braintree.js"></script>
 
 <div class="content-wrapper domain-page">
   <!-- Page Section -->
@@ -35,7 +34,6 @@
 						<th>Credits</th>
 						<th>Credits per $</th>
 						<th>Top-up</th>
-						<th>PayPal</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -45,11 +43,6 @@
 						<td width="16%" class="expandCredit col-md-2">{{price.credits}}</td>
 						<td width="16%" class="expandCredit col-md-2">{{price.credits / price.price | number:2}}</td>
 						<td width="16%" class="col-md-2"><a href="" ng-click="purchase(price)">Get {{price.level}}</a></td>
-						<td width="16%" class="col-md-2">
-							<div id="paypal-container-{{price.tierLevel}}">
-								<a href="" ng-click="launchPaypal(price)" lightbox="paypalForm">Get {{price.level}}</a>
-							</div>
-						</td>
 					</tr>
 					<tr fr-collapse class="animate-repeat"  ng-repeat-end="">
 						<td colspan="6" class="more-info-td">
@@ -61,7 +54,6 @@
 										<td width="16%" class="col-md-2">{{addon.credits}}</td>
 										<td width="16%" class="col-md-2"></td>
 										<td width="16%" class="col-md-3"><a href="" ng-click="purchaseAddon(addon)">Get {{price.level}} Addon {{addon.addonLevel}}</a></td>
-										<td width="16%" class="col-md-2"></td>
 									</tr>
 								</table>
 							</div>
