@@ -35,6 +35,7 @@
 					<table class="table">
 						<tr>
 							<th></th>
+                                                        <th></th>
 							<th>More Info</th>
 							<th>Credits</th>
 						</tr>
@@ -46,6 +47,7 @@
 						</tr>
 						<tr ng-if="cartDomains" ng-repeat="domain in cartDomains" class="domain-row">
 							<td ng-click="removeDomain($index)" class="more-link"><a>Remove</a></td>
+                                                        <td>{{domain.rootURL}}</td>
 							<td ng-click="" class="more-link"><a ui-sref='cart-domain({id: domain.id})'>More</a></td>
 							<td>{{domain.credits}}</td>
 						</tr>

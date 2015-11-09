@@ -8,7 +8,8 @@
  * Controller of the fastrankApp
  */
 angular.module('fastrankApp')
-        .controller('searchResultCtrl', ['$scope', '$log', '$stateParams', '$cookies', 'FastBuy', 'Summary', 'Links', 'SimpleSearch', 'AdvancedSearch', '$q', '$state', function ($scope, $log, $stateParams, $cookies, FastBuy, Summary, Links, SimpleSearch, AdvancedSearch, $q, $state) {
+        .controller('searchResultCtrl', ['$scope', '$log', '$stateParams', '$cookies', 'FastBuy', 'Summary', 'Links', 'SimpleSearch', 'AdvancedSearch', '$q', '$state', 'GetCart', 'AddToCart', 'RemoveFromCart',
+            function ($scope, $log, $stateParams, $cookies, FastBuy, Summary, Links, SimpleSearch, AdvancedSearch, $q, $state, GetCart, AddToCart, RemoveFromCart) {
                 $scope.searchMsg = '';
 
                 if (!$stateParams.result) {
@@ -81,7 +82,7 @@ angular.module('fastrankApp')
                         advancedSubmit.selectedTLDs = [];
                         if (angular.isDefined($stateParams.selectedTLDs)) {
                             if (angular.isArray($stateParams.selectedTLDs)) {
-                                angular.forEach($stateParams.selectedTLDs, function(value) {
+                                angular.forEach($stateParams.selectedTLDs, function (value) {
                                     this.push(value.replace(/dot/gi, '%2E'));
                                 }, advancedSubmit.selectedTLDs);
                             } else {
@@ -113,13 +114,23 @@ angular.module('fastrankApp')
 
                 $scope.summary = '';
                 $scope.links = '';
-                $scope.cartDomains = $cookies.getObject('cartDomains');
+                $scope.cartDomains = '';
+
+                /* To get domains which are already added into the cart */
+                GetCart.get().$promise.then(function (res) {
+                    $scope.cartDomains = res;
+                    $log.info('Domains into cart:');
+                    $log.info(res);
+                }).catch(function (err) {
+                    $log.info(err);
+                });  
                 $scope.resultInit = function () {
                     $scope.result = $stateParams.result;
                     if ($scope.cartDomains != null) { //jshint ignore:line
                         angular.forEach($scope.result, function (obj) {
                             for (var i = 0; i < $scope.cartDomains.length; i++) {
-                                if (obj.id === $scope.cartDomains[i].id) {
+                                if (obj.id === $scope.cartDomains[i].publicId) {
+                                    $log.info('yyyyy');
                                     obj.selected = true;
                                 }
                             }
@@ -132,8 +143,8 @@ angular.module('fastrankApp')
                 $scope.checkAll = function (status) {
                     angular.forEach($scope.result, function (obj) {
                         obj.selected = status;
-                        $scope.addToCart(obj);
                     });
+                    $scope.addToCart($scope.result, true);
                 };
                 $scope.toggle = false;
                 $scope.moreInfo = function () {
@@ -169,29 +180,73 @@ angular.module('fastrankApp')
                     });
 
                     jQuery('html, body').delay(1000).animate({scrollTop: jQuery('.detail-info').offset().top - 65}, 2000); //jshint ignore:line
-                };
-
-                $scope.addToCart = function (domain) {
-                    var cartDomains = $cookies.getObject('cartDomains');
-                    if (cartDomains == null) { //jshint ignore:line
-                        cartDomains = [];
-                    }
-                    if (domain.selected === true) {
-                        var selectedItem = {};
-                        selectedItem.id = domain.id;
-                        selectedItem.credits = domain.credits;
-                        cartDomains.push(selectedItem);
-                        $cookies.putObject('cartDomains', cartDomains);
-                        $cookies.cartDomains = cartDomains;
-                    } else if (domain.selected === false) {
-                        for (var i = cartDomains.length - 1; i >= 0; i--) {
-                            if (cartDomains[i].id === domain.id) {
-                                cartDomains.splice(i, 1);
-                            }
+                };          
+                
+                var cart = [];
+                $scope.addToCart = function (domain, selectAll) {
+                    if (domain.selected === true || selectAll === true) { // To add into cart
+                        if (selectAll === true) {
+                            angular.forEach(domain, function (obj) { // if all domains are checked
+                                var cartObj = {};
+                                cartObj.publicId = obj.id;
+                                cartObj.rootURL = obj.rootURL;
+                                cartObj.trustFlow = obj.domTF;
+                                cartObj.credits = obj.credits;
+                                cart.push(cartObj);
+                            });
+                        } else {  // if a domain is checked
+                            var cartObj = {};
+                            cartObj.publicId = domain.id;
+                            cartObj.rootURL = domain.rootURL;
+                            cartObj.trustFlow = domain.domTF;
+                            cartObj.credits = domain.credits;
+                            cart.push(cartObj);
                         }
-                        $cookies.putObject('cartDomains', cartDomains);
-                        $cookies.cartDomains = cartDomains;
+                        
+                        AddToCart.add(cart).$promise.then(function (res) {
+                            $log.info(res);
+                        }).catch(function (err) {
+                            $log.error(err);
+                        });
+                    } else if (domain.selected === false || selectAll === false) { // To remove from cart
+                        if (selectAll === false) { // if all domains are unchecked
+                            $log.info('Empty cart');
+                            cart = [];
+                        } else { // if a domain is unchecked
+
+                        }
+                        RemoveFromCart.remove(cart).$promise.then(function (res) {
+                            $log.info(res);
+                        }).catch(function (err) {
+                            $log.error(err);
+                        });
                     }
+                    /*for (var i = cartDomains.length - 1; i >= 0; i--) {
+                     if (cartDomains[i].id === domain.id) {
+                     cartDomains.splice(i, 1);
+                     }
+                     }*/
+
+                /*var cartDomains = $cookies.getObject('cartDomains');
+                 if (cartDomains == null) { //jshint ignore:line
+                 cartDomains = [];
+                 }
+                 if (domain.selected === true) {
+                 var selectedItem = {};
+                 selectedItem.id = domain.id;
+                 selectedItem.credits = domain.credits;
+                 cartDomains.push(selectedItem);
+                 $cookies.putObject('cartDomains', cartDomains);
+                 $cookies.cartDomains = cartDomains;
+                 } else if (domain.selected === false) {
+                 for (var i = cartDomains.length - 1; i >= 0; i--) {
+                 if (cartDomains[i].id === domain.id) {
+                 cartDomains.splice(i, 1);
+                 }
+                 }
+                 $cookies.putObject('cartDomains', cartDomains);
+                 $cookies.cartDomains = cartDomains;
+                 }*/
                 };
             }])
         .directive('frCollapse', [function () {
