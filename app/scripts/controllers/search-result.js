@@ -206,7 +206,7 @@ angular.module('fastrankApp')
                         }
 
                         AddToCart.add(cart).$promise.then(function (res) {
-                            $log.info('Added into cart:')
+                            $log.info('Added into cart:');
                             $log.info(res);
                         }).catch(function (err) {
                             $log.error(err);
@@ -217,7 +217,7 @@ angular.module('fastrankApp')
                             cart = [];
                         } else { // if a domain is unchecked
                             $log.info('Removing a single domain');
-                            var cartObj = {};
+                            var cartObj = {};  //jshint ignore:line
                             cartObj.publicId = domain.id;
                             cartObj.rootURL = domain.rootURL;
                             cartObj.trustFlow = domain.domTF;
