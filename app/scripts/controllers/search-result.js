@@ -185,7 +185,7 @@ angular.module('fastrankApp')
                 };
 
                 var cart = [];
-                $scope.addToCart = function (domain, selectAll) {
+                $scope.addToCart = function (domain, selectAll, index) {
                     if (domain.selected === true || selectAll === true) { // To add into cart
                         if (selectAll === true) {
                             angular.forEach(domain, function (obj) { // if all domains are checked
@@ -216,13 +216,8 @@ angular.module('fastrankApp')
                             $log.info('Empty cart');
                             cart = [];
                         } else { // if a domain is unchecked
-                            $log.info('Removing a single domain');
-                            var cartObj = {};  //jshint ignore:line
-                            cartObj.publicId = domain.id;
-                            cartObj.rootURL = domain.rootURL;
-                            cartObj.trustFlow = domain.domTF;
-                            cartObj.credits = domain.credits;
-                            cart.push(cartObj);
+                            $log.info('Removing a single domain: ', domain);
+                            cart.splice(index, 1);
                         }
                         //cart = [];
                         RemoveFromCart.remove(cart).$promise.then(function (res) {
