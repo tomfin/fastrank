@@ -185,7 +185,7 @@ angular.module('fastrankApp')
                 };
 
                 var cart = [];
-                $scope.addToCart = function (domain, selectAll, index) {
+                $scope.addToCart = function (domain, selectAll) {
                     if (domain.selected === true || selectAll === true) { // To add into cart
                         if (selectAll === true) {
                             angular.forEach(domain, function (obj) { // if all domains are checked
@@ -217,7 +217,7 @@ angular.module('fastrankApp')
                             cart = [];
                         } else { // if a domain is unchecked
                             $log.info('Removing a single domain: ', domain);
-                            cart.splice(index, 1);
+                			cart.splice($scope.result.indexOf(domain), 1);
                         }
                         //cart = [];
                         RemoveFromCart.remove(cart).$promise.then(function (res) {
