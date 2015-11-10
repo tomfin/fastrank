@@ -111,7 +111,7 @@ angular.module('fastrankApp')
                         });
                     }
                 } else {
-                	$scope.result = $stateParams.result;
+                    $scope.result = $stateParams.result;
                 }
 
                 $scope.summary = '';
@@ -135,11 +135,11 @@ angular.module('fastrankApp')
                             });
                         }
                     }).catch(function (err) {
-                    	console.log('D> GetCart err: ', err);
+                        console.log('D> GetCart err: ', err);
                         $log.info(err);
                     });
                 };
-//                $scope.resultInit();
+                $scope.resultInit();
 
                 $scope.parantCheck = '';
                 $scope.checkAll = function (status) {
@@ -186,7 +186,6 @@ angular.module('fastrankApp')
 
                 var cart = [];
                 $scope.addToCart = function (domain, selectAll) {
-                	console.log('D> Adding domain: ', domain);
                     if (domain.selected === true || selectAll === true) { // To add into cart
                         if (selectAll === true) {
                             angular.forEach(domain, function (obj) { // if all domains are checked
@@ -207,6 +206,7 @@ angular.module('fastrankApp')
                         }
 
                         AddToCart.add(cart).$promise.then(function (res) {
+                            $log.info('Added into cart:')
                             $log.info(res);
                         }).catch(function (err) {
                             $log.error(err);
@@ -216,40 +216,21 @@ angular.module('fastrankApp')
                             $log.info('Empty cart');
                             cart = [];
                         } else { // if a domain is unchecked
-
+                            $log.info('Removing a single domain');
+                            var cartObj = {};
+                            cartObj.publicId = domain.id;
+                            cartObj.rootURL = domain.rootURL;
+                            cartObj.trustFlow = domain.domTF;
+                            cartObj.credits = domain.credits;
+                            cart.push(cartObj);
                         }
+                        //cart = [];
                         RemoveFromCart.remove(cart).$promise.then(function (res) {
                             $log.info(res);
                         }).catch(function (err) {
                             $log.error(err);
                         });
                     }
-                    /*for (var i = cartDomains.length - 1; i >= 0; i--) {
-                     if (cartDomains[i].id === domain.id) {
-                     cartDomains.splice(i, 1);
-                     }
-                     }*/
-
-                    /*var cartDomains = $cookies.getObject('cartDomains');
-                     if (cartDomains == null) { //jshint ignore:line
-                     cartDomains = [];
-                     }
-                     if (domain.selected === true) {
-                     var selectedItem = {};
-                     selectedItem.id = domain.id;
-                     selectedItem.credits = domain.credits;
-                     cartDomains.push(selectedItem);
-                     $cookies.putObject('cartDomains', cartDomains);
-                     $cookies.cartDomains = cartDomains;
-                     } else if (domain.selected === false) {
-                     for (var i = cartDomains.length - 1; i >= 0; i--) {
-                     if (cartDomains[i].id === domain.id) {
-                     cartDomains.splice(i, 1);
-                     }
-                     }
-                     $cookies.putObject('cartDomains', cartDomains);
-                     $cookies.cartDomains = cartDomains;
-                     }*/
                 };
             }])
         .directive('frCollapse', [function () {
