@@ -67,7 +67,6 @@ angular
           }
       };
   })
-  
   .factory('authInterceptor', function ($rootScope, $q, $location, localStorageService) {
       return {
           // Add authorization token to headers
@@ -80,7 +79,20 @@ angular
               }
               
               return config;
-          }
+          },
+	      response: function(response){
+	          if (response.status === 401) {
+	              console.log('Response 401');
+	          }
+	          return response || $q.when(response);
+	      },
+	      responseError: function(rejection) {
+	          if (rejection.status === 401 && rejection.config.url.indexOf('api/public/account') < 0) {
+	              console.log('Response Error 401',rejection);
+	              $location.path('/login').search('returnTo', $location.path());
+	          }
+	          return $q.reject(rejection);
+	      }
       };
   })
   .config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider, $translateProvider, tmhDynamicLocaleProvider, httpRequestInterceptorCacheBusterProvider) {
@@ -193,7 +205,7 @@ angular
     $httpProvider.interceptors.push(function ($q) {
         return {
             request: function (config) {
-            	if (config.url.indexOf('rest-api/domains/strength') < 0 && config.url.indexOf('rest-api/domains/trustflow') < 0) {
+            	if (config.url.indexOf('rest-api/domains/strength') < 0 && config.url.indexOf('rest-api/domains/trustflow') < 0 && config.url.indexOf('rest-api/domains/cart') < 0) {
             		requestNotificationProvider.fireRequestStarted();
             	}
                 return config;
