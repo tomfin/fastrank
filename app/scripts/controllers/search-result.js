@@ -8,8 +8,8 @@
  * Controller of the fastrankApp
  */
 angular.module('fastrankApp')
-        .controller('searchResultCtrl', ['$scope', '$log', '$stateParams', '$cookies', 'FastBuy', 'Summary', 'Links', 'SimpleSearch', 'AdvancedSearch', '$q', '$state', 'GetCart', 'AddToCart', 'RemoveFromCart',
-            function ($scope, $log, $stateParams, $cookies, FastBuy, Summary, Links, SimpleSearch, AdvancedSearch, $q, $state, GetCart, AddToCart, RemoveFromCart) {
+        .controller('searchResultCtrl', ['$scope', '$log', '$stateParams', '$cookies', 'FastBuy', 'Summary', 'Links', 'SimpleSearch', 'AdvancedSearch', '$q', '$state', 'GetCart', 'ModifyCart',
+            function ($scope, $log, $stateParams, $cookies, FastBuy, Summary, Links, SimpleSearch, AdvancedSearch, $q, $state, GetCart, ModifyCart) {
                 $scope.searchMsg = '';
 
                 if (!$stateParams.result) {
@@ -117,22 +117,29 @@ angular.module('fastrankApp')
                 $scope.summary = '';
                 $scope.links = '';
                 $scope.cartDomains = '';
-
+                var cart = [];
                 $scope.resultInit = function () {
                     /* To get domains which are already added into the cart */
                     GetCart.get().$promise.then(function (res) {
-                        $scope.cartDomains = res;
-                        $log.info('Domains into cart:');
+                        $log.info('Cart items:');
                         $log.info(res);
+                        cart = res;
+                        $scope.cartDomains = res;
                         $scope.result = $stateParams.result;
-                        if ($scope.cartDomains != null) { //jshint ignore:line   
+                       
+                        if ($scope.cartDomains.length > 0) { //jshint ignore:line   
                             angular.forEach($scope.result, function (obj) {
                                 for (var i = 0; i < $scope.cartDomains.length; i++) {
                                     if (obj.id === $scope.cartDomains[i].publicId) {
                                         obj.selected = true;
+                                        $scope.selectedAll = true;
+                                    } else {
+                                        $scope.selectedAll = false;
                                     }
                                 }
                             });
+                        } else {
+                            $scope.selectedAll = false;
                         }
                     }).catch(function (err) {
                         console.log('D> GetCart err: ', err);
@@ -146,7 +153,11 @@ angular.module('fastrankApp')
                     angular.forEach($scope.result, function (obj) {
                         obj.selected = status;
                     });
-                    $scope.addToCart($scope.result, true);
+                    if(status) {
+                        $scope.addToCart($scope.result, true);
+                    } else {
+                        $scope.addToCart($scope.result, false);
+                    }
                 };
                 $scope.toggle = false;
                 $scope.moreInfo = function () {
@@ -183,8 +194,16 @@ angular.module('fastrankApp')
 
                     jQuery('html, body').delay(1000).animate({scrollTop: jQuery('.detail-info').offset().top - 65}, 2000); //jshint ignore:line
                 };
-
-                var cart = [];
+                
+                /* To empty the cart - for testing -start */
+                /*cart = [];
+                ModifyCart.cart(cart).$promise.then(function (res) {
+                    $log.info(res);
+                }).catch(function (err) {
+                    $log.error(err);
+                });
+                /* To empty the cart - for testing - end */
+                
                 $scope.addToCart = function (domain, selectAll) {
                     if (domain.selected === true || selectAll === true) { // To add into cart
                         if (selectAll === true) {
@@ -205,22 +224,19 @@ angular.module('fastrankApp')
                             cart.push(cartObj);
                         }
 
-                        AddToCart.add(cart).$promise.then(function (res) {
-                            $log.info('Added into cart:');
+                        ModifyCart.cart(cart).$promise.then(function (res) {
                             $log.info(res);
                         }).catch(function (err) {
                             $log.error(err);
                         });
                     } else if (domain.selected === false || selectAll === false) { // To remove from cart
                         if (selectAll === false) { // if all domains are unchecked
-                            $log.info('Empty cart');
                             cart = [];
                         } else { // if a domain is unchecked
-                            $log.info('Removing a single domain: ', domain);
-                			cart.splice($scope.result.indexOf(domain), 1);
+                            cart.splice($scope.result.indexOf(domain), 1);
                         }
-                        //cart = [];
-                        RemoveFromCart.remove(cart).$promise.then(function (res) {
+
+                        ModifyCart.cart(cart).$promise.then(function (res) {
                             $log.info(res);
                         }).catch(function (err) {
                             $log.error(err);

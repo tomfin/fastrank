@@ -6,11 +6,11 @@
  * @description # CreditsCtrl Controller of the fastrankApp
  */
 angular.module('fastrankApp')
-        .controller('CheckoutCtrl', ['$scope', '$cookies', 'CheckoutBuy', 'GetCart', 'RemoveFromCart', '$log', function ($scope, $cookies, CheckoutBuy, GetCart, RemoveFromCart, $log) {
+        .controller('CheckoutCtrl', ['$scope', '$cookies', 'CheckoutBuy', 'GetCart', 'ModifyCart', '$log', function ($scope, $cookies, CheckoutBuy, GetCart, ModifyCart, $log) {
 
                 //$scope.cartDomains = $cookies.getObject('cartDomains');
                 $scope.cartDomains = null;
-                GetCart.get().$promise.then(function (res) {
+                ModifyCart.cart().$promise.then(function (res) {
                     $scope.cartDomains = res;
                     $log.info(res);
                 }).catch(function (err) {
