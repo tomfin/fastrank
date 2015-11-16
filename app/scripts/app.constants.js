@@ -9,6 +9,6 @@ angular.module('fastrankApp')
 //.constant('ENDPOINT', 'http://localhost:9191/')
 .constant('ENDPOINT', 'https://api.fastrank.co/')
 
-.constant('STRIPE_KEY', 'pk_test_SGZNulSbFinEsRNQuLDhWwXj')
+.constant('STRIPE_KEY', 'pk_test_neObIns8URG66xThGPyWNYLl')
 
 ;
