@@ -18,7 +18,8 @@ angular.module('fastrankApp')
                 $scope.registrars = [
                     {name: 'Namecheap', value: 'https://www.namecheap.com/?utm_source=none&affnetwork=nc&utm_medium=Affiliate&utm_campaign=91652&domain='},
                     {name: 'GoDaddy', value: 'https://uk.godaddy.com/domains/searchresults.aspx?checkAvail=1&domainToCheck='},
-                    {name: 'Scalahosting', value: 'https://www.scalahosting.com/clients/aff.php?aff=365&domain='}
+                    {name: 'Scalahosting', value: 'https://www.scalahosting.com/clients/aff.php?aff=365&domain='},
+                    {name: 'BigRock', value: 'http://www.bigrock.com/?a_aid=vbn6gj6aDzs85'}
                 ];
 
 
