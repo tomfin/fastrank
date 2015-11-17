@@ -129,7 +129,7 @@
 												</tr>
 												<tr ng-repeat="domain in cartDomains">
 													<td>
-														<h5 class="product-name"><span class="product-count"></span>Domain Relevance [{{domain.domRel}}] | Majestic TrustFlow [{{domain.domTF}}]</h5>
+														<h5 class="product-name"><span class="product-count"></span>Domain: [{{domain.rootURL}}] | TF: [{{domain.trustFlow}}]</h5>
 													</td>
 													<td class="product-price">{{domain.credits}}</td>
 												</tr>
@@ -138,13 +138,16 @@
 										<!-- Shopping Cart / End -->
 									</li><!-- end grid demo -->
                                                                         
-                                                                        <li class="fhmm-content withoutdesc">
+                                    <li class="fhmm-content withoutdesc">
 										<!-- Shopping Cart -->
 										<table class="table">
 											<tbody>
 												<tr>
 													<td class="product-checkout">
 														<a ng-disabled="cartDomains.length == 0" ui-sref="checkout" ng-click="closeCart()" class="btn btn-primary btn-has-icon btn-confirm"><i class="fa fa-shopping-cart"></i> Checkout</a>
+													</td>
+													<td class="product-checkout">
+														Total Credits: {{cartDomains.total}}
 													</td>
 													<td class="product-close">
 														<a href="" ng-click="closeCart()" class="btn btn-default btn-single-icon btn-cancel"><i class="fa fa-times"></i></a>

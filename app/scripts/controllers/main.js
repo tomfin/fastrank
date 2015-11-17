@@ -48,8 +48,9 @@ angular.module('fastrankApp')
 		$scope.main.currentuser = newValue;
 	});
 	
-    $scope.$watch(function() { return $cookies.cartDomains; }, function() {
-        $scope.cartDomains = $cookies.getObject('cartDomains');
+    $scope.$watch(function() { return $rootScope.cartDomains; }, function() {
+        $scope.cartDomains = $rootScope.cartDomains;
+        console.log('D> watch caught domains: ', $rootScope.cartDomains);
 		var creditsTotal = 0;
 		if ($scope.cartDomains != null) { //jshint ignore:line
 			for(var i = $scope.cartDomains.length - 1; i >= 0; i--) {
@@ -62,7 +63,7 @@ angular.module('fastrankApp')
 		}
 		$scope.cartDomains.total = creditsTotal;
 //        $scope.cartDomains.domains = $scope.cartDomains;
-    });
+    }, true);
 
 	$scope.logout = function () {
 	    Auth.logout();
