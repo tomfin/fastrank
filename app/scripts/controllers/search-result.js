@@ -8,8 +8,8 @@
  * Controller of the fastrankApp
  */
 angular.module('fastrankApp')
-        .controller('searchResultCtrl', ['$scope', '$rootScope', '$log', '$stateParams', '$cookies', 'FastBuy', 'Summary', 'Links', 'SimpleSearch', 'AdvancedSearch', '$q', '$state', 'ModifyCart',
-            function ($scope, $rootScope, $log, $stateParams, $cookies, FastBuy, Summary, Links, SimpleSearch, AdvancedSearch, $q, $state, ModifyCart) {
+        .controller('searchResultCtrl', ['$scope', '$rootScope', '$log', '$stateParams', 'FastBuy', 'Summary', 'Links', 'SimpleSearch', 'AdvancedSearch', '$q', '$state', 'ModifyCart',
+            function ($scope, $rootScope, $log, $stateParams, FastBuy, Summary, Links, SimpleSearch, AdvancedSearch, $q, $state, ModifyCart) {
                 $scope.searchMsg = '';
 
                 if (!$stateParams.result) {
@@ -202,7 +202,7 @@ angular.module('fastrankApp')
 
                 $scope.fastBuy = function (result, index) {
                     var obj = {};
-                    obj.id = result.id;
+                    obj.publicId = result.id;
                     obj.credits = result.credits;
                     FastBuy.buy(obj).$promise.then(function () {
                         $scope.fastBuySuccess = 'SUCCESS';
