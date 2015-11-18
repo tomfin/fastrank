@@ -8,7 +8,7 @@
  * Controller of the fastrankApp
  */
 angular.module('fastrankApp')
-  .controller('MainCtrl', function ($scope, $location, $cookieStore, $cookies, $rootScope, $window, $state, Auth, Principal, RegisterInterest, ContactUs) {
+  .controller('MainCtrl', function ($scope, $location, $cookieStore, $cookies, $rootScope, $window, $state, Auth, Principal, RegisterInterest, ContactUs, GetCart) {
 
 	$scope.currentPage = $window.location;
 	
@@ -30,9 +30,21 @@ angular.module('fastrankApp')
 		$location.url(id);
 	};
    
-	$scope.main = {};
-	//$scope.gaId = envConfig.gaId; // jshint ignore:line
+    $scope.cartInit = function () {
+    	$scope.cartDomains = [];
+        /* To get domains which are already added into the cart */
+        GetCart.get().$promise.then(function (res) {
+            angular.forEach(res, function (obj) {
+                console.log('D> res obj: ', obj);
+            });
 
+        	$scope.cartDomains = res;
+            $rootScope.cartDomains = res;
+        });
+    };
+    $scope.cartInit();
+    
+    $scope.main = {};
 	$scope.main.currentuser = null;
 	$scope.$parent.main = {};
 	//$scope.buildVersion = envConfig.version;

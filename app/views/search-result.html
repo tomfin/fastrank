@@ -75,7 +75,7 @@
                                                 <td class="col-md-2"><strong>Domain TF:</strong> {{ rec.domTF}} </td>
                                                 <td class="col-md-3"><strong>1<sup>1st</sup> Crawled:</strong> {{ rec.firstCrawlDate}} </td>
                                                 <td class="col-md-3"><strong>Found:</strong> {{ rec.found}} </td>
-                                                <td class="col-md-4 cell-right"><input id="buildQuote" type="checkbox" /><label for="buildQuote">Site build?</label></td>
+                                                <td class="col-md-4 cell-right"></td>
                                             </tr>
                                             <tr>
                                                 <td class="col-md-2"><strong>Maj. Agg TF:</strong> {{ rec.aggLinkTF}}</td>
@@ -93,7 +93,7 @@
                                                 <td class="col-md-2"><strong>Ref Dom:</strong> {{ rec.refDom}}</td>
                                                 <td class="col-md-3"><strong>EDU/Gov:</strong> {{ rec.edugovCount}}</td>
                                                 <td class="col-md-3"></td>
-                                                <td class="col-md-4 cell-right"><a ng-if="rec.credits > 0" ng-click="fastBuy(rec, $index)">Fast Buy</a></td>
+                                                <td class="col-md-4 cell-right"><h5><a ng-if="rec.credits > 0" ng-click="fastBuy(rec, $index)">Fast Buy</a></h5></td>
                                             </tr>
                                         </table>
                                     </div>

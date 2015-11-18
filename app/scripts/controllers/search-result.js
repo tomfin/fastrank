@@ -8,8 +8,8 @@
  * Controller of the fastrankApp
  */
 angular.module('fastrankApp')
-        .controller('searchResultCtrl', ['$scope', '$rootScope', '$log', '$stateParams', '$cookies', 'FastBuy', 'Summary', 'Links', 'SimpleSearch', 'AdvancedSearch', '$q', '$state', 'GetCart', 'ModifyCart',
-            function ($scope, $rootScope, $log, $stateParams, $cookies, FastBuy, Summary, Links, SimpleSearch, AdvancedSearch, $q, $state, GetCart, ModifyCart) {
+        .controller('searchResultCtrl', ['$scope', '$rootScope', '$log', '$stateParams', '$cookies', 'FastBuy', 'Summary', 'Links', 'SimpleSearch', 'AdvancedSearch', '$q', '$state', 'ModifyCart',
+            function ($scope, $rootScope, $log, $stateParams, $cookies, FastBuy, Summary, Links, SimpleSearch, AdvancedSearch, $q, $state, ModifyCart) {
                 $scope.searchMsg = '';
 
                 if (!$stateParams.result) {
@@ -117,51 +117,87 @@ angular.module('fastrankApp')
                 $scope.summary = '';
                 $scope.links = '';
                 $scope.resultInit = function () {
-                	$scope.cartDomains = [];
-                    /* To get domains which are already added into the cart */
-                    GetCart.get().$promise.then(function (res) {
-                        angular.forEach(res, function (obj) {
-                            console.log('D> res obj: ', obj);
-                        });
+                	$scope.cartDomains = $rootScope.cartDomains;
 
-                    	$scope.cartDomains = res;
-                        $rootScope.cartDomains = res;
-                        $scope.result = $stateParams.result;
+                    $scope.result = $stateParams.result;
                        
-                        if ($scope.cartDomains.length > 0) { //jshint ignore:line   
-                            angular.forEach($scope.result, function (obj) {
-                                for (var i = 0; i < $scope.cartDomains.length; i++) {
-                                    if (obj.id === $scope.cartDomains[i].publicId) {
-                                        obj.selected = true;
-                                        $scope.selectedAll = true;
-                                    } else {
-                                        $scope.selectedAll = false;
-                                    }
+                    if ($scope.cartDomains.length > 0) { //jshint ignore:line   
+                        angular.forEach($scope.result, function (obj) {
+                            for (var i = 0; i < $scope.cartDomains.length; i++) {
+                                if (obj.id === $scope.cartDomains[i].publicId) {
+                                    obj.selected = true;
+                                    $scope.selectedAll = true;
+                                } else {
+                                    $scope.selectedAll = false;
                                 }
-                            });
-                        } else {
-                            $scope.selectedAll = false;
-                        }
-                    }).catch(function (err) {
-                        $log.info(err);
-                    });
+                            }
+                        });
+                    } else {
+                        $scope.selectedAll = false;
+                    }
                 };
                 $scope.resultInit();
 
                 $scope.parantCheck = '';
+                
                 $scope.checkAll = function (status) {
-                    angular.forEach($scope.result, function (obj) {
-                        obj.selected = status;
+                    angular.forEach($scope.result, function (domain) {
+                        domain.selected = status;
+                        if (domain.selected === true) { // To add into cart
+                            var cartObj = {};
+                            cartObj.publicId = domain.id;
+                            cartObj.rootURL = domain.rootURL;
+                            cartObj.trustFlow = domain.domTF;
+                            cartObj.credits = domain.credits;
+                            $scope.cartDomains.push(cartObj);
+                        } else if (domain.selected === false) { // To remove from cart
+                            angular.forEach($scope.cartDomains, function (obj) {
+                            	if (obj.publicId === domain.id) {
+                            		$scope.cartDomains.splice($scope.cartDomains.indexOf(obj), 1);
+                            	}
+                            });
+                        }
                     });
-                    if(status) {
-                        $scope.addToCart($scope.result, true);
-                    } else {
-                        $scope.addToCart($scope.result, false);
-                    }
+                    ModifyCart.cart($scope.cartDomains).$promise.then(function (res) {
+                    	$log.info(res);
+                    }).catch(function (err) {
+                    	$log.error(err);
+                    });
+                    $rootScope.cartDomains = $scope.cartDomains;
                 };
                 $scope.toggle = false;
                 $scope.moreInfo = function () {
                     $scope.toggle = !$scope.toggle;
+                };
+
+                $scope.addToCart = function (domain) {
+                    if (domain.selected === true) { // To add into cart
+                        var cartObj = {};
+                        cartObj.publicId = domain.id;
+                        cartObj.rootURL = domain.rootURL;
+                        cartObj.trustFlow = domain.domTF;
+                        cartObj.credits = domain.credits;
+                        $scope.cartDomains.push(cartObj);
+
+                        ModifyCart.cart($scope.cartDomains).$promise.then(function (res) {
+                            $log.info(res);
+                        }).catch(function (err) {
+                            $log.error(err);
+                        });
+                    } else if (domain.selected === false) { // To remove from cart
+                        angular.forEach($scope.cartDomains, function (obj) {
+                        	if (obj.publicId === domain.id) {
+                        		$scope.cartDomains.splice($scope.cartDomains.indexOf(obj), 1);
+                        	}
+                        });
+
+                        ModifyCart.cart($scope.cartDomains).$promise.then(function (res) {
+                            $log.info(res);
+                        }).catch(function (err) {
+                            $log.error(err);
+                        });
+                    }
+                    $rootScope.cartDomains = $scope.cartDomains;
                 };
 
                 $scope.fastBuy = function (result, index) {
@@ -195,35 +231,6 @@ angular.module('fastrankApp')
                     jQuery('html, body').delay(1000).animate({scrollTop: jQuery('.detail-info').offset().top - 65}, 2000); //jshint ignore:line
                 };
                 
-                $scope.addToCart = function (domain) {
-                    if (domain.selected === true) { // To add into cart
-                        var cartObj = {};
-                        cartObj.publicId = domain.id;
-                        cartObj.rootURL = domain.rootURL;
-                        cartObj.trustFlow = domain.domTF;
-                        cartObj.credits = domain.credits;
-                        $scope.cartDomains.push(cartObj);
-
-                        ModifyCart.cart($scope.cartDomains).$promise.then(function (res) {
-                            $log.info(res);
-                        }).catch(function (err) {
-                            $log.error(err);
-                        });
-                    } else if (domain.selected === false) { // To remove from cart
-                        angular.forEach($scope.cartDomains, function (obj) {
-                        	if (obj.publicId === domain.id) {
-                        		$scope.cartDomains.splice($scope.cartDomains.indexOf(obj), 1);
-                        	}
-                        });
-
-                        ModifyCart.cart($scope.cartDomains).$promise.then(function (res) {
-                            $log.info(res);
-                        }).catch(function (err) {
-                            $log.error(err);
-                        });
-                    }
-                    $rootScope.cartDomains = $scope.cartDomains;
-                };
             }])
         .directive('frCollapse', [function () {
                 return {
