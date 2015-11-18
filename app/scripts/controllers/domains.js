@@ -45,6 +45,13 @@ angular.module('fastrankApp')
                         sort.descending = false;
                     }
                 };
+                
+                $scope.siteBuild = function (record) {
+                	console.log('D> Site build for rec: ', record);
+                	Domains.build(record).$promise.then(function () {
+                		console.log('D> Build request submitted');
+                	});
+                };
 
             }]);
 

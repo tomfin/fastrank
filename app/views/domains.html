@@ -31,6 +31,7 @@
                             <span ng-show="sortType == 'domTF' && !sortReverse" class="fa fa-caret-down"></span>
                             <span ng-show="sortType == 'domTF' && sortReverse" class="fa fa-caret-up"></span>
                         </th>
+                        <th>Site Build Inquiry</th>
                         <th></th>
                         <th></th>
                     </tr>
@@ -40,6 +41,8 @@
                         <td>{{ rec.credits}}</td>
                         <td>{{ rec.aggLinkTF}}</td>
                         <td>{{ rec.domTF}}</td>
+                        <td ng-show="!rec.siteInquiryMade" ng-click="siteBuild(rec)" class="more-link"><a>Make Inquiry</a></td>
+                        <td ng-show="rec.siteInquiryMade">Inqury Made</td>
                         <td ng-show="!rec.expanded" ng-click="rec.expanded = !rec.expanded" class="more-link"><a>More</a></td>
                         <td ng-show="rec.expanded" ng-click="rec.expanded = !rec.expanded" class="more-link"><a>Less</a></td>
                         <td><a>All</a></td>

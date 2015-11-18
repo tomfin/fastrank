@@ -34,6 +34,9 @@ angular.module('fastrankApp')
 		'get': {
 			method: 'GET',
 			isArray: true
+		},
+		'build': {
+			method: 'POST'
 		}
 	})
 });
