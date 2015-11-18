@@ -8,6 +8,16 @@
                     <h1 class="section-title section-title__lg">My Purchased Domains</h1>
                 </div>
             </div>
+
+			<div ng-if="siteBuildFailure" class="alert alert-danger alert-dismissible fade in text-uppercase">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true"><i class="fa fa-times"></i></span></button>
+				<strong>Error!</strong> Unfortunately something went wrong with your site build request. Please try again later or contact us.
+			</div>
+			<div ng-if="siteBuildSuccess" class="alert alert-success alert-dismissible fade in text-uppercase">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true"><i class="fa fa-times"></i></span></button>
+				<strong>Success!</strong> We have received your inquiry for domain <strong>{{siteBuildSuccess}}</strong> and will be in touch with you shortly. 
+			</div>
+	
             <div class="table-responsive">          
                 <table class="table">
                     <tr>
@@ -47,7 +57,7 @@
                         <td ng-show="rec.expanded" ng-click="rec.expanded = !rec.expanded" class="more-link"><a>Less</a></td>
                         <td><a>All</a></td>
                     </tr>
-                    <tr ng-repeat-end fr-collapse class="more-info">
+                    <tr ng-show="rec.expanded" ng-repeat-end fr-collapse class="more-info">
                         <td colspan="12" class="more-info-td">
                             <div class="toggle" style="display: none">
                                 <table width="100%">

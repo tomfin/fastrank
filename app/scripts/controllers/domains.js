@@ -47,9 +47,18 @@ angular.module('fastrankApp')
                 };
                 
                 $scope.siteBuild = function (record) {
-                	console.log('D> Site build for rec: ', record);
-                	Domains.build(record).$promise.then(function () {
-                		console.log('D> Build request submitted');
+                	var domain = {};
+                	domain.publicId = record.id;
+                	Domains.build(domain).$promise.then(function () {
+                		console.log('D> Build request submitted: ', record.rootURL);
+                        $scope.siteBuildSuccess = record.rootURL;
+                        $scope.siteBuildFailure = null;
+                        Domains.get().$promise.then(function (domainList) {
+                        	$scope.domains = domainList;
+                        });
+                	}, function() {
+                		$scope.siteBuildSuccess = null;
+                		$scope.siteBuildFailure = 'ERROR';
                 	});
                 };
 
