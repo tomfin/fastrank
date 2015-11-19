@@ -63,7 +63,7 @@
                                 <td ng-if="rec.credits > 0 && rec.basePrice > rec.actualPrice"><span class="actualPrice">${{ rec.actualPrice | number:2 }}</span> <del>${{ rec.basePrice | number:2 }}</del></td>
                                 <td ng-if="rec.credits > 0 && rec.basePrice <= rec.actualPrice"><span class="actualPrice">${{ rec.actualPrice | number:2 }}</span></td>
                                 <td ng-if="rec.credits > 0">{{ rec.credits}}</td>
-                                <td ng-if="rec.credits == 0"><span class="actualPrice">$--.--</span> (<del>$--.--</del>)</td>
+                                <td ng-if="rec.credits == 0"><span class="actualPrice">$--.--</span></td>
                                 <td ng-if="rec.credits == 0">--</td>
 
                                 <td>{{ rec.domTF}}</td>
