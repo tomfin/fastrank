@@ -5,7 +5,7 @@ angular.module('fastrankApp')
             $stateProvider
                     .state('search-result', {
                         parent: 'site',
-                        url: '/search-result?item&max&min&type&comDomains&otherDomains&majesticCategory&majesticSubcategory&majesticSubsubcategory&majTFMin&majTFMax&majDOMCFMin&majDOMCFMax&majRefDomainsMin&majRefDomainsMax&majRefIPsMin&majRefIPsMax&majRefDomainsEDUMin&majRefDomainsEDUMax&majRefDomainsGOVMin&majRefDomainsGOVMax&selectedTLDs',
+                        url: '/search-result?ca&item&max&min&type&comDomains&otherDomains&majesticCategory&majesticSubcategory&majesticSubsubcategory&majTFMin&majTFMax&majDOMCFMin&majDOMCFMax&majRefDomainsMin&majRefDomainsMax&majRefIPsMin&majRefIPsMax&majRefDomainsEDUMin&majRefDomainsEDUMax&majRefDomainsGOVMin&majRefDomainsGOVMax&selectedTLDs',
                         params: {result: ''},
                         data: {
                             roles: [],

@@ -8,11 +8,12 @@
  * Controller of the fastrankApp
  */
 angular.module('fastrankApp')
-        .controller('searchResultCtrl', ['$scope', '$rootScope', '$log', '$stateParams', 'FastBuy', 'Summary', 'Links', 'SimpleSearch', 'AdvancedSearch', '$q', '$state', 'ModifyCart',
-            function ($scope, $rootScope, $log, $stateParams, FastBuy, Summary, Links, SimpleSearch, AdvancedSearch, $q, $state, ModifyCart) {
+        .controller('searchResultCtrl', ['$scope', '$rootScope', '$log', '$stateParams', '$q', '$state', 'FastBuy', 'Summary', 'Links', 'SimpleSearch', 'AdvancedSearch', 'ModifyCart', 'Principal',
+            function ($scope, $rootScope, $log, $stateParams, $q, $state, FastBuy, Summary, Links, SimpleSearch, AdvancedSearch, ModifyCart, Principal) {
                 $scope.searchMsg = '';
 
-                if (!$stateParams.result) {
+                if (!$stateParams.result || (Principal.isAuthenticated() === true && (!$stateParams.ca || $stateParams.ca.toString() === 'false'))) {
+                    
                     if (angular.isDefined($stateParams.min) && angular.isDefined($stateParams.max) && angular.isDefined($stateParams.type)) {
                         var simpleSubmit = {};
                         simpleSubmit.item = '';
@@ -40,6 +41,7 @@ angular.module('fastrankApp')
                         });
                         simpleSearchDefer.promise.then(function (res) {
                             simpleSubmit.result = res;
+                            simpleSubmit.ca = Principal.isAuthenticated();
                             $state.go('search-result', simpleSubmit);
                         });
                     } else if (angular.isDefined($stateParams.majTFMin) && angular.isDefined($stateParams.majTFMax) &&
@@ -107,6 +109,7 @@ angular.module('fastrankApp')
                         });
                         advancedSearchDefer.promise.then(function (res) {
                             advancedSubmit.result = res;
+                            advancedSubmit.ca = Principal.isAuthenticated();
                             $state.go('search-result', advancedSubmit);
                         });
                     }
