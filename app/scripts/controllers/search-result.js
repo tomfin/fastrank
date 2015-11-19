@@ -121,7 +121,7 @@ angular.module('fastrankApp')
 
                     $scope.result = $stateParams.result;
                        
-                    if ($scope.cartDomains.length > 0) { //jshint ignore:line   
+                    if ($scope.cartDomains != null && $scope.cartDomains.length > 0) { //jshint ignore:line   
                         angular.forEach($scope.result, function (obj) {
                             for (var i = 0; i < $scope.cartDomains.length; i++) {
                                 if (obj.id === $scope.cartDomains[i].publicId) {
