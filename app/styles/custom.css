@@ -345,3 +345,6 @@ input[id^=addToCart]:checked + label::after {
 
 .cartSelected {
 }
+body.modal-open {
+    overflow: visible;
+}

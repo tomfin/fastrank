@@ -23,9 +23,14 @@ angular
     'infinite-scroll',
     'ui.bootstrap',
     'rzModule',
-    'ngScrollbars'
+    'ngScrollbars',
+    'ngBootbox'
   ])
   .run(function ($rootScope, $location, $window, $http, $state, $translate, Auth, Principal, Language, ENV, VERSION) {
+      bootbox.setDefaults({ //jshint ignore:line
+        backdrop: true,
+      });
+                
       $rootScope.ENV = ENV;
       $rootScope.VERSION = VERSION;
       $rootScope.$on('$stateChangeStart', function (event, toState, toStateParams) {

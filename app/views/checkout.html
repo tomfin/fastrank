@@ -29,7 +29,7 @@
 					<div class="row">
 						<div class="col-md-8"></div>   
 						<div class="col-md-4">
-							<a href="" ng-click="checkout()" class="btn btn-primary btn-block btn-has-icon"><i class="fa fa-shopping-cart"></i>Buy Domains</a>
+                                                    <a ng-bootbox-confirm="Please confirm you want to FastBuy this domain" ng-bootbox-confirm-action="checkout()" class="btn btn-primary btn-block btn-has-icon"><i class="fa fa-shopping-cart"></i>Buy Domains</a>
 						</div>
 					</div>       
 					<table class="table">
@@ -39,19 +39,19 @@
 							<th>More Info</th>
 							<th>Credits</th>
 						</tr>
-						<tr ng-if="cartDomains.length === 0">
+						<tr ng-if="cartDomains.length == 0">
 							<td>
 								<h5>Shopping cart empty.</h5>
 								<span class="product-desc-alt"> <a ui-sref="search">Search for some domains.</a></span>
 							</td>
 						</tr>
-						<tr ng-if="cartDomains" ng-repeat="domain in cartDomains" class="domain-row">
+						<tr ng-if="cartDomains.length > 0" ng-repeat="domain in cartDomains" class="domain-row">
 							<td ng-click="removeDomain(domain)" class="more-link"><a>Remove</a></td>
                                                         <td>{{domain.rootURL}}</td>
 							<td ng-click="" class="more-link"><a ui-sref='cart-domain({id: domain.id})'>More</a></td>
 							<td>{{domain.credits}}</td>
 						</tr>
-						<tr>
+						<tr ng-if="cartDomains.length > 0">
 							<td></td>
 							<td>Sub-total: </td>
 							<td>{{cartDomains.total}}</td>
@@ -61,7 +61,7 @@
 					<div class="row">
 						<div class="col-md-8"></div>   
 						<div class="col-md-4">
-							<a href="" ng-click="checkout()" class="btn btn-primary btn-block btn-has-icon"><i class="fa fa-shopping-cart"></i>Buy Domains</a>
+							<a ng-bootbox-confirm="Please confirm you want to FastBuy this domain" ng-bootbox-confirm-action="checkout()" class="btn btn-primary btn-block btn-has-icon"><i class="fa fa-shopping-cart"></i>Buy Domains</a>
 						</div>
 					</div>       
 					
