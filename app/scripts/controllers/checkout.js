@@ -31,7 +31,7 @@ angular.module('fastrankApp')
                         obj.credits = result.credits;
                         domains.push(obj);
                     });
-                    CheckoutBuy.buy(domains).$promise.then(function (res) {
+                    CheckoutBuy.buy(domains).$promise.then(function () {
                         $scope.checkoutBuySuccess = 'SUCCESS';
                         $scope.checkoutBuyError = null;
                         angular.forEach(domains, function (obj) {
