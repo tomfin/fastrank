@@ -24,6 +24,10 @@
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true"><i class="fa fa-times"></i></span></button>
                     <strong>Congratulations!</strong> You have successfully purchased domain details. Check out <a href="" ui-sref="domains">your domains</a> to view the specifics. 
                 </div>
+                <div ng-if="lowCreditError" class="alert alert-danger alert-dismissible fade in text-uppercase">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true"><i class="fa fa-times"></i></span></button>
+                    <strong>Error!</strong> You don't have sufficient credit to purchase. Please <a href="" ui-sref="credits">buy some credit</a> first and then purchase again.
+                </div>
 			
 				<div class="table-responsive">
 					<div class="row">
@@ -48,7 +52,7 @@
 						<tr ng-if="cartDomains.length > 0" ng-repeat="domain in cartDomains" class="domain-row">
 							<td ng-click="removeDomain(domain)" class="more-link"><a>Remove</a></td>
                                                         <td>{{domain.rootURL}}</td>
-							<td ng-click="" class="more-link"><a ui-sref='cart-domain({id: domain.id})'>More</a></td>
+							<td ng-click="" class="more-link"><a ui-sref='cart-domain({id: domain.publicId})'>More</a></td>
 							<td>{{domain.credits}}</td>
 						</tr>
 						<tr ng-if="cartDomains.length > 0">

@@ -8,16 +8,16 @@
  * Controller of the fastrankApp
  */
 angular.module('fastrankApp')
-        .controller('cartDomainCtrl', ['$scope', '$log', '$stateParams', '$cookies', 'CartDomainSer', 'Summary', 'Links', function ($scope, $log, $stateParams, $cookies, CartDomainSer, Summary, Links) {
+        .controller('cartDomainCtrl', ['$scope', '$log', '$stateParams', 'CartDomainSer', 'Summary', 'Links', '$rootScope', function ($scope, $log, $stateParams, CartDomainSer, Summary, Links, $rootScope) {
                 var summeryDomain = $stateParams.id;
                 $scope.summary = '';
                 $scope.links = '';
                 
-                var cartDomains = $cookies.getObject('cartDomains');
+                var cartDomains = $rootScope.cartDomains;                
 
                 var domains = [];
                 angular.forEach(cartDomains, function (value) {
-                    this.push(value.id);
+                    this.push(value.publicId);
                 }, domains);
                                 
                 CartDomainSer.search({ids: {ids: domains}}).
