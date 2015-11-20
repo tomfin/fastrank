@@ -210,10 +210,18 @@ angular.module('fastrankApp')
                     FastBuy.buy(obj).$promise.then(function () {
                         $scope.fastBuySuccess = 'SUCCESS';
                         $scope.fastBuyError = null;
+                        $scope.lowCreditError = null;
                         $scope.result.splice(index, 1);
-                    }, function () {
-                        $scope.fastBuySuccess = null;
-                        $scope.fastBuyError = 'ERROR';
+                    }, function (res) {
+                        if(res.status == 402) {
+                            $scope.fastBuySuccess = null;
+                            $scope.fastBuyError = null;
+                            $scope.lowCreditError = 'ERROR';
+                        } else {
+                            $scope.fastBuySuccess = null;
+                            $scope.fastBuyError = 'ERROR';
+                            $scope.lowCreditError = null;
+                        }
                     });
                 };
 

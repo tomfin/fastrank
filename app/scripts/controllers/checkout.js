@@ -9,15 +9,14 @@ angular.module('fastrankApp')
         .controller('CheckoutCtrl', ['$scope', 'CheckoutBuy', 'ModifyCart', '$log', '$rootScope', function ($scope, CheckoutBuy, ModifyCart, $log, $rootScope) {
                 $scope.cartDomains = $rootScope.cartDomains;                
                 $scope.removeDomain = function (domain) {
-                    $log.info($scope.cartDomains);
-                    $log.info(domain);
                     angular.forEach($scope.cartDomains, function (obj) {
                         if (obj.publicId === domain.publicId) {
                             $scope.cartDomains.splice($scope.cartDomains.indexOf(obj), 1);
                         }
                     });
 
-                    ModifyCart.cart($scope.cartDomains).$promise.then(function () {
+                    ModifyCart.cart($scope.cartDomains).$promise.then(function (res) {
+                        $rootScope.cartDomains = res;
                     }).catch(function (err) {
                         $log.error(err);
                     });
@@ -34,12 +33,20 @@ angular.module('fastrankApp')
                     CheckoutBuy.buy(domains).$promise.then(function () {
                         $scope.checkoutBuySuccess = 'SUCCESS';
                         $scope.checkoutBuyError = null;
+                        $scope.lowCreditError = null;
                         angular.forEach(domains, function (obj) {
                             $scope.removeDomain(obj);
                         });
-                    }, function () {
-                        $scope.checkoutBuySuccess = null;
-                        $scope.checkoutBuyError = 'ERROR';
+                    }, function (res) {
+                        if(res.status == 402) {
+                            $scope.checkoutBuySuccess = null;
+                            $scope.checkoutBuyError = null;
+                            $scope.lowCreditError = 'ERROR';
+                        } else {
+                            $scope.checkoutBuySuccess = null;
+                            $scope.checkoutBuyError = 'ERROR';
+                            $scope.lowCreditError = null;
+                        }
                     });
                 };
             }]);
