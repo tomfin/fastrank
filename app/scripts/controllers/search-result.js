@@ -162,11 +162,11 @@ angular.module('fastrankApp')
                         }
                     });
                     ModifyCart.cart($scope.cartDomains).$promise.then(function (res) {
+                        $rootScope.cartDomains = res;
                     	$log.info(res);
                     }).catch(function (err) {
                     	$log.error(err);
                     });
-                    $rootScope.cartDomains = $scope.cartDomains;
                 };
                 $scope.toggle = false;
                 $scope.moreInfo = function () {
@@ -183,7 +183,7 @@ angular.module('fastrankApp')
                         $scope.cartDomains.push(cartObj);
 
                         ModifyCart.cart($scope.cartDomains).$promise.then(function (res) {
-                            $log.info(res);
+                            $rootScope.cartDomains = res;
                         }).catch(function (err) {
                             $log.error(err);
                         });
@@ -195,12 +195,12 @@ angular.module('fastrankApp')
                         });
 
                         ModifyCart.cart($scope.cartDomains).$promise.then(function (res) {
-                            $log.info(res);
+                            $rootScope.cartDomains = res;
                         }).catch(function (err) {
                             $log.error(err);
                         });
                     }
-                    $rootScope.cartDomains = $scope.cartDomains;
+                    
                 };
 
                 $scope.fastBuy = function (result, index) {
