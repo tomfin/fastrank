@@ -10,10 +10,8 @@
 angular.module('fastrankApp')
         .controller('searchResultCtrl', ['$scope', '$rootScope', '$log', '$stateParams', '$q', '$state', 'FastBuy', 'Summary', 'Links', 'SimpleSearch', 'AdvancedSearch', 'ModifyCart', 'Principal',
             function ($scope, $rootScope, $log, $stateParams, $q, $state, FastBuy, Summary, Links, SimpleSearch, AdvancedSearch, ModifyCart, Principal) {
-                $scope.searchMsg = '';
-
                 if (!$stateParams.result || (Principal.isAuthenticated() === true && (!$stateParams.ca || $stateParams.ca.toString() === 'false'))) {
-                    
+
                     if (angular.isDefined($stateParams.min) && angular.isDefined($stateParams.max) && angular.isDefined($stateParams.type)) {
                         var simpleSubmit = {};
                         simpleSubmit.item = '';
@@ -29,14 +27,12 @@ angular.module('fastrankApp')
                                 .success(function (res) {
                                     simpleSearchDefer.resolve(res);
                                 }).error(function (res) {
-                            if (res === null) {
-                                $scope.searchMsg = 'Error while searching';
-                                $log.error('Error while searching');
-                            } else if (angular.isDefined(res.status) && res.status === 404) {
-                                $scope.searchMsg = 'Sorry, no result found in selected criteria.';
-                                $log.error('Sorry, no result found in selected criteria');
+                            if (res.status === 404) {
+                                $scope.noResultFoundError = 'ERROR';
+                                $scope.searchError = null;
                             } else {
-                                $scope.searchMsg = 'Error while searching';
+                                $scope.searchError = 'ERROR';
+                                $scope.noResultFoundError = null;
                             }
                         });
                         simpleSearchDefer.promise.then(function (res) {
@@ -97,14 +93,12 @@ angular.module('fastrankApp')
                                 .success(function (res) {
                                     advancedSearchDefer.resolve(res);
                                 }).error(function (res) {
-                            if (res === null) {
-                                $scope.searchMsg = 'Error while searching';
-                                $log.error('Error while searching');
-                            } else if (angular.isDefined(res.status) && res.status === 404) {
-                                $scope.searchMsg = 'Sorry, no result found in selected criteria.';
-                                $log.error('Sorry, no result found in selected criteria');
+                            if (res.status === 404) {
+                                $scope.noResultFoundError = 'ERROR';
+                                $scope.searchError = null;
                             } else {
-                                $scope.searchMsg = 'Error while searching';
+                                $scope.searchError = 'ERROR';
+                                $scope.noResultFoundError = null;
                             }
                         });
                         advancedSearchDefer.promise.then(function (res) {
@@ -120,10 +114,10 @@ angular.module('fastrankApp')
                 $scope.summary = '';
                 $scope.links = '';
                 $scope.resultInit = function () {
-                	$scope.cartDomains = $rootScope.cartDomains;
+                    $scope.cartDomains = $rootScope.cartDomains;
 
                     $scope.result = $stateParams.result;
-                       
+
                     if ($scope.cartDomains != null && $scope.cartDomains.length > 0) { //jshint ignore:line   
                         angular.forEach($scope.result, function (obj) {
                             for (var i = 0; i < $scope.cartDomains.length; i++) {
@@ -142,7 +136,7 @@ angular.module('fastrankApp')
                 $scope.resultInit();
 
                 $scope.parantCheck = '';
-                
+
                 $scope.checkAll = function (status) {
                     angular.forEach($scope.result, function (domain) {
                         domain.selected = status;
@@ -155,16 +149,16 @@ angular.module('fastrankApp')
                             $scope.cartDomains.push(cartObj);
                         } else if (domain.selected === false) { // To remove from cart
                             angular.forEach($scope.cartDomains, function (obj) {
-                            	if (obj.publicId === domain.id) {
-                            		$scope.cartDomains.splice($scope.cartDomains.indexOf(obj), 1);
-                            	}
+                                if (obj.publicId === domain.id) {
+                                    $scope.cartDomains.splice($scope.cartDomains.indexOf(obj), 1);
+                                }
                             });
                         }
                     });
                     ModifyCart.cart($scope.cartDomains).$promise.then(function (res) {
                         $rootScope.cartDomains = res;
                     }).catch(function (err) {
-                    	$log.error(err);
+                        $log.error(err);
                     });
                 };
                 $scope.toggle = false;
@@ -188,9 +182,9 @@ angular.module('fastrankApp')
                         });
                     } else if (domain.selected === false) { // To remove from cart
                         angular.forEach($scope.cartDomains, function (obj) {
-                        	if (obj.publicId === domain.id) {
-                        		$scope.cartDomains.splice($scope.cartDomains.indexOf(obj), 1);
-                        	}
+                            if (obj.publicId === domain.id) {
+                                $scope.cartDomains.splice($scope.cartDomains.indexOf(obj), 1);
+                            }
                         });
 
                         ModifyCart.cart($scope.cartDomains).$promise.then(function (res) {
@@ -199,7 +193,7 @@ angular.module('fastrankApp')
                             $log.error(err);
                         });
                     }
-                    
+
                 };
 
                 $scope.fastBuy = function (result, index) {
@@ -212,7 +206,7 @@ angular.module('fastrankApp')
                         $scope.lowCreditError = null;
                         $scope.result.splice(index, 1);
                     }, function (res) {
-                        if(res.status === 402) {
+                        if (res.status === 402) {
                             $scope.fastBuySuccess = null;
                             $scope.fastBuyError = null;
                             $scope.lowCreditError = 'ERROR';
@@ -240,7 +234,7 @@ angular.module('fastrankApp')
 
                     jQuery('html, body').delay(1000).animate({scrollTop: jQuery('.detail-info').offset().top - 65}, 2000); //jshint ignore:line
                 };
-                
+
             }])
         .directive('frCollapse', [function () {
                 return {
