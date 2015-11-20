@@ -163,7 +163,6 @@ angular.module('fastrankApp')
                     });
                     ModifyCart.cart($scope.cartDomains).$promise.then(function (res) {
                         $rootScope.cartDomains = res;
-                    	$log.info(res);
                     }).catch(function (err) {
                     	$log.error(err);
                     });
