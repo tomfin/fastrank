@@ -38,7 +38,7 @@ angular.module('fastrankApp')
                             $scope.removeDomain(obj);
                         });
                     }, function (res) {
-                        if(res.status == 402) {
+                        if(res.status === 402) {
                             $scope.checkoutBuySuccess = null;
                             $scope.checkoutBuyError = null;
                             $scope.lowCreditError = 'ERROR';

@@ -213,7 +213,7 @@ angular.module('fastrankApp')
                         $scope.lowCreditError = null;
                         $scope.result.splice(index, 1);
                     }, function (res) {
-                        if(res.status == 402) {
+                        if(res.status === 402) {
                             $scope.fastBuySuccess = null;
                             $scope.fastBuyError = null;
                             $scope.lowCreditError = 'ERROR';
