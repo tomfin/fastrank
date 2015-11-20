@@ -34,6 +34,7 @@ angular.module('fastrankApp')
                         $scope.checkoutBuySuccess = 'SUCCESS';
                         $scope.checkoutBuyError = null;
                         $scope.lowCreditError = null;
+                        $scope.alreadyPurchased = null;
                         angular.forEach(domains, function (obj) {
                             $scope.removeDomain(obj);
                         });
@@ -42,10 +43,17 @@ angular.module('fastrankApp')
                             $scope.checkoutBuySuccess = null;
                             $scope.checkoutBuyError = null;
                             $scope.lowCreditError = 'ERROR';
+                            $scope.alreadyPurchased = null;
+                        } else if(res.status === 207) {
+                            $scope.checkoutBuySuccess = null;
+                            $scope.checkoutBuyError = null;
+                            $scope.lowCreditError = null;
+                            $scope.alreadyPurchased = 'ERROR';
                         } else {
                             $scope.checkoutBuySuccess = null;
                             $scope.checkoutBuyError = 'ERROR';
                             $scope.lowCreditError = null;
+                            $scope.alreadyPurchased = null;
                         }
                     });
                 };
