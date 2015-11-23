@@ -43,7 +43,7 @@ angular.module('fastrankApp')
                     }).catch(function (err) {
                         $log.info(err);
                     });
-                    jQuery('html, body').animate({scrollTop: jQuery('.detail-info').offset().top - 65}, 2000); //jshint ignore:line
+                    jQuery('html, body').animate({scrollTop: jQuery('.detail-info').offset().top - 65}, 1000); //jshint ignore:line
                 };
                 
                 if(angular.isDefined(summeryDomain) && summeryDomain !== '') {

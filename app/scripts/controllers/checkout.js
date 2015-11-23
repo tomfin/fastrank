@@ -56,6 +56,7 @@ angular.module('fastrankApp')
                             $scope.alreadyPurchased = null;
                         }
                     });
+                    jQuery('html, body').delay(1000).animate({scrollTop: jQuery('.error').offset().top - 100}, 1000); //jshint ignore:line
                 };
             }]);
 

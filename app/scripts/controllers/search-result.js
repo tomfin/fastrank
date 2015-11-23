@@ -216,6 +216,7 @@ angular.module('fastrankApp')
                             $scope.lowCreditError = null;
                         }
                     });
+                    jQuery('html, body').delay(1000).animate({scrollTop: jQuery('.error').offset().top - 100}, 1000); //jshint ignore:line
                 };
 
                 $scope.detailInfo = function (id) {
@@ -232,7 +233,7 @@ angular.module('fastrankApp')
                         $log.error(err);
                     });
 
-                    jQuery('html, body').delay(1000).animate({scrollTop: jQuery('.detail-info').offset().top - 65}, 2000); //jshint ignore:line
+                    jQuery('html, body').delay(1000).animate({scrollTop: jQuery('.detail-info').offset().top - 65}, 1000); //jshint ignore:line
                 };
 
             }])

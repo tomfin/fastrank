@@ -8,25 +8,27 @@
                 </div>
             </div>
             <div class="content">
-                <div ng-if="noResultFoundError" class="alert alert-danger alert-dismissible fade in text-uppercase">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true"><i class="fa fa-times"></i></span></button>
-                    <strong>Error!</strong> Sorry, no result found in the selected criteria.
-                </div>
-                <div ng-if="searchError" class="alert alert-danger alert-dismissible fade in text-uppercase">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true"><i class="fa fa-times"></i></span></button>
-                    <strong>Error!</strong> Unfortunately something went wrong while searching.
-                </div>
-                <div ng-if="fastBuyError" class="alert alert-danger alert-dismissible fade in text-uppercase">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true"><i class="fa fa-times"></i></span></button>
-                    <strong>Error!</strong> Unfortunately something went wrong with your FastBuy. Please try again later or contact us.
-                </div>
-                <div ng-if="fastBuySuccess" class="alert alert-success alert-dismissible fade in text-uppercase">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true"><i class="fa fa-times"></i></span></button>
-                    <strong>Congratulations!</strong> You have successfully purchased the details for a new domain. Check out <a href="" ui-sref="domains">your domains</a> to view the specifics. 
-                </div>
-                <div ng-if="lowCreditError" class="alert alert-danger alert-dismissible fade in text-uppercase">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true"><i class="fa fa-times"></i></span></button>
-                    <strong>Error!</strong> You don't have sufficient credit to purchase. Please <a href="" ui-sref="credits">buy some credit</a> first and then purchase again.
+                <div class="error">
+                    <div ng-if="noResultFoundError" class="alert alert-danger alert-dismissible fade in text-uppercase">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true"><i class="fa fa-times"></i></span></button>
+                        <strong>Error!</strong> Sorry, no result found in the selected criteria.
+                    </div>
+                    <div ng-if="searchError" class="alert alert-danger alert-dismissible fade in text-uppercase">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true"><i class="fa fa-times"></i></span></button>
+                        <strong>Error!</strong> Unfortunately something went wrong while searching.
+                    </div>
+                    <div ng-if="fastBuyError" class="alert alert-danger alert-dismissible fade in text-uppercase">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true"><i class="fa fa-times"></i></span></button>
+                        <strong>Error!</strong> Unfortunately something went wrong with your FastBuy. Please try again later or contact us.
+                    </div>
+                    <div ng-if="fastBuySuccess" class="alert alert-success alert-dismissible fade in text-uppercase">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true"><i class="fa fa-times"></i></span></button>
+                        <strong>Congratulations!</strong> You have successfully purchased the details for a new domain. Check out <a href="" ui-sref="domains">your domains</a> to view the specifics. 
+                    </div>
+                    <div ng-if="lowCreditError" class="alert alert-danger alert-dismissible fade in text-uppercase">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true"><i class="fa fa-times"></i></span></button>
+                        <strong>Error!</strong> You don't have sufficient credit to purchase. Please <a href="" ui-sref="credits">buy some credit</a> first and then purchase again.
+                    </div>
                 </div>
                 <div class="row" ng-if="!noResultFoundError && !searchError">                    
                     <div class="table-responsive">          

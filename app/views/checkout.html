@@ -16,21 +16,23 @@
 
             <div class="content">
                 <div class="row">
-                    <div ng-if="checkoutBuyError" class="alert alert-danger alert-dismissible fade in text-uppercase">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true"><i class="fa fa-times"></i></span></button>
-                        <strong>Error!</strong> Unfortunately something went wrong with your checkout. Please try again later or contact us.
-                    </div>
-                    <div ng-if="checkoutBuySuccess" class="alert alert-success alert-dismissible fade in text-uppercase">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true"><i class="fa fa-times"></i></span></button>
-                        <strong>Congratulations!</strong> You have successfully purchased domain details. Check out <a href="" ui-sref="domains">your domains</a> to view the specifics. 
-                    </div>
-                    <div ng-if="lowCreditError" class="alert alert-danger alert-dismissible fade in text-uppercase">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true"><i class="fa fa-times"></i></span></button>
-                        <strong>Error!</strong> You don't have sufficient credit to purchase. Please <a href="" ui-sref="credits">buy some credit</a> first and then purchase again.
-                    </div>
-                    <div ng-if="alreadyPurchased" class="alert alert-danger alert-dismissible fade in text-uppercase">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true"><i class="fa fa-times"></i></span></button>
-                        <strong>Error!</strong> At least one of the domains in the list was already registered/purchased and can’t be bought for you, but all others were ok and you weren't charged for any missing ones.
+                    <div class="error">
+                        <div ng-if="checkoutBuyError" class="alert alert-danger alert-dismissible fade in text-uppercase">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true"><i class="fa fa-times"></i></span></button>
+                            <strong>Error!</strong> Unfortunately something went wrong with your checkout. Please try again later or contact us.
+                        </div>
+                        <div ng-if="checkoutBuySuccess" class="alert alert-success alert-dismissible fade in text-uppercase">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true"><i class="fa fa-times"></i></span></button>
+                            <strong>Congratulations!</strong> You have successfully purchased domain details. Check out <a href="" ui-sref="domains">your domains</a> to view the specifics. 
+                        </div>
+                        <div ng-if="lowCreditError" class="alert alert-danger alert-dismissible fade in text-uppercase">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true"><i class="fa fa-times"></i></span></button>
+                            <strong>Error!</strong> You don't have sufficient credit to purchase. Please <a href="" ui-sref="credits">buy some credit</a> first and then purchase again.
+                        </div>
+                        <div ng-if="alreadyPurchased" class="alert alert-danger alert-dismissible fade in text-uppercase">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true"><i class="fa fa-times"></i></span></button>
+                            <strong>Error!</strong> At least one of the domains in the list was already registered/purchased and can’t be bought for you, but all others were ok and you weren't charged for any missing ones.
+                        </div>
                     </div>
 
                     <div class="table-responsive">
