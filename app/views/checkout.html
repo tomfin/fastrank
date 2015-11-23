@@ -39,7 +39,7 @@
                         <div class="row">
                             <div class="col-md-8"></div>   
                             <div class="col-md-4">
-                                <a ng-bootbox-confirm="Please confirm you want to FastBuy this domain" ng-bootbox-confirm-action="checkout()" class="btn btn-primary btn-block btn-has-icon"><i class="fa fa-shopping-cart"></i>Buy Domains</a>
+                                <a ng-disabled="cartDomains.length == 0" ng-bootbox-confirm="Please confirm you want to FastBuy this domain" ng-bootbox-confirm-action="checkout()" class="btn btn-primary btn-block btn-has-icon"><i class="fa fa-shopping-cart"></i>Buy Domains</a>
                             </div>
                         </div>       
                         <table class="table">
@@ -71,7 +71,7 @@
                         <div class="row">
                             <div class="col-md-8"></div>   
                             <div class="col-md-4">
-                                <a ng-bootbox-confirm="Please confirm you want to FastBuy this domain" ng-bootbox-confirm-action="checkout()" class="btn btn-primary btn-block btn-has-icon"><i class="fa fa-shopping-cart"></i>Buy Domains</a>
+                                <a ng-disabled="cartDomains.length == 0" ng-bootbox-confirm="Please confirm you want to FastBuy this domain" ng-bootbox-confirm-action="checkout()" class="btn btn-primary btn-block btn-has-icon"><i class="fa fa-shopping-cart"></i>Buy Domains</a>
                             </div>
                         </div>       
 
