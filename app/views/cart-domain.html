@@ -8,8 +8,11 @@
                 </div>
             </div>
             <div class="content">
-				<p ng-if="searchMsg" class="has-error">{{ searchMsg }}</p>
-                <div class="row" ng-if="!searchMsg">
+                <div class="error">
+                    <div ng-if="searchError" class="alert alert-danger alert-dismissible fade in text-uppercase">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true"><i class="fa fa-times"></i></span></button>
+                        <strong>Error!</strong> Unfortunately something went wrong while searching.
+                    </div>
                     <div ng-if="fastBuyError" class="alert alert-danger alert-dismissible fade in text-uppercase">
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true"><i class="fa fa-times"></i></span></button>
                         <strong>Error!</strong> Unfortunately something went wrong with your FastBuy. Please try again later or contact us.
@@ -18,6 +21,12 @@
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true"><i class="fa fa-times"></i></span></button>
                         <strong>Congratulations!</strong> You have successfully purchased the details for a new domain. Check out <a href="" ui-sref="domains">your domains</a> to view the specifics. 
                     </div>
+                    <div ng-if="lowCreditError" class="alert alert-danger alert-dismissible fade in text-uppercase">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true"><i class="fa fa-times"></i></span></button>
+                        <strong>Error!</strong> You don't have sufficient credit to purchase. Please <a href="" ui-sref="credits">buy some credit</a> first and then purchase again.
+                    </div>
+                </div>
+                <div class="row" ng-if="!noResultFoundError && !searchError">
                     <div class="table-responsive">          
                         <table class="table">
                             <tr>
@@ -33,23 +42,23 @@
                                 <th></th>
                             </tr>
                             <tr ng-repeat-start="rec in result|orderBy:sort.column:sort.descending" class="domain-row">
-                                <td><a ng-if="rec.credits > 0" ng-click="fastBuy(rec, $index)">Fast Buy</a></td>
+                                <td><a ng-if="rec.credits > 0" ng-bootbox-confirm="Please confirm you want to FastBuy this domain" ng-bootbox-confirm-action="fastBuy(rec, $index)" backdrop="true">Fast Buy</a></td>
                                 <td ng-if="rec.credits > 0"><del>${{ rec.basePrice}}</del></td>
                                 <td ng-if="rec.credits > 0"><span class="actualPrice">${{ rec.actualPrice}}</span></td>
-                                <td ng-if="rec.credits > 0">${{ rec.discount }}</td>
-                                <td ng-if="rec.credits > 0">{{ rec.credits }}</td>
+                                <td ng-if="rec.credits > 0">${{ rec.discount}}</td>
+                                <td ng-if="rec.credits > 0">{{ rec.credits}}</td>
 
                                 <td ng-if="rec.credits == 0"><del>$--.--</del></td>
                                 <td ng-if="rec.credits == 0"><span class="actualPrice">$--.--</span></td>
                                 <td ng-if="rec.credits == 0">$--.--</td>
                                 <td ng-if="rec.credits == 0">--</td>
 
-                                <td>{{ rec.aggLinkTF }}</td>
-                                <td>{{ rec.frTrust }}</td>
-                                <td>{{ rec.domTF }}</td>
+                                <td>{{ rec.aggLinkTF}}</td>
+                                <td>{{ rec.frTrust}}</td>
+                                <td>{{ rec.domTF}}</td>
                                 <td ng-show="!rec.expanded" ng-click="rec.expanded = !rec.expanded" class="more-link"><a>More</a></td>
                                 <td ng-show="rec.expanded" ng-click="rec.expanded = !rec.expanded" class="more-link"><a>Less</a></td>
-                                <td><a ng-click="detailInfo({{ 'rec.id' }})">All</a></td>
+                                <td><a ng-click="detailInfo({{ 'rec.id'}})">All</a></td>
                             </tr>
                             <tr ng-repeat-end fr-collapse class="more-info">
                                 <td colspan="12" class="more-info-td">
@@ -83,7 +92,7 @@
                                                 <td class="col-md-2"><strong>EDU/Gov:</strong> {{ rec.edugovCount}}</td>
                                                 <td class="col-md-3"><strong>TlD:</strong> {{ rec.tld}}</td>
                                                 <td class="col-md-5">{{ rec.alchMainTaxonomy}}</td>
-                                                <td class="col-md-2"><a ng-if="rec.credits > 0" ng-click="fastBuy(rec, $index)">Fast Buy</a></td>
+                                                <td class="col-md-2"><a ng-if="rec.credits > 0" ng-bootbox-confirm="Please confirm you want to FastBuy this domain" ng-bootbox-confirm-action="fastBuy(rec, $index)" backdrop="true">Fast Buy</a></td>
                                             </tr>
                                         </table>
                                     </div>
@@ -93,229 +102,229 @@
                     </div>
                 </div>
                 <section class="detail-info">
-                <div class="row" ng-if="summary && links">
-                    <accordion class="summary-accordian" id="summary-accordian">
-                        <accordion-group is-open="true">
-                            <accordion-heading>
-                                Summary<i class="pull-right glyphicon" ng-class="{'glyphicon glyphicon-minus-sign': status.open, 'glyphicon glyphicon-plus-sign': !status.open}"></i>
-                            </accordion-heading>
-                            <div>
-                                <div class="table-responsive">          
-                                    <table class="table">
-                                        <tr>
-                                            <th>Fastrank</th>
-                                            <th>Majestic</th>
-                                            <th>Top 90 backlinks</th>
-                                            <th>Domain Relevance</th>
-                                            <th>Link Relevance to Domain</th>
-                                        </tr>
-                                        <tr>
-                                            <td>Pwr: {{ summary.power }}</td>
-                                            <td>TF: {{ summary.trustFlow }}</td>
-                                            <td>TF Sum: {{ summary.tfSum }}</td>
-                                            <td>Alchemy: {{  }}</td>
-                                            <td>Majestic: {{  }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>D-Rel: {{ summary.dRel }}</td>
-                                            <td>CF: {{ summary.citationFlow }}</td>
-                                            <td>CF-Sum: {{ summary.tfSum }}</td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                    </table>
-                                </div>
-                                
-                                <div> 
-                                    <div class="left">
-                                        <div class="table-responsive">          
-                                            <table class="table">
-                                                <tr>
-                                                    <th colspan="2">Majestic Link Metrics</th>
-                                                </tr>
-                                                <tr>
-                                                    <td>Trust Flow</td>
-                                                    <td>{{ summary.trustFlow }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Citation Flow</td>
-                                                    <td>{{ summary.citationFlow }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>External Backlinks</td>
-                                                    <td>{{ summary.externalBacklinks }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Referring Domains</td>
-                                                    <td>{{ summary.referringDomains }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Referring IP's</td>
-                                                    <td>{{ summary.referringIPs }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Referring Subnets</td>
-                                                    <td>{{ summary.referringSubnets }}</td>
-                                                </tr>
-                                            </table>
-                                        </div>
+                    <div class="row" ng-if="summary && links">
+                        <accordion class="summary-accordian" id="summary-accordian">
+                            <accordion-group is-open="true">
+                                <accordion-heading>
+                                    Summary<i class="pull-right glyphicon" ng-class="{'glyphicon glyphicon-minus-sign': status.open, 'glyphicon glyphicon-plus-sign': !status.open}"></i>
+                                </accordion-heading>
+                                <div>
+                                    <div class="table-responsive">          
+                                        <table class="table">
+                                            <tr>
+                                                <th>Fastrank</th>
+                                                <th>Majestic</th>
+                                                <th>Top 90 backlinks</th>
+                                                <th>Domain Relevance</th>
+                                                <th>Link Relevance to Domain</th>
+                                            </tr>
+                                            <tr>
+                                                <td>Pwr: {{ summary.power}}</td>
+                                                <td>TF: {{ summary.trustFlow}}</td>
+                                                <td>TF Sum: {{ summary.tfSum}}</td>
+                                                <td>Alchemy: {{  }}</td>
+                                                <td>Majestic: {{  }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>D-Rel: {{ summary.dRel}}</td>
+                                                <td>CF: {{ summary.citationFlow}}</td>
+                                                <td>CF-Sum: {{ summary.tfSum}}</td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                        </table>
                                     </div>
-                                    <div class="right">   
-                                        <h3>Domain Relevance</h3>
-                                        <div class="table-responsive">          
-                                            <table class="table">
-                                                <tr>
-                                                    <th colspan="2">Alchemy Home Page Keywords</th>
-                                                </tr>
-                                                <tr ng-repeat="x in summary.alchemyKeywords|limitTo:3">
-                                                    <td>{{ x.key }}</td>
-                                                    <td>{{ x.value }}</td>
-                                                </tr>
-                                            </table>
+
+                                    <div> 
+                                        <div class="left">
+                                            <div class="table-responsive">          
+                                                <table class="table">
+                                                    <tr>
+                                                        <th colspan="2">Majestic Link Metrics</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Trust Flow</td>
+                                                        <td>{{ summary.trustFlow}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Citation Flow</td>
+                                                        <td>{{ summary.citationFlow}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>External Backlinks</td>
+                                                        <td>{{ summary.externalBacklinks}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Referring Domains</td>
+                                                        <td>{{ summary.referringDomains}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Referring IP's</td>
+                                                        <td>{{ summary.referringIPs}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Referring Subnets</td>
+                                                        <td>{{ summary.referringSubnets}}</td>
+                                                    </tr>
+                                                </table>
+                                            </div>
                                         </div>
-                                        <div class="table-responsive">          
-                                            <table class="table">
-                                                <tr>
-                                                    <th colspan="2">Alchemy Archived Home Page Topic</th>
-                                                </tr>
-                                                <tr ng-repeat="x in summary.alchemyTaxonomies|limitTo:3">
-                                                    <td>{{ x.key }}</td>
-                                                    <td>{{ x.value }}</td>
-                                                </tr>
-                                            </table>
-                                        </div>
-                                        <div class="table-responsive">          
-                                            <table class="table">
-                                                <tr>
-                                                    <th colspan="2">Majestic Domain Topical Trustflow</th>
-                                                </tr>
-                                                <tr ng-repeat="x in summary.majesticTopics|limitTo:3">
-                                                    <td>{{ x.key }}</td>
-                                                    <td>{{ x.value }}</td>
-                                                </tr>
-                                            </table>
-                                        </div>
-                                    </div>                                    
-                                </div>
-                            </div>
-                        </accordion-group>
-                    </accordion>
-                    <accordion class="topic-accordian">
-                        <accordion-group is-open="status.open">
-                            <accordion-heading>
-                                Topic Detail<i class="pull-right glyphicon" ng-class="{'glyphicon glyphicon-minus-sign': status.open, 'glyphicon glyphicon-plus-sign': !status.open}"></i>
-                            </accordion-heading>
-                            <div>
-                                <p>Domain Relevance to You</p>
-                                <h3>Alchemy: {{ }} </h3>
-                                <div> 
-                                    <div class="left">                                        
-                                        <div class="table-responsive">          
-                                            <table class="table">
-                                                <tr>
-                                                    <th colspan="2">Alchemy Archived Home Page Keywords</th>
-                                                </tr>
-                                                <tr ng-repeat="x in summary.alchemyKeywords">
-                                                    <td>{{ x.key }}</td>
-                                                    <td>{{ x.value }}</td>
-                                                </tr>
-                                            </table>
-                                        </div>
+                                        <div class="right">   
+                                            <h3>Domain Relevance</h3>
+                                            <div class="table-responsive">          
+                                                <table class="table">
+                                                    <tr>
+                                                        <th colspan="2">Alchemy Home Page Keywords</th>
+                                                    </tr>
+                                                    <tr ng-repeat="x in summary.alchemyKeywords|limitTo:3">
+                                                        <td>{{ x.key}}</td>
+                                                        <td>{{ x.value}}</td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                            <div class="table-responsive">          
+                                                <table class="table">
+                                                    <tr>
+                                                        <th colspan="2">Alchemy Archived Home Page Topic</th>
+                                                    </tr>
+                                                    <tr ng-repeat="x in summary.alchemyTaxonomies|limitTo:3">
+                                                        <td>{{ x.key}}</td>
+                                                        <td>{{ x.value}}</td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                            <div class="table-responsive">          
+                                                <table class="table">
+                                                    <tr>
+                                                        <th colspan="2">Majestic Domain Topical Trustflow</th>
+                                                    </tr>
+                                                    <tr ng-repeat="x in summary.majesticTopics|limitTo:3">
+                                                        <td>{{ x.key}}</td>
+                                                        <td>{{ x.value}}</td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>                                    
                                     </div>
-                                    <div class="right">   
-                                        <div class="table-responsive">          
-                                            <table class="table">
-                                                <tr>
-                                                    <th colspan="2">Alchemy Archived Home Page Topic</th>
-                                                </tr>
-                                                <tr ng-repeat="x in summary.alchemyTaxonomies">
-                                                    <td>{{ x.key }}</td>
-                                                    <td>{{ x.value }}</td>
-                                                </tr>
-                                            </table>
+                                </div>
+                            </accordion-group>
+                        </accordion>
+                        <accordion class="topic-accordian">
+                            <accordion-group is-open="status.open">
+                                <accordion-heading>
+                                    Topic Detail<i class="pull-right glyphicon" ng-class="{'glyphicon glyphicon-minus-sign': status.open, 'glyphicon glyphicon-plus-sign': !status.open}"></i>
+                                </accordion-heading>
+                                <div>
+                                    <p>Domain Relevance to You</p>
+                                    <h3>Alchemy: {{ }} </h3>
+                                    <div> 
+                                        <div class="left">                                        
+                                            <div class="table-responsive">          
+                                                <table class="table">
+                                                    <tr>
+                                                        <th colspan="2">Alchemy Archived Home Page Keywords</th>
+                                                    </tr>
+                                                    <tr ng-repeat="x in summary.alchemyKeywords">
+                                                        <td>{{ x.key}}</td>
+                                                        <td>{{ x.value}}</td>
+                                                    </tr>
+                                                </table>
+                                            </div>
                                         </div>
-                                        <p>Link Relevance to Domain</p>
-                                        <h3>Majestic: {{ }} </h3>
-                                        <div class="table-responsive">          
-                                            <table class="table">
-                                                <tr>
-                                                    <th colspan="2">Majestic Domain Topical Trustflow</th>
-                                                </tr>
-                                                <tr ng-repeat="x in summary.majesticTopics">
-                                                    <td>{{ x.key }}</td>
-                                                    <td>{{ x.value }}</td>
-                                                </tr>
-                                            </table>
-                                        </div>
-                                    </div>                                    
+                                        <div class="right">   
+                                            <div class="table-responsive">          
+                                                <table class="table">
+                                                    <tr>
+                                                        <th colspan="2">Alchemy Archived Home Page Topic</th>
+                                                    </tr>
+                                                    <tr ng-repeat="x in summary.alchemyTaxonomies">
+                                                        <td>{{ x.key}}</td>
+                                                        <td>{{ x.value}}</td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                            <p>Link Relevance to Domain</p>
+                                            <h3>Majestic: {{ }} </h3>
+                                            <div class="table-responsive">          
+                                                <table class="table">
+                                                    <tr>
+                                                        <th colspan="2">Majestic Domain Topical Trustflow</th>
+                                                    </tr>
+                                                    <tr ng-repeat="x in summary.majesticTopics">
+                                                        <td>{{ x.key}}</td>
+                                                        <td>{{ x.value}}</td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>                                    
+                                    </div>
                                 </div>
-                            </div>
-                        </accordion-group>
-                    </accordion>
-                    <accordion>
-                        <accordion-group is-open="status.open">
-                            <accordion-heading>
-                                Links Detail<i class="pull-right glyphicon" ng-class="{'glyphicon glyphicon-minus-sign': status.open, 'glyphicon glyphicon-plus-sign': !status.open}"></i>
-                            </accordion-heading>
-                            <div>
-                                <div class="table-responsive">          
-                                    <table class="table">
-                                        <tr>
-                                            <td rowspan="2">Top {{ links.noOfBacklinks }} backlinks</td>
-                                            <td>Sum of Link TF: {{ links.sumLinkTF }}</td>
-                                            <td>Ave Link TF: {{ links.avgLinkTF }}</td>
-                                            <td>Home / Internal Link Ratio: {{ links.homeInternalRatio }}</td>
-                                            <td rowspan="2">Avg. Link Relevance To Domain Majestic TTF {{ links.avgLinkRel }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Sum of Link CF: {{ links.sumLinkCF }}</td>
-                                            <td>Ave Link CF: {{ links.avgLinkCF }}</td>
-                                            <td>Average Link Age: {{ links.averageLinkAge }}</td>
-                                        </tr>
-                                    </table>
+                            </accordion-group>
+                        </accordion>
+                        <accordion>
+                            <accordion-group is-open="status.open">
+                                <accordion-heading>
+                                    Links Detail<i class="pull-right glyphicon" ng-class="{'glyphicon glyphicon-minus-sign': status.open, 'glyphicon glyphicon-plus-sign': !status.open}"></i>
+                                </accordion-heading>
+                                <div>
+                                    <div class="table-responsive">          
+                                        <table class="table">
+                                            <tr>
+                                                <td rowspan="2">Top {{ links.noOfBacklinks}} backlinks</td>
+                                                <td>Sum of Link TF: {{ links.sumLinkTF}}</td>
+                                                <td>Ave Link TF: {{ links.avgLinkTF}}</td>
+                                                <td>Home / Internal Link Ratio: {{ links.homeInternalRatio}}</td>
+                                                <td rowspan="2">Avg. Link Relevance To Domain Majestic TTF {{ links.avgLinkRel}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Sum of Link CF: {{ links.sumLinkCF}}</td>
+                                                <td>Ave Link CF: {{ links.avgLinkCF}}</td>
+                                                <td>Average Link Age: {{ links.averageLinkAge}}</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div class="table-responsive">          
+                                        <table class="table">
+                                            <tr>
+                                                <th>Domain</th>
+                                                <th>Link TF</th>
+                                                <th>Dom TF</th>
+                                                <th>Link CF/TF</th>
+                                                <th>Dom CF/TF</th>
+                                                <th>Link Ref Dom</th>
+                                                <th>Dom Ref Dom</th>
+                                                <th>Link Age</th>
+                                                <th>Dom Age</th>
+                                                <th>Link Ref Gov/EDU</th>
+                                                <th>Dom Ref Gov/EDU</th>
+                                                <th>Anchor Text </th>
+                                                <th>Link Rel</th>
+                                                <th>Maj TTF Topic 0</th>
+                                                <th>TTF 0</th>
+                                            </tr>
+                                            <tr ng-repeat="x in links.backlinks">
+                                                <td>{{ x.tld}}</td>
+                                                <td>{{ x.linkTrustFlow}}</td>
+                                                <td>{{ x.domainTrustFlow}}</td>
+                                                <td>{{ x.linkTfcfRatio}}</td>
+                                                <td>{{ x.domainTfcfRatio}}</td>
+                                                <td>{{ x.linkRefDomains}}</td>
+                                                <td>{{ x.domainRefDomains}}</td>
+                                                <td>{{ x.linkAge}}</td>
+                                                <td>{{ x.domainAge}}</td>
+                                                <td>{{ x.linkRefGOVEDU}}</td>
+                                                <td>{{ x.domainRefGOVEDU}}</td>
+                                                <td>{{ x.anchorText}}</td>
+                                                <td>{{ x.linkRef}}</td>
+                                                <td>{{ x.mainMajesticTopic}}</td>
+                                                <td>{{ x.mainMajesticValue}}</td>
+                                            </tr>
+                                        </table>
+                                    </div>
                                 </div>
-                                <div class="table-responsive">          
-                                    <table class="table">
-                                        <tr>
-                                            <th>Domain</th>
-                                            <th>Link TF</th>
-                                            <th>Dom TF</th>
-                                            <th>Link CF/TF</th>
-                                            <th>Dom CF/TF</th>
-                                            <th>Link Ref Dom</th>
-                                            <th>Dom Ref Dom</th>
-                                            <th>Link Age</th>
-                                            <th>Dom Age</th>
-                                            <th>Link Ref Gov/EDU</th>
-                                            <th>Dom Ref Gov/EDU</th>
-                                            <th>Anchor Text </th>
-                                            <th>Link Rel</th>
-                                            <th>Maj TTF Topic 0</th>
-                                            <th>TTF 0</th>
-                                        </tr>
-                                        <tr ng-repeat="x in links.backlinks">
-                                            <td>{{ x.tld }}</td>
-                                            <td>{{ x.linkTrustFlow }}</td>
-                                            <td>{{ x.domainTrustFlow }}</td>
-                                            <td>{{ x.linkTfcfRatio }}</td>
-                                            <td>{{ x.domainTfcfRatio }}</td>
-                                            <td>{{ x.linkRefDomains }}</td>
-                                            <td>{{ x.domainRefDomains }}</td>
-                                            <td>{{ x.linkAge }}</td>
-                                            <td>{{ x.domainAge }}</td>
-                                            <td>{{ x.linkRefGOVEDU }}</td>
-                                            <td>{{ x.domainRefGOVEDU }}</td>
-                                            <td>{{ x.anchorText }}</td>
-                                            <td>{{ x.linkRef }}</td>
-                                            <td>{{ x.mainMajesticTopic }}</td>
-                                            <td>{{ x.mainMajesticValue }}</td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
-                        </accordion-group>
-                    </accordion>
-                </div>
+                            </accordion-group>
+                        </accordion>
+                    </div>
                 </section>
             </div>
         </div>
