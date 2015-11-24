@@ -32,13 +32,16 @@ angular.module('fastrankApp')
 
             $scope.cartInit = function () {
                 $scope.cartDomains = [];
+                $rootScope.cartDomains = [];
                 /* To get domains which are already added into the cart */
                 GetCart.get().$promise.then(function (res) {
                     $scope.cartDomains = res;
                     $rootScope.cartDomains = res;
+                }). catch(function() {
+                    $rootScope.cartDomains = [];
                 });
-            };
-            $scope.cartInit();
+            }; 
+           $scope.cartInit();
 
             $scope.main = {};
             $scope.main.currentuser = null;
