@@ -39,7 +39,7 @@
 				<tbody>
 					<tr ng-repeat-start="price in prices" ng-class="{'selected':$index == selectedRow}">
 						<td width="16%" class="expandCredit col-md-2"><strong>{{price.level}}</strong></td>
-						<td width="16%" class="expandCredit col-md-2">${{price.price}}</td>
+						<td width="16%" class="expandCredit col-md-2">${{price.price | number: 0}}</td>
 						<td width="16%" class="expandCredit col-md-2">{{price.credits}}</td>
 						<td width="16%" class="expandCredit col-md-2">{{price.credits / price.price | number:2}}</td>
 						<td width="16%" class="col-md-2"><a href="" ng-click="purchase(price)">Get {{price.level}}</a></td>
@@ -50,7 +50,7 @@
 								<table width="100%">
 									<tr ng-repeat="addon in price.addons">
 										<td width="16%" class="col-md-2"><em>{{price.level}} Addon {{addon.addonLevel}}</em></td>
-										<td width="16%" class="col-md-2">${{addon.price}}</td>
+										<td width="16%" class="col-md-2">${{addon.price | number: 0}}</td>
 										<td width="16%" class="col-md-2">{{addon.credits}}</td>
 										<td width="16%" class="col-md-2"></td>
 										<td width="16%" class="col-md-2"><a href="" ng-click="purchaseAddon(addon)">Get {{price.level}} Addon {{addon.addonLevel}}</a></td>
