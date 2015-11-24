@@ -73,8 +73,8 @@
                                 <td ng-if="isAuthenticated()"><input id="addToCart{{$index}}" type="checkbox" ng-change="addToCart(rec)" ng-model="rec.selected" /><label for="addToCart{{$index}}"></label></td>
                                 <td><a ng-if="rec.credits > 0" ng-bootbox-confirm="Please confirm you want to FastBuy this domain" ng-bootbox-confirm-action="fastBuy(rec, $index)" backdrop="true">Fast Buy</a></td>
                                 <td>{{ rec.rootURL}}</td>
-                                <td ng-if="rec.credits > 0 && rec.basePrice > rec.actualPrice"><span class="actualPrice">${{ rec.actualPrice | number:0 }}</span> <del>${{ rec.basePrice | number:0 }}</del></td>
-                                <td ng-if="rec.credits > 0 && rec.basePrice <= rec.actualPrice"><span class="actualPrice">${{ rec.actualPrice | number:0 }}</span></td>
+                                <td ng-if="rec.credits > 0 && rec.basePrice > rec.actualPrice"><span class="actualPrice">${{ rec.actualPrice | number:2 }}</span> <del>${{ rec.basePrice | number:2 }}</del></td>
+                                <td ng-if="rec.credits > 0 && rec.basePrice <= rec.actualPrice"><span class="actualPrice">${{ rec.actualPrice | number:2 }}</span></td>
                                 <td ng-if="rec.credits > 0">{{ rec.credits}}</td>
                                 <td ng-if="rec.credits == 0"><span class="actualPrice">$--.--</span></td>
                                 <td ng-if="rec.credits == 0">--</td>
