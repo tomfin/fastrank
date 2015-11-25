@@ -115,31 +115,49 @@ angular.module('fastrankApp')
                 $scope.links = '';
                 $scope.resultInit = function () {
                     $scope.cartDomains = $rootScope.cartDomains;
-
                     $scope.result = $stateParams.result;
-
-                    if ($scope.cartDomains != null && $scope.cartDomains.length > 0) { //jshint ignore:line   
+                    if ($scope.cartDomains !== null && $scope.cartDomains.length > 0) { 
+                        var domainArr = [];
+                        var cartArr = [];
                         angular.forEach($scope.result, function (obj) {
                             for (var i = 0; i < $scope.cartDomains.length; i++) {
                                 if (obj.id === $scope.cartDomains[i].publicId) {
                                     obj.selected = true;
-                                    $scope.selectedAll = true;
-                                } else {
-                                    $scope.selectedAll = false;
+                                } 
+                                if(cartArr.indexOf($scope.cartDomains[i].publicId) === -1) {
+                                    cartArr.push($scope.cartDomains[i].publicId);
                                 }
                             }
                         });
+                        
+                        angular.forEach($scope.result, function (ele, key) { //jshint ignore:line   
+                            domainArr.push($scope.result[key].id);
+                        });
+                        
+                        var domainCounter = 0;
+                        angular.forEach(domainArr, function (domain, i) {
+                            if (cartArr.indexOf(domainArr[i]) > -1) {
+                                domainCounter++;
+                            }
+                        });
+
+                        if (domainCounter === domainArr.length) {
+                            $scope.checkAllNone = true;
+                        } else {
+                            $scope.checkAllNone = false;
+                        }
                     } else {
-                        $scope.selectedAll = false;
+                        $scope.checkAllNone = false;
                     }
                 };
+
                 $scope.resultInit();
 
-                $scope.parantCheck = '';
-
-                $scope.checkAll = function (status) {
+                $scope.checkAll = function () {
+                    $scope.checkAllNone = !$scope.checkAllNone;
+                    $scope.cartDomains = [];
                     angular.forEach($scope.result, function (domain) {
-                        domain.selected = status;
+                        domain.selected = $scope.checkAllNone;
                         if (domain.selected === true) { // To add into cart
                             var cartObj = {};
                             cartObj.publicId = domain.id;
@@ -177,9 +195,32 @@ angular.module('fastrankApp')
 
                         ModifyCart.cart($scope.cartDomains).$promise.then(function (res) {
                             $rootScope.cartDomains = res;
+                            var domainArr = [];
+                            var cartArr = [];
+
+                            angular.forEach($scope.result, function (foundDomain) {
+                                domainArr.push(foundDomain.id);
+                            });
+                            angular.forEach(res, function (cartDomain) {
+                                cartArr.push(cartDomain.publicId);
+                            });
+                                                        
+                            var domainCounter = 0;
+                            angular.forEach(domainArr, function(domain, i) {
+                                if(cartArr.indexOf(domainArr[i]) > -1) {
+                                    domainCounter++; 
+                                }
+                            });
+                            
+                            if(domainCounter === domainArr.length) {
+                                $scope.checkAllNone = true;
+                            } else {
+                                $scope.checkAllNone = false;
+                            }
                         }).catch(function (err) {
                             $log.error(err);
                         });
+
                     } else if (domain.selected === false) { // To remove from cart
                         angular.forEach($scope.cartDomains, function (obj) {
                             if (obj.publicId === domain.id) {
@@ -189,9 +230,11 @@ angular.module('fastrankApp')
 
                         ModifyCart.cart($scope.cartDomains).$promise.then(function (res) {
                             $rootScope.cartDomains = res;
+                            $scope.checkAllNone = false;
                         }).catch(function (err) {
                             $log.error(err);
                         });
+
                     }
 
                 };
@@ -237,7 +280,7 @@ angular.module('fastrankApp')
                 };
 
             }])
-        .directive('frCollapse', [function () {
+            .directive('frCollapse', [function () {
                 return {
                     restrict: 'A',
                     link: function (scope, element) {
