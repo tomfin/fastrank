@@ -348,3 +348,35 @@ input[id^=addToCart]:checked + label::after {
 body.modal-open {
     overflow: visible;
 }
+.credit-container, .credit-container div {
+    float: left;
+}
+.credit-container span {
+    display: block!important; line-height: inherit!important; text-align:center; margin: 0 5px; padding:0px 0!important
+}
+.item-has-cart .shopping-cart{
+    line-height: inherit; 
+    padding: 0 12px!important;
+}
+.item-has-cart .shopping-cart .cart-icon{
+    margin: -2px 8px!important;
+}
+.item-has-cart .shopping-cart .credit-container div{
+    padding:0 0 0 5px
+}
+.item-has-cart .shopping-cart .credit-container div:first-of-type{
+    padding:0 5px 0 0!important; 
+    border-right:2px solid #1a7ab0; 
+}
+.item-has-cart .shopping-cart .credit-container .cart-label {
+    font-size: 13px;
+    font-weight: 500; line-height: 15px
+}
+.item-has-cart .shopping-cart {
+    line-height: inherit
+}
+@media all and (min-width: 992px) {
+ .fhmm .navbar-collapse .navbar-nav > li + li {
+    margin-left: 23px;
+  }
+}

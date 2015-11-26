@@ -9,7 +9,9 @@
  */
 angular.module('fastrankApp')
         .controller('MainCtrl', function ($scope, $location, $cookieStore, $cookies, $rootScope, $window, $state, Auth, Principal, RegisterInterest, ContactUs, GetCart) {
-
+            $scope.account = {};
+            $rootScope.account = {};
+    
             $scope.currentPage = $window.location;
 
             $scope.isHome = function (path) { // jshint ignore:line
@@ -76,6 +78,12 @@ angular.module('fastrankApp')
                 $scope.cartDomains.total = creditsTotal;
 //        $scope.cartDomains.domains = $scope.cartDomains;
             }, true);
+            
+            $rootScope.$watch(function() {
+                return $rootScope.account;
+            }, function() {
+                $scope.account = $rootScope.account;
+            });
 
             $scope.logout = function () {
                 Auth.logout();
