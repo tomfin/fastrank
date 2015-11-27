@@ -154,17 +154,35 @@ angular.module('fastrankApp')
                 $scope.resultInit();
 
                 $scope.checkAll = function () {
+                    var cartArr = [];
+                    angular.copy($scope.cartDomains, cartArr);                  
                     $scope.checkAllNone = !$scope.checkAllNone;
-                    $scope.cartDomains = [];
                     angular.forEach($scope.result, function (domain) {
+                        var dstatus = 1;
                         domain.selected = $scope.checkAllNone;
                         if (domain.selected === true) { // To add into cart
-                            var cartObj = {};
-                            cartObj.publicId = domain.id;
-                            cartObj.rootURL = domain.rootURL;
-                            cartObj.trustFlow = domain.domTF;
-                            cartObj.credits = domain.credits;
-                            $scope.cartDomains.push(cartObj);
+                            if(cartArr.length !== 0) {
+                                angular.forEach($scope.cartDomains, function (obj) {
+                                    if(obj.publicId === domain.id) {
+                                        dstatus = 0;       
+                                    } 
+                                });
+                                if(dstatus) {
+                                    var cartObj = {};
+                                    cartObj.publicId = domain.id;
+                                    cartObj.rootURL = domain.rootURL;
+                                    cartObj.trustFlow = domain.domTF;
+                                    cartObj.credits = domain.credits;
+                                    $scope.cartDomains.push(cartObj);    
+                                }
+                            } else {
+                                var cartObj = {};
+                                cartObj.publicId = domain.id;
+                                cartObj.rootURL = domain.rootURL;
+                                cartObj.trustFlow = domain.domTF;
+                                cartObj.credits = domain.credits;
+                                $scope.cartDomains.push(cartObj);
+                            }
                         } else if (domain.selected === false) { // To remove from cart
                             angular.forEach($scope.cartDomains, function (obj) {
                                 if (obj.publicId === domain.id) {
