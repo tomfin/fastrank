@@ -6,7 +6,7 @@ angular.module('fastrankApp')
                     .state('cart-domain', {
                         parent: 'site',
                         url: '/cart-domain',
-                        params: {id: ''},
+                        params: {publicId: ''},
                         data: {
                             roles: [],
                             pageTitle: 'searchResult.title'

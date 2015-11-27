@@ -48,7 +48,7 @@ angular.module('fastrankApp')
                 
                 $scope.siteBuild = function (record) {
                 	var domain = {};
-                	domain.publicId = record.id;
+                	domain.publicId = record.publicId;
                 	Domains.build(domain).$promise.then(function () {
                 		console.log('D> Build request submitted: ', record.rootURL);
                         $scope.siteBuildSuccess = record.rootURL;

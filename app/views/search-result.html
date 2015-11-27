@@ -84,7 +84,7 @@
                                 <td>{{ rec.domRel}}</td>
                                 <td ng-show="!rec.expanded" ng-click="rec.expanded = !rec.expanded" class="more-link"><a>More</a></td>
                                 <td ng-show="rec.expanded" ng-click="rec.expanded = !rec.expanded" class="more-link"><a>Less</a></td>
-                                <td><a ng-click="detailInfo({{ 'rec.id'}})">All</a></td>
+                                <td><a ng-click="detailInfo({{ 'rec.publicId'}})">All</a></td>
                             </tr>
                             <tr ng-repeat-end fr-collapse class="more-info">
                                 <td colspan="12" class="more-info-td">

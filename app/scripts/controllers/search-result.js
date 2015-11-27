@@ -121,7 +121,7 @@ angular.module('fastrankApp')
                         var cartArr = [];
                         angular.forEach($scope.result, function (obj) {
                             for (var i = 0; i < $scope.cartDomains.length; i++) {
-                                if (obj.id === $scope.cartDomains[i].publicId) {
+                                if (obj.publicId === $scope.cartDomains[i].publicId) {
                                     obj.selected = true;
                                 } 
                                 if(cartArr.indexOf($scope.cartDomains[i].publicId) === -1) {
@@ -131,7 +131,7 @@ angular.module('fastrankApp')
                         });
                         
                         angular.forEach($scope.result, function (ele, key) { //jshint ignore:line   
-                            domainArr.push($scope.result[key].id);
+                            domainArr.push($scope.result[key].publicId);
                         });
                         
                         var domainCounter = 0;
@@ -163,13 +163,13 @@ angular.module('fastrankApp')
                         if (domain.selected === true) { // To add into cart
                             if(cartArr.length !== 0) {
                                 angular.forEach($scope.cartDomains, function (obj) {
-                                    if(obj.publicId === domain.id) {
+                                    if(obj.publicId === domain.publicId) {
                                         dstatus = 0;       
                                     } 
                                 });
                                 if(dstatus) {
                                     var cartObj = {};
-                                    cartObj.publicId = domain.id;
+                                    cartObj.publicId = domain.publicId;
                                     cartObj.rootURL = domain.rootURL;
                                     cartObj.trustFlow = domain.domTF;
                                     cartObj.credits = domain.credits;
@@ -177,7 +177,7 @@ angular.module('fastrankApp')
                                 }
                             } else {
                                 var cartObj = {};
-                                cartObj.publicId = domain.id;
+                                cartObj.publicId = domain.publicId;
                                 cartObj.rootURL = domain.rootURL;
                                 cartObj.trustFlow = domain.domTF;
                                 cartObj.credits = domain.credits;
@@ -185,7 +185,7 @@ angular.module('fastrankApp')
                             }
                         } else if (domain.selected === false) { // To remove from cart
                             angular.forEach($scope.cartDomains, function (obj) {
-                                if (obj.publicId === domain.id) {
+                                if (obj.publicId === domain.publicId) {
                                     $scope.cartDomains.splice($scope.cartDomains.indexOf(obj), 1);
                                 }
                             });
@@ -205,7 +205,7 @@ angular.module('fastrankApp')
                 $scope.addToCart = function (domain) {
                     if (domain.selected === true) { // To add into cart
                         var cartObj = {};
-                        cartObj.publicId = domain.id;
+                        cartObj.publicId = domain.publicId;
                         cartObj.rootURL = domain.rootURL;
                         cartObj.trustFlow = domain.domTF;
                         cartObj.credits = domain.credits;
@@ -217,7 +217,7 @@ angular.module('fastrankApp')
                             var cartArr = [];
 
                             angular.forEach($scope.result, function (foundDomain) {
-                                domainArr.push(foundDomain.id);
+                                domainArr.push(foundDomain.publicId);
                             });
                             angular.forEach(res, function (cartDomain) {
                                 cartArr.push(cartDomain.publicId);
@@ -241,7 +241,7 @@ angular.module('fastrankApp')
 
                     } else if (domain.selected === false) { // To remove from cart
                         angular.forEach($scope.cartDomains, function (obj) {
-                            if (obj.publicId === domain.id) {
+                            if (obj.publicId === domain.publicId) {
                                 $scope.cartDomains.splice($scope.cartDomains.indexOf(obj), 1);
                             }
                         });
@@ -259,7 +259,7 @@ angular.module('fastrankApp')
 
                 $scope.fastBuy = function (result, index) {
                     var obj = {};
-                    obj.publicId = result.id;
+                    obj.publicId = result.publicId;
                     obj.credits = result.credits;
                     FastBuy.buy(obj).$promise.then(function () {
                         $scope.fastBuySuccess = 'SUCCESS';
@@ -280,9 +280,9 @@ angular.module('fastrankApp')
                     jQuery('html, body').delay(1000).animate({scrollTop: jQuery('.error').offset().top - 100}, 1000); //jshint ignore:line
                 };
 
-                $scope.detailInfo = function (id) {
+                $scope.detailInfo = function (publicId) {
                     var domain = {};
-                    domain.id = id;
+                    domain.id = publicId;
                     Summary.get(domain).$promise.then(function (summary) {
                         $scope.summary = summary;
                     }).catch(function (err) {

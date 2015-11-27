@@ -9,7 +9,7 @@
  */
 angular.module('fastrankApp')
         .controller('cartDomainCtrl', ['$scope', '$log', '$stateParams', 'CartDomainSer', 'Summary', 'Links', '$rootScope', 'FastBuy', function ($scope, $log, $stateParams, CartDomainSer, Summary, Links, $rootScope, FastBuy) {
-                var summeryDomain = $stateParams.id;
+                var summeryDomain = $stateParams.publicId;
                 $scope.summary = '';
                 $scope.links = '';
 
@@ -30,9 +30,9 @@ angular.module('fastrankApp')
                                 }
                         );
 
-                $scope.detailInfo = function (id) {
+                $scope.detailInfo = function (publicId) {
                     var domain = {};
-                    domain.id = id;
+                    domain.id = publicId;
                     Summary.get(domain).$promise.then(function (summary) {
                         $scope.summary = summary;
                     }).catch(function (err) {
@@ -54,7 +54,7 @@ angular.module('fastrankApp')
                     $log.info(result);
                     $log.info(index);
                     var obj = {};
-                    obj.publicId = result.id;
+                    obj.publicId = result.publicId;
                     obj.credits = result.credits;
                     FastBuy.buy(obj).$promise.then(function () {
                         $scope.fastBuySuccess = 'SUCCESS';
