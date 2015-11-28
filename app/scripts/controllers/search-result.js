@@ -110,7 +110,7 @@ angular.module('fastrankApp')
                 } else {
                     $scope.result = $stateParams.result;
                 }
-
+ 
                 $scope.summary = '';
                 $scope.links = '';
                 $scope.resultInit = function () {
@@ -176,7 +176,7 @@ angular.module('fastrankApp')
                                     $scope.cartDomains.push(cartObj);    
                                 }
                             } else {
-                                var cartObj = {};
+                                var cartObj = {}; //jshint ignore:line
                                 cartObj.publicId = domain.publicId;
                                 cartObj.rootURL = domain.rootURL;
                                 cartObj.trustFlow = domain.domTF;
