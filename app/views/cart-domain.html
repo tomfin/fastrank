@@ -25,8 +25,12 @@
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true"><i class="fa fa-times"></i></span></button>
                         <strong>Error!</strong> You don't have sufficient credit to purchase. Please <a href="" ui-sref="credits">buy some credit</a> first and then purchase again.
                     </div>
+                    <div ng-if="cartDomains.length == 0" class="alert alert-danger alert-dismissible fade in text-uppercase">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true"><i class="fa fa-times"></i></span></button>
+                        <span class="product-desc-alt">Shopping cart empty. <a ui-sref="search">Search for some domains.</a></span>
+                    </div>
                 </div>
-                <div class="row" ng-if="!noResultFoundError && !searchError">
+                <div class="row" ng-if="!noResultFoundError && !searchError && cartDomains.length">
                     <div class="table-responsive">          
                         <table class="table">
                             <tr>
