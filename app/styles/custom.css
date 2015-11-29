@@ -313,6 +313,11 @@ input[id^=addToCart] {
 }
 
 */
+input[type=checkbox], input[type=radio] {
+    vertical-align: middle;
+    position: relative;
+    bottom: 1px;
+}
 
 input[id^=addToCart] + label::before {
 	content: ' ';
@@ -340,11 +345,6 @@ input[id^=addToCart]:checked + label::after {
   opacity: 1;
 }
 
-.cartUnselected {
-}
-
-.cartSelected {
-}
 body.modal-open {
     overflow: visible;
 }
