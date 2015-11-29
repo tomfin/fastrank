@@ -51,11 +51,11 @@
                         <td>{{ rec.credits}}</td>
                         <td>{{ rec.aggLinkTF}}</td>
                         <td>{{ rec.domTF}}</td>
-                        <td ng-show="!rec.siteInquiryMade" ng-click="siteBuild(rec)" class="more-link"><a>Make Inquiry</a></td>
+                        <td ng-show="!rec.siteInquiryMade" ng-click="siteBuild(rec)" class="more-link"><a class="btn btn-sm btn-primary">Make Inquiry</a></td>
                         <td ng-show="rec.siteInquiryMade">Inqury Made</td>
-                        <td ng-show="!rec.expanded" ng-click="rec.expanded = !rec.expanded" class="more-link"><a>More</a></td>
-                        <td ng-show="rec.expanded" ng-click="rec.expanded = !rec.expanded" class="more-link"><a>Less</a></td>
-                        <td><a>All</a></td>
+                        <td ng-show="!rec.expanded" ng-click="rec.expanded = !rec.expanded" class="more-link"><a class="btn btn-sm btn-success btn-has-icon"><i class="fa fa-chevron-circle-down"></i>More</a></td>
+                        <td ng-show="rec.expanded" ng-click="rec.expanded = !rec.expanded" class="more-link"><a class="btn btn-sm btn-success btn-has-icon"><i class="fa fa-chevron-circle-up"></i>Less</a></td>
+                        <td><a class="btn btn-sm btn-success">All</a></td>
                     </tr>
                     <tr ng-show="rec.expanded" ng-repeat-end fr-collapse class="more-info">
                         <td colspan="12" class="more-info-td">
