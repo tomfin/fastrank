@@ -8,7 +8,7 @@
  * Controller of the fastrankApp
  */
 angular.module('fastrankApp')
-        .controller('DomainsCtrl', ['$scope', '$window', 'Domains', function ($scope, $window, Domains) {
+        .controller('DomainsCtrl', ['$scope', '$window', 'Domains', 'Summary', 'Links', '$log', function ($scope, $window, Domains, Summary, Links, $log) {
 
                 $scope.domains = [];
                 Domains.get().$promise.then(function (domainList) {
@@ -33,36 +33,51 @@ angular.module('fastrankApp')
                 };
 
                 $scope.changeSorting = function (column) {
-                    console.log(column);
                     var sort = $scope.sort;
 
                     if (sort.column === column) {
-                        console.log('if');
                         sort.descending = !sort.descending;
                     } else {
-                        console.log('else');
                         sort.column = column;
                         sort.descending = false;
                     }
                 };
-                
+
                 $scope.siteBuild = function (record) {
-                	var domain = {};
-                	domain.publicId = record.publicId;
-                	Domains.build(domain).$promise.then(function () {
-                		console.log('D> Build request submitted: ', record.rootURL);
+                    var domain = {};
+                    domain.publicId = record.publicId;
+                    Domains.build(domain).$promise.then(function () {
+                        console.log('D> Build request submitted: ', record.rootURL);
                         $scope.siteBuildSuccess = record.rootURL;
                         $scope.siteBuildFailure = null;
                         Domains.get().$promise.then(function (domainList) {
-                        	$scope.domains = domainList;
+                            $scope.domains = domainList;
                         });
-                	}, function() {
-                		$scope.siteBuildSuccess = null;
-                		$scope.siteBuildFailure = 'ERROR';
-                	});
+                    }, function () {
+                        $scope.siteBuildSuccess = null;
+                        $scope.siteBuildFailure = 'ERROR';
+                    });
                 };
 
+                $scope.detailInfo = function (publicId) {
+                    var domain = {};
+                    domain.id = publicId;
+                    Summary.get(domain).$promise.then(function (summary) {
+                        $scope.summary = summary;
+                    }).catch(function (err) {
+                        $log.error(err);
+                    });
+                    Links.get(domain).$promise.then(function (links) {
+                        $scope.links = links;
+                    }).catch(function (err) {
+                        $log.error(err);
+                    });
+
+                    jQuery('html, body').delay(1000).animate({scrollTop: jQuery('.detail-info').offset().top - 65}, 1000); //jshint ignore:line
+                };
             }]);
+        
+        
 
 
 
