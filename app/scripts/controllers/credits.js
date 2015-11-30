@@ -210,7 +210,7 @@ angular.module('fastrankApp')
 }]);
 
 angular.module('fastrankApp')
-.directive('frCollapse', [function () {
+.directive('frCreditCollapse', [function () {
 	return {
 		restrict: 'A',
 		link: function (scope, element) {
