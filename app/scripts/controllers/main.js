@@ -132,4 +132,15 @@ angular.module('fastrankApp')
                     enable: true // enable scrolling buttons by default
                 }
             };
-        });
+        })
+        .directive('frCollapse', [function () {
+                return {
+                    restrict: 'A',
+                    link: function (scope, element) {
+                        var p = jQuery(element.prev('.domain-row').find('.more-link')); //jshint ignore:line
+                        p.click(function () {
+                            jQuery(element).find('.toggle').slideToggle('slow'); //jshint ignore:line
+                        });
+                    }
+                };
+            }]);

@@ -297,15 +297,4 @@ angular.module('fastrankApp')
                     jQuery('html, body').delay(1000).animate({scrollTop: jQuery('.detail-info').offset().top - 65}, 1000); //jshint ignore:line
                 };
 
-            }])
-            .directive('frCollapse', [function () {
-                return {
-                    restrict: 'A',
-                    link: function (scope, element) {
-                        var p = jQuery(element.prev('.domain-row').find('.more-link')); //jshint ignore:line
-                        p.click(function () {
-                            jQuery(element).find('.toggle').slideToggle('slow'); //jshint ignore:line
-                        });
-                    }
-                };
             }]);
