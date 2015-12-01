@@ -19,17 +19,15 @@ angular.module('fastrankApp')
                 angular.forEach(cartDomains, function (value) {
                     this.push(value.publicId);
                 }, domains);
-                console.log(domains);
+                $log.info(domains);
 
-                CartDomainSer.search({ids: {ids: domains}}).
-                        $promise.then(
-                                function (success) {
-                                    $scope.result = success;
-                                },
-                                function (error) {
-                                    $log.info(error);
-                                }
-                        );
+                CartDomainSer.search({ids: {ids: domains}}).$promise.then(function (success) {
+                    $log.info('Response:');
+                    $log.info(success);
+                    $scope.result = success;
+                }).catch(function(error) {
+                    $log.error(error);
+                });                       
 
                 $scope.detailInfo = function (publicId) {
                     var domain = {};

@@ -47,7 +47,10 @@
                                 <th></th>
                                 <th></th>
                                 <th>More Info</th>
-                                <th>Credits</th>
+                                <th ng-click="sortType = 'credits';sortReverse = !sortReverse">Credits
+                                    <span ng-show="sortType == 'credits' && !sortReverse" class="fa fa-caret-down"></span>
+                                    <span ng-show="sortType == 'credits' && sortReverse" class="fa fa-caret-up"></span>
+                                </th>
                             </tr>
                             <tr ng-if="cartDomains.length == 0">
                                 <td>
@@ -55,7 +58,7 @@
                                     <span class="product-desc-alt"> <a ui-sref="search">Search for some domains.</a></span>
                                 </td>
                             </tr>
-                            <tr ng-if="cartDomains.length > 0" ng-repeat="domain in cartDomains" class="domain-row">
+                            <tr ng-if="cartDomains.length > 0" ng-repeat="domain in cartDomains|orderBy:sortType:sortReverse" class="domain-row">
                                 <td ng-click="removeDomain(domain)" class="more-link"><a>Remove</a></td>
                                 <td>{{domain.rootURL}}</td>
                                 <td ng-click="" class="more-link"><a ui-sref='cart-domain({publicId: domain.publicId})'>All</a></td>

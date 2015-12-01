@@ -32,17 +32,6 @@ angular.module('fastrankApp')
                     descending: false
                 };
 
-                $scope.changeSorting = function (column) {
-                    var sort = $scope.sort;
-
-                    if (sort.column === column) {
-                        sort.descending = !sort.descending;
-                    } else {
-                        sort.column = column;
-                        sort.descending = false;
-                    }
-                };
-
                 $scope.siteBuild = function (record) {
                     var domain = {};
                     domain.publicId = record.publicId;
