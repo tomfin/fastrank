@@ -380,3 +380,19 @@ body.modal-open {
     margin-left: 23px;
   }
 }
+.more-info-td .form-group {
+    margin: 0;
+}
+.more-info-td .form-group select.form-control {
+    padding: 5px;
+    height: auto;
+}
+.more-info-td table td {
+    border-bottom: 1px solid;
+    padding: 5px;
+    vertical-align: text-top;
+}
+.more-info-td .credit-detail table td {
+    border: none; 
+    vertical-align: middle; 
+}

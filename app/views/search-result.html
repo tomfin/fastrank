@@ -110,8 +110,7 @@
                                             <tr>
                                                 <td class="col-md-2"><strong>Ref Dom:</strong> {{ rec.refDom}}</td>
                                                 <td class="col-md-3"><strong>EDU/Gov:</strong> {{ rec.edugovCount}}</td>
-                                                <td class="col-md-3"></td>
-                                                <td class="col-md-4 cell-right"><h5><a ng-if="rec.credits > 0" class="btn btn-sm btn-primary btn-has-icon" ng-bootbox-confirm="Please confirm you want to FastBuy this domain" ng-bootbox-confirm-action="fastBuy(rec, $index)" backdrop="true"><i class="fa fa-bolt"></i>Fast Buy</a></h5></td>
+                                                <td class="col-md-4 cell-left" colspan="2"><h5><a ng-if="rec.credits > 0" class="btn btn-sm btn-primary btn-has-icon" ng-bootbox-confirm="Please confirm you want to FastBuy this domain" ng-bootbox-confirm-action="fastBuy(rec, $index)" backdrop="true"><i class="fa fa-bolt"></i>Fast Buy</a></h5></td>
                                             </tr>
                                         </table>
                                     </div>

@@ -19,6 +19,7 @@ angular.module('fastrankApp')
                 angular.forEach(cartDomains, function (value) {
                     this.push(value.publicId);
                 }, domains);
+                console.log(domains);
 
                 CartDomainSer.search({ids: {ids: domains}}).
                         $promise.then(
