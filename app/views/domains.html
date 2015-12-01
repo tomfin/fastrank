@@ -17,8 +17,12 @@
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true"><i class="fa fa-times"></i></span></button>
                 <strong>Success!</strong> We have received your inquiry for domain <strong>{{siteBuildSuccess}}</strong> and will be in touch with you shortly. 
             </div>
+            <div ng-if="domains.length == 0" class="alert alert-warning alert-dismissible fade in text-uppercase">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true"><i class="fa fa-times"></i></span></button>
+                <span class="product-desc-alt">You didn't purchased any domain yet. <a ui-sref="search">Search for some domains.</a></span>
+            </div>
 
-            <div class="table-responsive">          
+            <div class="table-responsive" ng-if="domains.length > 0">          
                 <table class="table">
                     <tr>
                         <th ng-click="sortType = 'rootURL';
