@@ -50,6 +50,7 @@ angular.module('fastrankApp')
 
                 $scope.detailInfo = function (publicId) {
                     var domain = {};
+                    domain.pur = true;
                     domain.id = publicId;
                     Summary.get(domain).$promise.then(function (summary) {
                         $scope.summary = summary;

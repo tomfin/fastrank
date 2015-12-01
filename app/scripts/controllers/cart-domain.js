@@ -19,11 +19,8 @@ angular.module('fastrankApp')
                 angular.forEach(cartDomains, function (value) {
                     this.push(value.publicId);
                 }, domains);
-                $log.info(domains);
 
-                CartDomainSer.search({ids: {ids: domains}}).$promise.then(function (success) {
-                    $log.info('Response:');
-                    $log.info(success);
+                CartDomainSer.search({ids: domains}).$promise.then(function (success) {
                     $scope.result = success;
                 }).catch(function(error) {
                     $log.error(error);
@@ -50,8 +47,6 @@ angular.module('fastrankApp')
                 }
 
                 $scope.fastBuy = function (result, index) {
-                    $log.info(result);
-                    $log.info(index);
                     var obj = {};
                     obj.publicId = result.publicId;
                     obj.credits = result.credits;
