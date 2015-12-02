@@ -40,12 +40,12 @@
 				<tbody>
 					<tr ng-repeat-start="price in prices" ng-class="{'selected':$index == selectedRow}">
 					    <td ng-show="!price.expanded" ng-click="price.expanded = !price.expanded" width="5%" class="expandCredit col-md-1"><i class="fa fa-plus-square"></i></td>
-                        <td ng-show="price.expanded" ng-click="price.expanded = !price.expanded" width="5%" class="expandCredit col-md-1"><i class="fa fa-minus-square"></i></td>
-						<td ng-click="price.expanded = !price.expanded" width="16%" class="expandCredit col-md-2"><strong>{{price.level}}</strong></td>
-						<td ng-click="price.expanded = !price.expanded" width="16%" class="expandCredit col-md-2">${{price.price | number: 0}}</td>
-						<td ng-click="price.expanded = !price.expanded" width="16%" class="expandCredit col-md-2">{{price.credits}}</td>
-						<td ng-click="price.expanded = !price.expanded" width="16%" class="expandCredit col-md-2">{{price.credits / price.price | number:2}}</td>
-						<td ng-click="price.expanded = !price.expanded" width="16%" class="col-md-2"><a href="" ng-click="purchase(price)" class="btn btn-sm btn-primary">Get {{price.level}}</a></td>
+                                            <td ng-show="price.expanded" ng-click="price.expanded = !price.expanded" width="5%" class="expandCredit col-md-1"><i class="fa fa-minus-square"></i></td>
+                                            <td ng-click="price.expanded = !price.expanded" width="16%" class="expandCredit col-md-2"><strong>{{price.level}}</strong></td>
+                                            <td ng-click="price.expanded = !price.expanded" width="16%" class="expandCredit col-md-2">${{price.price | number: 0}}</td>
+                                            <td ng-click="price.expanded = !price.expanded" width="16%" class="expandCredit col-md-2">{{price.credits}}</td>
+                                            <td ng-click="price.expanded = !price.expanded" width="16%" class="expandCredit col-md-2">{{price.credits / price.price | number:2}}</td>
+                                            <td width="16%" class="col-md-2"><a href="" ng-click="purchase(price)" class="btn btn-sm btn-primary">Get {{price.level}}</a></td>
 					</tr>
 					<tr fr-credit-collapse class="animate-repeat"  ng-repeat-end="">
 						<td colspan="6" class="more-info-td">
