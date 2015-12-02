@@ -332,7 +332,7 @@ input[id^=addToCart] + label::before {
 input[id^=addToCart] + label::after {
 	content: ' ';
 	position: relative;
-	left: 13px;
+	left: 27px;
 	width: 51px;
 	height: 51px;
 	display: block;
@@ -343,6 +343,12 @@ input[id^=addToCart] + label::after {
 
 input[id^=addToCart]:checked + label::after {
   opacity: 1;
+}
+
+@media all and (max-width: 640px) {
+    input[id^=addToCart] + label::after {
+        left: 14px;
+    }
 }
 
 body.modal-open {
