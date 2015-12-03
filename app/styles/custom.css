@@ -402,3 +402,21 @@ body.modal-open {
     border: none; 
     vertical-align: middle; 
 }
+.first-section:after {
+	display: none !important;
+	height: 0px;
+}
+.static-header:after {
+    content: "";
+    display: block;
+    position: absolute;
+    background: url(../images/bg-section-cta-bottom-inside.svg) no-repeat 50% 100%;
+    background-size: contain;
+    width: 100%;
+    height: 30px;
+    bottom: 0;
+    right: 0;
+}
+.page-section__darkest h3 {
+	color: #fff;
+}
