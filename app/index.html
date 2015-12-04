@@ -1207,11 +1207,89 @@
                                 <h1 class="section-title">At last, buy domains you can trust.</h1>
                                 <br/><br/>
                                 <a href="https://www.fastrank.co/register" class="btn btn-primary btn-has-icon"><i class="fa fa-hand-o-right"></i>Join today, get your 1st $15 domain...free!</a>
-                                <div class="gap-100 visible-lg"></div>
+                                <div class="gap-40 visible-lg"></div>
                             </div>
                         </div>
                     </div>
                 </section>
+
+        		<!-- Contact Us -->
+		        <section class="page-section page-section__no-bottom-padding" id="section-contact" ng-show="isHome()">
+		            <div class="container">
+		    
+		                <div class="section-title-wrapper">
+		                    <div class="section-title-inner">
+		                        <h1 class="section-title">Need More Information?</h1>
+		                        <span class="section-desc">Drop us a line and we'll get back to you within 24 hours</span>
+		                    </div>
+		                </div>
+		                
+		                <!-- Contact Form -->
+		                <form id="contact-form" class="contact-form" novalidate="novalidate">
+		    
+		                    <div ng-show="contactUsSuccess" class="alert alert-success" id="contact-alert-success">
+		                        <strong>Success!</strong> Thank you for your message. We'll aim to get back to you within 24 business hours.
+		                    </div>
+		                    <div ng-show="contactUsError" class="alert alert-danger" id="contact-alert-error">
+		                        <strong>Error!</strong> Something went wrong sending your message.
+		                    </div>
+		    
+		                    <div class="row">
+		                        <div class="col-md-4">
+		                            <!-- Field: Name -->
+		                            <div class="form-group">
+		                                <div class="input-group">
+		                                    <div class="input-group-addon"><i class="fa fa-user"></i></div>
+		                                    <input type="text" value="" ng-model="contactUsForm.name" data-msg-required="Please enter your name." class="form-control" name="name" id="name" placeholder="Your Name">
+		                                </div>
+		                            </div>
+		                            <!-- Field: Name / End -->
+		                        </div>
+		                        <div class="col-md-4">
+		                            <!-- Field: Email -->
+		                            <div class="form-group">
+		                                <div class="input-group">
+		                                    <div class="input-group-addon"><i class="fa fa-envelope"></i></div>
+		                                    <input type="email" value="" ng-model="contactUsForm.email" data-msg-required="Please enter your email address." data-msg-email="Please enter a valid email address." class="form-control" name="email" id="email" placeholder="Email Address">
+		                                </div>
+		                            </div>
+		                            <!-- Field: Email / End -->
+		                        </div>
+		                        <div class="col-md-4">
+		                            <!-- Field: Site -->
+		                            <div class="form-group">
+		                                <div class="input-group">
+		                                    <div class="input-group-addon"><i class="fa fa-desktop"></i></div>
+		                                    <input type="text" ng-model="contactUsForm.website" class="form-control" name="website" id="website" placeholder="Your Web Site">
+		                                </div>
+		                            </div>
+		                            <!-- Field: Site / End -->
+		                        </div>
+		                    </div>
+		                    <div class="row">
+		                        <div class="col-md-8">
+		                            <!-- Field: Textarea / End -->
+		                            <div class="form-group">
+		                                <div class="input-group">
+		                                    <div class="input-group-addon"><i class="fa fa-pencil"></i></div>
+		                                    <textarea data-msg-required="Please enter your message." ng-model="contactUsForm.message" rows="8" class="form-control" name="message" id="message" placeholder="Your Message"></textarea>
+		                                </div>
+		                            </div>
+		                            <!-- Field: Textarea / End -->
+		                        </div>
+		                        <div class="col-md-4">
+		    
+		                            <button class="btn btn-primary btn-has-icon btn-block" ng-click="contactUs(contactUsForm)" data-loading-text="Loading...">
+		                                <i class="fa fa-envelope"></i> 
+		                                Send Message
+		                            </button>
+		                        </div>
+		                    </div>
+		                </form>
+		                <!-- Contact Form / End -->
+		            </div>
+		        </section>
+		        <!-- End contact us -->
             </div>
 
             <!-- Angular view -->
@@ -1246,7 +1324,7 @@
                 <a href="#top" class="top-link"><i class="fa fa-chevron-up"></i></a>
             </div>
             <div class="link-holder scroll-local">
-                <a href="#section-contacts" class="contacts-link" data-toggle="tooltip" data-placement="left" title="Contact Us"><i class="fa fa-envelope"></i></a>
+                <a href="#section-contact" class="contacts-link" data-toggle="tooltip" data-placement="left" title="Contact Us"><i class="fa fa-envelope"></i></a>
             </div>
         </div>
         <!-- Back to Top / End -->
