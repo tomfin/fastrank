@@ -84,13 +84,16 @@
                                 <!-- end navbar-header -->
                                 <div id="main-nav" class="navbar-collapse collapse" ng-cloak>
                                     <ul class="nav navbar-nav scroll-local">
+                                        <!-- 
                                         <li ng-show="isHome()"><a href="#section-about" ng-cloak>About Us</a></li>
                                         <li ng-show="!isHome()"><a href="" ng-click="linkTo('/#section-about')" ng-cloak>About Us</a></li>
-                                        <li ng-show="isHome() && !isAuthenticated()"><a href="#section-cta" ng-cloak>Register Your Interest</a></li>
-                                        <li ng-show="!isHome() && !isAuthenticated()"><a href="" ng-click="linkTo('/#section-cta')" ng-cloak>Register Your Interest</a></li>
+                                         -->
+                                        <li ng-show="isHome()"><a href="http://blog.fastrank.co/" ng-cloak>Blog</a></li>
+                                        <!-- 
                                         <li ng-show="isHome()"><a href="#section-contact" ng-cloak>Contact Us</a></li>
                                         <li ng-show="!isHome()"><a href="" ng-click="linkTo('/#section-contact')" ng-cloak>Contact Us</a></li>
-                                        <li ng-show="isAuthenticated()"><a ui-sref="search">Domain Search</a></li>
+                                         -->
+                                        <li><a ui-sref="search">Domain Search</a></li>
                                         <li ng-show="isAuthenticated()"><a ui-sref="credits">Buy Credits</a></li>
                                         <li ng-show="isAuthenticated()" class="dropdown">
                                             <a href="#" data-toggle="dropdown" class="dropdown-toggle dropdown-toggle__caret-holder">My Account</a>
