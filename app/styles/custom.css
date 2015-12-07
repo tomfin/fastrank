@@ -420,3 +420,6 @@ body.modal-open {
 .page-section__darkest h3 {
 	color: #fff;
 }
+.btn-index {
+	font-size: 22px;
+}
