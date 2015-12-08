@@ -26,7 +26,7 @@ angular.module('fastrankApp')
 	  $scope.purchase = function(levelToBuy) {
 		var handler = StripeCheckout.configure({ // jshint ignore:line
 			key: STRIPE_KEY, // jshint ignore:line
-			image: 'images/fastrank_avatar_square.jpg',
+			image: 'images/fastrankblackstripe.png',
 			name: 'Fastrank Ltd',
 			description: levelToBuy.level + ' level top-up',
 			amount: (levelToBuy.price * 100),
