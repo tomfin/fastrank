@@ -27,7 +27,7 @@
                         </div>
                         <div ng-if="lowCreditError" class="alert alert-danger alert-dismissible fade in text-uppercase">
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true"><i class="fa fa-times"></i></span></button>
-                            <strong>Error!</strong> You don't have sufficient credit to purchase. Please <a href="" ui-sref="credits">buy some credit</a> first and then purchase again.
+                            <strong>Error!</strong> Unfortunately you don't have sufficient credits for this purchase. Please <a href="" ui-sref="credits">top-up your credits</a> and try again.
                         </div>
                         <div ng-if="alreadyPurchased" class="alert alert-danger alert-dismissible fade in text-uppercase">
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true"><i class="fa fa-times"></i></span></button>
@@ -39,7 +39,7 @@
                         <div class="row">
                             <div class="col-md-8"></div>   
                             <div class="col-md-4">
-                                <a ng-disabled="cartDomains.length == 0" ng-bootbox-confirm="Please confirm you want to FastBuy this domain" ng-bootbox-confirm-action="checkout()" class="btn btn-primary btn-block btn-has-icon"><i class="fa fa-shopping-cart"></i>Buy Domains</a>
+                                <a ng-disabled="cartDomains.length == 0" ng-bootbox-confirm="Please confirm you want to purchase this domain information:" ng-bootbox-confirm-action="checkout()" class="btn btn-primary btn-block btn-has-icon"><i class="fa fa-shopping-cart"></i>Buy Domains</a>
                             </div>
                         </div>       
                         <table class="table">
@@ -75,7 +75,7 @@
                         <div class="row">
                             <div class="col-md-8"></div>   
                             <div class="col-md-4">
-                                <a ng-disabled="cartDomains.length == 0" ng-bootbox-confirm="Please confirm you want to FastBuy this domain" ng-bootbox-confirm-action="checkout()" class="btn btn-primary btn-block btn-has-icon"><i class="fa fa-shopping-cart"></i>Buy Domains</a>
+                                <a ng-disabled="cartDomains.length == 0" ng-bootbox-confirm="Please confirm you want to purchase this domain information:" ng-bootbox-confirm-action="checkout()" class="btn btn-primary btn-block btn-has-icon"><i class="fa fa-shopping-cart"></i>Buy Domains</a>
                             </div>
                         </div>       
 
