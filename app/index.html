@@ -84,11 +84,13 @@
                                 <!-- end navbar-header -->
                                 <div id="main-nav" class="navbar-collapse collapse" ng-cloak>
                                     <ul class="nav navbar-nav scroll-local">
+                                        <li ng-show="isHome() && !isAuthenticated()"><a href="#section-bigdata" ng-cloak>Big Data</a></li>
+                                        <li ng-show="isHome() && !isAuthenticated()"><a href="#section-science" ng-cloak>Science</a></li>
+                                        <li ng-show="isHome() && !isAuthenticated()"><a href="#section-screenshots" ng-cloak>Screenshots</a></li>
                                         <!-- 
-                                        <li ng-show="isHome()"><a href="#section-about" ng-cloak>About Us</a></li>
                                         <li ng-show="!isHome()"><a href="" ng-click="linkTo('/#section-about')" ng-cloak>About Us</a></li>
                                          -->
-                                        <li ng-show="isHome()"><a href="http://blog.fastrank.co/" ng-cloak>Blog</a></li>
+                                        <li ng-show="isHome()"><a href="http://blog.fastrank.co/" target="_new" ng-cloak>Blog</a></li>
                                         <!-- 
                                         <li ng-show="isHome()"><a href="#section-contact" ng-cloak>Contact Us</a></li>
                                         <li ng-show="!isHome()"><a href="" ng-click="linkTo('/#section-contact')" ng-cloak>Contact Us</a></li>
@@ -193,14 +195,16 @@
 	                        <br/>
 	                        <img src="images/home-page-1-2-3.png" alt="FastRank Process">
 	                        <br/><br/>
-	                        <img src="images/down-arrow.png" alt="Down">
+                            <div class="link-holder scroll-local">
+                                <a href="#section-reasons" class="top-link"><img src="images/down-arrow.png" alt="Down"></i></a>
+                            </div>
 	                    </div>
 	                </div>
 		        </div>
             </div>
 
             <!-- Page Section (benefits) -->
-            <section class="page-section" id="section-features" ng-show="isHome()">
+            <section class="page-section" id="section-reasons" ng-show="isHome()">
                 <div class="container">
                     <div class="gap-40 visible-lg" ng-show="isHome()"></div>
                     <div class="gap-40 visible-lg" ng-show="isHome()"></div>
@@ -458,12 +462,15 @@
                         </div>
                         <!-- Panel #6 / End -->
                     </div>
+	                <div class="link-holder scroll-local section-arrow">
+	                    <a href="#section-validation" class="top-link"><img src="images/down-arrow.png" alt="Down"></i></a>
+	                </div>
                     <!-- Accordion (Features) / End -->
                 </div>
             </section>
             <!-- Page Section (Features) / End -->
             <!-- Page Section (brands) -->
-            <section ng-show="isHome()">
+            <section ng-show="isHome()" id="section-validation">
                 <div align="center"> 
                     <div class="section-title-wrapper">
                         <h3 >"Some of the worlds best SEO's use FastRank Domains"</h3>
@@ -472,7 +479,7 @@
             </section>
             <!-- Page Section (brands) / End -->
             <!-- video and testamonial -->
-            <section class="page-section" id="section-slider" ng-show="isHome()">
+            <section class="page-section" ng-show="isHome()">
                 <div class="container">	
                     <div class="row">
                         <div class="col-md-6 col-lg-5">
@@ -489,11 +496,14 @@
                             <p class="text-center">Nick Garner, Founder of 90 Digital, the successful SEO Agency. Recently founder Oshi Bitcoin Casino.<p/>						
                         </div>
                     </div>
+                    <div class="link-holder scroll-local section-arrow">
+                        <a href="#section-bigdata" class="top-link"><img src="images/down-arrow.png" alt="Down"></i></a>
+                    </div>
                 </div>
             </section>
 
             <!-- Page Section (Partners) -->
-            <section class="page-section" id="section-partners" ng-show="isHome()">
+            <section class="page-section" id="section-bigdata" ng-show="isHome()">
                 <div class="container">
                     <div class="row">
                         <div class="section-title-wrapper">
@@ -540,6 +550,9 @@
                             </div>
                         </div>
                     </div>
+                    <div class="link-holder scroll-local section-arrow">
+                        <a href="#section-science" class="top-link"><img src="images/down-arrow.png" alt="Down"></i></a>
+                    </div>
                 </div>
             </section>
             <!-- Page Section (Partners) / End -->
@@ -555,7 +568,7 @@
                 </section>
                 <!-- Page Section (brands) / End -->
                 <!-- Page Section (How We Work) -->
-                <section class="page-section page-section__darkest" id="section-work" ng-show="isHome()">
+                <section class="page-section page-section__darkest" id="section-science" ng-show="isHome()">
                     <div class="container">
                         <div class="section-title-wrapper">
                             <div class="section-title-inner">
@@ -614,12 +627,15 @@
                                 </a>
                             </div>
                         </div>
+	                    <div class="link-holder scroll-local section-arrow">
+	                        <a href="#section-deepscience" class="top-link"><img src="images/down-arrow.png" alt="Down"></i></a>
+	                    </div>
                         <!-- Timeline / End -->
                     </div>
                 </section>
                 <!-- Page Section (How We Work) / End -->
                 <!-- Page Section (Features) -->
-                <section class="page-section" id="section-features" ng-show="isHome()">
+                <section class="page-section" id="section-deepscience" ng-show="isHome()">
                     <div class="container">
                         <div class="gap-40 visible-lg" ng-show="isHome()"></div>
                         <div class="gap-40 visible-lg" ng-show="isHome()"></div>
@@ -951,11 +967,14 @@
                             </div>
                             <!-- Panel #6 / End -->
                         </div>
+	                    <div class="link-holder scroll-local section-arrow">
+	                        <a href="#section-screenshots" class="top-link"><img src="images/down-arrow.png" alt="Down"></i></a>
+	                    </div>
                         <!-- Accordion (Features) / End -->
                     </div>
                 </section>
                 <!-- Page Section (Features) / End -->
-                <div class="gap-40 visible-lg" ng-show="isHome()"></div>
+                <div class="gap-40 visible-lg" id="section-screenshots" ng-show="isHome()"></div>
                 <div class="gap-40 visible-lg" ng-show="isHome()"></div>
                 <div align="center" ng-show="isHome()"> 
                     <h1 class="section-title">FastRank screenshots</h1>
@@ -1098,11 +1117,14 @@
                                 </ul>
                             </div>
                         </div>
+	                    <div class="link-holder scroll-local section-arrow">
+	                        <a href="#section-endreasons" class="top-link"><img src="images/down-arrow.png" alt="Down"></i></a>
+	                    </div>
                     </div>
                 </section>
                 <div class="gap-40 visible-lg" ng-show="isHome()"></div>
                 <div class="gap-40 visible-lg" ng-show="isHome()"></div>
-                <section class="page-section page-section__darkest" ng-show="isHome()">
+                <section class="page-section page-section__darkest" id="section-endreasons" ng-show="isHome()">
 	                <div align="center" ng-show="isHome()"> 
 	                    <h1 class="section-title">5 Reasons to try FastRank today</h1>
 	                </div>
@@ -1116,11 +1138,14 @@
                             <h3> Transparency & Confidence</h3>
                             <h3> Money Back Guarantee</h3>
                         </div>
+	                    <div class="link-holder scroll-local section-arrow">
+	                        <a href="#section-signup" class="top-link"><img src="images/down-arrow.png" alt="Down"></i></a>
+	                    </div>
                     </div>				 
                 </section>
                 <!-- Page Section (brands) / End -->
                 <!-- Page Section (Event) -->
-                <section class="page-section" id="section-event" ng-show="isHome()">
+                <section class="page-section" id="section-signup" ng-show="isHome()">
                     <div class="container">
                         <div class="section-title-wrapper">
                             <div class="section-title-inner">
