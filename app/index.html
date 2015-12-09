@@ -108,19 +108,19 @@
                                             </ul><!-- end drop down menu -->
                                         </li>
                                         <li ng-show="isAuthenticated()" class="item-has-cart dropdown dropdown-right fhmm-fw">
-                                            <div class="shopping-cart">
+                                            <div class="shopping-cart" ng-class="{'open':hovering}" >
                                                 <div class="credit-container">
                                                     <div>
-                                                        <span class="cart-total cart-label">Account credits</span>
+                                                        <span class="cart-total cart-label">Account Credits</span>
                                                         <span class="cart-total">{{account.credits}}</span>
                                                     </div>
                                                     <div>
-                                                        <span class="cart-total cart-label">Cart credits</span>
+                                                        <span class="cart-total cart-label">Cart Credits</span>
                                                         <span class="cart-total">{{cartDomains.total}}</span>
                                                     </div>
                                                 </div>
 
-                                                <a href="#" data-toggle="dropdown" class="cart-icon dropdown-toggle dropdown-toggle__caret-holder"><i class="fa fa-shopping-cart"></i></a>
+                                                <a href="#" ng-click="toCheckout()" ng-mouseenter="hovering=true" data-toggle="dropdown" class="cart-icon dropdown-toggle dropdown-toggle__caret-holder"><i class="fa fa-shopping-cart"></i></a>
                                                 <span class="cart-number">{{cartDomains.size}}</span>
                                                 <!--                                                                <div class="scrollMe">-->
                                                 <ul class="dropdown-menu half half-right">

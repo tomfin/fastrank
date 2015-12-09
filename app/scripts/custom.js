@@ -105,14 +105,14 @@
 
     MainNav: function(){
       // Menu drop down effect
-      $('.dropdown-toggle').dropdownHover().dropdown();
-      $(document).on('click', '.fhmm .dropdown-menu', function(e) {
-          e.stopPropagation();
-      });
+//      $('.dropdown-toggle').dropdownHover().dropdown();
+//      $(document).on('click', '.fhmm .dropdown-menu', function(e) {
+//          e.stopPropagation();
+//      });
 
-      $('.navbar-toggle').on('click', function () {
-        $('.navbar-collapse').collapse('toggle');
-      });
+//      $('.navbar-toggle').on('click', function () {
+//        $('.navbar-collapse').collapse('toggle');
+//      });
     },
 
     MasonryBlog: function(){

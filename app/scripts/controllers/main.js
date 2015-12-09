@@ -94,8 +94,14 @@ angular.module('fastrankApp')
             };
 
             $scope.closeCart = function () {
+            	$scope.hovering = false;
                 var element = angular.element('.shopping-cart');
                 element.removeClass('open');
+            };
+            
+            $scope.toCheckout = function () {
+            	$scope.hovering = false;
+            	$state.go('checkout');
             };
 
             $scope.registerInterest = function (interestEmail) {
