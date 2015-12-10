@@ -20,6 +20,7 @@ angular.module('fastrankApp')
                 };
                 $scope.keywords = '';
                 $scope.categories = {};
+            
                 $scope.categories.majesticCategoryIdx = null;
                 $scope.categories.majesticSubcategoryIdx = null;
                 $scope.categories.majesticSubsubcategoryIdx = null;
@@ -254,6 +255,10 @@ angular.module('fastrankApp')
                     $scope.otherSliders.majRefDomainsGOV.min = 0;
                     $scope.otherSliders.majRefDomainsGOV.max = 100;
                 };
+                
+                // For basic and advance accordians
+                $scope.oneAtATime = true;
+                $scope.accordian1 = {open:true};
 
             }]);
 

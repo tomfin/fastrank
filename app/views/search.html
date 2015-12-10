@@ -14,78 +14,83 @@
                 </div>
             </div>
 
+
             <div class="content">
-                <div class="row">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <h2 class="panel-title text-center">Basic search</h2>
-                        </div>
+                <accordion>
+                    <div class="row">
 
-                        <div class="panel-body">
-                            <div class="row">
+                        <accordion-group is-open="accordian1.open">
+                            <accordion-heading>
+                                Basic search<i class="pull-right glyphicon" ng-class="{'glyphicon glyphicon-minus-sign': accordian1.open, 'glyphicon glyphicon-plus-sign': !accordian1.open}"></i>
+                            </accordion-heading>
+                            <div class="panel panel-primary">
+                                <div class="panel-body">
+                                    <div class="row">
 
-                                <div class="alert alert-danger" role="alert" ng-if="searchMsg">
-                                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                                    <span class="sr-only">Error:</span>
-                                    {{ searchMsg}}
-                                </div>
+                                        <div class="alert alert-danger" role="alert" ng-if="searchMsg">
+                                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                            <span class="sr-only">Error:</span>
+                                            {{ searchMsg}}
+                                        </div>
 
-                                <div class="row-height">
-                                    <div class="col-md-4 col-height text-center domainStr">
-                                        <span>
-                                            Domain Strength: Weak - Max
-                                            <button class="btnInvisible" popover="Domain strength is based on our 'Weighted Trust Flow' score and tells how powerful a domain is." popover-trigger="focus" aria-hidden="true">
-                                                <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
-                                            </button>
-                                        </span>
-                                        <rzslider
-                                            rz-slider-floor="domainStrength.floor"
-                                            rz-slider-ceil="domainStrength.ceil"
-                                            rz-slider-model="domainStrength.min"
-                                            rz-slider-high="domainStrength.max"
-                                            rz-slider-step="{{domainStrength.step}}"
-                                            rz-slider-tpl-url="rzSliderTpl.html"
-                                            rz-slider-hide-limit-labels="true"
-                                            rz-slider-on-end="updateDomainStrengthSlider(domainStrength.min, domainStrength.max)">
-                                        </rzslider>
-                                        <p>({{domainStrength.count| number }}) </p>
-                                    </div>
-                                    <div class="col-md-1 col-height col-middle text-center vertical-align">
-                                        <div><p>and/or</p></div>
-                                    </div>
-                                    <div class="col-md-4 col-height col-middle text-center basic-search keyword">
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <div class="input-group-addon"><i class="fa fa-desktop"></i></div>
-                                                <input type="text" ng-model="keywords" value="" data-msg-required="Search keyword required" class="form-control" name="name" id="name" placeholder="Keyword or phrase">
+                                        <div class="row-height">
+                                            <div class="col-md-4 col-height text-center domainStr">
+                                                <span>
+                                                    Domain Strength: Weak - Max
+                                                    <button class="btnInvisible" popover="Domain strength is based on our 'Weighted Trust Flow' score and tells how powerful a domain is." popover-trigger="focus" aria-hidden="true">
+                                                        <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+                                                    </button>
+                                                </span>
+                                                <rzslider
+                                                    rz-slider-floor="domainStrength.floor"
+                                                    rz-slider-ceil="domainStrength.ceil"
+                                                    rz-slider-model="domainStrength.min"
+                                                    rz-slider-high="domainStrength.max"
+                                                    rz-slider-step="{{domainStrength.step}}"
+                                                    rz-slider-tpl-url="rzSliderTpl.html"
+                                                    rz-slider-hide-limit-labels="true"
+                                                    rz-slider-on-end="updateDomainStrengthSlider(domainStrength.min, domainStrength.max)">
+                                                </rzslider>
+                                                <p>({{domainStrength.count| number }}) </p>
+                                            </div>
+                                            <div class="col-md-1 col-height col-middle text-center vertical-align">
+                                                <div><p>and/or</p></div>
+                                            </div>
+                                            <div class="col-md-4 col-height col-middle text-center basic-search keyword">
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <div class="input-group-addon"><i class="fa fa-desktop"></i></div>
+                                                        <input type="text" ng-model="keywords" value="" data-msg-required="Search keyword required" class="form-control" name="name" id="name" placeholder="Keyword or phrase">
+                                                    </div>
+                                                </div>
+                                                <button class="btnInvisible tooltip-top" popover="Enter a phrase relevant to the domains you're looking for, and we'll find the best matches" popover-trigger="focus" aria-hidden="true">
+                                                    <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+                                                </button>
+                                                <!-- 
+                                                -->
+                                            </div>
+                                            <div class="col-md-3 col-height col-middle text-center">
+                                                <button class="btn btn-primary btn-has-icon btn-block" data-loading-text="Loading..." ng-click="find()">
+                                                    <i class="fa fa-search"></i>Find Domains
+                                                </button>
+                                                <!-- 
+                                                <div class="col-lg-6"> 
+                                                  <button class="btn btn-primary btn-has-icon btn-block" data-loading-text="Loading..." ng-click="save()">
+                                                    <i class="fa fa-save"></i>Save search
+                                                  </button>
+                                                </div>
+                                                -->
                                             </div>
                                         </div>
-                                        <button class="btnInvisible tooltip-top" popover="Enter a phrase relevant to the domains you're looking for, and we'll find the best matches" popover-trigger="focus" aria-hidden="true">
-                                            <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
-                                        </button>
-                                        <!-- 
-                                        -->
-                                    </div>
-                                    <div class="col-md-3 col-height col-middle text-center">
-                                        <button class="btn btn-primary btn-has-icon btn-block" data-loading-text="Loading..." ng-click="find()">
-                                            <i class="fa fa-search"></i>Find Domains
-                                        </button>
-                                        <!-- 
-                                        <div class="col-lg-6"> 
-                                          <button class="btn btn-primary btn-has-icon btn-block" data-loading-text="Loading..." ng-click="save()">
-                                            <i class="fa fa-save"></i>Save search
-                                          </button>
-                                        </div>
-                                        -->
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
+                        </accordion-group>
 
-                <div class="row">
-                    <accordion>
+                    </div>
+
+                    <div class="row">
+
                         <accordion-group is-open="$parent.acc.advancedOpen">
                             <accordion-heading>
                                 Advance Search<i class="pull-right glyphicon" ng-class="{'glyphicon glyphicon-minus-sign': acc.advancedOpen, 'glyphicon glyphicon-plus-sign': !acc.advancedOpen}"></i>
@@ -95,7 +100,7 @@
                                 <div class="alert alert-danger" role="alert" ng-if="advanceSearchMsg">
                                     <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                                     <span class="sr-only">Error:</span>
-                                    {{ advanceSearchMsg }}
+                                    {{ advanceSearchMsg}}
                                 </div>
 
                                 <div class="panel panel-primary">
@@ -111,9 +116,9 @@
                                                     <span>Select:
                                                         <a ng-click="selectAllNone(true)">All</a> | <a ng-click="selectAllNone(false)">None</a>
                                                     </span>
-		                                            <button class="btnInvisible" popover="Filter by Top Level Domains" popover-trigger="focus" aria-hidden="true">
-		                                                <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
-		                                            </button>
+                                                    <button class="btnInvisible" popover="Filter by Top Level Domains" popover-trigger="focus" aria-hidden="true">
+                                                        <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+                                                    </button>
                                                 </div>
                                                 <div class="col-lg-12 col-md-12">
                                                     <div class="form-group col-lg-6 col-md-6">
@@ -184,9 +189,9 @@
                                         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                                             <div class="col-lg-8 col-lg-offset-2 majTF text-center">
                                                 Maj. Dom TF: 0 - 100
-	                                            <button class="btnInvisible" popover="Filter by Majestic's Trust Flow rating" popover-trigger="focus" aria-hidden="true">
-	                                                <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
-	                                            </button>
+                                                <button class="btnInvisible" popover="Filter by Majestic's Trust Flow rating" popover-trigger="focus" aria-hidden="true">
+                                                    <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+                                                </button>
                                                 <rzslider
                                                     rz-slider-floor="majTF.floor"
                                                     rz-slider-ceil="majTF.ceil"
@@ -245,10 +250,12 @@
                                 </div>
                             </div>
                         </accordion-group>
-                    </accordion>
-                </div>
+
+                    </div>
+                </accordion>
             </div>
         </div>
+
     </section>
     <!-- Page Section / End -->
 </div>

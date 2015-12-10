@@ -426,3 +426,6 @@ body.modal-open {
 .section-arrow {
 	text-align: center;
 }
+.domain-page .panel-group .row{
+    margin-top: 10px;
+}
