@@ -48,6 +48,7 @@ angular.module('fastrankApp')
 				PaymentFactory.newCard($scope.card).$promise.then(function() {
 					$scope.paymentError = null;
 					$scope.paymentSuccess = levelToBuy.credits;
+	                $rootScope.account.credits = $rootScope.account.credits + levelToBuy.credits;
 				}, function() {
 					$scope.paymentError = 'ERROR';
 					$scope.paymentSuccess = null;

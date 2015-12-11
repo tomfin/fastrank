@@ -121,7 +121,7 @@
                     <accordion class="summary-accordian" id="summary-accordian">
                         <accordion-group is-open="true">
                             <accordion-heading>
-                                Summary<i class="pull-right glyphicon" ng-class="{'glyphicon glyphicon-minus-sign': status.open, 'glyphicon glyphicon-plus-sign': !status.open}"></i>
+                                Summary for {{summary.rootURL}}<i class="pull-right glyphicon" ng-class="{'glyphicon glyphicon-minus-sign': status.open, 'glyphicon glyphicon-plus-sign': !status.open}"></i>
                             </accordion-heading>
                             <div>
                                 <div class="table-responsive">          
@@ -224,7 +224,7 @@
                     <accordion class="topic-accordian">
                         <accordion-group is-open="status.open">
                             <accordion-heading>
-                                Topic Detail<i class="pull-right glyphicon" ng-class="{'glyphicon glyphicon-minus-sign': status.open, 'glyphicon glyphicon-plus-sign': !status.open}"></i>
+                                Topic Detail for {{summary.rootURL}}<i class="pull-right glyphicon" ng-class="{'glyphicon glyphicon-minus-sign': status.open, 'glyphicon glyphicon-plus-sign': !status.open}"></i>
                             </accordion-heading>
                             <div>
                                 <p>Domain Relevance to You</p>
@@ -276,7 +276,7 @@
                     <accordion>
                         <accordion-group is-open="status.open">
                             <accordion-heading>
-                                Links Detail<i class="pull-right glyphicon" ng-class="{'glyphicon glyphicon-minus-sign': status.open, 'glyphicon glyphicon-plus-sign': !status.open}"></i>
+                                Links Detail for {{links.rootURL}}<i class="pull-right glyphicon" ng-class="{'glyphicon glyphicon-minus-sign': status.open, 'glyphicon glyphicon-plus-sign': !status.open}"></i>
                             </accordion-heading>
                             <div>
                                 <div class="table-responsive">          
