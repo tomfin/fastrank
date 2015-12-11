@@ -34,53 +34,55 @@
                                         </div>
 
                                         <div class="row-height">
-                                            <div class="col-md-4 col-height text-center domainStr">
-                                                <span>
-                                                    Domain Strength: Weak - Max
-                                                    <button class="btnInvisible" popover="Domain strength is based on our 'Weighted Trust Flow' score and tells how powerful a domain is." popover-trigger="focus" aria-hidden="true">
-                                                        <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
-                                                    </button>
-                                                </span>
-                                                <rzslider
-                                                    rz-slider-floor="domainStrength.floor"
-                                                    rz-slider-ceil="domainStrength.ceil"
-                                                    rz-slider-model="domainStrength.min"
-                                                    rz-slider-high="domainStrength.max"
-                                                    rz-slider-step="{{domainStrength.step}}"
-                                                    rz-slider-tpl-url="rzSliderTpl.html"
-                                                    rz-slider-hide-limit-labels="true"
-                                                    rz-slider-on-end="updateDomainStrengthSlider(domainStrength.min, domainStrength.max)">
-                                                </rzslider>
-                                                <p>({{domainStrength.count| number }}) </p>
-                                            </div>
-                                            <div class="col-md-1 col-height col-middle text-center vertical-align">
-                                                <div><p>and/or</p></div>
-                                            </div>
-                                            <div class="col-md-4 col-height col-middle text-center basic-search keyword">
-                                                <div class="form-group">
-                                                    <div class="input-group">
-                                                        <div class="input-group-addon"><i class="fa fa-desktop"></i></div>
-                                                        <input type="text" ng-model="keywords" value="" data-msg-required="Search keyword required" class="form-control" name="name" id="name" placeholder="Keyword or phrase">
-                                                    </div>
-                                                </div>
-                                                <button class="btnInvisible tooltip-top" popover="Enter a phrase relevant to the domains you're looking for, and we'll find the best matches" popover-trigger="focus" aria-hidden="true">
-                                                    <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
-                                                </button>
-                                                <!-- 
-                                                -->
-                                            </div>
-                                            <div class="col-md-3 col-height col-middle text-center">
-                                                <button class="btn btn-primary btn-has-icon btn-block" data-loading-text="Loading..." ng-click="find()">
-                                                    <i class="fa fa-search"></i>Find Domains
-                                                </button>
-                                                <!-- 
-                                                <div class="col-lg-6"> 
-                                                  <button class="btn btn-primary btn-has-icon btn-block" data-loading-text="Loading..." ng-click="save()">
-                                                    <i class="fa fa-save"></i>Save search
-                                                  </button>
-                                                </div>
-                                                -->
-                                            </div>
+                                            <form ng-submit="find()">
+	                                            <div class="col-md-4 col-height text-center domainStr">
+	                                                <span>
+	                                                    Domain Strength: Weak - Max
+	                                                    <button class="btnInvisible" popover="Domain strength is based on our 'Weighted Trust Flow' score and tells how powerful a domain is." popover-trigger="focus" aria-hidden="true">
+	                                                        <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+	                                                    </button>
+	                                                </span>
+	                                                <rzslider
+	                                                    rz-slider-floor="domainStrength.floor"
+	                                                    rz-slider-ceil="domainStrength.ceil"
+	                                                    rz-slider-model="domainStrength.min"
+	                                                    rz-slider-high="domainStrength.max"
+	                                                    rz-slider-step="{{domainStrength.step}}"
+	                                                    rz-slider-tpl-url="rzSliderTpl.html"
+	                                                    rz-slider-hide-limit-labels="true"
+	                                                    rz-slider-on-end="updateDomainStrengthSlider(domainStrength.min, domainStrength.max)">
+	                                                </rzslider>
+	                                                <p>({{domainStrength.count| number }}) </p>
+	                                            </div>
+	                                            <div class="col-md-1 col-height col-middle text-center vertical-align">
+	                                                <div><p>and/or</p></div>
+	                                            </div>
+	                                            <div class="col-md-4 col-height col-middle text-center basic-search keyword">
+	                                                <div class="form-group">
+	                                                    <div class="input-group">
+	                                                        <div class="input-group-addon"><i class="fa fa-desktop"></i></div>
+	                                                        <input type="text" ng-model="keywords" value="" data-msg-required="Search keyword required" class="form-control" name="name" id="name" placeholder="Keyword or phrase">
+	                                                    </div>
+	                                                </div>
+	                                                <button class="btnInvisible tooltip-top" popover="Enter a phrase relevant to the domains you're looking for, and we'll find the best matches" popover-trigger="focus" aria-hidden="true">
+	                                                    <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+	                                                </button>
+	                                                <!-- 
+	                                                -->
+	                                            </div>
+	                                            <div class="col-md-3 col-height col-middle text-center">
+	                                                <button class="btn btn-primary btn-has-icon btn-block" data-loading-text="Loading...">
+	                                                    <i class="fa fa-search"></i>Find Domains
+	                                                </button>
+	                                                <!-- 
+	                                                <div class="col-lg-6"> 
+	                                                  <button class="btn btn-primary btn-has-icon btn-block" data-loading-text="Loading..." ng-click="save()">
+	                                                    <i class="fa fa-save"></i>Save search
+	                                                  </button>
+	                                                </div>
+	                                                -->
+	                                            </div>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -105,147 +107,149 @@
 
                                 <div class="panel panel-primary">
                                     <div class="panel-body"> 
-                                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                                            <h4 class="text-center">Majestic SEO</h4>
-                                            <p class="text-center">
-                                                Search for powerful expired domains using Majestic data.
-                                            </p>
-                                            <div class="row">
-                                                <div class="col-lg-12 text-center">
-                                                    <span>Domain Extensions</span>
-                                                    <span>Select:
-                                                        <a ng-click="selectAllNone(true)">All</a> | <a ng-click="selectAllNone(false)">None</a>
-                                                    </span>
-                                                    <button class="btnInvisible" popover="Filter by Top Level Domains" popover-trigger="focus" aria-hidden="true">
-                                                        <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
-                                                    </button>
-                                                </div>
-                                                <div class="col-lg-12 col-md-12">
-                                                    <div class="form-group col-lg-6 col-md-6">
-                                                        <div class="col-lg-3 col-md-3">
-                                                            <input type="checkbox" id="comOnly" class="form-control checkbox" ng-model="com.selected" />
-                                                        </div>
-                                                        <div class="col-lg-9 col-md-9">
-                                                            <label for="comOnly">{{ com.tld | uppercase }} ({{ com.count | number }})</label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group col-lg-6 col-md-6">
-                                                        <div class="col-lg-3 col-md-3">
-                                                            <input type="checkbox" id="allOthers" class="form-control checkbox" ng-model="otherDomains.selected" ng-click="selectAllNone(otherDomains.selected, 'other')" />
-                                                        </div>
-                                                        <div class="col-lg-9 col-md-9">
-                                                            <label for="allOthers">{{ allOthers.tld | uppercase }} ({{ allOthers.count | number }})</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-lg-12 col-md-12">
-                                                    <accordion>
-                                                        <accordion-group is-open="status.open">
-                                                            <accordion-heading>
-                                                                Other Domain Extensions<i class="pull-right glyphicon" ng-class="{'glyphicon glyphicon-minus-sign': status.open, 'glyphicon glyphicon-plus-sign': !status.open}"></i>
-                                                            </accordion-heading>
-                                                            <div ng-repeat="domain in otherDomains">
-                                                                <div class="form-group">
-                                                                    <div class="col-sm-1">
-                                                                        <input type="checkbox" id="{{ domain.tld}}" class="form-control checkbox" ng-model="domain.selected" />
-                                                                    </div>
-                                                                    <div class="col-sm-11">
-                                                                        <label for="{{ domain.tld}}">{{ domain.tld | uppercase }} ({{ domain.count | number }})</label>
-                                                                    </div>
-                                                                </div>                                
-                                                            </div>
-                                                        </accordion-group>
-                                                    </accordion>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-lg-12">
-                                                    <accordion>
-                                                        <accordion-group is-open="status.open">
-                                                            <accordion-heading>
-                                                                Majestic Topical Trust Flow <i class="pull-right glyphicon" ng-class="{'glyphicon glyphicon-minus-sign': status.open, 'glyphicon glyphicon-plus-sign': !status.open}"></i>
-                                                            </accordion-heading>
-                                                            <p>Use Majestic Topical TrustFlow categorisation to find relevant sites. Select a category and sub-category below.</p>
-                                                            <select class="form-control selectpicker" ng-change="categoryChange()" name="majesticSelect1" id="majesticSelect1" ng-model="categories.majesticCategoryIdx" data-style="btn-default">
-                                                                <option value="">----Please select a category----</option>
-                                                                <option ng-repeat="category in majesticCategories" value="{{$index}}">{{category.category}}</option>
-                                                            </select>
-                                                            <select class="form-control selectpicker" ng-change="subcategoryChange()" ng-show="categories.majesticCategory != null" name="majesticSelect2" id="majesticSelect2" ng-model="categories.majesticSubcategoryIdx" data-style="btn-default">
-                                                                <option value="">----Please select a sub-category----</option>
-                                                                <option ng-repeat="subcategory in categories.majesticCategory.subcategories" value="{{$index}}">{{subcategory.category}}</option>
-                                                            </select>
-                                                            <select class="form-control selectpicker" ng-change="subsubcategoryChange()" ng-show="categories.majesticSubcategory != null && categories.majesticSubcategory.lastCategory == false" name="majesticSelect3" id="majesticSelect3" ng-model="categories.majesticSubsubcategoryIdx" data-style="btn-default">
-                                                                <option value="">----Please select a further sub-category----</option>
-                                                                <option ng-repeat="subcategory in categories.majesticSubcategory.subcategories" value="{{$index}}">{{subcategory.category}}</option>
-                                                            </select>
-
-                                                        </accordion-group>
-                                                    </accordion>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                                            <div class="col-lg-8 col-lg-offset-2 majTF text-center">
-                                                Maj. Dom TF: 0 - 100
-                                                <button class="btnInvisible" popover="Filter by Majestic's Trust Flow rating" popover-trigger="focus" aria-hidden="true">
-                                                    <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
-                                                </button>
-                                                <rzslider
-                                                    rz-slider-floor="majTF.floor"
-                                                    rz-slider-ceil="majTF.ceil"
-                                                    rz-slider-model="majTF.min"
-                                                    rz-slider-high="majTF.max"
-                                                    rz-slider-step="{{majTF.step}}"
-                                                    rz-slider-tpl-url="rzSliderTpl.html"
-                                                    rz-slider-hide-limit-labels="true"
-                                                    rz-slider-on-end="updatemajTFSlider(majTF.min, majTF.max)">
-                                                </rzslider>
-                                                Domains: {{majTF.count}}
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-lg-12">
-                                                    <accordion>
-                                                        <accordion-group is-open="$parent.acc.otherMetricsOpen">
-                                                            <accordion-heading>
-                                                                Other Majestic Metics <i class="pull-right glyphicon" ng-class="{'glyphicon glyphicon-minus-sign': acc.otherMetricsOpen, 'glyphicon glyphicon-plus-sign': !acc.otherMetricsOpen}"></i>
-                                                            </accordion-heading>
-                                                            <div class="col-lg-8 col-lg-offset-2 text-center" ng-repeat="slider in otherSliders">
-                                                                {{slider.title}}
-                                                                <rzslider
-                                                                    rz-slider-floor="slider.floor"
-                                                                    rz-slider-ceil="slider.ceil"
-                                                                    rz-slider-model="slider.min"
-                                                                    rz-slider-high="slider.max"
-                                                                    rz-slider-step="{{slider.step}}"
-                                                                    rz-slider-tpl-url="rzSliderTpl.html"
-                                                                    rz-slider-hide-limit-labels="true">
-                                                                </rzslider>
-                                                            </div>
-                                                        </accordion-group>
-                                                    </accordion>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-12">
-                                                <button class="btn btn-primary btn-has-icon btn-block" data-loading-text="Loading..." ng-click="advancedFind()">
-                                                    <i class="fa fa-search"></i> 
-                                                    Search
-                                                </button>
-                                                <!-- 
-                                                <div class="col-md-4">
-                                                  <button class="btn btn-primary btn-has-icon btn-block" data-loading-text="Loading...">
-                                                    <i class="fa fa-save"></i> 
-                                                    Save Search
-                                                  </button>
-                                                </div>
-                                                -->
-                                                <button class="btn btn-primary btn-has-icon btn-block" data-loading-text="Loading..." ng-click="advancedReset()">
-                                                    <i class="fa fa-refresh"></i> 
-                                                    Reset Search
-                                                </button>
-                                            </div>
-                                        </div>
+                                        <form ng-submit="advancedFind()">
+	                                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+	                                            <h4 class="text-center">Majestic SEO</h4>
+	                                            <p class="text-center">
+	                                                Search for powerful expired domains using Majestic data.
+	                                            </p>
+	                                            <div class="row">
+	                                                <div class="col-lg-12 text-center">
+	                                                    <span>Domain Extensions</span>
+	                                                    <span>Select:
+	                                                        <a ng-click="selectAllNone(true)">All</a> | <a ng-click="selectAllNone(false)">None</a>
+	                                                    </span>
+	                                                    <button class="btnInvisible" popover="Filter by Top Level Domains" popover-trigger="focus" aria-hidden="true">
+	                                                        <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+	                                                    </button>
+	                                                </div>
+	                                                <div class="col-lg-12 col-md-12">
+	                                                    <div class="form-group col-lg-6 col-md-6">
+	                                                        <div class="col-lg-3 col-md-3">
+	                                                            <input type="checkbox" id="comOnly" class="form-control checkbox" ng-model="com.selected" />
+	                                                        </div>
+	                                                        <div class="col-lg-9 col-md-9">
+	                                                            <label for="comOnly">{{ com.tld | uppercase }} ({{ com.count | number }})</label>
+	                                                        </div>
+	                                                    </div>
+	                                                    <div class="form-group col-lg-6 col-md-6">
+	                                                        <div class="col-lg-3 col-md-3">
+	                                                            <input type="checkbox" id="allOthers" class="form-control checkbox" ng-model="otherDomains.selected" ng-click="selectAllNone(otherDomains.selected, 'other')" />
+	                                                        </div>
+	                                                        <div class="col-lg-9 col-md-9">
+	                                                            <label for="allOthers">{{ allOthers.tld | uppercase }} ({{ allOthers.count | number }})</label>
+	                                                        </div>
+	                                                    </div>
+	                                                </div>
+	                                            </div>
+	                                            <div class="row">
+	                                                <div class="col-lg-12 col-md-12">
+	                                                    <accordion>
+	                                                        <accordion-group is-open="status.open">
+	                                                            <accordion-heading>
+	                                                                Other Domain Extensions<i class="pull-right glyphicon" ng-class="{'glyphicon glyphicon-minus-sign': status.open, 'glyphicon glyphicon-plus-sign': !status.open}"></i>
+	                                                            </accordion-heading>
+	                                                            <div ng-repeat="domain in otherDomains">
+	                                                                <div class="form-group">
+	                                                                    <div class="col-sm-1">
+	                                                                        <input type="checkbox" id="{{ domain.tld}}" class="form-control checkbox" ng-model="domain.selected" />
+	                                                                    </div>
+	                                                                    <div class="col-sm-11">
+	                                                                        <label for="{{ domain.tld}}">{{ domain.tld | uppercase }} ({{ domain.count | number }})</label>
+	                                                                    </div>
+	                                                                </div>                                
+	                                                            </div>
+	                                                        </accordion-group>
+	                                                    </accordion>
+	                                                </div>
+	                                            </div>
+	                                            <div class="row">
+	                                                <div class="col-lg-12">
+	                                                    <accordion>
+	                                                        <accordion-group is-open="status.open">
+	                                                            <accordion-heading>
+	                                                                Majestic Topical Trust Flow <i class="pull-right glyphicon" ng-class="{'glyphicon glyphicon-minus-sign': status.open, 'glyphicon glyphicon-plus-sign': !status.open}"></i>
+	                                                            </accordion-heading>
+	                                                            <p>Use Majestic Topical TrustFlow categorisation to find relevant sites. Select a category and sub-category below.</p>
+	                                                            <select class="form-control selectpicker" ng-change="categoryChange()" name="majesticSelect1" id="majesticSelect1" ng-model="categories.majesticCategoryIdx" data-style="btn-default">
+	                                                                <option value="">----Please select a category----</option>
+	                                                                <option ng-repeat="category in majesticCategories" value="{{$index}}">{{category.category}}</option>
+	                                                            </select>
+	                                                            <select class="form-control selectpicker" ng-change="subcategoryChange()" ng-show="categories.majesticCategory != null" name="majesticSelect2" id="majesticSelect2" ng-model="categories.majesticSubcategoryIdx" data-style="btn-default">
+	                                                                <option value="">----Please select a sub-category----</option>
+	                                                                <option ng-repeat="subcategory in categories.majesticCategory.subcategories" value="{{$index}}">{{subcategory.category}}</option>
+	                                                            </select>
+	                                                            <select class="form-control selectpicker" ng-change="subsubcategoryChange()" ng-show="categories.majesticSubcategory != null && categories.majesticSubcategory.lastCategory == false" name="majesticSelect3" id="majesticSelect3" ng-model="categories.majesticSubsubcategoryIdx" data-style="btn-default">
+	                                                                <option value="">----Please select a further sub-category----</option>
+	                                                                <option ng-repeat="subcategory in categories.majesticSubcategory.subcategories" value="{{$index}}">{{subcategory.category}}</option>
+	                                                            </select>
+	
+	                                                        </accordion-group>
+	                                                    </accordion>
+	                                                </div>
+	                                            </div>
+	                                        </div>
+	                                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+	                                            <div class="col-lg-8 col-lg-offset-2 majTF text-center">
+	                                                Maj. Dom TF: 0 - 100
+	                                                <button class="btnInvisible" popover="Filter by Majestic's Trust Flow rating" popover-trigger="focus" aria-hidden="true">
+	                                                    <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+	                                                </button>
+	                                                <rzslider
+	                                                    rz-slider-floor="majTF.floor"
+	                                                    rz-slider-ceil="majTF.ceil"
+	                                                    rz-slider-model="majTF.min"
+	                                                    rz-slider-high="majTF.max"
+	                                                    rz-slider-step="{{majTF.step}}"
+	                                                    rz-slider-tpl-url="rzSliderTpl.html"
+	                                                    rz-slider-hide-limit-labels="true"
+	                                                    rz-slider-on-end="updatemajTFSlider(majTF.min, majTF.max)">
+	                                                </rzslider>
+	                                                Domains: {{majTF.count}}
+	                                            </div>
+	                                            <div class="row">
+	                                                <div class="col-lg-12">
+	                                                    <accordion>
+	                                                        <accordion-group is-open="$parent.acc.otherMetricsOpen">
+	                                                            <accordion-heading>
+	                                                                Other Majestic Metics <i class="pull-right glyphicon" ng-class="{'glyphicon glyphicon-minus-sign': acc.otherMetricsOpen, 'glyphicon glyphicon-plus-sign': !acc.otherMetricsOpen}"></i>
+	                                                            </accordion-heading>
+	                                                            <div class="col-lg-8 col-lg-offset-2 text-center" ng-repeat="slider in otherSliders">
+	                                                                {{slider.title}}
+	                                                                <rzslider
+	                                                                    rz-slider-floor="slider.floor"
+	                                                                    rz-slider-ceil="slider.ceil"
+	                                                                    rz-slider-model="slider.min"
+	                                                                    rz-slider-high="slider.max"
+	                                                                    rz-slider-step="{{slider.step}}"
+	                                                                    rz-slider-tpl-url="rzSliderTpl.html"
+	                                                                    rz-slider-hide-limit-labels="true">
+	                                                                </rzslider>
+	                                                            </div>
+	                                                        </accordion-group>
+	                                                    </accordion>
+	                                                </div>
+	                                            </div>
+	                                            <div class="col-lg-12">
+	                                                <button class="btn btn-primary btn-has-icon btn-block" data-loading-text="Loading...">
+	                                                    <i class="fa fa-search"></i> 
+	                                                    Search
+	                                                </button>
+	                                                <!-- 
+	                                                <div class="col-md-4">
+	                                                  <button class="btn btn-primary btn-has-icon btn-block" data-loading-text="Loading...">
+	                                                    <i class="fa fa-save"></i> 
+	                                                    Save Search
+	                                                  </button>
+	                                                </div>
+	                                                -->
+	                                                <button class="btn btn-primary btn-has-icon btn-block" data-loading-text="Loading..." ng-click="advancedReset()">
+	                                                    <i class="fa fa-refresh"></i> 
+	                                                    Reset Search
+	                                                </button>
+	                                            </div>
+	                                        </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
