@@ -36,32 +36,39 @@
                             <tr>
                                 <th></th>
                                 <th ng-click="sortType = 'basePrice';sortReverse = !sortReverse">Was
-                                    <span ng-show="sortType == 'basePrice' && !sortReverse" class="fa fa-caret-down"></span>
-                                    <span ng-show="sortType == 'basePrice' && sortReverse" class="fa fa-caret-up"></span>
+                                    <span ng-show="(sortType == null || sortType != 'basePrice') || sortReverse == null" class="fa fa-sort"></span>
+                                    <span ng-show="sortType == 'basePrice' && !sortReverse" class="fa fa-sort-asc"></span>
+                                    <span ng-show="sortType == 'basePrice' && sortReverse" class="fa fa-sort-desc"></span>
                                 </th>
                                 <th ng-click="sortType = 'actualPrice';sortReverse = !sortReverse">$USD
-                                    <span ng-show="sortType == 'actualPrice' && !sortReverse" class="fa fa-caret-down"></span>
-                                    <span ng-show="sortType == 'actualPrice' && sortReverse" class="fa fa-caret-up"></span>
+                                    <span ng-show="(sortType == null || sortType != 'actualPrice') || sortReverse == null" class="fa fa-sort"></span>
+                                    <span ng-show="sortType == 'actualPrice' && !sortReverse" class="fa fa-sort-asc"></span>
+                                    <span ng-show="sortType == 'actualPrice' && sortReverse" class="fa fa-sort-desc"></span>
                                 </th>
                                 <th ng-click="sortType = 'discount';sortReverse = !sortReverse">You Save
-                                    <span ng-show="sortType == 'discount' && !sortReverse" class="fa fa-caret-down"></span>
-                                    <span ng-show="sortType == 'discount' && sortReverse" class="fa fa-caret-up"></span>
+                                    <span ng-show="(sortType == null || sortType != 'discount') || sortReverse == null" class="fa fa-sort"></span>
+                                    <span ng-show="sortType == 'discount' && !sortReverse" class="fa fa-sort-asc"></span>
+                                    <span ng-show="sortType == 'discount' && sortReverse" class="fa fa-sort-desc"></span>
                                 </th>
                                 <th ng-click="sortType = 'credits';sortReverse = !sortReverse">Credits
-                                    <span ng-show="sortType == 'credits' && !sortReverse" class="fa fa-caret-down"></span>
-                                    <span ng-show="sortType == 'credits' && sortReverse" class="fa fa-caret-up"></span>
+                                    <span ng-show="(sortType == null || sortType != 'credits') || sortReverse == null" class="fa fa-sort"></span>
+                                    <span ng-show="sortType == 'credits' && !sortReverse" class="fa fa-sort-asc"></span>
+                                    <span ng-show="sortType == 'credits' && sortReverse" class="fa fa-sort-desc"></span>
                                 </th>
                                 <th ng-click="sortType = 'aggLinkTF';sortReverse = !sortReverse">Agg Link TF
-                                    <span ng-show="sortType == 'aggLinkTF' && !sortReverse" class="fa fa-caret-down"></span>
-                                    <span ng-show="sortType == 'aggLinkTF' && sortReverse" class="fa fa-caret-up"></span>
+                                    <span ng-show="(sortType == null || sortType != 'aggLinkTF') || sortReverse == null" class="fa fa-sort"></span>
+                                    <span ng-show="sortType == 'aggLinkTF' && !sortReverse" class="fa fa-sort-asc"></span>
+                                    <span ng-show="sortType == 'aggLinkTF' && sortReverse" class="fa fa-sort-desc"></span>
                                 </th>
                                 <th ng-click="sortType = 'frTrust';sortReverse = !sortReverse">FR Trust
-                                    <span ng-show="sortType == 'frTrust' && !sortReverse" class="fa fa-caret-down"></span>
-                                    <span ng-show="sortType == 'frTrust' && sortReverse" class="fa fa-caret-up"></span>
+                                    <span ng-show="(sortType == null || sortType != 'frTrust') || sortReverse == null" class="fa fa-sort"></span>
+                                    <span ng-show="sortType == 'frTrust' && !sortReverse" class="fa fa-sort-asc"></span>
+                                    <span ng-show="sortType == 'frTrust' && sortReverse" class="fa fa-sort-desc"></span>
                                 </th>
                                 <th ng-click="sortType = 'domTF';sortReverse = !sortReverse">Dom TF
-                                    <span ng-show="sortType == 'domTF' && !sortReverse" class="fa fa-caret-down"></span>
-                                    <span ng-show="sortType == 'domTF' && sortReverse" class="fa fa-caret-up"></span>
+                                    <span ng-show="(sortType == null || sortType != 'domTF') || sortReverse == null" class="fa fa-sort"></span>
+                                    <span ng-show="sortType == 'domTF' && !sortReverse" class="fa fa-sort-asc"></span>
+                                    <span ng-show="sortType == 'domTF' && sortReverse" class="fa fa-sort-desc"></span>
                                 </th>
                                 <th></th>
                                 <th></th>
@@ -129,9 +136,9 @@
                 <section class="detail-info">
                     <div class="row" ng-if="summary && links">
                         <accordion class="summary-accordian" id="summary-accordian">
-                            <accordion-group is-open="true">
+                            <accordion-group is-open="accordian1.open">
                                 <accordion-heading>
-                                    Summary<i class="pull-right glyphicon" ng-class="{'glyphicon glyphicon-minus-sign': status.open, 'glyphicon glyphicon-plus-sign': !status.open}"></i>
+                                    Summary<i class="pull-right glyphicon" ng-class="{'glyphicon glyphicon-minus-sign': accordian1.open, 'glyphicon glyphicon-plus-sign': !accordian1.open}"></i>
                                 </accordion-heading>
                                 <div>
                                     <div class="table-responsive">          

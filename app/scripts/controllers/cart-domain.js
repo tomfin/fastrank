@@ -68,5 +68,7 @@ angular.module('fastrankApp')
                     });
                     jQuery('html, body').delay(1000).animate({scrollTop: jQuery('.error').offset().top - 100}, 1000); //jshint ignore:line
                 };
-
+                     // For basic and advance accordians
+                     $scope.oneAtATime = true;
+                     $scope.accordian1 = {open:true};
             }]);

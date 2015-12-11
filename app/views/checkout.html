@@ -48,8 +48,9 @@
                                 <th></th>
                                 <th>More Info</th>
                                 <th ng-click="sortType = 'credits';sortReverse = !sortReverse">Credits
-                                    <span ng-show="sortType == 'credits' && !sortReverse" class="fa fa-caret-down"></span>
-                                    <span ng-show="sortType == 'credits' && sortReverse" class="fa fa-caret-up"></span>
+                                    <span ng-show="(sortType == null || sortType != 'credits') || sortReverse == null" class="fa fa-sort"></span>
+                                    <span ng-show="sortType == 'credits' && !sortReverse" class="fa fa-sort-asc"></span>
+                                    <span ng-show="sortType == 'credits' && sortReverse" class="fa fa-sort-desc"></span>
                                 </th>
                             </tr>
                             <tr ng-if="cartDomains.length == 0">

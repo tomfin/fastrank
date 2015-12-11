@@ -14,24 +14,29 @@
 							<thead>
 								<tr>
 									<th ng-click="sortType = 'transactionId';sortReverse = !sortReverse">Transaction Id
-                                                                            <span ng-show="sortType == 'transactionId' && !sortReverse" class="fa fa-caret-down"></span>
-                                                                            <span ng-show="sortType == 'transactionId' && sortReverse" class="fa fa-caret-up"></span>
+                                                                            <span ng-show="(sortType == null || sortType != 'transactionId') || sortReverse == null" class="fa fa-sort"></span>
+                                                                            <span ng-show="sortType == 'transactionId' && !sortReverse" class="fa fa-sort-asc"></span>
+                                                                            <span ng-show="sortType == 'transactionId' && sortReverse" class="fa fa-sort-desc"></span>
                                                                         </th>
 									<th ng-click="sortType = 'provider';sortReverse = !sortReverse">Provider
-                                                                            <span ng-show="sortType == 'provider' && !sortReverse" class="fa fa-caret-down"></span>
-                                                                            <span ng-show="sortType == 'provider' && sortReverse" class="fa fa-caret-up"></span>
+                                                                            <span ng-show="(sortType == null || sortType != 'provider') || sortReverse == null" class="fa fa-sort"></span>
+                                                                            <span ng-show="sortType == 'provider' && !sortReverse" class="fa fa-sort-asc"></span>
+                                                                            <span ng-show="sortType == 'provider' && sortReverse" class="fa fa-sort-desc"></span>
                                                                         </th>
 									<th ng-click="sortType = 'amount';sortReverse = !sortReverse">Amount (USD)
-                                                                            <span ng-show="sortType == 'amount' && !sortReverse" class="fa fa-caret-down"></span>
-                                                                            <span ng-show="sortType == 'amount' && sortReverse" class="fa fa-caret-up"></span>
+                                                                            <span ng-show="(sortType == null || sortType != 'amount') || sortReverse == null" class="fa fa-sort"></span>
+                                                                            <span ng-show="sortType == 'amount' && !sortReverse" class="fa fa-sort-asc"></span>
+                                                                            <span ng-show="sortType == 'amount' && sortReverse" class="fa fa-sort-desc"></span>
                                                                         </th>
 									<th ng-click="sortType = 'credits';sortReverse = !sortReverse">Credits Granted
-                                                                            <span ng-show="sortType == 'credits' && !sortReverse" class="fa fa-caret-down"></span>
-                                                                            <span ng-show="sortType == 'credits' && sortReverse" class="fa fa-caret-up"></span>
+                                                                            <span ng-show="(sortType == null || sortType != 'credits') || sortReverse == null" class="fa fa-sort"></span>
+                                                                            <span ng-show="sortType == 'credits' && !sortReverse" class="fa fa-sort-asc"></span>
+                                                                            <span ng-show="sortType == 'credits' && sortReverse" class="fa fa-sort-desc"></span>
                                                                         </th>
 									<th ng-click="sortType = 'date';sortReverse = !sortReverse">Date
-                                                                            <span ng-show="sortType == 'date' && !sortReverse" class="fa fa-caret-down"></span>
-                                                                            <span ng-show="sortType == 'date' && sortReverse" class="fa fa-caret-up"></span>
+                                                                            <span ng-show="(sortType == null || sortType != 'date') || sortReverse == null" class="fa fa-sort"></span>
+                                                                            <span ng-show="sortType == 'date' && !sortReverse" class="fa fa-sort-asc"></span>
+                                                                            <span ng-show="sortType == 'date' && sortReverse" class="fa fa-sort-desc"></span>
                                                                         </th>
 								</tr>
 							</thead>
