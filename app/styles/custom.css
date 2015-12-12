@@ -29,6 +29,7 @@
 .domain-page .open > .dropdown-toggle.btn-primary,
 .domain-page .btn-primary{
   background: none repeat scroll 0 0 #1a4b69;
+  border: none;
 }
 .domain-page rzslider span.rz-pointer {
   background: #1a7ab0;
@@ -322,7 +323,7 @@ input[type=checkbox], input[type=radio] {
 input[id^=addToCart] + label::before {
 	content: ' ';
 	position: absolute;
-	left: 50px;
+	left: 10px;
 	width: 51px;
 	height: 51px;
 	display: block;
@@ -332,7 +333,7 @@ input[id^=addToCart] + label::before {
 input[id^=addToCart] + label::after {
 	content: ' ';
 	position: relative;
-	left: 27px;
+	left: 10px;
 	width: 51px;
 	height: 51px;
 	display: block;
@@ -345,12 +346,17 @@ input[id^=addToCart]:checked + label::after {
   opacity: 1;
 }
 
-@media all and (max-width: 640px) {
-    input[id^=addToCart] + label::after {
-        left: 14px;
-    }
+.cartSelected label{position:relative}
+.table > tbody > tr.domain-row > td {
+    padding: 10px;
+    vertical-align: middle;
 }
-
+.form-group.limit-container  {
+    margin-bottom: 5px;
+}
+.addTocart {
+    display: none;
+}
 body.modal-open {
     overflow: visible;
 }
@@ -429,3 +435,6 @@ body.modal-open {
 .domain-page .panel-group .row{
     margin-top: 10px;
 }
+ul.pagination li::before {
+    content: '';
+} 
