@@ -30,15 +30,31 @@
 				<thead>
 					<tr>
 					    <th></th>
-						<th>Level</th>
-						<th>Price</th>
-						<th>Credits</th>
-						<th>Credits per $</th>
+						<th ng-click="sortType = 'level';sortReverse = !sortReverse">Level  
+                                                    <span ng-show="(sortType == null || sortType != 'level') || sortReverse == null" class="fa fa-sort"></span>
+                                                    <span ng-show="sortType == 'level' && !sortReverse" class="fa fa-sort-asc"></span>
+                                                    <span ng-show="sortType == 'level' && sortReverse" class="fa fa-sort-desc"></span>
+                                                </th>
+						<th ng-click="sortType = 'Price';sortReverse = !sortReverse">Price
+                                                <span ng-show="(sortType == null || sortType != 'Price') || sortReverse == null" class="fa fa-sort"></span>
+                                                    <span ng-show="sortType == 'Price' && !sortReverse" class="fa fa-sort-asc"></span>
+                                                    <span ng-show="sortType == 'Price' && sortReverse" class="fa fa-sort-desc"></span>
+                                                </th>
+						<th ng-click="sortType = 'credits';sortReverse = !sortReverse">Credits
+                                                <span ng-show="(sortType == null || sortType != 'credits') || sortReverse == null" class="fa fa-sort"></span>
+                                                    <span ng-show="sortType == 'credits' && !sortReverse" class="fa fa-sort-asc"></span>
+                                                    <span ng-show="sortType == 'credits' && sortReverse" class="fa fa-sort-desc"></span>
+                                                </th>
+						<th ng-click="sortType = 'creditsper$';sortReverse = !sortReverse">Credits per $
+                                                <span ng-show="(sortType == null || sortType != 'creditsper$') || sortReverse == null" class="fa fa-sort"></span>
+                                                    <span ng-show="sortType == 'creditsper$' && !sortReverse" class="fa fa-sort-asc"></span>
+                                                    <span ng-show="sortType == 'creditsper$' && sortReverse" class="fa fa-sort-desc"></span>
+                                                </th>
 						<th>Top-up</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr ng-repeat-start="price in prices" ng-class="{'selected':$index == selectedRow}">
+					<tr ng-repeat-start="price in prices|orderBy:sortType:sortReverse" ng-class="{'selected':$index == selectedRow}">
 					    <td ng-show="!price.expanded" ng-click="price.expanded = !price.expanded" width="5%" class="expandCredit col-md-1"><i class="fa fa-plus-square"></i></td>
                                             <td ng-show="price.expanded" ng-click="price.expanded = !price.expanded" width="5%" class="expandCredit col-md-1"><i class="fa fa-minus-square"></i></td>
                                             <td ng-click="price.expanded = !price.expanded" width="16%" class="expandCredit col-md-2"><strong>{{price.level}}</strong></td>
@@ -51,7 +67,7 @@
 						<td colspan="6" class="more-info-td">
 							<div class="toggle credit-detail" style="display: none">
 								<table width="100%">
-									<tr ng-repeat="addon in price.addons">
+									<tr ng-repeat="addon in price.addons|orderBy:sortType:sortReverse">
 									    <td width="5%" class="col-md-1"></td>
 										<td width="16%" class="col-md-2"><em>{{price.level}} Addon {{addon.addonLevel}}</em></td>
 										<td width="16%" class="col-md-2">${{addon.price | number: 0}}</td>

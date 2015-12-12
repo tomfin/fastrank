@@ -67,7 +67,7 @@
                                     <span ng-show="(sortType == null || sortType != 'domTF') || sortReverse == null" class="fa fa-sort"></span>
                                     <span ng-show="sortType == 'domTF' && !sortReverse" class="fa fa-sort-asc"></span>
                                     <span ng-show="sortType == 'domTF' && sortReverse" class="fa fa-sort-desc"></span>
-                                    <button class="btnInvisible" popover="Majestic Trust Flow rating for this domain" popover-trigger="focus" aria-hidden="true">
+                                    <button class="btnInvisible" popover="Majestic Trust Flow rating for this domain" popover-trigger="mouseenter" aria-hidden="true">
                                         <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
                                     </button>
                                 </th>
@@ -76,7 +76,7 @@
                                     <span ng-show="(sortType == null || sortType != 'aggLinkTF') || sortReverse == null" class="fa fa-sort"></span>
                                     <span ng-show="sortType == 'aggLinkTF' && !sortReverse" class="fa fa-sort-asc"></span>
                                     <span ng-show="sortType == 'aggLinkTF' && sortReverse" class="fa fa-sort-desc"></span>
-                                    <button class="btnInvisible" popover="The combined Trust Flow score of all links into this domain" popover-trigger="focus" aria-hidden="true">
+                                    <button class="btnInvisible" popover="The combined Trust Flow score of all links into this domain" popover-trigger="mouseenter" aria-hidden="true">
                                         <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
                                     </button>
                                 </th>
@@ -85,7 +85,7 @@
                                     <span ng-show="(sortType == null || sortType != 'domRel') || sortReverse == null" class="fa fa-sort"></span>
                                     <span ng-show="sortType == 'domRel' && !sortReverse" class="fa fa-sort-asc"></span>
                                     <span ng-show="sortType == 'domRel' && sortReverse" class="fa fa-sort-desc"></span>
-                                    <button class="btnInvisible" popover="How relevant this domain is to your search criteria (the higher the better), and by which provider these calculations were made" popover-trigger="focus" aria-hidden="true">
+                                    <button class="btnInvisible" popover="How relevant this domain is to your search criteria (the higher the better), and by which provider these calculations were made" popover-trigger="mouseenter" aria-hidden="true">
                                         <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
                                     </button>
                                 </th>
@@ -104,8 +104,8 @@
                                 <td>{{ rec.domTF}}</td>
                                 <td>{{ rec.aggLinkTF}}</td>
                                 <td>{{ rec.domRel}}</td>
-                                <td ng-show="!rec.expanded" ng-click="rec.expanded = !rec.expanded" class="more-link"><a class="btn btn-sm btn-success btn-has-icon"><i class="fa fa-chevron-circle-down"></i>More</a></td>
-                                <td ng-show="rec.expanded" ng-click="rec.expanded = !rec.expanded" class="more-link"><a class="btn btn-sm btn-success btn-has-icon"><i class="fa fa-chevron-circle-up"></i>Less</a></td>
+                                <td ng-show="!rec.expanded"><a ng-click="rec.expanded = !rec.expanded" class="more-link btn btn-sm btn-success btn-has-icon"><i class="fa fa-chevron-circle-down"></i>More</a></td>
+                                <td ng-show="rec.expanded"><a ng-click="rec.expanded = !rec.expanded" class="more-link btn btn-sm btn-success btn-has-icon"><i class="fa fa-chevron-circle-up"></i>Less</a></td>
                                 <td><a ng-click="detailInfo({{ 'rec.publicId'}})" class="btn btn-sm btn-success">All</a></td>
                             </tr>
                             <tr ng-repeat-end fr-collapse class="more-info">

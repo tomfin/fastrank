@@ -88,8 +88,8 @@
                                 <td>{{ rec.aggLinkTF}}</td>
                                 <td>{{ rec.frTrust}}</td>
                                 <td>{{ rec.domTF}}</td>
-                                <td ng-show="!rec.expanded" ng-click="rec.expanded = !rec.expanded" class="more-link"><a>More</a></td>
-                                <td ng-show="rec.expanded" ng-click="rec.expanded = !rec.expanded" class="more-link"><a>Less</a></td>
+                                <td ng-show="!rec.expanded"><a ng-click="rec.expanded = !rec.expanded" class="more-link">More</a></td>
+                                <td ng-show="rec.expanded" ><a ng-click="rec.expanded = !rec.expanded" class="more-link">Less</a></td>
                                 <td><a ng-click="detailInfo({{ 'rec.publicId' }})">All</a></td>
                             </tr>
                             <tr ng-repeat-end fr-collapse class="more-info">
