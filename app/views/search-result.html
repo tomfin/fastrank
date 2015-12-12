@@ -31,6 +31,14 @@
                     </div>
                 </div>
                 <div class="row" ng-if="!noResultcheckAllNoneFoundError && !searchError">                    
+                    
+                    <div class="form-group limit-container ">
+                        <label for="sel1">Domains per page</label>
+                        <select ng-options="item for item in pageSizeRanges" id="sel1"
+                                ng-change="setRecordLimit(pageSize)" ng-model="pageSize">
+                        </select>
+                    </div>
+                    
                     <div class="table-responsive">          
                         <table class="table">
                             <tr>
@@ -85,7 +93,7 @@
                                 <th class="col-md-2"></th>
                             </tr>
                             <tr ng-repeat-start="rec in result|orderBy:sortType:sortReverse" class="domain-row cartSelected">
-                                <td ng-if="isAuthenticated()"><input id="addToCart{{$index}}" type="checkbox" ng-change="addToCart(rec)" ng-model="rec.selected" /><label for="addToCart{{$index}}"></label></td>
+                                <td ng-if="isAuthenticated()"><input id="addToCart{{$index}}" class="addTocart" type="checkbox" ng-change="addToCart(rec)" ng-model="rec.selected" /><label for="addToCart{{$index}}"></label></td>
                                 <td><a ng-if="rec.credits > 0" class="btn btn-sm btn-primary btn-has-icon" ng-bootbox-confirm="Please confirm you want to FastBuy this domain" ng-bootbox-confirm-action="fastBuy(rec, $index)" backdrop="true"><i class="fa fa-bolt"></i>Fast Buy</a></td>
                                 <td>{{ rec.rootURL}}</td>
                                 <td ng-if="rec.credits > 0 && rec.basePrice > rec.actualPrice"><span class="actualPrice">${{ rec.actualPrice | number:2 }}</span> <del>${{ rec.basePrice | number:2 }}</del></td>
@@ -134,6 +142,13 @@
                         </table>
                     </div>
                 </div>
+                 
+                <pagination boundary-links="true" total-items="totalItems" ng-model="pageNo" 
+                class="pagination-lg" items-per-page="pageSize" max-size="maxPage" rotate="false"
+                previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" 
+                ng-change="paginate()">
+                </pagination>
+                
                 <section class="detail-info">
                     <div class="row" ng-if="summary && links">
                         <accordion class="summary-accordian" id="summary-accordian">
