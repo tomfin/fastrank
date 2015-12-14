@@ -1,12 +1,22 @@
 {
-    "password": {
-        "title": "Changer le mot de passe pour [<b>{{username}}</b>]",
+    "reset": {
+        "title": "Nouveau mot de passe",
         "form": {
-            "button": "Sauvegarder"
+            "button": "Nouveau mot de passe",
+            "email": "Adresse e-mail",
+            "email.placeholder": "Adresse e-mail",
+            "confirmemail": "Confirmez votre adresse email",
+            "confirmemail.placeholder": "Confirmez votre adresse email"
         },
         "messages": {
-            "error": "<strong>Une erreur est survenue!</strong> Le mot de passe n'a pas pu être modifié.",
-            "success": "<strong>La mot de passe a été modifié!</strong>"
+            "error": {
+                "dontmatch" : "Le <strong> email et validez email </ strong> ne sont pas correspondre!", 
+                "emailnotexists": "<strong> E-mail est déjà utilisée! </ strong> S'il vous plaît choisir un autre.",
+                "userexists": "nom <strong> Connectez-vous déjà enregistré! </ strong> S'il vous plaît choisir un autre.",
+                "fail": "<strong> Echec de l'enregistrement! </ strong> S'il vous plaît vérifier votre saisie et essayez à nouveau."
+            },
+            
+            "success": "<strong> Inscription sauvé! </ strong> S'il vous plaît vérifier votre e-mail de confirmation."
         }
     }
 }
