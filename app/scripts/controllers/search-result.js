@@ -319,5 +319,5 @@ angular.module('fastrankApp')
 		
 				    jQuery('html, body').delay(1000).animate({scrollTop: jQuery('.detail-info').offset().top - 65}, 1000); //jshint ignore:line
 				};
-
+			}
 	    }]);
