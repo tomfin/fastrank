@@ -43,7 +43,7 @@ angular.module('fastrankApp')
                     $rootScope.cartDomains = [];
                 });
             }; 
-           $scope.cartInit();
+            $scope.cartInit();
 
             $scope.main = {};
             $scope.main.currentuser = null;
@@ -83,7 +83,7 @@ angular.module('fastrankApp')
                 return $rootScope.account;
             }, function() {
                 $scope.account = $rootScope.account;
-            });
+            }, true);
 
             $scope.logout = function () {
                 Auth.logout();
