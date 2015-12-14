@@ -74,7 +74,7 @@
                                 <th></th>
                             </tr>
                             <tr ng-repeat-start="rec in result|orderBy:sortType:sortReverse" class="domain-row">
-                                <td><a ng-if="rec.credits > 0" ng-bootbox-confirm="Please confirm you want to FastBuy this domain" ng-bootbox-confirm-action="fastBuy(rec, $index)" backdrop="true">Fast Buy</a></td>
+				<td><a ng-if="rec.credits > 0" ng-click="fastBuy(rec, $index)">Fast Buy</a></td>
                                 <td ng-if="rec.credits > 0"><del>${{ rec.basePrice}}</del></td>
                                 <td ng-if="rec.credits > 0"><span class="actualPrice">${{ rec.actualPrice}}</span></td>
                                 <td ng-if="rec.credits > 0">${{ rec.discount}}</td>
@@ -124,7 +124,7 @@
                                                 <td class="col-md-2"><strong>EDU/Gov:</strong> {{ rec.edugovCount}}</td>
                                                 <td class="col-md-3"><strong>TlD:</strong> {{ rec.tld}}</td>
                                                 <td class="col-md-5">{{ rec.alchMainTaxonomy}}</td>
-                                                <td class="col-md-2"><a ng-if="rec.credits > 0" ng-bootbox-confirm="Please confirm you want to FastBuy this domain" ng-bootbox-confirm-action="fastBuy(rec, $index)" backdrop="true">Fast Buy</a></td>
+                                                <td class="col-md-2"><a ng-if="rec.credits > 0" ng-click="fastBuy(rec, $index)">Fast Buy</a></td>
                                             </tr>
                                         </table>
                                     </div>
