@@ -30,12 +30,12 @@ angular.module('fastrankApp')
 			title: 'Please confirm!',
 			buttons: {
 			    warning: {
-				label: "Cancel",
-				className: "btn-warning"
+				label: 'Cancel',
+				className: 'btn-warning'
 			    },
 			    success: {
-				label: "Buy Information",
-				className: "btn-success",
+				label: 'Buy Information',
+				className: 'btn-success',
 				callback: function () {
 				    var domains = [];
 				    angular.forEach($scope.cartDomains, function (result) {
