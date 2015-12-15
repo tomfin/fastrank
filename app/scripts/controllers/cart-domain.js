@@ -44,7 +44,9 @@ angular.module('fastrankApp')
 
 		if (angular.isDefined(summeryDomain) && summeryDomain !== '') {
 		    $scope.detailInfo(summeryDomain);
-		}
+		} else {
+                    $location.path('checkout');
+                }
 
 		$scope.fastBuy = function (result, index) {
 		    var options = {
