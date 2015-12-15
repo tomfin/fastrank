@@ -8,7 +8,7 @@
  * Controller of the fastrankApp
  */
 angular.module('fastrankApp')
-	.controller('cartDomainCtrl', ['$scope', '$log', '$stateParams', 'CartDomainSer', 'Summary', 'Links', '$rootScope', 'FastBuy', '$ngBootbox', function ($scope, $log, $stateParams, CartDomainSer, Summary, Links, $rootScope, FastBuy, $ngBootbox) {
+	.controller('cartDomainCtrl', ['$scope', '$log', '$stateParams', 'CartDomainSer', 'Summary', 'Links', '$rootScope', 'FastBuy', '$ngBootbox', '$location',  function ($scope, $log, $stateParams, CartDomainSer, Summary, Links, $rootScope, FastBuy, $ngBootbox, $location) {
 		var summeryDomain = $stateParams.publicId;
 		$scope.summary = '';
 		$scope.links = '';
