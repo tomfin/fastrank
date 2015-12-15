@@ -10,7 +10,6 @@
 angular.module('fastrankApp')
 	.controller('searchResultCtrl', ['$scope', '$rootScope', '$log', '$stateParams', '$q', '$state', 'FastBuy', 'Summary', 'Links', 'SimpleSearch', 'AdvancedSearch', 'ModifyCart', 'Principal', '$ngBootbox',
 	    function ($scope, $rootScope, $log, $stateParams, $q, $state, FastBuy, Summary, Links, SimpleSearch, AdvancedSearch, ModifyCart, Principal, $ngBootbox) {
-		if (!$stateParams.result || (Principal.isAuthenticated() === true && (!$stateParams.ca || $stateParams.ca.toString() === 'false'))) {
 
 		    Principal.identity().then(function (account) {
 			$scope.account = account;
@@ -371,5 +370,4 @@ angular.module('fastrankApp')
 		    $scope.paginate = function () {
 			domainSearch(adjustPageNo($scope.pageNo - 1), $scope.pageSize);
 		    };
-		}
 	    }]);
