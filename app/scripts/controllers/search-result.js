@@ -27,7 +27,6 @@ angular.module('fastrankApp')
 		    };
 
 		    var domainSearch = function (pageNo, pageSize) {
-			console.log(pageNo);
 			if (angular.isDefined($stateParams.min) && angular.isDefined($stateParams.max) && angular.isDefined($stateParams.type)) {
 			    var simpleSubmit = {};
 			    simpleSubmit.item = '';
@@ -133,6 +132,7 @@ angular.module('fastrankApp')
 				});
 			    });
 			}
+			jQuery('html, body').delay(1000).animate({scrollTop: jQuery('.error').offset().top - 100}, 1000); //jshint ignore:line
 		    };
 
 		    if (!$stateParams.result || (Principal.isAuthenticated().toString() === 'true' && $stateParams.result && $stateParams.result[0].credits === 0)) {
