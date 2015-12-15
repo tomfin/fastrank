@@ -67,27 +67,27 @@
                                     <span ng-show="(sortType == null || sortType != 'domTF') || sortReverse == null" class="fa fa-sort"></span>
                                     <span ng-show="sortType == 'domTF' && !sortReverse" class="fa fa-sort-asc"></span>
                                     <span ng-show="sortType == 'domTF' && sortReverse" class="fa fa-sort-desc"></span>
-                                    <button class="btnInvisible" popover="Majestic Trust Flow rating for this domain" popover-trigger="mouseenter" aria-hidden="true">
+                                    <span class="btnInvisible" popover="Majestic Trust Flow rating for this domain" popover-trigger="mouseenter" aria-hidden="true">
                                         <span class="fa fa-question-circle fa-1" aria-hidden="true"></span>
-                                    </button>
+                                    </span>
                                 </th>
                                 <th class="col-md-2" ng-click="sortType = 'aggLinkTF';
                                     sortReverse = !sortReverse">Agg Link TF
                                     <span ng-show="(sortType == null || sortType != 'aggLinkTF') || sortReverse == null" class="fa fa-sort"></span>
                                     <span ng-show="sortType == 'aggLinkTF' && !sortReverse" class="fa fa-sort-asc"></span>
                                     <span ng-show="sortType == 'aggLinkTF' && sortReverse" class="fa fa-sort-desc"></span>
-                                    <button class="btnInvisible" popover="The combined Trust Flow score of all links into this domain" popover-trigger="mouseenter" aria-hidden="true">
+                                    <span class="btnInvisible" popover="The combined Trust Flow score of all links into this domain" popover-trigger="mouseenter" aria-hidden="true">
                                         <span class="fa fa-question-circle fa-1" aria-hidden="true"></span>
-                                    </button>
+                                    </span>
                                 </th>
                                 <th class="col-md-2" ng-click="sortType = 'domRel';
                                     sortReverse = !sortReverse">Search Rel. to Domain
                                     <span ng-show="(sortType == null || sortType != 'domRel') || sortReverse == null" class="fa fa-sort"></span>
                                     <span ng-show="sortType == 'domRel' && !sortReverse" class="fa fa-sort-asc"></span>
                                     <span ng-show="sortType == 'domRel' && sortReverse" class="fa fa-sort-desc"></span>
-                                    <button class="btnInvisible" popover="How relevant this domain is to your search criteria (the higher the better), and by which provider these calculations were made" popover-trigger="mouseenter" aria-hidden="true">
+                                    <span class="btnInvisible" popover="How relevant this domain is to your search criteria (the higher the better), and by which provider these calculations were made" popover-trigger="mouseenter" aria-hidden="true">
                                         <span class="fa fa-question-circle fa-1" aria-hidden="true"></span>
-                                    </button>
+                                    </span>
                                 </th>
                                 <th class="col-md-2"></th>
                                 <th class="col-md-2"></th>
