@@ -37,26 +37,22 @@
                             <tr>
                                 <th class="col-md-4" ng-show="isAuthenticated()"><label for="addAllToCart"><input id="addAllToCart" type="checkbox" ng-click="checkAll()" ng-checked="checkAllNone"/>Add All</label></th>
                                 <th class="col-md-1"></th>
-				<th class="col-md-2" ng-click="sortType = 'rootURL';
-				    sortReverse = !sortReverse">Domain
+				                <th class="col-md-2" ng-click="sortType = 'rootURL'; sortReverse = !sortReverse">Domain
                                     <span ng-show="(sortType == null || sortType != 'rootURL') || sortReverse == null" class="fa fa-sort"></span>
                                     <span ng-show="sortType == 'rootURL' && !sortReverse" class="fa fa-sort-asc"></span>
                                     <span ng-show="sortType == 'rootURL' && sortReverse" class="fa fa-sort-desc"></span>
                                 </th>
-				<th class="col-md-2" ng-click="sortType = 'actualPrice';
-				    sortReverse = !sortReverse">Price (USD)
+				                <th class="col-md-2" ng-click="sortType = 'actualPrice'; sortReverse = !sortReverse">Price (USD)
                                     <span ng-show="(sortType == null || sortType != 'actualPrice') || sortReverse == null" class="fa fa-sort"></span>
                                     <span ng-show="sortType == 'actualPrice' && !sortReverse" class="fa fa-sort-asc"></span>
                                     <span ng-show="sortType == 'actualPrice' && sortReverse" class="fa fa-sort-desc"></span>
                                 </th>
-				<th class="col-md-2" ng-click="sortType = 'credits';
-				    sortReverse = !sortReverse">Credits
+				                <th class="col-md-2" ng-click="sortType = 'credits'; sortReverse = !sortReverse">Credits
                                     <span ng-show="(sortType == null || sortType != 'credits') || sortReverse == null" class="fa fa-sort"></span>
                                     <span ng-show="sortType == 'credits' && !sortReverse" class="fa fa-sort-asc"></span>
                                     <span ng-show="sortType == 'credits' && sortReverse" class="fa fa-sort-desc"></span>
                                 </th>
-				<th class="col-md-2" ng-click="sortType = 'domTF';
-				    sortReverse = !sortReverse">Dom TF
+				                <th class="col-md-2" ng-click="sortType = 'domTF'; sortReverse = !sortReverse">Dom TF
                                     <span ng-show="(sortType == null || sortType != 'domTF') || sortReverse == null" class="fa fa-sort"></span>
                                     <span ng-show="sortType == 'domTF' && !sortReverse" class="fa fa-sort-asc"></span>
                                     <span ng-show="sortType == 'domTF' && sortReverse" class="fa fa-sort-desc"></span>
@@ -64,37 +60,35 @@
                                         <span class="fa fa-question-circle fa-1" aria-hidden="true"></span>
                                     </span>
                                 </th>
-				<th class="col-md-2" ng-click="sortType = 'aggLinkTF';
-				    sortReverse = !sortReverse">Agg Link TF
-                                    <span ng-show="(sortType == null || sortType != 'aggLinkTF') || sortReverse == null" class="fa fa-sort"></span>
-                                    <span ng-show="sortType == 'aggLinkTF' && !sortReverse" class="fa fa-sort-asc"></span>
-                                    <span ng-show="sortType == 'aggLinkTF' && sortReverse" class="fa fa-sort-desc"></span>
-                                    <span class="btnInvisible" popover="The combined Trust Flow score of all links into this domain" popover-trigger="mouseenter" aria-hidden="true">
-                                        <span class="fa fa-question-circle fa-1" aria-hidden="true"></span>
-                                    </span>
-                                </th>
-				<th class="col-md-2" ng-click="sortType = 'domRel';
-				    sortReverse = !sortReverse">Search Rel. to Domain
-                                    <span ng-show="(sortType == null || sortType != 'domRel') || sortReverse == null" class="fa fa-sort"></span>
-                                    <span ng-show="sortType == 'domRel' && !sortReverse" class="fa fa-sort-asc"></span>
-                                    <span ng-show="sortType == 'domRel' && sortReverse" class="fa fa-sort-desc"></span>
-                                    <span class="btnInvisible" popover="How relevant this domain is to your search criteria (the higher the better), and by which provider these calculations were made" popover-trigger="mouseenter" aria-hidden="true">
-                                        <span class="fa fa-question-circle fa-1" aria-hidden="true"></span>
-                                    </span>
+					            <th class="col-md-2" ng-click="sortType = 'aggLinkTF'; sortReverse = !sortReverse">Agg Link TF
+	                                    <span ng-show="(sortType == null || sortType != 'aggLinkTF') || sortReverse == null" class="fa fa-sort"></span>
+	                                    <span ng-show="sortType == 'aggLinkTF' && !sortReverse" class="fa fa-sort-asc"></span>
+	                                    <span ng-show="sortType == 'aggLinkTF' && sortReverse" class="fa fa-sort-desc"></span>
+	                                    <span class="btnInvisible" popover="The combined Trust Flow score of all links into this domain" popover-trigger="mouseenter" aria-hidden="true">
+	                                        <span class="fa fa-question-circle fa-1" aria-hidden="true"></span>
+	                                    </span>
+	                            </th>
+							    <th class="col-md-2" ng-click="sortType = 'domRel'; sortReverse = !sortReverse">Search Rel. to Domain
+	                                    <span ng-show="(sortType == null || sortType != 'domRel') || sortReverse == null" class="fa fa-sort"></span>
+	                                    <span ng-show="sortType == 'domRel' && !sortReverse" class="fa fa-sort-asc"></span>
+	                                    <span ng-show="sortType == 'domRel' && sortReverse" class="fa fa-sort-desc"></span>
+	                                    <span class="btnInvisible" popover="How relevant this domain is to your search criteria (the higher the better), and by which provider these calculations were made" popover-trigger="mouseenter" aria-hidden="true">
+	                                        <span class="fa fa-question-circle fa-1" aria-hidden="true"></span>
+	                                    </span>
                                 </th>
                                 <th class="col-md-2" colspan="2">
-				    <div class="form-group">
-					<label for="sel1">Domains per page</label>
-					<select class="form-control" ng-options="item for item in pageSizeRanges" id="sel1"
-						ng-change="setRecordLimit(pageSize)" ng-model="pageSize">
-					</select>
-				    </div>
-				</th>
+							    <div class="form-group">
+								<label for="sel1">Domains per page</label>
+								<select class="form-control" ng-options="item for item in pageSizeRanges" id="sel1"
+									ng-change="setRecordLimit(pageSize)" ng-model="pageSize">
+								</select>
+							    </div>
+							</th>
                             </tr>
                             <tr ng-repeat-start="rec in result|orderBy:sortType:sortReverse" class="domain-row cartSelected">
                                 <td ng-if="isAuthenticated()"><input id="addToCart{{$index}}" class="addTocart" type="checkbox" ng-change="addToCart(rec)" ng-model="rec.selected" /><label for="addToCart{{$index}}"></label></td>
-				<td><a ng-if="rec.credits > 0" class="btn btn-sm btn-primary btn-has-icon" ng-click="fastBuy(rec, $index)"><i class="fa fa-bolt"></i>Fast Buy</a></td>
-                                <td>{{ rec.rootURL}}</td>
+				                <td><a ng-if="rec.credits > 0" class="btn btn-sm btn-primary btn-has-icon" ng-click="fastBuy(rec, $index)"><i class="fa fa-bolt"></i>Fast Buy</a></td>
+                                <td class="root-domain">{{ rec.rootURL}}</td>
                                 <td ng-if="rec.credits > 0 && rec.basePrice > rec.actualPrice"><span class="actualPrice">${{ rec.actualPrice | number:2 }}</span> <del>${{ rec.basePrice | number:2 }}</del></td>
                                 <td ng-if="rec.credits > 0 && rec.basePrice <= rec.actualPrice"><span class="actualPrice">${{ rec.actualPrice | number:2 }}</span></td>
                                 <td ng-if="rec.credits > 0">{{ rec.credits}}</td>

@@ -441,3 +441,6 @@ ul.pagination li::before {
 .domain-page .container-fluid .content {
     text-align: center;
 }
+.root-domain {
+	text-align: left;
+}
