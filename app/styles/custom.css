@@ -438,3 +438,6 @@ body.modal-open {
 ul.pagination li::before {
     content: '';
 } 
+.domain-page .container-fluid .content {
+    text-align: center;
+}

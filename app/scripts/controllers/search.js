@@ -10,6 +10,7 @@
 angular.module('fastrankApp')
         .controller('SearchCtrl', ['$scope', 'Domain', 'DomainStrength', 'MajTF', 'SimpleSearch', 'AdvancedSearch', 'MajesticCategories', '$q', '$timeout', '$log', '$state', function ($scope, Domain, DomainStrength, MajTF, SimpleSearch, AdvancedSearch, MajesticCategories, $q, $timeout, $log, $state) {
                 $scope.domainStrength = {min: 0, max: 100, ceil: 100, floor: 0, step: 1};
+	
                 $scope.majTF = {min: 0, max: 100, ceil: 100, floor: 0, step: 1};
                 $scope.otherSliders = {
                     majDOMCF: {title: 'Maj. Dom CF:0 - 100', min: 0, max: 100, ceil: 100, floor: 0, step: 1},
@@ -18,7 +19,7 @@ angular.module('fastrankApp')
                     majRefDomainsEDU: {title: 'Maj. RefDomainsEDU: 0 - Max', min: 0, max: 100, ceil: 100, floor: 0, step: 1},
                     majRefDomainsGOV: {title: 'Maj. RefDomainsGOV: 0 - Max', min: 0, max: 100, ceil: 100, floor: 0, step: 1}
                 };
-                $scope.keywords = '';
+                $scope.keywords = {keywords: ''};
                 $scope.categories = {};
             
                 $scope.categories.majesticCategoryIdx = null;
@@ -28,7 +29,7 @@ angular.module('fastrankApp')
                 $scope.categories.majesticSubcategory = null;
                 $scope.categories.majesticSubsubcategory = null;
                 $scope.searchMsg = '';
-				$scope.advanceSearchMsg = '';
+		$scope.advanceSearchMsg = '';
 
                 $scope.initDomain = function () {
                     $scope.updateDomainStrengthSlider($scope.majTF.min, $scope.majTF.max);
@@ -136,10 +137,12 @@ angular.module('fastrankApp')
 
                 $scope.find = function () {
                     var simpleSubmit = {};
-                    simpleSubmit.item = $scope.keywords;
+                    simpleSubmit.item = $scope.keywords.keywords;
                     simpleSubmit.max = $scope.domainStrength.max;
                     simpleSubmit.min = $scope.domainStrength.min;
                     simpleSubmit.type = 'text';
+                    simpleSubmit.pageNo = 0;
+                    simpleSubmit.pageSize = 20;
 
                     var simpleSearchDefer = $q.defer();
                     SimpleSearch.search(simpleSubmit)
@@ -198,6 +201,8 @@ angular.module('fastrankApp')
                     advancedSubmit.majRefDomainsGOVMax = $scope.otherSliders.majRefDomainsGOV.max;
                     
                     advancedSubmit.selectedTLDs = [];
+                    advancedSubmit.pageNo = 0;
+                    advancedSubmit.pageSize = 20;
                     
                     angular.forEach($scope.otherDomains, function(value) {
                         if(angular.isDefined(value.selected)) {

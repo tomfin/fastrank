@@ -31,39 +31,32 @@
                     </div>
                 </div>
                 <div class="row" ng-if="!noResultcheckAllNoneFoundError && !searchError">                    
-                    
-                    <div class="form-group limit-container ">
-                        <label for="sel1">Domains per page</label>
-                        <select ng-options="item for item in pageSizeRanges" id="sel1"
-                                ng-change="setRecordLimit(pageSize)" ng-model="pageSize">
-                        </select>
-                    </div>
-                    
+
                     <div class="table-responsive">          
                         <table class="table">
                             <tr>
                                 <th class="col-md-4" ng-show="isAuthenticated()"><label for="addAllToCart"><input id="addAllToCart" type="checkbox" ng-click="checkAll()" ng-checked="checkAllNone"/>Add All</label></th>
                                 <th class="col-md-1"></th>
-                                <th class="col-md-2" ng-click="sortType = 'rootURL';
-                                    sortReverse = !sortReverse">Domain
+				<th class="col-md-2" ng-click="sortType = 'rootURL';
+				    sortReverse = !sortReverse">Domain
                                     <span ng-show="(sortType == null || sortType != 'rootURL') || sortReverse == null" class="fa fa-sort"></span>
                                     <span ng-show="sortType == 'rootURL' && !sortReverse" class="fa fa-sort-asc"></span>
                                     <span ng-show="sortType == 'rootURL' && sortReverse" class="fa fa-sort-desc"></span>
                                 </th>
-                                <th class="col-md-2" ng-click="sortType = 'actualPrice';
-                                    sortReverse = !sortReverse">Price (USD)
+				<th class="col-md-2" ng-click="sortType = 'actualPrice';
+				    sortReverse = !sortReverse">Price (USD)
                                     <span ng-show="(sortType == null || sortType != 'actualPrice') || sortReverse == null" class="fa fa-sort"></span>
                                     <span ng-show="sortType == 'actualPrice' && !sortReverse" class="fa fa-sort-asc"></span>
                                     <span ng-show="sortType == 'actualPrice' && sortReverse" class="fa fa-sort-desc"></span>
                                 </th>
-                                <th class="col-md-2" ng-click="sortType = 'credits';
-                                    sortReverse = !sortReverse">Credits
+				<th class="col-md-2" ng-click="sortType = 'credits';
+				    sortReverse = !sortReverse">Credits
                                     <span ng-show="(sortType == null || sortType != 'credits') || sortReverse == null" class="fa fa-sort"></span>
                                     <span ng-show="sortType == 'credits' && !sortReverse" class="fa fa-sort-asc"></span>
                                     <span ng-show="sortType == 'credits' && sortReverse" class="fa fa-sort-desc"></span>
                                 </th>
-                                <th class="col-md-2" ng-click="sortType = 'domTF';
-                                    sortReverse = !sortReverse">Dom TF
+				<th class="col-md-2" ng-click="sortType = 'domTF';
+				    sortReverse = !sortReverse">Dom TF
                                     <span ng-show="(sortType == null || sortType != 'domTF') || sortReverse == null" class="fa fa-sort"></span>
                                     <span ng-show="sortType == 'domTF' && !sortReverse" class="fa fa-sort-asc"></span>
                                     <span ng-show="sortType == 'domTF' && sortReverse" class="fa fa-sort-desc"></span>
@@ -71,8 +64,8 @@
                                         <span class="fa fa-question-circle fa-1" aria-hidden="true"></span>
                                     </span>
                                 </th>
-                                <th class="col-md-2" ng-click="sortType = 'aggLinkTF';
-                                    sortReverse = !sortReverse">Agg Link TF
+				<th class="col-md-2" ng-click="sortType = 'aggLinkTF';
+				    sortReverse = !sortReverse">Agg Link TF
                                     <span ng-show="(sortType == null || sortType != 'aggLinkTF') || sortReverse == null" class="fa fa-sort"></span>
                                     <span ng-show="sortType == 'aggLinkTF' && !sortReverse" class="fa fa-sort-asc"></span>
                                     <span ng-show="sortType == 'aggLinkTF' && sortReverse" class="fa fa-sort-desc"></span>
@@ -80,8 +73,8 @@
                                         <span class="fa fa-question-circle fa-1" aria-hidden="true"></span>
                                     </span>
                                 </th>
-                                <th class="col-md-2" ng-click="sortType = 'domRel';
-                                    sortReverse = !sortReverse">Search Rel. to Domain
+				<th class="col-md-2" ng-click="sortType = 'domRel';
+				    sortReverse = !sortReverse">Search Rel. to Domain
                                     <span ng-show="(sortType == null || sortType != 'domRel') || sortReverse == null" class="fa fa-sort"></span>
                                     <span ng-show="sortType == 'domRel' && !sortReverse" class="fa fa-sort-asc"></span>
                                     <span ng-show="sortType == 'domRel' && sortReverse" class="fa fa-sort-desc"></span>
@@ -89,8 +82,14 @@
                                         <span class="fa fa-question-circle fa-1" aria-hidden="true"></span>
                                     </span>
                                 </th>
-                                <th class="col-md-2"></th>
-                                <th class="col-md-2"></th>
+                                <th class="col-md-2" colspan="2">
+				    <div class="form-group">
+					<label for="sel1">Domains per page</label>
+					<select class="form-control" ng-options="item for item in pageSizeRanges" id="sel1"
+						ng-change="setRecordLimit(pageSize)" ng-model="pageSize">
+					</select>
+				    </div>
+				</th>
                             </tr>
                             <tr ng-repeat-start="rec in result|orderBy:sortType:sortReverse" class="domain-row cartSelected">
                                 <td ng-if="isAuthenticated()"><input id="addToCart{{$index}}" class="addTocart" type="checkbox" ng-change="addToCart(rec)" ng-model="rec.selected" /><label for="addToCart{{$index}}"></label></td>
@@ -142,13 +141,13 @@
                         </table>
                     </div>
                 </div>
-                 
+
                 <pagination boundary-links="true" total-items="totalItems" ng-model="pageNo" 
-                class="pagination-lg" items-per-page="pageSize" max-size="maxPage" rotate="false"
-                previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" 
-                ng-change="paginate()">
+			    class="pagination-lg" items-per-page="pageSize" max-size="maxPage" rotate="false"
+			    previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" 
+			    ng-change="paginate()">
                 </pagination>
-                
+
                 <section class="detail-info">
                     <div class="row" ng-if="summary && links">
                         <accordion class="summary-accordian" id="summary-accordian">
