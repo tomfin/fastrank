@@ -18,7 +18,7 @@ angular.module('fastrankApp')
 			$scope.isAuthenticated = Principal.isAuthenticated;
 		    });
 		    
-		    var adjust_pageNo = function (pageNo) {
+		    var adjustPageNo = function (pageNo) {
 			if(pageNo >= 0) {
 			    return pageNo;
 			} else {
@@ -136,7 +136,7 @@ angular.module('fastrankApp')
 		    };
 
 		    if (!$stateParams.result || (Principal.isAuthenticated().toString() === 'true' && $stateParams.result && $stateParams.result[0].credits === 0)) {
-			domainSearch(adjust_pageNo($stateParams.pageNo - 1), $stateParams.pageSize);
+			domainSearch(adjustPageNo($stateParams.pageNo - 1), $stateParams.pageSize);
 		    } else {
 			$scope.result = $stateParams.result;
 			angular.forEach($scope.result, function (value, key) { //jshint ignore:line   
@@ -365,11 +365,11 @@ angular.module('fastrankApp')
 		    $scope.setRecordLimit = function (limit) {
 			$scope.pageSize = limit;
 			$scope.pageNo = 0;
-			domainSearch(adjust_pageNo(0), $scope.pageSize);
+			domainSearch(adjustPageNo(0), $scope.pageSize);
 		    };
 
 		    $scope.paginate = function () {
-			domainSearch(adjust_pageNo($scope.pageNo - 1), $scope.pageSize);
+			domainSearch(adjustPageNo($scope.pageNo - 1), $scope.pageSize);
 		    };
 		}
 	    }]);
