@@ -74,7 +74,7 @@
                                 <th></th>
                             </tr>
                             <tr ng-repeat-start="rec in result|orderBy:sortType:sortReverse" class="domain-row">
-				<td><a ng-if="rec.credits > 0" ng-click="fastBuy(rec, $index)">Fast Buy</a></td>
+				<td><a ng-if="rec.credits > 0" class="btn btn-sm btn-primary btn-has-icon" ng-click="fastBuy(rec, $index)"><i class="fa fa-bolt"></i>Fast Buy</a></td>
                                 <td ng-if="rec.credits > 0"><del>${{ rec.basePrice}}</del></td>
                                 <td ng-if="rec.credits > 0"><span class="actualPrice">${{ rec.actualPrice}}</span></td>
                                 <td ng-if="rec.credits > 0">${{ rec.discount}}</td>
@@ -88,9 +88,9 @@
                                 <td>{{ rec.aggLinkTF}}</td>
                                 <td>{{ rec.frTrust}}</td>
                                 <td>{{ rec.domTF}}</td>
-                                <td ng-show="!rec.expanded"><a ng-click="rec.expanded = !rec.expanded" class="more-link">More</a></td>
-                                <td ng-show="rec.expanded" ><a ng-click="rec.expanded = !rec.expanded" class="more-link">Less</a></td>
-                                <td><a ng-click="detailInfo({{ 'rec.publicId' }})">All</a></td>
+                                <td ng-show="!rec.expanded"><a ng-click="rec.expanded = !rec.expanded" class="more-link btn btn-sm btn-success btn-has-icon"><i class="fa fa-chevron-circle-down"></i>More</a></td>
+                                <td ng-show="rec.expanded" ><a ng-click="rec.expanded = !rec.expanded" class="more-link btn btn-sm btn-success btn-has-icon"><i class="fa fa-chevron-circle-up"></i>Less</a></td>
+                                <td><a ng-click="detailInfo({{ 'rec.publicId'}})" class="btn btn-sm btn-success">All</a></td>
                             </tr>
                             <tr ng-repeat-end fr-collapse class="more-info">
                                 <td colspan="12" class="more-info-td">
@@ -98,33 +98,33 @@
                                         <table width="100%">
                                             <tr>
                                                 <td class="col-md-2"><strong>Domain TF:</strong> {{ rec.domTF}} </td>
-                                                <td class="col-md-3"><strong>1<sup>1st</sup> Crawled:</strong> {{ rec.firstCrawlDate}} </td>
-                                                <td class="col-md-5"><strong>Found:</strong> {{ rec.found}} </td>
-                                                <td class="col-md-2"></td>
+                                                <td class="col-md-2"><strong>1<sup>1st</sup> Crawled:</strong> {{ rec.firstCrawlDate}} </td>
+                                                <td class="col-md-3"><strong>Found:</strong> {{ rec.found}} </td>
+                                                <td class="col-md-1"></td>
                                             </tr>
                                             <tr>
                                                 <td class="col-md-2"><strong>Maj. Agg TF:</strong> {{ rec.aggLinkTF}}</td>
-                                                <td class="col-md-3"><strong>Spam Found?</strong> {{ rec.spammedDomain}}</td>
-                                                <td class="col-md-5"><strong>Main Majestic topic:</strong> </td>
-                                                <td class="col-md-2"></td>
+                                                <td class="col-md-2"><strong>Spam Found?:</strong> {{ rec.spammedDomain}}</td>
+                                                <td class="col-md-3" colspan="2"><strong>Main Majestic topic:</strong>{{ rec.majMainTopic}} </td>
+                                                
                                             </tr>
                                             <tr>
                                                 <td class="col-md-2"><strong>TF/CF:</strong> {{ rec.tfcfRatio}}</td>
-                                                <td class="col-md-3"><strong>Last checked:</strong> {{ rec.lastChecked}}</td>
-                                                <td class="col-md-5">{{ rec.majMainTopic}}</td>
-                                                <td class="col-md-2"></td>
+                                                <td class="col-md-2"><strong>Last checked:</strong> {{ rec.lastChecked}}</td>
+                                                <td class="col-md-3" colspan="2"><strong>Main Alchemy Taxonomy:</strong>{{ rec.alchMainTaxonomy}} </td>
+                                               
                                             </tr>
                                             <tr>
                                                 <td class="col-md-2"><strong>Ref Dom:</strong> {{ rec.refDom}}</td>
-                                                <td class="col-md-3"><strong>Link Rel:</strong> {{ rec.linkRel}}</td>
-                                                <td class="col-md-5"><strong>Main Alchemy Taxonomy:</strong> </td>
-                                                <td class="col-md-2"></td>
+                                                <td class="col-md-2"><strong>Link Rel:</strong> {{ rec.linkRel}}</td>
+                                                <td class="col-md-3"><strong>SiteInquiryMade:</strong> {{rec.siteInquiryMade}}</td>
+                                                <td class="col-md-1"></td>
                                             </tr>
                                             <tr>
                                                 <td class="col-md-2"><strong>EDU/Gov:</strong> {{ rec.edugovCount}}</td>
-                                                <td class="col-md-3"><strong>TlD:</strong> {{ rec.tld}}</td>
-                                                <td class="col-md-5">{{ rec.alchMainTaxonomy}}</td>
-                                                <td class="col-md-2"><a ng-if="rec.credits > 0" ng-click="fastBuy(rec, $index)">Fast Buy</a></td>
+                                                <td class="col-md-2"><strong>TlD:</strong> {{ rec.tld}}</td>
+                                                <td class="col-md-3"></td>
+                                                <td class="col-md-1 cell-left"><h5><a ng-if="rec.credits > 0" class="btn btn-sm btn-primary btn-has-icon" ng-click="fastBuy(rec, $index)"><i class="fa fa-bolt"></i>Fast Buy</a></h5></td>    
                                             </tr>
                                         </table>
                                     </div>

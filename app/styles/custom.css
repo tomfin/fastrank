@@ -400,7 +400,6 @@ body.modal-open {
     height: auto;
 }
 .more-info-td table td {
-    border-bottom: 1px solid;
     padding: 5px;
     vertical-align: text-top;
 }

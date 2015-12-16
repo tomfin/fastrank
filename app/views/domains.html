@@ -76,16 +76,10 @@
                             <div class="toggle" style="display: none">
                                 <table width="100%">
                                     <tr>
-                                        <td class="col-md-3"><strong>Domain TF:</strong> {{ rec.domTF}} </td>
-                                        <td class="col-md-3"><strong>1<sup>1st</sup> Crawled:</strong> {{ rec.firstCrawlDate}} </td>
-                                        <td class="col-md-3"><strong>Found:</strong> {{ rec.found}} </td>
-                                        <td class="col-md-3"><strong>Register your domain:</strong></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="col-md-3"><strong>Maj. Agg TF:</strong> {{ rec.aggLinkTF}}</td>
-                                        <td class="col-md-3"><strong>Spam Found?</strong> {{ rec.spammedDomain}}</td>
-                                        <td class="col-md-3"><strong>Main Majestic Topic:</strong> </td>
-                                        <td class="col-md-3">
+                                        <td class="col-md-2"><strong>Domain TF:</strong> {{ rec.domTF}} </td>
+                                        <td class="col-md-2"><strong>1<sup>1st</sup> Crawled:</strong> {{ rec.firstCrawlDate}} </td>                                        
+                                        <td class="col-md-2"><strong>Register your domain:</strong></td>
+                                        <td class="col-md-2">
                                             <div class="form-group">
                                                 <select class="form-control selectpicker" id="select-alt" data-type="btn-link" ng-model="selectedRegistrar" ng-options="registrar.name for registrar in registrars">
                                                     <option value="">-- Select a Registrar --</option>
@@ -94,21 +88,26 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="col-md-3"><strong>TF/CF:</strong> {{ rec.tfcfRatio}}</td>
-                                        <td class="col-md-3"><strong>Link Rel:</strong> {{ rec.linkRel}}</td>
-                                        <td class="col-md-3">{{ rec.majMainTopic}}</td>
-                                        <td class="col-md-3"><button ng-show="selectedRegistrar" ng-click="redirectToRegistrar(selectedRegistrar, rec.rootURL)">Register with {{selectedRegistrar.name}}</button></td>
+                                        <td class="col-md-2"><strong>Maj. Agg TF:</strong> {{ rec.aggLinkTF}}</td>
+                                        <td class="col-md-2"><strong>Spam Found?:</strong> {{ rec.spammedDomain}}</td>                                     
+                                        <td class="col-md-3"><strong>Found:</strong> {{ rec.found}} </td>
+                                        <td class="col-md-2"><button ng-show="selectedRegistrar" ng-click="redirectToRegistrar(selectedRegistrar, rec.rootURL)">Register with {{selectedRegistrar.name}}</button></td>
                                     </tr>
                                     <tr>
-                                        <td class="col-md-3"><strong>Ref Dom:</strong> {{ rec.refDom}}</td>
-                                        <td class="col-md-3"><strong>TlD:</strong> {{ rec.tld}}</td>
-                                        <td class="col-md-3"><strong>Main Alchemy Taxonomy:</strong></td>
-                                        <td class="col-md-3"></td>
+                                        <td class="col-md-2"><strong>TF/CF:</strong> {{ rec.tfcfRatio}}</td>
+                                        <td class="col-md-2"><strong>Last checked:</strong> {{ rec.lastChecked}}</td>
+                                        <td class="col-md-3"><strong>SiteInquiryMade:</strong> {{rec.siteInquiryMade}}</td>
+                                        <td class="col-md-2"></td> 
                                     </tr>
                                     <tr>
-                                        <td class="col-md-3"><strong>EDU/Gov:</strong> {{ rec.edugovCount}}</td>
-                                        <td class="col-md-3"></td>
-                                        <td class="col-md-3" colspan="2">{{ rec.alchMainTaxonomy}}</td>
+                                        <td class="col-md-2"><strong>Ref Dom:</strong> {{ rec.refDom}}</td>
+                                        <td class="col-md-2"><strong>Link Rel:</strong> {{ rec.linkRel}}</td>                    
+                                        <td class="col-md-3" colspan="2"><strong>Main Majestic topic:</strong>{{ rec.majMainTopic}} </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-md-2"><strong>EDU/Gov:</strong> {{ rec.edugovCount}}</td>
+                                        <td class="col-md-2"><strong>TlD:</strong> {{ rec.tld}}</td>
+                                        <td class="col-md-3" colspan="2"><strong>Main Alchemy Taxonomy:</strong>{{ rec.alchMainTaxonomy}} </td>                 
                                     </tr>
                                 </table>
                             </div>
