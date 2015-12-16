@@ -21,18 +21,8 @@ angular.module('fastrankApp')
                     return false;
                 }
             };
-
-            Principal.identity().then(function (account) {
-                $scope.account = account;
-                $rootScope.account = account;
-                $scope.isAuthenticated = Principal.isAuthenticated;
-            });
-
-            $scope.linkTo = function (id) {
-                $location.url(id);
-            };
-
-            $scope.cartInit = function () {
+	    
+	    $scope.getCart = function () {
                 $scope.cartDomains = [];
                 $rootScope.cartDomains = [];
                 /* To get domains which are already added into the cart */
@@ -43,7 +33,19 @@ angular.module('fastrankApp')
                     $rootScope.cartDomains = [];
                 });
             }; 
-            $scope.cartInit();
+
+            Principal.identity().then(function (account) {
+                $scope.account = account;
+                $rootScope.account = account;
+                $scope.isAuthenticated = Principal.isAuthenticated;
+		if($scope.account) {
+		    $scope.getCart();
+		}
+            });
+
+            $scope.linkTo = function (id) {
+                $location.url(id);
+            };
 
             $scope.main = {};
             $scope.main.currentuser = null;
