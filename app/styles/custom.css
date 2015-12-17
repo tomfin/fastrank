@@ -443,3 +443,6 @@ ul.pagination li::before {
 .root-domain {
     text-align: left;
 }
+.domain-row a.more-link {
+    border: none;
+}

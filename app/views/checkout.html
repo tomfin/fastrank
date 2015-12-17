@@ -60,7 +60,7 @@
                                 </td>
                             </tr>
                             <tr ng-if="cartDomains.length > 0" ng-repeat="domain in cartDomains|orderBy:sortType:sortReverse" class="domain-row">
-                                <td><i ng-click="removeDomain(domain)" class="more-link fa fa-close"></i></td>
+                                <td><a ng-click="removeDomain(domain)" class="more-link fa fa-close"></a></td>
                                 <td class="root-domain">{{domain.rootURL}}</td>
                                 <td ng-click="" class="more-link"><a ui-sref='cart-domain({publicId: domain.publicId})' class="btn btn-sm btn-success">All</a></td>
                                 <td>{{domain.credits}}</td>
