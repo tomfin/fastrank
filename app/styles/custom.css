@@ -437,10 +437,12 @@ body.modal-open {
 ul.pagination li::before {
     content: '';
 } 
-.domain-page .container-fluid .content {
+.domain-page table td:not(.text-left),
+.domain-page table th:not(.text-left) {
     text-align: center;
 }
-.root-domain {
+.domain-page table .more-info table td,
+.domain-page table .more-info table th {
     text-align: left;
 }
 .domain-row a.more-link {
