@@ -141,6 +141,8 @@ angular.module('fastrankApp')
 			    });
 			});
 		    }
+		    $scope.summary = '';
+		    $scope.links = '';
 		    jQuery('html, body').delay(1000).animate({scrollTop: jQuery('.error').offset().top - 100}, 1000); //jshint ignore:line
 		};
 
