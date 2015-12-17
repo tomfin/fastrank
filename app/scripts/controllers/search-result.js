@@ -143,7 +143,7 @@ angular.module('fastrankApp')
 		    }
 		    $scope.summary = '';
 		    $scope.links = '';
-		    jQuery('html, body').delay(1000).animate({scrollTop: jQuery('.error').offset().top - 100}, 1000); //jshint ignore:line
+		    angular.element('html, body').delay(1000).animate({scrollTop: angular.element('.error').offset().top - 100}, 1000);
 		};
 
 		if (!$stateParams.result || (Principal.isAuthenticated().toString() === 'true' && $stateParams.result && $stateParams.result[0].credits === 0)) {
@@ -336,7 +336,7 @@ angular.module('fastrankApp')
 					    $scope.lowCreditError = null;
 					}
 				    });
-				    jQuery('html, body').delay(1000).animate({scrollTop: jQuery('.error').offset().top - 100}, 1000); //jshint ignore:line
+				    angular.element('html, body').delay(1000).animate({scrollTop: angular.element('.error').offset().top - 100}, 1000); 
 				}
 			    }
 			}
@@ -358,7 +358,7 @@ angular.module('fastrankApp')
 			$log.error(err);
 		    });
 
-		    jQuery('html, body').delay(1000).animate({scrollTop: jQuery('.detail-info').offset().top - 65}, 1000); //jshint ignore:line
+		    angular.element('html, body').delay(1000).animate({scrollTop: angular.element('.detail-info').offset().top - 65}, 1000); 
 		};
 
 		$scope.pageSizeRanges = [20, 30, 40, 50, 100];

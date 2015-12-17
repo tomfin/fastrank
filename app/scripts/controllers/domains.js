@@ -63,7 +63,7 @@ angular.module('fastrankApp')
                         $log.error(err);
                     });
 
-                    jQuery('html, body').delay(1000).animate({scrollTop: jQuery('.detail-info').offset().top - 65}, 1000); //jshint ignore:line
+                    angular.element('html, body').delay(1000).animate({scrollTop: angular.element('.detail-info').offset().top - 65}, 1000);
                 };
             }]);
         

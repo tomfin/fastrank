@@ -145,9 +145,9 @@ angular.module('fastrankApp')
                 return {
                     restrict: 'A',
                     link: function (scope, element) {
-                        var p = jQuery(element.prev('.domain-row').find('.more-link')); //jshint ignore:line
+                        var p = angular.element(element.prev('.domain-row').find('.more-link')); 
                         p.click(function () {
-                            jQuery(element).find('.toggle').slideToggle('slow'); //jshint ignore:line
+                            angular.element(element).find('.toggle').slideToggle('slow'); 
                         });
                     }
                 };
