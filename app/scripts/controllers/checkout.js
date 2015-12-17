@@ -7,7 +7,12 @@
  */
 angular.module('fastrankApp')
 	.controller('CheckoutCtrl', ['$scope', 'CheckoutBuy', 'ModifyCart', '$log', '$rootScope', '$ngBootbox', function ($scope, CheckoutBuy, ModifyCart, $log, $rootScope, $ngBootbox) {
-		$scope.cartDomains = $rootScope.cartDomains;
+		$rootScope.$watch(function() {
+		    return $rootScope.cartDomains;
+		}, function() {
+		    $scope.cartDomains = $rootScope.cartDomains;
+		}, true);
+		
 		$scope.removeDomain = function (domain) {
 		    angular.forEach($scope.cartDomains, function (obj) {
 			if (obj.publicId === domain.publicId) {
