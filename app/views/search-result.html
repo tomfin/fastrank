@@ -29,6 +29,10 @@
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true"><i class="fa fa-times"></i></span></button>
                         <strong>Error!</strong> Unfortunately you don't have sufficient credits for this purchase. Please <a href="" ui-sref="credits">top-up your credits</a> and try again.
                     </div>
+		    <div ng-if="noResultFoundAlchemy" class="alert alert-danger alert-dismissible fade in text-uppercase">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true"><i class="fa fa-times"></i></span></button>
+                        <strong>Error!</strong> The query text you used was not sufficient. Please be more specific.
+                    </div>
                 </div>
                 <div class="row" ng-if="!noResultcheckAllNoneFoundError && !searchError">                    
 

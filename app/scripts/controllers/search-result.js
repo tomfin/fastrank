@@ -50,6 +50,10 @@ angular.module('fastrankApp')
 			    if (res.status === 404) {
 				$scope.noResultFoundError = 'ERROR';
 				$scope.searchError = null;
+			    } else if(res.status === 400) {
+				$scope.searchError = null;
+				$scope.noResultFoundError = null;
+				$scope.noResultFoundAlchemy = 'Error';
 			    } else {
 				$scope.searchError = 'ERROR';
 				$scope.noResultFoundError = null;

@@ -149,12 +149,10 @@ angular.module('fastrankApp')
                             .success(function (res) {
                                 simpleSearchDefer.resolve(res);
                             }).error(function (res) {
-                        if (res === null) {
-                            $scope.searchMsg = 'Error while searching';
-                            $log.error('Error while searching');
-                        } else if (angular.isDefined(res.status) && res.status === 404) {
+			if (angular.isDefined(res.status) && res.status === 404) {
                             $scope.searchMsg = 'Sorry, no result found in selected criteria.';
-                            $log.error('Sorry, no result found in selected criteria');
+                        } else if (angular.isDefined(res.status) && res.status === 400) {
+                            $scope.searchMsg = 'The query text you used was not sufficient. Please be more specific.';
                         } else {
                             $scope.searchMsg = 'Error while searching';
                         }
