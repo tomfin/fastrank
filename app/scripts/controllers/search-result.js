@@ -14,12 +14,6 @@ angular.module('fastrankApp')
 		$scope.summary = '';
 		$scope.links = '';
 		$scope.result = [];
-		
-		Principal.identity().then(function (account) {
-		    $scope.account = account;
-		    $rootScope.account = account;
-		    $scope.isAuthenticated = Principal.isAuthenticated;
-		});
 
 		var adjustPageNo = function (pageNo) {
 		    if (pageNo >= 0) {

@@ -9,9 +9,7 @@
  */
 angular.module('fastrankApp')
         .controller('MainCtrl', function ($scope, $location, $cookieStore, $cookies, $rootScope, $window, $state, Auth, Principal, RegisterInterest, ContactUs, GetCart) {
-            $scope.account = {};
-            $rootScope.account = {};
-    
+	    
             $scope.currentPage = $window.location;
 
             $scope.isHome = function (path) { // jshint ignore:line
