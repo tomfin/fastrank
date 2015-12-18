@@ -448,3 +448,6 @@ ul.pagination li::before {
 .domain-row a.more-link {
     border: none;
 }
+.modal-open {
+    padding-right: 0 !important;
+}
