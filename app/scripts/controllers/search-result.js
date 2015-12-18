@@ -385,4 +385,5 @@ angular.module('fastrankApp')
 		$scope.paginate = function () {
 		    domainSearch(adjustPageNo($scope.pageNo - 1), $scope.pageSize);
 		};
+		$scope.summeryAccordianStatus = {open: true};
 	    }]);
