@@ -162,8 +162,7 @@ angular.module('fastrankApp')
 		    if ($stateParams.result) {
 			$scope.result = $stateParams.result;
 		    }
-
-		    if ($scope.cartDomains !== null && $scope.cartDomains.length > 0) {
+		    if (angular.isDefined($scope.cartDomains)) {
 			var domainArr = [];
 			var cartArr = [];
 			angular.forEach($scope.result, function (obj) {
