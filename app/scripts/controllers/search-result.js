@@ -55,12 +55,15 @@ angular.module('fastrankApp')
 			});
 			simpleSearchDefer.promise.then(function (res) {
 			    angular.copy(res, $scope.result);
-			    $scope.addAllStatus();
-			    angular.forEach($scope.result, function (value, key) { //jshint ignore:line   
-				if (!$scope.totalItems) {
-				    $scope.totalItems = value.totalCount;
+			    $scope.addAllStatus();	
+			    var totalFound = true;
+			    for(var i = 0; i < $scope.result.length; i++) {
+				if (totalFound) {
+				    $scope.totalItems = $scope.result[i].totalCount;
+				    totalFound = false;
+				    break;
 				}
-			    });
+			    }
 			});
 		    } else if (angular.isDefined($stateParams.majTFMin) && angular.isDefined($stateParams.majTFMax) &&
 			    angular.isDefined($stateParams.majDOMCFMin) && angular.isDefined($stateParams.majDOMCFMax) &&
@@ -128,11 +131,14 @@ angular.module('fastrankApp')
 			advancedSearchDefer.promise.then(function (res) {			    
 			    angular.copy(res, $scope.result);
 			    $scope.addAllStatus();
-			    angular.forEach($scope.result, function (value, key) { //jshint ignore:line   
-				if (!$scope.totalItems) {
-				    $scope.totalItems = value.totalCount;
+			    var totalFound = true;
+			    for(var i = 0; i < $scope.result.length; i++) {
+				if (totalFound) {
+				    $scope.totalItems = $scope.result[i].totalCount;
+				    totalFound = false;
+				    break;
 				}
-			    });
+			    }
 			});
 		    }
 		    $scope.summary = '';
@@ -144,11 +150,14 @@ angular.module('fastrankApp')
 		    domainSearch(adjustPageNo($stateParams.pageNo - 1), $stateParams.pageSize);
 		} else {
 		    $scope.result = $stateParams.result;
-		    angular.forEach($scope.result, function (value, key) { //jshint ignore:line   
-			if (!$scope.totalItems) {
-			    $scope.totalItems = value.totalCount;
+		    var totalFound = true;
+		    for(var i = 0; i < $scope.result.length; i++) {
+			if (totalFound) {
+			    $scope.totalItems = $scope.result[i].totalCount;
+			    totalFound = false;
+			    break;
 			}
-		    });
+		    }
 		}
 		
 		$scope.addAllStatus = function () {
