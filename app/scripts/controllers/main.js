@@ -8,7 +8,7 @@
  * Controller of the fastrankApp
  */
 angular.module('fastrankApp')
-	.controller('MainCtrl', function ($timeout, $scope, $location, $cookieStore, $cookies, $rootScope, $window, $state, Auth, Principal, RegisterInterest, ContactUs, GetCart) {
+	.controller('MainCtrl', function ($scope, $location, $cookieStore, $cookies, $rootScope, $window, $state, Auth, Principal, RegisterInterest, ContactUs, GetCart) {
 
 	    $scope.currentPage = $window.location;
 
@@ -32,8 +32,8 @@ angular.module('fastrankApp')
 		});
 	    };
 
-	    $scope.acc_data = Principal;
-	    $scope.$watch('acc_data.isIdentityResolved()', function (newValue, oldValue) {
+	    $scope.accData = Principal;
+	    $scope.$watch('accData.isIdentityResolved()', function (newValue, oldValue) { // jshint ignore:line
 		if (newValue) {
 		    Principal.identity().then(function (account) {
 			$scope.account = account;
