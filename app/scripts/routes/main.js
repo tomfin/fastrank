@@ -11,8 +11,7 @@ angular.module('fastrankApp')
                 },
                 views: {
                     'content@': {
-                        templateUrl: 'views/main.html',
-                        controller: 'MainCtrl'
+                        templateUrl: 'views/main.html'
                     }
                 },
                 resolve: {
