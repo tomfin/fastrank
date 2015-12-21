@@ -134,31 +134,28 @@
                 <section class="detail-info">
                     <div class="row" ng-if="summary && links">
                         <accordion class="summary-accordian" id="summary-accordian">
-                            <accordion-group is-open="accordian1.open">
+                                                        <accordion-group is-open="accordian1.open">
                                 <accordion-heading>
-                                    Summary<i class="pull-right glyphicon" ng-class="{'glyphicon glyphicon-minus-sign': accordian1.open, 'glyphicon glyphicon-plus-sign': !accordian1.open}"></i>
+                                    Summary for {{summary.rootURL}}<i class="pull-right glyphicon" ng-class="{'glyphicon glyphicon-minus-sign': accordian1.open, 'glyphicon glyphicon-plus-sign': !accordian1.open}"></i>
                                 </accordion-heading>
                                 <div>
                                     <div class="table-responsive">          
                                         <table class="table">
                                             <tr>
-                                                <th>Fastrank</th>
                                                 <th>Majestic</th>
                                                 <th>Top 90 backlinks</th>
                                                 <th>Domain Relevance</th>
                                                 <th>Link Relevance to Domain</th>
                                             </tr>
                                             <tr>
-                                                <td>Pwr: {{ summary.power}}</td>
                                                 <td>TF: {{ summary.trustFlow}}</td>
                                                 <td>TF Sum: {{ summary.tfSum}}</td>
                                                 <td>Alchemy: {{  }}</td>
                                                 <td>Majestic: {{  }}</td>
                                             </tr>
                                             <tr>
-                                                <td>D-Rel: {{ summary.dRel}}</td>
                                                 <td>CF: {{ summary.citationFlow}}</td>
-                                                <td>CF-Sum: {{ summary.tfSum}}</td>
+                                                <td>CF-Sum: {{ summary.cfSum}}</td>
                                                 <td></td>
                                                 <td></td>
                                             </tr>
@@ -206,7 +203,7 @@
                                                     <tr>
                                                         <th colspan="2">Alchemy Home Page Keywords</th>
                                                     </tr>
-                                                    <tr ng-repeat="x in summary.alchemyKeywords|limitTo:3">
+                                                    <tr ng-repeat="x in summary.alchemyKeywords| limitTo:3">
                                                         <td>{{ x.key}}</td>
                                                         <td>{{ x.value}}</td>
                                                     </tr>
@@ -217,7 +214,7 @@
                                                     <tr>
                                                         <th colspan="2">Alchemy Archived Home Page Topic</th>
                                                     </tr>
-                                                    <tr ng-repeat="x in summary.alchemyTaxonomies|limitTo:3">
+                                                    <tr ng-repeat="x in summary.alchemyTaxonomies| limitTo:3">
                                                         <td>{{ x.key}}</td>
                                                         <td>{{ x.value}}</td>
                                                     </tr>
@@ -228,7 +225,7 @@
                                                     <tr>
                                                         <th colspan="2">Majestic Domain Topical Trustflow</th>
                                                     </tr>
-                                                    <tr ng-repeat="x in summary.majesticTopics|limitTo:3">
+                                                    <tr ng-repeat="x in summary.majesticTopics| limitTo:3">
                                                         <td>{{ x.key}}</td>
                                                         <td>{{ x.value}}</td>
                                                     </tr>
@@ -242,7 +239,7 @@
                         <accordion class="topic-accordian">
                             <accordion-group is-open="status.open">
                                 <accordion-heading>
-                                    Topic Detail<i class="pull-right glyphicon" ng-class="{'glyphicon glyphicon-minus-sign': status.open, 'glyphicon glyphicon-plus-sign': !status.open}"></i>
+                                    Topic Detail for {{summary.rootURL}}<i class="pull-right glyphicon" ng-class="{'glyphicon glyphicon-minus-sign': status.open, 'glyphicon glyphicon-plus-sign': !status.open}"></i>
                                 </accordion-heading>
                                 <div>
                                     <p>Domain Relevance to You</p>
@@ -294,7 +291,7 @@
                         <accordion>
                             <accordion-group is-open="status.open">
                                 <accordion-heading>
-                                    Links Detail<i class="pull-right glyphicon" ng-class="{'glyphicon glyphicon-minus-sign': status.open, 'glyphicon glyphicon-plus-sign': !status.open}"></i>
+                                    Links Detail for {{links.rootURL}}<i class="pull-right glyphicon" ng-class="{'glyphicon glyphicon-minus-sign': status.open, 'glyphicon glyphicon-plus-sign': !status.open}"></i>
                                 </accordion-heading>
                                 <div>
                                     <div class="table-responsive">          
@@ -303,7 +300,7 @@
                                                 <td rowspan="2">Top {{ links.noOfBacklinks}} backlinks</td>
                                                 <td>Sum of Link TF: {{ links.sumLinkTF}}</td>
                                                 <td>Ave Link TF: {{ links.avgLinkTF}}</td>
-                                                <td>Home / Internal Link Ratio: {{ links.homeInternalRatio}}</td>
+                                                <td></td>
                                                 <td rowspan="2">Avg. Link Relevance To Domain Majestic TTF {{ links.avgLinkRel}}</td>
                                             </tr>
                                             <tr>
@@ -316,15 +313,12 @@
                                     <div class="table-responsive">          
                                         <table class="table">
                                             <tr>
-                                                <th>Domain</th>
+                                                <th>TLD</th>
                                                 <th>Link TF</th>
                                                 <th>Dom TF</th>
-                                                <th>Link CF/TF</th>
-                                                <th>Dom CF/TF</th>
                                                 <th>Link Ref Dom</th>
                                                 <th>Dom Ref Dom</th>
                                                 <th>Link Age</th>
-                                                <th>Dom Age</th>
                                                 <th>Link Ref Gov/EDU</th>
                                                 <th>Dom Ref Gov/EDU</th>
                                                 <th>Anchor Text </th>
@@ -336,16 +330,13 @@
                                                 <td>{{ x.tld}}</td>
                                                 <td>{{ x.linkTrustFlow}}</td>
                                                 <td>{{ x.domainTrustFlow}}</td>
-                                                <td>{{ x.linkTfcfRatio}}</td>
-                                                <td>{{ x.domainTfcfRatio}}</td>
                                                 <td>{{ x.linkRefDomains}}</td>
                                                 <td>{{ x.domainRefDomains}}</td>
                                                 <td>{{ x.linkAge}}</td>
-                                                <td>{{ x.domainAge}}</td>
                                                 <td>{{ x.linkRefGOVEDU}}</td>
                                                 <td>{{ x.domainRefGOVEDU}}</td>
                                                 <td>{{ x.anchorText}}</td>
-                                                <td>{{ x.linkRef}}</td>
+                                                <td>{{ x.linkRel}}</td>
                                                 <td>{{ x.mainMajesticTopic}}</td>
                                                 <td>{{ x.mainMajesticValue}}</td>
                                             </tr>

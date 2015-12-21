@@ -379,4 +379,7 @@ angular.module('fastrankApp')
 		    domainSearch(adjustPageNo($scope.pageNo - 1), $scope.pageSize);
 		};
 		$scope.summeryAccordianStatus = {open: true};
+                // For basic and advance accordians
+		$scope.oneAtATime = true;
+		$scope.accordian1 = {open: true};
 	    }]);

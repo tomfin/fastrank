@@ -65,6 +65,9 @@ angular.module('fastrankApp')
 
                     angular.element('html, body').delay(1000).animate({scrollTop: angular.element('.detail-info').offset().top - 65}, 1000);
                 };
+                // For basic and advance accordians
+		$scope.oneAtATime = true;
+		$scope.accordian1 = {open: true};
             }]);
         
         

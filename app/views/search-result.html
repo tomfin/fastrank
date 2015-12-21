@@ -156,9 +156,9 @@
                 <section class="detail-info">
                     <div class="row" ng-if="summary && links">
                         <accordion class="summary-accordian" id="summary-accordian">
-                            <accordion-group is-open="summeryAccordianStatus.open">
+                                                        <accordion-group is-open="accordian1.open">
                                 <accordion-heading>
-                                    Summary for {{summary.rootURL}}<i class="pull-right glyphicon" ng-class="{'glyphicon glyphicon-minus-sign': summeryAccordianStatus.open, 'glyphicon glyphicon-plus-sign': !summeryAccordianStatus.open}"></i>
+                                    Summary for {{summary.rootURL}}<i class="pull-right glyphicon" ng-class="{'glyphicon glyphicon-minus-sign': accordian1.open, 'glyphicon glyphicon-plus-sign': !accordian1.open}"></i>
                                 </accordion-heading>
                                 <div>
                                     <div class="table-responsive">          
