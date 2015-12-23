@@ -39,7 +39,7 @@
                     <div class="table-responsive">          
                         <table class="table">
                             <tr>
-                                <th class="col-md-4" ng-show="isAuthenticated() && rec.credits > 0"><label for="addAllToCart"><input id="addAllToCart" type="checkbox" ng-click="checkAll()" ng-checked="checkAllNone"/>Add All</label></th>
+                                <th class="col-md-4" ng-show="isAuthenticated()"><label for="addAllToCart"><input id="addAllToCart" type="checkbox" ng-click="checkAll()" ng-checked="checkAllNone"/>Add All</label></th>
                                 <th class="col-md-1"></th>
 				                <th class="col-md-2" ng-click="sortType = 'rootURL'; sortReverse = !sortReverse">Domain
                                     <span ng-show="(sortType == null || sortType != 'rootURL') || sortReverse == null" class="fa fa-sort"></span>
@@ -90,7 +90,7 @@
 							</th>
                             </tr>
                             <tr ng-repeat-start="rec in result|orderBy:sortType:sortReverse" class="domain-row cartSelected">
-                                <td ng-if="isAuthenticated() && rec.credits > 0"><input id="addToCart{{$index}}" class="addTocart" type="checkbox" ng-change="addToCart(rec)" ng-model="rec.selected" /><label for="addToCart{{$index}}"></label></td>
+                                <td ng-if="isAuthenticated()"><input id="addToCart{{$index}}" class="addTocart" type="checkbox" ng-change="addToCart(rec)" ng-model="rec.selected" /><label for="addToCart{{$index}}"></label></td>
 				                <td><a ng-if="rec.credits > 0" class="btn btn-sm btn-primary btn-has-icon" ng-click="fastBuy(rec, $index)"><i class="fa fa-bolt"></i>Fast Buy</a></td>
                                 <td class="text-left">{{ rec.rootURL}}</td>
                                 <td ng-if="rec.credits > 0 && rec.basePrice > rec.actualPrice"><span class="actualPrice">${{ rec.actualPrice | number:2 }}</span> <del>${{ rec.basePrice | number:2 }}</del></td>

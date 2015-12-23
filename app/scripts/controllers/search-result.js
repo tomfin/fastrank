@@ -8,9 +8,10 @@
  * Controller of the fastrankApp
  */
 angular.module('fastrankApp')
-	.controller('searchResultCtrl', ['$scope', '$rootScope', '$log', '$stateParams', '$q', '$state', 'FastBuy', 'Summary', 'Links', 'SimpleSearch', 'AdvancedSearch', 'ModifyCart', 'Principal', '$ngBootbox',
-	    function ($scope, $rootScope, $log, $stateParams, $q, $state, FastBuy, Summary, Links, SimpleSearch, AdvancedSearch, ModifyCart, Principal, $ngBootbox) {
+	.controller('searchResultCtrl', ['$scope', '$rootScope', '$log', '$stateParams', '$q', '$state', 'FastBuy', 'Summary', 'Links', 'SimpleSearch', 'AdvancedSearch', 'ModifyCart', 'Principal', '$ngBootbox', 'localStorageService', '$window',
+	    function ($scope, $rootScope, $log, $stateParams, $q, $state, FastBuy, Summary, Links, SimpleSearch, AdvancedSearch, ModifyCart, Principal, $ngBootbox, localStorageService, $window) {
 		
+		var token = localStorageService.get('token');
 		$scope.summary = '';
 		$scope.links = '';
 		$scope.result = [];
@@ -203,6 +204,9 @@ angular.module('fastrankApp')
 		}
 
 		$scope.checkAll = function () {
+		    if(Date.now() >= token.expires) {	
+		       $window.location.reload();
+		    }
 		    var cartArr = [];
 		    angular.copy($scope.cartDomains, cartArr);
 		    $scope.checkAllNone = !$scope.checkAllNone;
@@ -251,8 +255,12 @@ angular.module('fastrankApp')
 		$scope.moreInfo = function () {
 		    $scope.toggle = !$scope.toggle;
 		};
-
+		
 		$scope.addToCart = function (domain) {
+		    if(Date.now() >= token.expires) {	
+		       $window.location.reload();
+		    }
+		    
 		    if (domain.selected === true) { // To add into cart
 			var cartObj = {};
 			cartObj.publicId = domain.publicId;
