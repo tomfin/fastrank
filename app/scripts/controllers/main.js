@@ -152,7 +152,7 @@ angular.module('fastrankApp')
 			    	$log.info('Expired');
 			    	$scope.logout();
 			    } else {
-			    	if (token.expires - EXPIRY_CHECK_TIME >= Date.now()) {
+			    	if (token.expires - EXPIRY_CHECK_TIME <= Date.now()) {
 			    		var updatedToken = {};
 			    		console.log('D> orig token: ', token);
 			    		console.log('D> orig token token: ', token.token);
@@ -160,7 +160,7 @@ angular.module('fastrankApp')
 			    			console.log('D> new token: ', res);
 			    			updatedToken = res;
 			    			console.log('D> Setting new token: ', updatedToken);
-//					updatedToken.expires = Date.now() + 120000;
+//							updatedToken.expires = Date.now() + 120000;
 			    			localStorageService.set('token', updatedToken);
 			    			$log.info('Renewed');
 			    			var NewToken = localStorageService.get('token');		
