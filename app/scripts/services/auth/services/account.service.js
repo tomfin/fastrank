@@ -23,3 +23,13 @@ angular.module('fastrankApp')
             }
         });
     });
+    
+angular.module('fastrankApp')
+.factory('UpdateToken', function ($resource, ENDPOINT) {
+    return $resource(ENDPOINT + 'api/validate', {}, {
+        'POST': { 
+        	method: 'POST',
+                isArray: false
+        }
+    });
+});
