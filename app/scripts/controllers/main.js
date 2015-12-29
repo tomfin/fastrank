@@ -8,7 +8,7 @@
  * Controller of the fastrankApp
  */
 angular.module('fastrankApp')
-	.controller('MainCtrl', function ($log, $scope, $location, $cookieStore, $cookies, $rootScope, $window, $state, Auth, Principal, RegisterInterest, ContactUs, GetCart, localStorageService) {
+	.controller('MainCtrl', function ($log, $scope, $location, $cookieStore, $cookies, $rootScope, $window, $state, Auth, Principal, RegisterInterest, ContactUs, GetCart, localStorageService, EXPIRY_CHECK_TIME, UpdateToken) {
         
 	    $scope.currentPage = $window.location;
 
@@ -145,22 +145,33 @@ angular.module('fastrankApp')
 	    };	    
 	    
 	    $rootScope.$on('$stateChangeStart', function () {
-		var token = localStorageService.get('token');		
-		if(angular.isObject(token)) {
-		    console.log('Expired on:' + new Date(token.expires));
-		    if(token.expires <= Date.now()) {
-		    	$log.info('Expired');
-		    	$scope.logout();
-		    } else {
-			var updatedToken = {};
-			updatedToken.token = token.token;
-			updatedToken.expires = Date.now() + 300000;
-			localStorageService.set('token', updatedToken);
-			$log.info('Renewed');
-			var NewToken = localStorageService.get('token');		
-			console.log('New expired on:' + new Date(NewToken.expires));
-		    }
-		}
+			var token = localStorageService.get('token');		
+			if(angular.isObject(token)) {
+			    console.log('Expired on:' + new Date(token.expires));
+			    if(token.expires <= Date.now()) {
+			    	$log.info('Expired');
+			    	$scope.logout();
+			    } else {
+			    	if (token.expires - EXPIRY_CHECK_TIME >= Date.now()) {
+			    		var updatedToken = {};
+			    		console.log('D> orig token: ', token);
+			    		console.log('D> orig token token: ', token.token);
+			    		UpdateToken.update(token.token).$promise.then(function (res) {
+			    			console.log('D> new token: ', res);
+			    			updatedToken = res;
+			    			console.log('D> Setting new token: ', updatedToken);
+//					updatedToken.expires = Date.now() + 120000;
+			    			localStorageService.set('token', updatedToken);
+			    			$log.info('Renewed');
+			    			var NewToken = localStorageService.get('token');		
+			    			console.log('New expired on:' + new Date(NewToken.expires));
+			    		}).catch(function () {
+			    			console.log('E> Error validating token - logging out.');
+			    			$scope.logout();
+			    		});
+			    	}
+			    }
+			}
 	    });
 	})
 	.directive('frCollapse', [function () {

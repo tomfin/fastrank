@@ -27,9 +27,9 @@ angular.module('fastrankApp')
 angular.module('fastrankApp')
 .factory('UpdateToken', function ($resource, ENDPOINT) {
     return $resource(ENDPOINT + 'api/validate', {}, {
-        'POST': { 
+        'update': { 
         	method: 'POST',
-                isArray: false
+            isArray: false
         }
     });
 });

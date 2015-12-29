@@ -6,9 +6,11 @@ angular.module('fastrankApp')
 
 .constant('VERSION', '0.0.1-SNAPSHOT')
 
-//.constant('ENDPOINT', 'http://localhost:9191/')
-.constant('ENDPOINT', 'https://api.fastrank.co/')
+.constant('ENDPOINT', 'http://localhost:9191/')
+//.constant('ENDPOINT', 'https://api.fastrank.co/')
 
 .constant('STRIPE_KEY', 'pk_test_neObIns8URG66xThGPyWNYLl')
+
+.constant('EXPIRY_CHECK_TIME', 60000)
 
 ;
