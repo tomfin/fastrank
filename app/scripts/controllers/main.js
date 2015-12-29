@@ -8,7 +8,7 @@
  * Controller of the fastrankApp
  */
 angular.module('fastrankApp')
-	.controller('MainCtrl', function ($log, $scope, $location, $cookieStore, $cookies, $rootScope, $window, $state, Auth, Principal, RegisterInterest, ContactUs, GetCart, UpdateToken, localStorageService) {
+	.controller('MainCtrl', function ($log, $scope, $location, $cookieStore, $cookies, $rootScope, $window, $state, Auth, Principal, RegisterInterest, ContactUs, GetCart, localStorageService) {
         
 	    $scope.currentPage = $window.location;
 
