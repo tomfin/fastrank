@@ -144,7 +144,7 @@ angular.module('fastrankApp')
 		}
 	    };	    
 	    
-	    $rootScope.$on('$stateChangeStart', function (event, toState, toStateParams) {
+	    $rootScope.$on('$stateChangeStart', function () {
 		var token = localStorageService.get('token');		
 		if(angular.isObject(token)) {
 		    console.log('Expired on:' + new Date(token.expires));
