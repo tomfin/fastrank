@@ -155,7 +155,6 @@ angular.module('fastrankApp')
 			    		UpdateToken.update(token.token).$promise.then(function (res) {
 			    			updatedToken = res;
 			    			localStorageService.set('token', updatedToken);
-			    			var NewToken = localStorageService.get('token');		
 			    		}).catch(function () {
 			    			console.log('E> Error validating token - logging out.');
 			    			$scope.logout();
