@@ -8,8 +8,8 @@
  * Controller of the fastrankApp
  */
 angular.module('fastrankApp')
-	.controller('MainCtrl', function ($scope, $location, $cookieStore, $cookies, $rootScope, $window, $state, Auth, Principal, RegisterInterest, ContactUs, GetCart) {
-
+	.controller('MainCtrl', function ($log, $scope, $location, $cookieStore, $cookies, $rootScope, $window, $state, Auth, Principal, RegisterInterest, ContactUs, GetCart, UpdateToken, localStorageService) {
+        
 	    $scope.currentPage = $window.location;
 
 	    $scope.isHome = function (path) { // jshint ignore:line
@@ -142,7 +142,26 @@ angular.module('fastrankApp')
 		    scrollAmount: 'auto', // scroll amount when button pressed
 		    enable: true // enable scrolling buttons by default
 		}
-	    };
+	    };	    
+	    
+	    $rootScope.$on('$stateChangeStart', function (event, toState, toStateParams) {
+		var token = localStorageService.get('token');		
+		if(angular.isObject(token)) {
+		    console.log('Expired on:' + new Date(token.expires));
+		    if(token.expires <= Date.now()) {
+		    	$log.info('Expired');
+		    	$scope.logout();
+		    } else {
+			var updatedToken = {};
+			updatedToken.token = token.token;
+			updatedToken.expires = Date.now() + 300000;
+			localStorageService.set('token', updatedToken);
+			$log.info('Renewed');
+			var NewToken = localStorageService.get('token');		
+			console.log('New expired on:' + new Date(NewToken.expires));
+		    }
+		}
+	    });
 	})
 	.directive('frCollapse', [function () {
 		return {
