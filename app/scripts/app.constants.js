@@ -10,7 +10,7 @@ angular.module('fastrankApp')
 .constant('ENDPOINT', 'https://api.fastrank.co/')
 
 //.constant('STRIPE_KEY', 'pk_test_neObIns8URG66xThGPyWNYLl')
-.constant('STRIPE_KEY', pk_live_NJhwP12rxu7eawHgquX9krGS)
+.constant('STRIPE_KEY', 'pk_live_NJhwP12rxu7eawHgquX9krGS')
 
 .constant('EXPIRY_CHECK_TIME', 900000)
 
