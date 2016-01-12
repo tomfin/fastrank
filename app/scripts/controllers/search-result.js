@@ -15,6 +15,8 @@ angular.module('fastrankApp')
 		$scope.summary = '';
 		$scope.links = '';
 		$scope.result = [];
+                $scope.sortField = null;
+                $scope.sortOrder = null;
 
 		var adjustPageNo = function (pageNo) {
 		    if (pageNo >= 0) {
@@ -36,6 +38,10 @@ angular.module('fastrankApp')
 			simpleSubmit.type = $stateParams.type;
 			simpleSubmit.pageNo = pageNo;
 			simpleSubmit.pageSize = pageSize;
+                        if($scope.sortField !== null && $scope.sortOrder !== null) {
+                            simpleSubmit.sortField = $scope.sortField;
+                            simpleSubmit.sortOrder = $scope.sortOrder;
+                        }
 
 			var simpleSearchDefer = $q.defer();
 			SimpleSearch.search(simpleSubmit)
@@ -106,6 +112,12 @@ angular.module('fastrankApp')
 			advancedSubmit.selectedTLDs = [];
 			advancedSubmit.pageNo = pageNo;
 			advancedSubmit.pageSize = pageSize;
+                        
+                        if($scope.sortField !== null && $scope.sortOrder !== null) {
+                            advancedSubmit.sortField = $scope.sortField;
+                            advancedSubmit.sortOrder = $scope.sortOrder;
+                        }
+                        
 			if (angular.isDefined($stateParams.selectedTLDs)) {
 			    if (angular.isArray($stateParams.selectedTLDs)) {
 				angular.forEach($stateParams.selectedTLDs, function (value) {
@@ -399,4 +411,21 @@ angular.module('fastrankApp')
                 // For basic and advance accordians
 		$scope.oneAtATime = true;
 		$scope.accordian1 = {open: true};
+                
+                $scope.sortCol = function(column) {
+                    if($scope.sortField === column) {
+                        if($scope.sortOrder === null) {
+                            $scope.sortOrder = 'asc';
+                        } else if ($scope.sortOrder === 'asc') {
+                            $scope.sortOrder = 'desc';
+                        } else if($scope.sortOrder === 'desc') {
+                            $scope.sortOrder = 'asc';
+                        } 
+                    } else {
+                        $scope.sortOrder = 'asc';
+                    }
+                    $scope.sortField = column;                    
+                    $scope.pageNo = 0;
+                    domainSearch(adjustPageNo(0), $scope.pageSize);
+                };
 	    }]);
