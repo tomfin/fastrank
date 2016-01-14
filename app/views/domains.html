@@ -19,7 +19,7 @@
             </div>
             <div ng-if="domains.length == 0" class="alert alert-warning alert-dismissible fade in text-uppercase">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true"><i class="fa fa-times"></i></span></button>
-                <span class="product-desc-alt">You didn't purchased any domain yet. <a ui-sref="search">Search for some domains.</a></span>
+                <span class="product-desc-alt">You haven't purchased any domains as yet. <a ui-sref="search">Search for domains right for you.</a></span>
             </div>
 
             <div class="table-responsive" ng-if="domains.length > 0">          
@@ -60,7 +60,7 @@
                         <th></th>
                     </tr>
                     <tr ng-repeat-start="rec in domains|orderBy:sortType:sortReverse" class="domain-row">
-                        <td class="text-left">{{ rec.rootURL}}</td>
+                        <td class="text-left">{{ rec.rootURL}} <span ng-if="rec.restrictedDomainMessage" class="btnInvisible" popover="{{rec.restrictedDomainMessage}}" popover-trigger="mouseenter"><span class="fa fa-exclamation-triangle" aria-hidden="true"></span></span></td>
                         <td>{{ rec.purchaseDate}}</td>
                         <td>{{ rec.credits}}</td>
                         <td>{{ rec.aggLinkTF}}</td>

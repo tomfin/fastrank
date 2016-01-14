@@ -91,7 +91,7 @@
                             <tr ng-repeat-start="rec in result" class="domain-row cartSelected">
                                 <td ng-if="isAuthenticated()"><input id="addToCart{{$index}}" class="addTocart" type="checkbox" ng-change="addToCart(rec)" ng-model="rec.selected" /><label for="addToCart{{$index}}"></label></td>
 				                <td><a ng-if="rec.credits > 0" class="btn btn-sm btn-primary btn-has-icon" ng-click="fastBuy(rec, $index)"><i class="fa fa-bolt"></i>Fast Buy</a></td>
-                                <td class="text-left">{{ rec.rootURL}}</td>
+                                <td class="text-left">{{ rec.rootURL}} <span ng-if="rec.restrictedDomainMessage" class="btnInvisible" popover="{{rec.restrictedDomainMessage}}" popover-trigger="mouseenter"><span class="fa fa-exclamation-triangle" aria-hidden="true"></span></span></td>
                                 <td ng-if="rec.credits > 0 && rec.basePrice > rec.actualPrice"><span class="actualPrice">${{ rec.actualPrice | number:2 }}</span> <del>${{ rec.basePrice | number:2 }}</del></td>
                                 <td ng-if="rec.credits > 0 && rec.basePrice <= rec.actualPrice"><span class="actualPrice">${{ rec.actualPrice | number:2 }}</span></td>
                                 <td ng-if="rec.credits > 0">{{ rec.credits}}</td>
