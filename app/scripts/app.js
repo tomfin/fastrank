@@ -27,6 +27,8 @@ angular
     'ngBootbox'
   ])
   .run(function ($rootScope, $location, $window, $http, $state, $translate, Auth, Principal, Language, ENV, VERSION) {
+      $rootScope.currentYear = new Date().getFullYear();
+
       bootbox.setDefaults({ //jshint ignore:line
         backdrop: true,
       });
