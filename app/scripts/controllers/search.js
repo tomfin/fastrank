@@ -14,10 +14,10 @@ angular.module('fastrankApp')
                 $scope.majTF = {min: 0, max: 100, ceil: 100, floor: 0, step: 1};
                 $scope.otherSliders = {
                     majDOMCF: {title: 'Maj. Dom CF:0 - 100', min: 0, max: 100, ceil: 100, floor: 0, step: 1},
-                    majRefDomains: {title: 'Maj. RefDomains: 0 - Max', min: 0, max: 100, ceil: 100, floor: 0, step: 1},
-                    majRefIPs: {title: 'Maj. RefIPs: 0 - Max', min: 0, max: 100, ceil: 100, floor: 0, step: 1},
-                    majRefDomainsEDU: {title: 'Maj. RefDomainsEDU: 0 - Max', min: 0, max: 100, ceil: 100, floor: 0, step: 1},
-                    majRefDomainsGOV: {title: 'Maj. RefDomainsGOV: 0 - Max', min: 0, max: 100, ceil: 100, floor: 0, step: 1}
+                    majRefDomains: {title: 'Maj. RefDomains: 0 - Max', min: 0, max: 10000, ceil: 10000, floor: 0, step: 1},
+                    majRefIPs: {title: 'Maj. RefIPs: 0 - Max', min: 0, max: 10000, ceil: 10000, floor: 0, step: 1},
+                    majRefDomainsEDU: {title: 'Maj. RefDomainsEDU: 0 - Max', min: 0, max: 1000, ceil: 1000, floor: 0, step: 1},
+                    majRefDomainsGOV: {title: 'Maj. RefDomainsGOV: 0 - Max', min: 0, max: 1000, ceil: 1000, floor: 0, step: 1}
                 };
                 $scope.keywords = {keywords: ''};
                 $scope.categories = {};
@@ -29,7 +29,7 @@ angular.module('fastrankApp')
                 $scope.categories.majesticSubcategory = null;
                 $scope.categories.majesticSubsubcategory = null;
                 $scope.searchMsg = '';
-		$scope.advanceSearchMsg = '';
+                $scope.advanceSearchMsg = '';
 
                 $scope.initDomain = function () {
                     $scope.updateDomainStrengthSlider($scope.majTF.min, $scope.majTF.max);
@@ -165,6 +165,7 @@ angular.module('fastrankApp')
 
                 $scope.advancedFind = function () {
                     var advancedSubmit = {};
+                    console.log('D> AdvancedSubmit: ', advancedSubmit);
 
                     // Majestic topics
 
@@ -202,9 +203,11 @@ angular.module('fastrankApp')
                     advancedSubmit.pageNo = 0;
                     advancedSubmit.pageSize = 20;
                     
+                    console.log('D> selectedTLDs before: ', advancedSubmit.selectedTLDs);
                     angular.forEach($scope.otherDomains, function(value) {
-                        if(angular.isDefined(value.selected)) {
-                            this.push(value.tld.replace(/\./gi, '%2E'));
+                    	console.log('D> value selected: ', value, value.selected);
+                        if(angular.isDefined(value.selected) && value.selected === true) {
+                            this.push(value.tld); //.replace(/\./gi, '%2E')
                         }
                     }, advancedSubmit.selectedTLDs);
 			
@@ -212,7 +215,9 @@ angular.module('fastrankApp')
                         advancedSubmit.selectedTLDs.push('com');
                     }    
                                           
+                    console.log('D> selectedTLDs after: ', advancedSubmit.selectedTLDs);
                     var advancedSearchDefer = $q.defer();
+                    console.log('D> Submit before search: ', advancedSubmit);
                     AdvancedSearch.search(advancedSubmit)
                             .success(function (res) {
                                 advancedSearchDefer.resolve(res);
