@@ -8,9 +8,9 @@
  * Controller of the fastrankApp
  */
 angular.module('fastrankApp')
-        .controller('SearchCtrl', ['$scope', 'Domain', 'DomainStrength', 'MajTF', 'SimpleSearch', 'AdvancedSearch', 'MajesticCategories', '$q', '$timeout', '$log', '$state', function ($scope, Domain, DomainStrength, MajTF, SimpleSearch, AdvancedSearch, MajesticCategories, $q, $timeout, $log, $state) {
+        .controller('SearchCtrl', ['$scope', 'Domain', 'DomainStrength', 'MajTF', 'SimpleSearch', 'AdvancedSearch', 'MajesticCategories', '$q', '$timeout', '$log', '$state', 'usSpinnerService', function ($scope, Domain, DomainStrength, MajTF, SimpleSearch, AdvancedSearch, MajesticCategories, $q, $timeout, $log, $state, usSpinnerService) {
                 $scope.domainStrength = {min: 0, max: 100, ceil: 100, floor: 0, step: 1};
-	
+
                 $scope.majTF = {min: 0, max: 100, ceil: 100, floor: 0, step: 1};
                 $scope.otherSliders = {
                     majDOMCF: {title: 'Maj. Dom CF:0 - 100', min: 0, max: 100, ceil: 100, floor: 0, step: 1},
@@ -21,7 +21,7 @@ angular.module('fastrankApp')
                 };
                 $scope.keywords = {keywords: ''};
                 $scope.categories = {};
-            
+
                 $scope.categories.majesticCategoryIdx = null;
                 $scope.categories.majesticSubcategoryIdx = null;
                 $scope.categories.majesticSubsubcategoryIdx = null;
@@ -30,7 +30,6 @@ angular.module('fastrankApp')
                 $scope.categories.majesticSubsubcategory = null;
                 $scope.searchMsg = '';
                 $scope.advanceSearchMsg = '';
-
                 $scope.initDomain = function () {
                     $scope.updateDomainStrengthSlider($scope.majTF.min, $scope.majTF.max);
                     $scope.updatemajTFSlider($scope.majTF.min, $scope.majTF.max);
@@ -105,8 +104,12 @@ angular.module('fastrankApp')
                         $scope.majTF.count = res;
                     });
                 };
-
                 var getDomains = function () {
+                    $timeout(function () {
+                        usSpinnerService.spin('spinner-1');
+                        usSpinnerService.spin('spinner-2');
+                        usSpinnerService.spin('spinner-3');
+                    }, 100);
                     var domainDefer = $q.defer();
                     Domain.fetchDomains()
                             .success(function (res) {
@@ -115,22 +118,25 @@ angular.module('fastrankApp')
                         $log.error('Error fetching domains');
                     });
                     domainDefer.promise.then(function (res) {
+                        usSpinnerService.stop('spinner-1');
+                        usSpinnerService.stop('spinner-2');
+                        usSpinnerService.stop('spinner-3');
                         $scope.allDomains = res;
                         $scope.otherDomains = angular.copy($scope.allDomains);
                         angular.forEach($scope.otherDomains, function (domain, i) {
                             if (domain.tld === 'com') {
                                 $scope.com = {
                                     tld: domain.tld,
-                                    count: domain.count
-                                };
+                                    count: "("+(domain.count)+")"
+                                };                               
                                 $scope.otherDomains.splice(i, 1);
                             } else if (domain.tld === 'All Others') {
                                 $scope.allOthers = {
                                     tld: domain.tld,
-                                    count: domain.count
+                                    count: "("+domain.count+")"
                                 };
                                 $scope.otherDomains.splice(i, 1);
-                            }
+                            }                            
                         });
                     });
                 };
@@ -149,7 +155,7 @@ angular.module('fastrankApp')
                             .success(function (res) {
                                 simpleSearchDefer.resolve(res);
                             }).error(function (res) {
-			if (angular.isDefined(res.status) && res.status === 404) {
+                        if (angular.isDefined(res.status) && res.status === 404) {
                             $scope.searchMsg = 'Sorry, no result found in selected criteria.';
                         } else if (angular.isDefined(res.status) && res.status === 400) {
                             $scope.searchMsg = 'The query text you used was not sufficient. Please be more specific.';
@@ -198,23 +204,23 @@ angular.module('fastrankApp')
                     // Ref GOV
                     advancedSubmit.majRefDomainsGOVMin = $scope.otherSliders.majRefDomainsGOV.min;
                     advancedSubmit.majRefDomainsGOVMax = $scope.otherSliders.majRefDomainsGOV.max;
-                    
+
                     advancedSubmit.selectedTLDs = [];
                     advancedSubmit.pageNo = 0;
                     advancedSubmit.pageSize = 20;
-                    
+
                     console.log('D> selectedTLDs before: ', advancedSubmit.selectedTLDs);
-                    angular.forEach($scope.otherDomains, function(value) {
-                    	console.log('D> value selected: ', value, value.selected);
-                        if(angular.isDefined(value.selected) && value.selected === true) {
+                    angular.forEach($scope.otherDomains, function (value) {
+                        console.log('D> value selected: ', value, value.selected);
+                        if (angular.isDefined(value.selected) && value.selected === true) {
                             this.push(value.tld); //.replace(/\./gi, '%2E')
                         }
                     }, advancedSubmit.selectedTLDs);
-			
-                    if(angular.isDefined($scope.com.selected)) {
+
+                    if (angular.isDefined($scope.com.selected)) {
                         advancedSubmit.selectedTLDs.push('com');
-                    }    
-                                          
+                    }
+
                     console.log('D> selectedTLDs after: ', advancedSubmit.selectedTLDs);
                     var advancedSearchDefer = $q.defer();
                     console.log('D> Submit before search: ', advancedSubmit);
@@ -222,8 +228,8 @@ angular.module('fastrankApp')
                             .success(function (res) {
                                 advancedSearchDefer.resolve(res);
                             }).error(function (res) {
-						if (res === null) {
-							$scope.advanceSearchMsg = 'Error while searching';
+                        if (res === null) {
+                            $scope.advanceSearchMsg = 'Error while searching';
                             $log.error('Error while searching');
                         } else if (angular.isDefined(res.status) && res.status === 404) {
                             $scope.advanceSearchMsg = 'Sorry, no result found in selected criteria.';
@@ -263,10 +269,10 @@ angular.module('fastrankApp')
                     $scope.otherSliders.majRefDomainsGOV.min = 0;
                     $scope.otherSliders.majRefDomainsGOV.max = 100;
                 };
-                
+
                 // For basic and advance accordians
                 $scope.oneAtATime = true;
-                $scope.accordian1 = {open:true};
+                $scope.accordian1 = {open: true};
 
             }]);
 

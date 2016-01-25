@@ -24,7 +24,8 @@ angular
     'ui.bootstrap',
     'rzModule',
     'ngScrollbars',
-    'ngBootbox'
+    'ngBootbox',
+    'angularSpinner'
   ])
   .run(function ($rootScope, $location, $window, $http, $state, $translate, Auth, Principal, Language, ENV, VERSION) {
       $rootScope.currentYear = new Date().getFullYear();
