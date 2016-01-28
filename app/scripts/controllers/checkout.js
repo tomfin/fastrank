@@ -64,7 +64,7 @@ angular.module('fastrankApp')
 						    $scope.checkoutBuyError = null;
 						    $scope.lowCreditError = 'ERROR';
 						    $scope.alreadyPurchased = null;
-						} else if (res.status === 207) {
+						} else if (res.status === 424) {
 						    $scope.checkoutBuySuccess = null;
 						    $scope.checkoutBuyError = null;
 						    $scope.lowCreditError = null;
