@@ -6,7 +6,7 @@
  * @description # CreditsCtrl Controller of the fastrankApp
  */
 angular.module('fastrankApp')
-	.controller('CheckoutCtrl', ['$scope', 'CheckoutBuy', 'ModifyCart', '$log', '$rootScope', '$ngBootbox', function ($scope, CheckoutBuy, ModifyCart, $log, $rootScope, $ngBootbox) {
+	.controller('CheckoutCtrl', ['$scope', 'CheckoutBuy', 'ModifyCart', 'Principal', '$log', '$rootScope', '$ngBootbox', function ($scope, CheckoutBuy, ModifyCart, Principal, $log, $rootScope, $ngBootbox) {
 		$rootScope.$watch(function() {
 		    return $rootScope.cartDomains;
 		}, function() {
@@ -44,36 +44,37 @@ angular.module('fastrankApp')
 				callback: function () {
 				    var domains = [];
 				    angular.forEach($scope.cartDomains, function (result) {
-					var obj = {};
-					obj.publicId = result.publicId;
-					obj.credits = result.credits;
-					domains.push(obj);
+						var obj = {};
+						obj.publicId = result.publicId;
+						obj.credits = result.credits;
+						domains.push(obj);
 				    });
 				    CheckoutBuy.buy(domains).$promise.then(function () {
-					$scope.checkoutBuySuccess = 'SUCCESS';
-					$scope.checkoutBuyError = null;
-					$scope.lowCreditError = null;
-					$scope.alreadyPurchased = null;
-					angular.forEach(domains, function (obj) {
-					    $scope.removeDomain(obj);
-					});
+						$scope.checkoutBuySuccess = 'SUCCESS';
+						$scope.checkoutBuyError = null;
+						$scope.lowCreditError = null;
+						$scope.alreadyPurchased = null;
+						angular.forEach(domains, function (obj) {
+						    $scope.removeDomain(obj);
+						});
+						$rootScope.account.credits = $rootScope.account.credits - $scope.cartDomains.total;
 				    }, function (res) {
-					if (res.status === 402) {
-					    $scope.checkoutBuySuccess = null;
-					    $scope.checkoutBuyError = null;
-					    $scope.lowCreditError = 'ERROR';
-					    $scope.alreadyPurchased = null;
-					} else if (res.status === 207) {
-					    $scope.checkoutBuySuccess = null;
-					    $scope.checkoutBuyError = null;
-					    $scope.lowCreditError = null;
-					    $scope.alreadyPurchased = 'ERROR';
-					} else {
-					    $scope.checkoutBuySuccess = null;
-					    $scope.checkoutBuyError = 'ERROR';
-					    $scope.lowCreditError = null;
-					    $scope.alreadyPurchased = null;
-					}
+						if (res.status === 402) {
+						    $scope.checkoutBuySuccess = null;
+						    $scope.checkoutBuyError = null;
+						    $scope.lowCreditError = 'ERROR';
+						    $scope.alreadyPurchased = null;
+						} else if (res.status === 207) {
+						    $scope.checkoutBuySuccess = null;
+						    $scope.checkoutBuyError = null;
+						    $scope.lowCreditError = null;
+						    $scope.alreadyPurchased = 'ERROR';
+						} else {
+						    $scope.checkoutBuySuccess = null;
+						    $scope.checkoutBuyError = 'ERROR';
+						    $scope.lowCreditError = null;
+						    $scope.alreadyPurchased = null;
+						}
 				    });
 				    angular.element('html, body').delay(1000).animate({scrollTop: angular.element('.error').offset().top - 100}, 1000);
 				}

@@ -343,21 +343,22 @@ angular.module('fastrankApp')
 				    obj.publicId = result.publicId;
 				    obj.credits = result.credits;
 				    FastBuy.buy(obj).$promise.then(function () {
-					$scope.fastBuySuccess = 'SUCCESS';
-					$scope.fastBuyError = null;
-					$scope.lowCreditError = null;
-					$scope.result.splice(index, 1);
+						$scope.fastBuySuccess = 'SUCCESS';
+						$scope.fastBuyError = null;
+						$scope.lowCreditError = null;
+						$scope.result.splice(index, 1);
+						$rootScope.account.credits = $rootScope.account.credits - result.credits;
 				    }, function (res) {
-					if (res.status === 402) {
-					    $scope.fastBuySuccess = null;
-					    $scope.fastBuyError = null;
-					    $scope.lowCreditError = 'ERROR';
-					} else {
-					    $scope.fastBuySuccess = null;
-					    $scope.fastBuyError = 'ERROR';
-					    $scope.lowCreditError = null;
-					}
-				    });
+						if (res.status === 402) {
+						    $scope.fastBuySuccess = null;
+						    $scope.fastBuyError = null;
+						    $scope.lowCreditError = 'ERROR';
+						} else {
+						    $scope.fastBuySuccess = null;
+						    $scope.fastBuyError = 'ERROR';
+						    $scope.lowCreditError = null;
+						}
+					});
 				    angular.element('html, body').delay(1000).animate({scrollTop: angular.element('.error').offset().top - 100}, 1000); 
 				}
 			    }
