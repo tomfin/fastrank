@@ -127,13 +127,13 @@ angular.module('fastrankApp')
                             if (domain.tld === 'com') {
                                 $scope.com = {
                                     tld: domain.tld,
-                                    count: "("+(domain.count)+")"
+                                    count: '('+(domain.count)+')'
                                 };                               
                                 $scope.otherDomains.splice(i, 1);
                             } else if (domain.tld === 'All Others') {
                                 $scope.allOthers = {
                                     tld: domain.tld,
-                                    count: "("+domain.count+")"
+                                    count: '('+domain.count+')'
                                 };
                                 $scope.otherDomains.splice(i, 1);
                             }                            
